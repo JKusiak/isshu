@@ -4,11 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "servers": "concurrently \"npm run dev\" \"cd ../frontend && npm run start\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Juliusz Kusiak",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
