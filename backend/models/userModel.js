@@ -27,12 +27,13 @@ const userSchema = mongoose.Schema({
             required: true,
             default: false,
       },
-      projects: {
+      projects: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Project',
             required: false,
             default: null,
-      },
+            unique: true,
+      }],
       issuesAdded: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Issue',

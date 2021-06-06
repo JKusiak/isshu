@@ -3,8 +3,9 @@ import {
       getUserById, 
       addUser,
       updateUser, 
-      deleteUser} from "../controllers/userController.js";
-import express from 'express'
+      deleteUser,
+      addProjectToUser} from "../controllers/userController.js";
+import express from 'express';
 
 const router = express.Router()
 
@@ -17,5 +18,7 @@ router.route('/add').post(addUser);
 router.route('/update/:id').post(updateUser);
 
 router.route('/delete/:id').delete(deleteUser);
+
+router.route('/addProject/:id').post(addProjectToUser);
 
 export default router;
