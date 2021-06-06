@@ -25,7 +25,9 @@ const userSchema = mongoose.Schema({
             type: Boolean,
             required: true,
             default: false,
-      }
+      },
+
+      // PROJECTS ISSUES BOARDS
 });
 
 const User = mongoose.model('User', userSchema);
