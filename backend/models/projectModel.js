@@ -11,6 +11,7 @@ const projectSchema = mongoose.Schema({
       description: {
             type: String,
             required: false,
+            default: null,
       },
       dateStart: {
             type: Date,
@@ -19,9 +20,25 @@ const projectSchema = mongoose.Schema({
       dateEnd: {
             type: Date,
             required: false,
+            default: null,
       },
-
-      // CONTRIBUTORS BOARDS
+      creator: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',           
+            required: true,
+      },
+      contributors: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: false,
+            default: null,
+      }],
+      boards: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Board',
+            required: false,
+            default: null,
+      }],
 });
 
 const Project = mongoose.model('Project', projectSchema);

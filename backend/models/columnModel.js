@@ -6,8 +6,12 @@ const columnSchema = mongoose.Schema({
             type: String,
             required: true,
       },
-
-      // ISSUES
+      issues: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Issue',
+            required: false,
+            default: null,
+      }],
 });
 
 const Column = mongoose.model('Column', columnSchema);

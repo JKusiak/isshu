@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 
 const issueSchema = mongoose.Schema({
 
@@ -6,8 +6,23 @@ const issueSchema = mongoose.Schema({
             type: String,
             required: true,
       },
-
-      //CREATOR SOLVER TAGS
+      creator: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+      },
+      contributor: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: false,
+            default: null,
+      },
+      tags: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Tag',
+            required: false,
+            default: null,
+      }],
 });
 
 const Issue = mongoose.model('Issue', issueSchema);
