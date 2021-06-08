@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const columnSchema = mongoose.Schema({
       name: {
             type: String,

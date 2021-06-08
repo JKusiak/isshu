@@ -88,6 +88,7 @@ export const deleteUser = asyncHandler(async(req, res) => {
     }
 });
 
+
 // TODO simplify to get rid of boilerplate code for all API endpoints
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
     const projects = await User.find({_id: req.params.id}).select({projects: 1});

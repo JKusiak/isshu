@@ -20,6 +20,7 @@ export const getProjectById = asyncHandler(async(req, res) => {
     }
 });
 
+
 export const addProject = asyncHandler(async(req, res) => {
     const name = req.body.name;
     const description = req.body.description;
@@ -71,7 +72,7 @@ export const updateProject = asyncHandler(async(req, res) => {
             res.json("Project updated successfuly");
         }
     });
-  });
+});
 
 
 export const deleteProject = asyncHandler(async(req, res) => {

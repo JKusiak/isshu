@@ -20,6 +20,7 @@ export const getBoardById = asyncHandler(async(req, res) => {
       }
 });
 
+
 export const addBoard = asyncHandler(async(req, res) => {
       const name = req.body.name;
       

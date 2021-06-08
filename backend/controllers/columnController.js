@@ -20,6 +20,7 @@ export const getColumnById = asyncHandler(async(req, res) => {
       }
 });
 
+
 export const addColumn = asyncHandler(async(req, res) => {
       const name = req.body.name;
       

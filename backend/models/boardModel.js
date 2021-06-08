@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const boardSchema = mongoose.Schema({
       name: {
             type: String,

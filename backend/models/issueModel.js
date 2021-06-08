@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const issueSchema = mongoose.Schema({
       description: {
             type: String,
