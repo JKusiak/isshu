@@ -89,6 +89,18 @@ export const deleteUser = asyncHandler(async(req, res) => {
 });
 
 
+export const getProjectsByUser = asyncHandler(async(req, res) => {
+    const projects = await User.find({_id: req.params.id}).select({projects: 1});
+
+    if (projects) {
+        res.json(projects);
+    } else {
+        res.status(404).json({message: "User not found"});
+        throw new Error('User not found');
+    }
+}); 
+
+
 export const addProjectToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
@@ -101,7 +113,9 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+
+    // no await here, otherwise callback on update + await make execute twice
+    const user = User.findByIdAndUpdate(id, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -115,20 +129,21 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
 });
 
 
-
-export const addBoardToUser = asyncHandler(async(req, res) => {
+export const deleteProjectFromUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
-    const update = {
-         $push: {
-            boards: board._id,
+    const update = { 
+        $pull: {
+            "projects": {
+                _id: req.body.projectId,
+            }
         } 
     };
-    const options = {
-        new: true, 
-        useFindAndModify: false,
+    const options =  {
+        safe: true, 
+        upsert: true
     };
 
-    const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+    User.findByIdAndUpdate(id, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -136,9 +151,21 @@ export const addBoardToUser = asyncHandler(async(req, res) => {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User's boards updated successfuly");
+            res.json("User updated successfuly");
         }
     });
+});
+
+
+export const getIssuesCreatedByUser = asyncHandler(async(req, res) => {
+    const issuesCreated = await User.find({_id: req.params.id}).select({issuesCreated: 1});
+
+    if (issuesCreated) {
+        res.json(issuesCreated);
+    } else {
+        res.status(404).json({message: "User not found"});
+        throw new Error('User not found');
+    }
 });
 
 
@@ -146,7 +173,7 @@ export const addIssueCreatedToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
          $push: {
-            issuesCreate: issueCreated._id,
+            issuesCreated: req.body.issuesCreated,
         } 
     };
     const options = {
@@ -154,7 +181,8 @@ export const addIssueCreatedToUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+    // no await here, otherwise callback on update + await make execute twice
+    const user =  User.findByIdAndUpdate(id, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -162,10 +190,50 @@ export const addIssueCreatedToUser = asyncHandler(async(req, res) => {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User's boards updated successfuly");
+            res.json("User's issues updated successfuly");
         }
     });
 
+});
+
+
+export const deleteIssueCreatedFromUser = asyncHandler(async(req, res) => {
+    const id = req.params.id;
+    const update = { 
+        $pull: {
+            "issuesCreated": {
+                _id: req.body.issueCreatedId,
+            }
+        } 
+    };
+    const options =  {
+        safe: true, 
+        upsert: true
+    };
+
+    User.findByIdAndUpdate(id, update, options, function(err, data){
+        if(err) {
+            res.status(400).json({message: "Update unsuccessful"});
+            throw new Error('Update unsuccessful');
+        } else if(!data) {
+            res.status(404).json({message: "User not found"});
+            throw new Error('User not found');
+        } else {
+            res.json("User updated successfuly");
+        }
+    });
+});
+
+
+export const getIssuesTakenByUser = asyncHandler(async(req, res) => {
+    const issuesTaken = await User.find({_id: req.params.id}).select({issuesTaken: 1});
+
+    if (issuesTaken) {
+        res.json(issuesTaken);
+    } else {
+        res.status(404).json({message: "User not found"});
+        throw new Error('User not found');
+    }
 });
 
 
@@ -173,7 +241,7 @@ export const addIssueTakenToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
          $push: {
-            issuesTaken: issueTaken._id,
+            issuesTaken: req.body.issuesTaken,
         } 
     };
     const options = {
@@ -181,7 +249,8 @@ export const addIssueTakenToUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+    // no await here, otherwise callback on update + await make execute twice
+    const user = User.findByIdAndUpdate(id, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -189,28 +258,28 @@ export const addIssueTakenToUser = asyncHandler(async(req, res) => {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User's boards updated successfuly");
+            res.json("User's issues updated successfuly");
         }
     });
 
 });
 
 
-async function addToUser(documentType, req, res) {
+export const deleteIssueTakenFromUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
-    const documentPlural = documentType + 's';
-
-    const update = {
-         $push: {
-            [`${documentPlural}`]: documentType._id,
+    const update = { 
+        $pull: {
+            "issuesTaken": {
+                _id: req.body.issueTakenId,
+            }
         } 
     };
-    const options = {
-        new: true, 
-        useFindAndModify: false,
+    const options =  {
+        safe: true, 
+        upsert: true
     };
 
-    const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+    User.findByIdAndUpdate(id, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -218,7 +287,34 @@ async function addToUser(documentType, req, res) {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User's boards updated successfuly");
+            res.json("User updated successfuly");
         }
     });
-}
+});
+
+
+// async function addToUser(documentType, req, res) {
+//     const id = req.params.id;
+
+//     const update = {
+//          $push: {
+//             [`${documentType}`]: req.body.documentType,
+//         } 
+//     };
+//     const options = {
+//         new: true, 
+//         useFindAndModify: false,
+//     };
+
+//     const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
+//         if(err) {
+//             res.status(400).json({message: "Update unsuccessful"});
+//             throw new Error('Update unsuccessful');
+//         } else if(!data) {
+//             res.status(404).json({message: "User not found"});
+//             throw new Error('User not found');
+//         } else {
+//             res.json(`User's ${documentType} updated successfuly`);
+//         }
+//     });
+// }
