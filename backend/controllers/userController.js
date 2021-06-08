@@ -80,7 +80,7 @@ export const updateUser = asyncHandler(async(req, res) => {
 export const deleteUser = asyncHandler(async(req, res) => {
     const user = await User.findByIdAndDelete(req.params.id);
 
-    if (user) {
+    if(user) {
         res.json("User deleted successfuly");
     } else {
         res.status(404).json({message: "User not found"});
@@ -88,11 +88,11 @@ export const deleteUser = asyncHandler(async(req, res) => {
     }
 });
 
-
-export const getProjectsByUser = asyncHandler(async(req, res) => {
+// TODO simplify to get rid of boilerplate code for all API endpoints
+export const getProjectsOfUser = asyncHandler(async(req, res) => {
     const projects = await User.find({_id: req.params.id}).select({projects: 1});
 
-    if (projects) {
+    if(projects) {
         res.json(projects);
     } else {
         res.status(404).json({message: "User not found"});
@@ -241,7 +241,7 @@ export const addIssueTakenToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
          $push: {
-            issuesTaken: req.body.issuesTaken,
+            issuesTaken: req.body.issueTakenId,
         } 
     };
     const options = {

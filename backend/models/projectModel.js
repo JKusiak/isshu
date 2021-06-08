@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const projectSchema = mongoose.Schema({
-
       name: {
             type: String,
             required: true,
@@ -27,12 +26,6 @@ const projectSchema = mongoose.Schema({
             ref: 'User',           
             required: true,
       },
-      contributors: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: false,
-            default: null,
-      }],
       boards: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Board',

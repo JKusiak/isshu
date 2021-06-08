@@ -5,7 +5,7 @@ import {
       updateUser, 
       deleteUser,
       addProjectToUser,
-      getProjectsByUser,
+      getProjectsOfUser,
       deleteProjectFromUser,
       getIssuesCreatedByUser,
       addIssueCreatedToUser,
@@ -27,19 +27,19 @@ router.route('/update/:id').post(updateUser);
 
 router.route('/delete/:id').delete(deleteUser);
 
-router.route('/getProject/:id').get(getProjectsByUser);
+router.route('/getProjects/:id').get(getProjectsOfUser);
 
 router.route('/addProject/:id').post(addProjectToUser);
 
 router.route('/deleteProject/:id').delete(deleteProjectFromUser);
 
-router.route('/getIssueCreated/:id').delete(getIssuesCreatedByUser);
+router.route('/getIssuesCreated/:id').delete(getIssuesCreatedByUser);
 
 router.route('/addIssueCreated/:id').delete(addIssueCreatedToUser);
 
 router.route('/deleteIssueCreated/:id').delete(deleteIssueCreatedFromUser);
 
-router.route('/getIssueTaken/:id').delete(getIssuesTakenByUser);
+router.route('/getIssuesTaken/:id').delete(getIssuesTakenByUser);
 
 router.route('/addIssueTaken/:id').delete(addIssueTakenToUser);
 

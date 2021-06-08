@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const boardSchema = mongoose.Schema({
-
       name: {
             type: String,
             required: true,
@@ -12,13 +11,6 @@ const boardSchema = mongoose.Schema({
             required: false,
             default: null,
       }],
-      users: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: false,
-            default: null,
-      }]
-      
 });
 
 const Board = mongoose.model('Board', boardSchema);
