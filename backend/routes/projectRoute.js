@@ -8,10 +8,10 @@ import {
       deleteProject,
       getBoardsOfProject,
       addBoardToProject,
-      deleteBoardFromProject
+      deleteBoardFromProject,
 } from '../controllers/projectController.js';
 
-const router = express.Router()
+const router = express.Router();
 
 router.route('/').get(getAllProjects);
 
