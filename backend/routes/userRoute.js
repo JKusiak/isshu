@@ -1,3 +1,4 @@
+import express from 'express';
 import { 
       getAllUsers,
       getUserById, 
@@ -12,8 +13,9 @@ import {
       deleteIssueCreatedFromUser,
       getIssuesTakenByUser,
       addIssueTakenToUser,
-      deleteIssueTakenFromUser} from "../controllers/userController.js";
-import express from 'express';
+      deleteIssueTakenFromUser,
+} from "../controllers/userController.js";
+
 
 const router = express.Router();
 

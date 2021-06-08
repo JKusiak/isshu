@@ -7,8 +7,9 @@ import {
       deleteBoard,
       getColumnsOfBoard,
       addColumnToBoard,
-      deleteColumnFromBoard
+      deleteColumnFromBoard,
 } from '../controllers/boardController.js';
+
 
 const router = express.Router();
 

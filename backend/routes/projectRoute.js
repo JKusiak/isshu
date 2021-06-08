@@ -11,6 +11,7 @@ import {
       deleteBoardFromProject,
 } from '../controllers/projectController.js';
 
+
 const router = express.Router();
 
 router.route('/').get(getAllProjects);

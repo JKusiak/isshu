@@ -7,8 +7,9 @@ import {
       deleteColumn,
       getIssuesOfColumn,
       addIssueToColumn,
-      deleteIssueFromColumn
+      deleteIssueFromColumn,
 } from '../controllers/columnController.js';
+
 
 const router = express.Router();
 
