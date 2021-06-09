@@ -103,7 +103,7 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
         $push: {
-            boards: req.body.boards,
+            boards: req.body.boardId,
         } 
     };
     const options = {
@@ -130,10 +130,8 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
 export const deleteBoardFromProject = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = { 
-        $pull: {
-            "boards": {
-                _id: req.body.boardId,
-            }
+        $pullAll: {
+            boards: [req.body.boardId],
         } 
     };
     const options =  {

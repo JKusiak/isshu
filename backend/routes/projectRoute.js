@@ -24,10 +24,10 @@ router.route('/update/:id').post(updateProject);
 
 router.route('/delete/:id').delete(deleteProject);
 
-router.route('/getBoards:id').get(getBoardsOfProject);
+router.route('/getBoards/:id').get(getBoardsOfProject);
 
-router.route('/addBoard:id').post(addBoardToProject);
+router.route('/addBoard/:id').post(addBoardToProject);
 
-router.route('/deleteBoard:id').delete(deleteBoardFromProject);
+router.route('/deleteBoard/:id').delete(deleteBoardFromProject);
 
 export default router;

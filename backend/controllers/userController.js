@@ -106,7 +106,7 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
          $push: {
-            projects: req.body.projects,
+            projects: req.body.projectId,
         } 
     };
     const options = {

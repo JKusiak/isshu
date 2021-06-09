@@ -48,6 +48,4 @@ router.route('/addIssueTaken/:id').post(addIssueTakenToUser);
 router.route('/deleteIssueTaken/:id').delete(deleteIssueTakenFromUser);
 
 
-
-
 export default router;
