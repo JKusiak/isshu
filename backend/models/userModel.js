@@ -32,9 +32,8 @@ const userSchema = mongoose.Schema({
             ref: 'Project',
             required: false,
             default: null,
-            unique: true,
       }],
-      issuesAdded: [{
+      issuesCreated: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Issue',
             required: false,

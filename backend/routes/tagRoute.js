@@ -1,6 +1,5 @@
 import express from 'express'
 import { 
-      getAllTags, 
       getAllTags,
       getTagById,
       addTag,
@@ -20,3 +19,5 @@ router.route('/add').post(addTag);
 router.route('/update/:id').post(updateTag);
 
 router.route('/delete/:id').delete(deleteTag);
+
+export default router;

@@ -133,15 +133,12 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
 export const deleteProjectFromUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = { 
-        $pull: {
-            "projects": {
-                _id: req.body.projectId,
-            }
+        $pullAll: {
+            projects: [req.body.projectId],
         } 
     };
     const options =  {
-        safe: true, 
-        upsert: true
+        new: true,
     };
 
     User.findByIdAndUpdate(id, update, options, function(err, data){
@@ -159,7 +156,7 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
 
 
 export const getIssuesCreatedByUser = asyncHandler(async(req, res) => {
-    const issuesCreated = await User.find({_id: req.params.id}).select({issuesCreated: 1});
+    const issuesCreated = await User.find({_id: req.params.id}).select({issuesAdded: 1});
 
     if (issuesCreated) {
         res.json(issuesCreated);
@@ -173,14 +170,14 @@ export const getIssuesCreatedByUser = asyncHandler(async(req, res) => {
 export const addIssueCreatedToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = {
-         $push: {
-            issuesCreated: req.body.issuesCreated,
-        } 
-    };
-    const options = {
-        new: true, 
-        useFindAndModify: false,
-    };
+        $push: {
+            issuesCreated: req.body.issueCreatedId,
+       } 
+   };
+   const options = {
+       new: true, 
+       useFindAndModify: false,
+   };
 
     // no await here, otherwise callback on update + await make execute twice
     const user =  User.findByIdAndUpdate(id, update, options, function(err, data){
@@ -201,15 +198,12 @@ export const addIssueCreatedToUser = asyncHandler(async(req, res) => {
 export const deleteIssueCreatedFromUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = { 
-        $pull: {
-            "issuesCreated": {
-                _id: req.body.issueCreatedId,
-            }
+        $pullAll: {
+            issuesCreated: [req.body.issueCreatedId],
         } 
     };
     const options =  {
-        safe: true, 
-        upsert: true
+        new: true,
     };
 
     User.findByIdAndUpdate(id, update, options, function(err, data){
@@ -269,15 +263,12 @@ export const addIssueTakenToUser = asyncHandler(async(req, res) => {
 export const deleteIssueTakenFromUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const update = { 
-        $pull: {
-            "issuesTaken": {
-                _id: req.body.issueTakenId,
-            }
+        $pullAll: {
+            issuesTaken: [req.body.issueTakenId],
         } 
     };
     const options =  {
-        safe: true, 
-        upsert: true
+        new: true,
     };
 
     User.findByIdAndUpdate(id, update, options, function(err, data){

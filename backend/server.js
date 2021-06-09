@@ -5,6 +5,9 @@ import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import projectRoute from './routes/projectRoute.js';
 import boardRoute from './routes/boardRoute.js';
+import columnRoute from './routes/columnRoute.js';
+import issueRoute from './routes/issueRoute.js';
+import tagRoute from './routes/tagRoute.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -23,6 +26,9 @@ app.use(express.json());
 app.use('/users', userRoute);
 app.use('/projects', projectRoute);
 app.use('/boards', boardRoute);
+app.use('/columns', columnRoute);
+app.use('/issues', issueRoute);
+app.use('/tags', tagRoute);
 
 // universal route for handling 404 response if route not existing
 app.use((req, res, next) => {
