@@ -93,7 +93,7 @@ export const addIssueToColumn = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = {
           $push: {
-              columns: req.body.columns,
+              issues: req.body.issueId,
           } 
       };
       const options = {
@@ -119,12 +119,10 @@ export const addIssueToColumn = asyncHandler(async(req, res) => {
 
 export const deleteIssueFromColumn = asyncHandler(async(req, res) => {
       const id = req.params.id;
-      const update = { 
-          $pull: {
-              "columns": {
-                  _id: req.body.columnId,
-              }
-          } 
+      const update = {
+            $pullAll: {
+                  issues: [req.body.issueId],
+            } 
       };
       const options =  {
           safe: true, 

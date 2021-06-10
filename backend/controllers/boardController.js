@@ -78,7 +78,7 @@ export const deleteBoard = asyncHandler(async(req, res) => {
 
 
 export const getColumnsOfBoard = asyncHandler(async(req, res) => {
-      const columns = await Board.find({_id: req.params.id}).select({boards: 1});
+      const columns = await Board.find({_id: req.params.id}).select({columns: 1});
 
       if(columns) {
             res.json(columns);
@@ -93,7 +93,7 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = {
           $push: {
-              columns: req.body.columns,
+              columns: req.body.columnId,
           } 
       };
       const options = {
@@ -119,12 +119,10 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
 
 export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
       const id = req.params.id;
-      const update = { 
-          $pull: {
-              "columns": {
-                  _id: req.body.columnId,
-              }
-          } 
+      const update = {
+            $pullAll: {
+                  columns: [req.body.columnId],
+            } 
       };
       const options =  {
           safe: true, 

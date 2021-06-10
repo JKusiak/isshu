@@ -95,7 +95,7 @@ export const addTagToIssue = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = {
           $push: {
-            issues: req.body.issues,
+            tags: req.body.tagId,
           } 
       };
       const options = {
@@ -122,11 +122,9 @@ export const addTagToIssue = asyncHandler(async(req, res) => {
 export const deleteTagFromIssue = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = { 
-          $pull: {
-              "issues": {
-                  _id: req.body.tagId,
-              }
-          } 
+            $pullAll: {
+                tags: [req.body.tagId],
+            } 
       };
       const options =  {
           safe: true, 
