@@ -23,10 +23,10 @@ router.route('/update/:id').post(updateBoard);
 
 router.route('/delete/:id').delete(deleteBoard);
 
-router.route('/getColumns:id').get(getColumnsOfBoard);
+router.route('/getColumns/:id').get(getColumnsOfBoard);
 
-router.route('/addColumn:id').post(addColumnToBoard);
+router.route('/addColumn/:id').post(addColumnToBoard);
 
-router.route('/deleteColumn:id').delete(deleteColumnFromBoard);
+router.route('/deleteColumn/:id').delete(deleteColumnFromBoard);
 
 export default router;
