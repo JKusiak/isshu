@@ -24,10 +24,10 @@ router.route('/update/:id').post(updateIssue);
 
 router.route('/delete/:id').delete(deleteIssue);
 
-router.route('/getBoards:id').get(getTagsOfIssue);
+router.route('/getTags/:id').get(getTagsOfIssue);
 
-router.route('/addBoard:id').post(addTagToIssue);
+router.route('/addTag/:id').post(addTagToIssue);
 
-router.route('/deleteBoard:id').delete(deleteTagFromIssue);
+router.route('/deleteTag/:id').delete(deleteTagFromIssue);
 
 export default router;

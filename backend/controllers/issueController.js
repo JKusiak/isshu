@@ -45,7 +45,7 @@ export const updateIssue = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = { 
             $set: {
-                  name: req.body.name,
+                  description: req.body.description,
             } 
       };
       const options =  {
@@ -80,7 +80,7 @@ export const deleteIssue = asyncHandler(async(req, res) => {
 
 
 export const getTagsOfIssue = asyncHandler(async(req, res) => {
-      const issues = await Issue.find({_id: req.params.id}).select({issues: 1});
+      const issues = await Issue.find({_id: req.params.id}).select({tags: 1});
 
       if(issues) {
             res.json(issues);
