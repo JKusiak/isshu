@@ -7,18 +7,13 @@ interface PersonalDataProps {
 }
 
 const PersonalData: FC<PersonalDataProps> = (props) => {
-      console.log("Created", props.issuesCreated);
-      console.log("Taken", props.issuesTaken);
-
       function displayIssues(type: 'issuesTaken' | 'issuesCreated') {
             if(props[type].length > 0 ) {
                   return(props[type].map((issue: any, index: any) => {
                         return(
-                              <>
                               <div className="issue_container" key={index}>
                                     <p className="issue_description"> {issue.description} </p>
                               </div>
-                              </>
                         );
                   }));
             } else {
