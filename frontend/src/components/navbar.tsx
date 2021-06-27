@@ -9,8 +9,9 @@ const Navbar: FC<NavbarProps> = (props) => {
       
       return (
       <>
-            <Link to="/users">Users</Link>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
+            <Link to="/projects">Projects</Link>
+            <Link to="/profile">Profile</Link>
       </>
       );
 }
