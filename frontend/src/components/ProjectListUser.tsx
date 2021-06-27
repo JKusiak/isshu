@@ -1,17 +1,17 @@
 import { FC } from "react"
 
-interface NavbarProps {
+interface ProjectListProps {
       projects: any;
 }
 
-const ProjectList: FC<NavbarProps> = (props) => {
+const ProjectListUser: FC<ProjectListProps> = (props) => {
 
       function displayProjects() {
-            console.log(props.projects);
             if(props.projects.length > 0) {
                   return(props.projects.map((project: any, index: any) => {
                         return(
                               <>
+                              <h2>List of all your projects:</h2>
                               <div className="project_container" key={index}>
                                     <p className="project_name"> {project.name} </p>
                                     <p className="project_description"> {project.description} </p>
@@ -35,4 +35,4 @@ const ProjectList: FC<NavbarProps> = (props) => {
       );
 }
 
-export default ProjectList;
+export default ProjectListUser;

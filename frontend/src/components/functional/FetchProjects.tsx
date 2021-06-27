@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import ProjectList from "../ProjectList";
+import ProjectListMain from "../ProjectListMain";
 
 interface FetchProjectsProps {
 
@@ -21,7 +21,7 @@ const FetchProjects: FC<FetchProjectsProps> = (props) => {
       return (
       <>
             <h2>List of all your projects: </h2>
-            <ProjectList projects = {projects}/>
+            <ProjectListMain projects = {projects}/>
       </>
       );
 }

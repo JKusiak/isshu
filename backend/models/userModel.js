@@ -32,25 +32,7 @@ const userSchema = mongoose.Schema({
             ref: 'Project',
             required: false,
             default: null,
-      }],
-      issuesCreated: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Issue',
-            required: false,
-            default: null,
-      }],
-      issuesTaken: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Issue',
-            required: false,
-            default: null,
-      }],
-      boards: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Board',
-            required: false,
-            default: null,
-      }],
+      }]
 });
 
 const User = mongoose.model('User', userSchema);

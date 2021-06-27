@@ -46,6 +46,7 @@ export const updateIssue = asyncHandler(async(req, res) => {
       const update = { 
             $set: {
                   description: req.body.description,
+                  contributor: req.body.contributor,
             } 
       };
       const options =  {
@@ -142,4 +143,26 @@ export const deleteTagFromIssue = asyncHandler(async(req, res) => {
               res.json("Issue updated successfuly");
           }
       });
+});
+
+export const getIssuesByCreator = asyncHandler(async(req, res) => {
+      const issue = await Issue.find({creator: req.params.id});
+
+      if(issue) {
+            res.json(issue);
+      } else {
+            res.status(404).json({message: "Issue not found"});
+            throw new Error('Issue not found');
+      }
+});
+
+export const getIssuesByContributor = asyncHandler(async(req, res) => {
+      const issue = await Issue.find({contributor: req.params.id});
+
+      if(issue) {
+            res.json(issue);
+      } else {
+            res.status(404).json({message: "Issue not found"});
+            throw new Error('Issue not found');
+      }
 });

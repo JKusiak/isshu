@@ -9,6 +9,8 @@ import {
       getTagsOfIssue,
       addTagToIssue,
       deleteTagFromIssue,
+      getIssuesByCreator,
+      getIssuesByContributor
 } from '../controllers/issueController.js';
 
 
@@ -29,5 +31,9 @@ router.route('/getTags/:id').get(getTagsOfIssue);
 router.route('/addTag/:id').post(addTagToIssue);
 
 router.route('/deleteTag/:id').delete(deleteTagFromIssue);
+
+router.route('/getIssueCreator/:id').get(getIssuesByCreator)
+
+router.route('/getIssueContributor/:id').get(getIssuesByContributor);
 
 export default router;
