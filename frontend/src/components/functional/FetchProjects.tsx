@@ -9,10 +9,10 @@ interface FetchProjectsProps {
 const FetchProjects: FC<FetchProjectsProps> = (props) => {
       const [projects, setProjects] = useState('');
 
-      useEffect(() => {
+      useEffect (() => {
             axios.get('http://localhost:5000/users/getProjects/60bce0e59c89184d505fa989')
             .then(resp => {
-                  const userProjects = resp.data;
+                  const userProjects = resp.data.projects;
                   setProjects(userProjects);
             });
         }, []);

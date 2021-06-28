@@ -8,20 +8,20 @@ import UserProfile from './components/UserPage';
 
 function App() {
   return (
-    <Router>
-      <Navbar/>
-      <Switch>
-      <Route path="/home">
-          <HomePage/>
-      </Route>
-      <Route path="/projects">
-          <ProjectsPage/>
-      </Route>
-      <Route path="/profile">
-          <UserProfile/>
-      </Route>
-      </Switch>
-    </Router>
+      <Router>
+        <Navbar/>
+        <Switch>
+        <Route path="/home">
+            <HomePage/>
+        </Route>
+        <Route path="/projects">
+            <ProjectsPage/>
+        </Route>
+        <Route path="/profile">
+            <UserProfile/>
+        </Route>
+        </Switch>
+      </Router>
   );
 }
 
