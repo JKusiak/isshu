@@ -6,10 +6,12 @@ import Navbar from './components/Navbar';
 import ProjectsPage from './components/ProjectsPage';
 import RegisterPage from './components/RegisterPage';
 import UserProfile from './components/UserPage';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 function App() {
   return (
+    <CssBaseline>
       <Router>
         <Navbar/>
         <Switch>
@@ -36,6 +38,7 @@ function App() {
         </Route>
         </Switch>
       </Router>
+    </CssBaseline>
   );
 }
 

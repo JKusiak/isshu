@@ -16,27 +16,14 @@ const useStyles = makeStyles((theme) => ({
       grow: {
             flexGrow: 1,
       },
-
-      title: {
-            display: 'none',
-            [theme.breakpoints.up('sm')]: {
-                  display: 'block',
-            },
-      },
       sectionDesktop: {
             display: 'none',
             [theme.breakpoints.up('md')]: {
                   display: 'flex',
             },
       },
-      sectionMobile: {
-            display: 'flex',
-            [theme.breakpoints.up('md')]: {
-                  display: 'none',
-            },
-      },
       image: {
-            marginLeft: theme.spacing(2),
+            marginLeft: "2em",
             width: '5%',
             height: '5%'
       },
@@ -54,14 +41,10 @@ function Navbar() {
       <div className={classes.grow}>
             <AppBar position="sticky">
             <Toolbar>
-            <img className={classes.image} src={Icon}/>
-            <img className={classes.logo} src={Logo}/>
+            <img className={classes.image} src={Icon} alt='site icon'/>
+            <img className={classes.logo} src={Logo} alt='site logo'/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-                  
-
-                  
- 
                   <Button color="secondary" component={Link} to="/home">
                         Home
                   </Button>
