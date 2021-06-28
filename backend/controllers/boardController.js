@@ -46,6 +46,7 @@ export const updateBoard = asyncHandler(async(req, res) => {
                   name: req.body.name,
             } 
       };
+
       const options =  {
             new: true, 
             useFindAndModify: false,
@@ -78,7 +79,8 @@ export const deleteBoard = asyncHandler(async(req, res) => {
 
 
 export const getColumnsOfBoard = asyncHandler(async(req, res) => {
-      const columns = await Board.find({_id: req.params.id}).select({columns: 1});
+      const columns = await Board.findOne({_id: req.params.id})
+            .populate('columns');
 
       if(columns) {
             res.json(columns);

@@ -81,10 +81,11 @@ export const deleteIssue = asyncHandler(async(req, res) => {
 
 
 export const getTagsOfIssue = asyncHandler(async(req, res) => {
-      const issues = await Issue.find({_id: req.params.id}).select({tags: 1});
+      const tags = await Issue.findOne({_id: req.params.id})
+            .populate('tags');
 
-      if(issues) {
-            res.json(issues);
+      if(tags) {
+            res.json(tags);
       } else {
             res.status(404).json({message: "Issue not found"});
             throw new Error('Issue not found');

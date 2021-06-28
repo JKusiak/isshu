@@ -78,7 +78,8 @@ export const deleteColumn = asyncHandler(async(req, res) => {
 
 
 export const getIssuesOfColumn = asyncHandler(async(req, res) => {
-      const issues = await Column.find({_id: req.params.id}).select({issues: 1});
+      const issues = await Column.findOne({_id: req.params.id})
+            .populate('issues');
 
       if(issues) {
             res.json(issues);

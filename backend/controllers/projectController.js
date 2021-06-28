@@ -88,7 +88,8 @@ export const deleteProject = asyncHandler(async(req, res) => {
 
 
 export const getBoardsOfProject = asyncHandler(async(req, res) => {
-    const boards = await Project.find({_id: req.params.id}).select({boards: 1});
+    const boards = await Project.findOne({_id: req.params.id})
+        .populate('boards');
 
     if(boards) {
         res.json(boards);

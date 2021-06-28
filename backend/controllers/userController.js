@@ -1,6 +1,4 @@
 import User from '../models/userModel.js';
-import Project from '../models/projectModel.js';
-import Issue from '../models/issueModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -93,9 +91,13 @@ export const deleteUser = asyncHandler(async(req, res) => {
 
 // TODO simplify to get rid of boilerplate code for all API endpoints
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
-    const projectIDs = await User.find({_id: req.params.id}).select({projects: 1});
-    const scrapedIDs = projectIDs[0].projects;
-    const projects = await Project.find({_id: {$in: [scrapedIDs]}});
+
+    const projects = await User.findOne({_id: req.params.id})
+        .populate('projects');
+
+    // const projectIDs = await User.find({_id: req.params.id}).select({projects: 1});
+    // const scrapedIDs = projectIDs[0].projects;
+    // const projects = await Project.find({_id: {$in: [scrapedIDs]}});
 
     if(projects) {
         res.json(projects);   
