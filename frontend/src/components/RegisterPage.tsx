@@ -1,14 +1,9 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -17,23 +12,37 @@ import { Link as RouterLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(9),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    width: '100%',
+    marginTop: theme.spacing(5),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 3),
   },
+  inputField: {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": { 
+        padding: '0.5em 4em',
+        borderRadius: '10px',
+      }, 
+      "&.Mui-focused fieldset": {
+        borderColor: "#000000",
+        borderWidth: "2px",
+      }
+    },
+  }
 }));
+
+
+
+
+
+
 
 function RegisterPage() {
   const classes = useStyles();
@@ -42,73 +51,76 @@ function RegisterPage() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h4">
           Sign up
         </Typography>
         <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
+                className={classes.inputField}
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
                 autoFocus
+                variant="outlined"
+                name="firstName"
+                id="firstName"
+                placeholder="First Name"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                variant="outlined"
+                className={classes.inputField}
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
+                variant="outlined"
                 name="lastName"
-                autoComplete="lname"
+                id="lastName"
+                placeholder="Last Name"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                className={classes.inputField}
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
+                variant="outlined"
                 name="email"
-                autoComplete="email"
+                id="email"
+                placeholder="Email Address"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
+                className={classes.inputField}
                 required
                 fullWidth
+                variant="outlined"
                 name="password"
-                label="Password"
-                type="password"
                 id="password"
-                autoComplete="current-password"
+                placeholder="Password"
+                type="password"
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+              <TextField
+                className={classes.inputField}
+                required
+                fullWidth
+                variant="outlined"
+                name="password"
+                id="password"
+                placeholder="Confirm password"
+                type="password"
               />
             </Grid>
           </Grid>
           <Button
+            className={classes.submit}
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
           >
             Sign Up
           </Button>
@@ -121,9 +133,6 @@ function RegisterPage() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        {/* <Copyright /> */}
-      </Box>
     </Container>
   );
 }
