@@ -9,7 +9,8 @@ import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/isshu_logo.svg';
-import Icon from '../resources/isshu_icon.svg'
+import Icon from '../resources/isshu_icon.svg';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,15 +57,21 @@ function Navbar() {
                         Register
                   </Button>
 
-                  <IconButton aria-label="add project" color="secondary" component={Link} to="/addProject">
-                        <AddProjectIcon/>
-                  </IconButton>
-                  <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
-                        <ProjectsIcon/>
-                  </IconButton>
-                  <IconButton aria-label="user profile" color="secondary" component={Link} to="/profile">
-                        <ProfileIcon/>
-                  </IconButton>
+                  <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
+                        <IconButton aria-label="add project" color="secondary" component={Link} to="/addProject">
+                              <AddProjectIcon/>
+                        </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
+                        <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
+                              <ProjectsIcon/>
+                        </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
+                        <IconButton aria-label="user profile" color="secondary" component={Link} to="/profile">
+                              <ProfileIcon/>
+                        </IconButton>
+                  </Tooltip>
             </div>
             </Toolbar>
             </AppBar>
