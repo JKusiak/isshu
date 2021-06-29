@@ -1,5 +1,5 @@
 import { FC } from "react"
-import FetchUserData from "./functional/FetchUserData";
+import GetUserData from "../functional/GetUserData";
 
 interface UserPageProps {
 
@@ -9,7 +9,7 @@ const UserPage: FC<UserPageProps> = (props) => {
       
       return (
       <>
-           <FetchUserData/>
+           <GetUserData/>
       </>
       );
 }

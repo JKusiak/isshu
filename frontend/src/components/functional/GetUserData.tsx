@@ -3,11 +3,11 @@ import { FC, useEffect, useState } from "react";
 import PersonalData from "../PersonalData";
 import ProjectListUser from "../ProjectListUser";
 
-interface FetchUserDataProps {
+interface GetUserDataProps {
 
 }
 
-const FetchUserData: FC<FetchUserDataProps> = (props) => {
+const GetUserData: FC<GetUserDataProps> = (props) => {
       const [credentials, setCredentials] = useState({});
       const [projects, setProjects] = useState('');
       const [issuesCreated, setIssuesCreated] = useState('');
@@ -60,4 +60,4 @@ const FetchUserData: FC<FetchUserDataProps> = (props) => {
       );
 }
 
-export default FetchUserData;
+export default GetUserData;

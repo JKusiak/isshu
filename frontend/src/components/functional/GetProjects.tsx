@@ -2,11 +2,11 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import ProjectListMain from "../ProjectListMain";
 
-interface FetchProjectsProps {
+interface GetProjectsProps {
 
 }
 
-const FetchProjects: FC<FetchProjectsProps> = (props) => {
+const GetProjects: FC<GetProjectsProps> = (props) => {
       const [projects, setProjects] = useState('');
 
       useEffect (() => {
@@ -26,4 +26,4 @@ const FetchProjects: FC<FetchProjectsProps> = (props) => {
       );
 }
 
-export default FetchProjects;
+export default GetProjects;

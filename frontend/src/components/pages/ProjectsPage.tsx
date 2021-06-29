@@ -1,5 +1,5 @@
 import { FC } from "react"
-import FetchProjects from "./functional/FetchProjects";
+import GetProjects from "../functional/GetProjects";
 
 interface ProjectsPageProps {
 
@@ -9,7 +9,7 @@ const ProjectsPage: FC<ProjectsPageProps> = (props) => {
       
       return (
       <>
-            <FetchProjects/>
+            <GetProjects/>
       </>
       );
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
+import HomePage from './components/pages/HomePage';
+import LoginPage from './components/pages/LoginPage';
 import Navbar from './components/Navbar';
-import ProjectsPage from './components/ProjectsPage';
+import ProjectsPage from './components/pages/ProjectsPage';
 import RegisterPage from './components/RegisterPage';
-import UserProfile from './components/UserPage';
+import UserProfile from './components/pages/UserPage';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 

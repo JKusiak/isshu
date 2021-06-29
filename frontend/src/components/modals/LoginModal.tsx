@@ -3,8 +3,8 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from './ButtonSpacing';
-import LoginForm from './LoginForm';
+import Button from '../ButtonSpacing';
+import LoginForm from '../LoginForm';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {
@@ -27,8 +27,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                   background: theme.palette.primary.dark
             }
       },
-  }),
-);
+}));
 
 function LoginModal() {
   const classes = useStyles();
