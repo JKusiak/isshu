@@ -41,6 +41,7 @@ function Navbar() {
       <div className={classes.grow}>
             <AppBar position="sticky">
             <Toolbar>
+            
             <img className={classes.image} src={Icon} alt='site icon'/>
             <img className={classes.logo} src={Logo} alt='site logo'/>
             <div className={classes.grow} />
