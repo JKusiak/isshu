@@ -89,13 +89,13 @@ export const deleteUser = asyncHandler(async(req, res) => {
     }
 });
 
+
 // export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
 //     const projects = await User.find({}).populate('projects');
     
 //     res.json(projects) ;
     
-
 //     // tokenFilteredProjects = projects.filter(project => project.email === req.user.email)
 
 //     // if(tokenFilteredProjects) {
@@ -108,8 +108,7 @@ export const deleteUser = asyncHandler(async(req, res) => {
 
 
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
-
-    const projects = await User.findOne({_id: req.params.id})
+    const projects = await User.findOne({email: req.user.email})
         .populate('projects');
 
     if(projects) {

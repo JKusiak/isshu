@@ -2,16 +2,15 @@ import connectDB from './config/db.js';
 import dotenv  from 'dotenv';
 import express from 'express';
 import cors from 'cors';
-import userRoute from './routes/userRoute.js';
-import projectRoute from './routes/projectRoute.js';
-import boardRoute from './routes/boardRoute.js';
-import columnRoute from './routes/columnRoute.js';
-import issueRoute from './routes/issueRoute.js';
-import tagRoute from './routes/tagRoute.js';
-import {router, protectedRouter} from './routes/authenticationRoute.js';
+import projectRouter from './routes/projectRoute.js';
+import boardRouter from './routes/boardRoute.js';
+import columnRouter from './routes/columnRoute.js';
+import issueRouter from './routes/issueRoute.js';
+import tagRouter from './routes/tagRoute.js';
+import { userRouter, protectedUserRouter } from './routes/userRoute.js';
+import { router, protectedRouter } from './routes/authenticationRoute.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import jwt from 'jsonwebtoken';
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -26,12 +25,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/users', userRoute);
-app.use('/projects', projectRoute);
-app.use('/boards', boardRoute);
-app.use('/columns', columnRoute);
-app.use('/issues', issueRoute);
-app.use('/tags', tagRoute);
+app.use('/users', userRouter, protectedUserRouter);
+app.use('/projects', projectRouter);
+app.use('/boards', boardRouter);
+app.use('/columns', columnRouter);
+app.use('/issues', issueRouter);
+app.use('/tags', tagRouter);
 app.use('/login', router, protectedRouter);
 
 // universal route for handling 404 response if route not existing

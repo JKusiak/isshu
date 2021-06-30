@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
 import { 
       getAllUsers,
       getUserById, 
@@ -11,22 +12,23 @@ import {
 } from "../controllers/userController.js";
 
 
-const router = express.Router();
+export const protectedUserRouter = express.Router();
+export const userRouter = express.Router();
 
-router.route('/').get(getAllUsers);
+protectedUserRouter.use(authenticateJWT);
 
-router.route('/:id').get(getUserById);
+protectedUserRouter.route('/').get(getAllUsers);
 
-router.route('/add').post(addUser);
+protectedUserRouter.route('/:id').get(getUserById);
 
-router.route('/update/:id').post(updateUser);
+userRouter.route('/add').post(addUser);
 
-router.route('/delete/:id').delete(deleteUser);
+protectedUserRouter.route('/update/:id').post(updateUser);
 
-router.route('/getProjects/:id').get(getProjectsOfUser);
+protectedUserRouter.route('/delete/:id').delete(deleteUser);
 
-router.route('/addProject/:id').post(addProjectToUser);
+protectedUserRouter.route('/getProjects/:id').get(getProjectsOfUser);
 
-router.route('/deleteProject/:id').delete(deleteProjectFromUser);
+protectedUserRouter.route('/addProject/:id').post(addProjectToUser);
 
-export default router;
+protectedUserRouter.route('/deleteProject/:id').delete(deleteProjectFromUser);
