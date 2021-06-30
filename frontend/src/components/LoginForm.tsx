@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink, useHistory} from 'react-router-dom';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -32,24 +33,46 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         borderWidth: "2px",
       }
     },
+  },
+  wrongInput: {
+    color: "#C62828",
+    textAlign: "center",
   }
 }));
 
-// const emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-// + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-// const passRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 
 function LoginForm() {
   const classes = useStyles();
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isValid, setIsValid] = useState(true);
+
+  let history = useHistory();
+
+  const credentials = {
+    email: email,
+    password: password,
+  }
+
+  function onSubmit(e: any) {
+    e.preventDefault();
+
+    axios.post('http://localhost:5000/login/', credentials)
+      .then((res) => {
+        history.push("/projects");
+        console.log(res);
+      }).catch((res) => {
+        setIsValid(false);
+      });
+  } 
+
 
   return (
     <>
       <Typography component="h1" variant="h4">
       Sign in
       </Typography>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} onSubmit={onSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -61,6 +84,10 @@ function LoginForm() {
               name="email"
               id="email"
               placeholder="Email Address"
+              onChange={e => {
+                setEmail(e.target.value);
+                setIsValid(true);
+              }}
               
             />
           </Grid>
@@ -74,13 +101,18 @@ function LoginForm() {
               id="password"
               placeholder="Password"
               type="password"
+              onChange={e => {
+                setPassword(e.target.value);
+                setIsValid(true);
+              }}
             />
           </Grid>
         </Grid>
+        {!isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
         <Button
           className={classes.submit}
-          type="submit"
           fullWidth
+          type="submit"
           variant="contained"
           color="primary"
         >

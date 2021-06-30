@@ -17,7 +17,6 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
       useEffect(() => {
             axios.get('http://localhost:5000/users/getProjects/60dca3332045f733ac918b2b', {
                   headers: {
-                  'Content-Type': 'application/json',
                   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjYTMzMzIwNDVmNzMzYWM5MThiMmIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiaWF0IjoxNjI1MDcyNzU0fQ.rU1shosVRHUTC8LOgV43NJOabkCnWHErCwGYErMRH9U'
                   }
             }).then(resp => {

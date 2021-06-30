@@ -2,6 +2,7 @@ import connectDB from './config/db.js';
 import dotenv  from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import projectRouter from './routes/projectRoute.js';
 import boardRouter from './routes/boardRoute.js';
 import columnRouter from './routes/columnRoute.js';
@@ -24,6 +25,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/users', userRouter, protectedUserRouter);
 app.use('/projects', projectRouter);

@@ -62,7 +62,6 @@ function RegisterForm() {
       const [errorText, setErrorText] = useState('');
 
       useEffect(() => {
-            console.log(repeatPassword);
             if(repeatPassword === password) {
                   setIsValid(true);
             } else {
@@ -119,7 +118,7 @@ function RegisterForm() {
                                                 setIsValid(false);
                                           }
                                           setIsSent(false);
-                                          }}
+                                    }}
                               />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -175,7 +174,6 @@ function RegisterForm() {
                                     placeholder="Password"
                                     type="password"
                                     onChange={e => {
-                                          console.log(e.target.value);
                                           if (e.target.value.match(passRegex)) {
                                                 setPassword(e.target.value);
                                                 setIsValid(true);
