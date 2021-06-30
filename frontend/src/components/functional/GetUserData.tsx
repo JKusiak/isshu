@@ -22,15 +22,22 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
             }).then(resp => {
                   const userProjects = resp.data.projects;
                   setProjects(userProjects);
-            });
+            }).catch((err) => {
+                  console.log(err);
+            });;
         }, []);
 
       // requests user object by their id
       useEffect(() => {
-            axios.get('http://localhost:5000/users/60bce0e59c89184d505fa989')
-            .then(resp => {
+            axios.get('http://localhost:5000/users/60dca3332045f733ac918b2b', {
+                  headers: {
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRjYTMzMzIwNDVmNzMzYWM5MThiMmIiLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiaWF0IjoxNjI1MDcyNzU0fQ.rU1shosVRHUTC8LOgV43NJOabkCnWHErCwGYErMRH9U'
+                  }
+            }).then(resp => {
                   const userCredentials = resp.data;
                   setCredentials(userCredentials);
+            }).catch((err) => {
+                  console.log(err);
             });
         }, []);
 
@@ -40,7 +47,9 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
             .then(resp => {
                   const issuesData = resp.data;
                   setIssuesCreated(issuesData);
-            });
+            }).catch((err) => {
+                  console.log(err);
+            });;
         }, []); 
         
       // requests issues taken by user
@@ -49,7 +58,9 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
             .then(resp => {
                   const issuesData = resp.data;
                   setIssuesTaken(issuesData);
-            });
+            }).catch((err) => {
+                  console.log(err);
+            });;
         }, []); 
         
         

@@ -90,23 +90,6 @@ export const deleteUser = asyncHandler(async(req, res) => {
 });
 
 
-// export const getProjectsOfUser = asyncHandler(async(req, res) => {
-
-//     const projects = await User.find({}).populate('projects');
-    
-//     res.json(projects) ;
-    
-//     // tokenFilteredProjects = projects.filter(project => project.email === req.user.email)
-
-//     // if(tokenFilteredProjects) {
-//     //     res.json(tokenFilteredProjects);   
-//     // } else {
-//     //     res.status(404).json({message: "User not found"});
-//     //     throw new Error('User not found');
-//     // }
-// }); 
-
-
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
     const projects = await User.findOne({email: req.user.email})
         .populate('projects');

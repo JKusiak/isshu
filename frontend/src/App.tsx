@@ -15,9 +15,6 @@ function App() {
       <Router>
         <Navbar/>
         <Switch>
-        <Route path="/home">
-            <HomePage/>
-        </Route>
         <Route path="/projects">
             <ProjectsPage/>
         </Route>
@@ -33,8 +30,8 @@ function App() {
         <Route path="/register">
             <RegisterPage/>
         </Route>
-        <Route path="/register">
-            
+        <Route path="/">
+            <HomePage/>
         </Route>
         </Switch>
       </Router>

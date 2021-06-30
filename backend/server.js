@@ -27,6 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use('/users', userRouter, protectedUserRouter);
 app.use('/projects', projectRouter);
 app.use('/boards', boardRouter);

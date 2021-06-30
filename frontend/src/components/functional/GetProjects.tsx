@@ -18,7 +18,9 @@ const GetProjects: FC<GetProjectsProps> = (props) => {
             .then(resp => {
                   const userProjects = resp.data.projects;
                   setProjects(userProjects);
-            });
+            }).catch((err) => {
+                  console.log(err);
+            });;
         }, []);
 
         

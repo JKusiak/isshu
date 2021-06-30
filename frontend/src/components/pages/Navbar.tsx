@@ -47,7 +47,7 @@ function Navbar() {
             <img className={classes.logo} src={Logo} alt='site logo'/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-                  <Button color="secondary" component={Link} to="/home">
+                  <Button color="secondary" component={Link} to="/">
                         Home
                   </Button>
                   <Button color="secondary" component={Link} to="/login">

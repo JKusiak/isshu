@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './ButtonSpacing';
+import Button from '../ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
@@ -59,9 +59,10 @@ function LoginForm() {
 
     axios.post('http://localhost:5000/login/', credentials)
       .then((res) => {
-        history.push("/projects");
         console.log(res);
-      }).catch((res) => {
+        history.push("/projects");
+      }).catch((err) => {
+        console.log(err);
         setIsValid(false);
       });
   } 
@@ -72,7 +73,7 @@ function LoginForm() {
       <Typography component="h1" variant="h4">
       Sign in
       </Typography>
-      <form className={classes.form} onSubmit={onSubmit}>
+      <form className={classes.form} onSubmit={onSubmit} autoComplete="off">
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
@@ -84,6 +85,7 @@ function LoginForm() {
               name="email"
               id="email"
               placeholder="Email Address"
+              autoComplete="email-address"
               onChange={e => {
                 setEmail(e.target.value);
                 setIsValid(true);
@@ -100,6 +102,7 @@ function LoginForm() {
               name="password"
               id="password"
               placeholder="Password"
+              autoComplete="password"
               type="password"
               onChange={e => {
                 setPassword(e.target.value);

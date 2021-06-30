@@ -14,10 +14,10 @@ export const loginUser = asyncHandler(async(req, res) => {
 
       if (bcrypt.compareSync(req.body.password, userData.password)) {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-            res.cookie('token', accessToken, { httpOnly: true });
-            return res.json({ token: accessToken});
+            res.cookie('token', accessToken, {httpOnly: 'true'});
+            res.json({ token: accessToken});
       } else {
-            return res.status(401).json({message: 'Authentication failed. Invalid user or password.'});
+            res.status(401).json({message: 'Authentication failed. Invalid user or password.'});
       }
 })
 

@@ -2,7 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import LoginForm from '../LoginForm';
+import LoginForm from '../functional/LoginForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

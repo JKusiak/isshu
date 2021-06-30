@@ -2,7 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import RegisterForm from '../RegisterForm';
+import RegisterForm from '../functional/RegisterForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

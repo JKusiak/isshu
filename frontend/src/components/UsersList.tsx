@@ -15,7 +15,9 @@ const UsersList: FC<UsersListProps> = (props) => {
                   if(resp.data.length > 0) {
                         setUsers(resp.data.map((user: { name: any; }) => user.name));
                   }
-            });
+            }).catch((err) => {
+                  console.log(err);
+            });;
         
         }, []);
 

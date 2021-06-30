@@ -84,6 +84,8 @@ function RegisterForm() {
                   axios.post('http://localhost:5000/users/add', user)
                   .then(() => {
                         console.log(user);
+                  }).catch((err) => {
+                        console.log(err);
                   });
                   setIsSent(true);
             } else (
@@ -109,6 +111,7 @@ function RegisterForm() {
                                     name="name"
                                     id="name"
                                     placeholder="Name"
+                                    autoComplete="your-name"
                                     onChange={e => {
                                           if (e.target.value.match(nameRegex)) {
                                                 setName(e.target.value);
@@ -130,6 +133,7 @@ function RegisterForm() {
                                     name="surname"
                                     id="surname"
                                     placeholder="Surname"
+                                    autoComplete="your-surname"
                                     onChange={e => {
                                           if (e.target.value.match(nameRegex)) {
                                                 setSurname(e.target.value);
@@ -151,6 +155,7 @@ function RegisterForm() {
                                     name="email"
                                     id="email"
                                     placeholder="Email"
+                                    autoComplete="email-address"
                                     onChange={e => {
                                           if (e.target.value.match(emailRegex)) {
                                                 setEmail(e.target.value);
@@ -173,6 +178,7 @@ function RegisterForm() {
                                     id="password"
                                     placeholder="Password"
                                     type="password"
+                                    autoComplete="password"
                                     onChange={e => {
                                           if (e.target.value.match(passRegex)) {
                                                 setPassword(e.target.value);
@@ -198,6 +204,7 @@ function RegisterForm() {
                                     id="confirmPassword"
                                     placeholder="Confirm password"
                                     type="password"
+                                    autoComplete="repeat-password"
                                     onChange={e => {
                                           setRepeatPassword(e.target.value);
                                           setIsSent(false);

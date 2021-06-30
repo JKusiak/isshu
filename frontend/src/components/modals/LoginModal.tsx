@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '../ButtonSpacing';
-import LoginForm from '../LoginForm';
+import LoginForm from '../functional/LoginForm';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {

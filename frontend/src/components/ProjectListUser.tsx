@@ -6,7 +6,7 @@ interface ProjectListProps {
 
 const ProjectListUser: FC<ProjectListProps> = (props) => {
       function displayProjects() {
-            if (props.projects.length > 0) {
+            if(props.projects.length > 0) {
                   return(props.projects.map((project: any, index: any) => {
                         return(
                               <div className="project_container" key={index}>
