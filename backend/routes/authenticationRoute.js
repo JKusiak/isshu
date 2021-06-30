@@ -27,6 +27,7 @@ export const authenticateJWT = (req, res, next) => {
 
 protectedRouter.use(authenticateJWT);
 
+
 router.route('/').post(loginUser);
 
 protectedRouter.route('/getUserByToken').get(getUserByToken);

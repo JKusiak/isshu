@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+function setPassword(value) {
+      return bcrypt.hashSync(value, 10);
+}
+
 const userSchema = mongoose.Schema({
       name: {
             type: String,
@@ -18,8 +22,10 @@ const userSchema = mongoose.Schema({
             unique: true,
             trim: true,
       },
-      hash_password: {
+      password: {
             type: String,
+            required: true,
+            set: setPassword
       },
       isAdmin: {
             type: Boolean,
@@ -34,11 +40,6 @@ const userSchema = mongoose.Schema({
       }]
 });
 
-userSchema.methods.comparePassword = function(password) {
-      return bcrypt.compare(password, this.hash_password, function(err, result){
-            console.log(result);
-      });
-};
 
 const User = mongoose.model('User', userSchema);
 

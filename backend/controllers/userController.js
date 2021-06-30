@@ -1,8 +1,6 @@
 import User from '../models/userModel.js';
 import Project from '../models/projectModel.js';
 import asyncHandler from 'express-async-handler';
-import bcrypt from 'bcrypt';
-const saltRounds = 10;
 
 
 // TODO simplify to get rid of boilerplate code for all API endpoints
@@ -31,19 +29,12 @@ export const addUser = asyncHandler(async(req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const isAdmin = req.body.isAdmin;
-    const hashedPassword = '';
-
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            hashedPassword = hash;
-        });
-    });
 
     const newUser = new User({
         name,
         surname,
         email,
-        hashedPassword,
+        password,
         isAdmin,
     });
     
