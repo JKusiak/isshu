@@ -1,4 +1,5 @@
 import { FC } from "react"
+import GetProjectsList from "../functional/GetProjectsList";
 import GetUserData from "../functional/GetUserData";
 
 interface UserPageProps {
@@ -8,8 +9,9 @@ interface UserPageProps {
 const UserPage: FC<UserPageProps> = (props) => {
       
       return (
-      <>
-           <GetUserData/>
+      <>    
+            <GetUserData/>
+            <GetProjectsList/>
       </>
       );
 }

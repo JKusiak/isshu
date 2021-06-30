@@ -1,12 +1,12 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import ProjectListMain from "../ProjectListMain";
+import ProjectListMain from "../ProjectsBoard";
 
-interface GetProjectsProps {
+interface GetProjectsBoardProps {
 
 }
 
-const GetProjects: FC<GetProjectsProps> = (props) => {
+const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
       const [projects, setProjects] = useState('');
 
       useEffect (() => {
@@ -32,4 +32,4 @@ const GetProjects: FC<GetProjectsProps> = (props) => {
       );
 }
 
-export default GetProjects;
+export default GetProjectsBoard;

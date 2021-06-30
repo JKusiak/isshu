@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import PersonalData from "../PersonalData";
-import ProjectListUser from "../ProjectListUser";
+import ProjectListUser from "../ProjectsList";
 
 interface CreateUserProps {
 

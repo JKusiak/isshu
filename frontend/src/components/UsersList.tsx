@@ -24,7 +24,7 @@ const UsersList: FC<UsersListProps> = (props) => {
         
       return (
       <>
-            <div>{users[0]}</div>
+            <div>{users}</div>
       </>
       );
 }
