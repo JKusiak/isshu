@@ -19,10 +19,13 @@ function App() {
             <ProjectsPage/>
         </Route>
         <Route path="/addProject">
-            
+          AddProject
         </Route>
         <Route path="/profile">
             <UserProfile/>
+        </Route>
+        <Route path="/settings">
+          Settings
         </Route>
         <Route path="/login">
             <LoginPage/>
