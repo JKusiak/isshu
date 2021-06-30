@@ -16,19 +16,16 @@ export const loginUser = asyncHandler(async(req, res) => {
       //       return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
       // }
 
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 
       return res.json({ token: accessToken});
 })
 
 export const getUserByToken = asyncHandler(async(req, res) => {
-      res.send(req.user);
-      // if(req.user) {
-      //   res.send(req.user);
-      //   next();
-      // } 
-      // else {
-      //  return res.status(401).json({ message: 'Invalid token' });
-      // }
+      if(req.user) {
+            res.send(req.user);
+      } else {
+            res.status(401).json({ message: 'Invalid token' });
+      }
 });
       
