@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.up('md')]: {
                   display: 'flex',
             },
-            marginRight: "1em"
+            marginRight: "2.5em"
       },
       image: {
             marginLeft: "2em",
@@ -42,10 +42,6 @@ function Navbar() {
       const [authenticated, setAuthenticated] = useState(true);
       const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
       const open = Boolean(anchorEl);
-      
-      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            setAuthenticated(event.target.checked);
-      };
         
       const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
             setAnchorEl(event.currentTarget);
@@ -57,7 +53,7 @@ function Navbar() {
 
       const handleLogout = () => {
             handleClose();
-            setAuthenticated(false);
+            // setAuthenticated(false);
       };
 
 
@@ -106,13 +102,14 @@ function Navbar() {
                         id="menu-appbar"
                         anchorEl={anchorEl}
                         anchorOrigin={{
-                              vertical: 'top',
-                              horizontal: 'right',
+                              vertical: 'bottom',
+                              horizontal: 'center',
                         }}
+                        getContentAnchorEl={null}
                         keepMounted
                         transformOrigin={{
                               vertical: 'top',
-                              horizontal: 'right',
+                              horizontal: 'center',
                         }}
                         open={open}
                         onClose={handleClose}
