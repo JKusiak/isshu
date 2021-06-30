@@ -35,8 +35,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }));
 
+// const emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+// + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+// const passRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+
 function LoginForm() {
   const classes = useStyles();
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
   return (
     <>
@@ -50,10 +56,12 @@ function LoginForm() {
               className={classes.inputField}
               required
               fullWidth
+              autoFocus
               variant="outlined"
               name="email"
               id="email"
               placeholder="Email Address"
+              
             />
           </Grid>
           <Grid item xs={12}>

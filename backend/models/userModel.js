@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import bcrypt from 'bcrypt';
 
 const userSchema = mongoose.Schema({
       name: {
@@ -18,9 +18,8 @@ const userSchema = mongoose.Schema({
             unique: true,
             trim: true,
       },
-      password: {
+      hash_password: {
             type: String,
-            required: true,
       },
       isAdmin: {
             type: Boolean,
@@ -34,6 +33,12 @@ const userSchema = mongoose.Schema({
             default: null,
       }]
 });
+
+userSchema.methods.comparePassword = function(password) {
+      return bcrypt.compare(password, this.hash_password, function(err, result){
+            console.log(result);
+      });
+};
 
 const User = mongoose.model('User', userSchema);
 

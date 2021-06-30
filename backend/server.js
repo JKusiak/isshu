@@ -8,8 +8,10 @@ import boardRoute from './routes/boardRoute.js';
 import columnRoute from './routes/columnRoute.js';
 import issueRoute from './routes/issueRoute.js';
 import tagRoute from './routes/tagRoute.js';
+import authenticationRoute from './routes/authenticationRoute.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -29,6 +31,35 @@ app.use('/boards', boardRoute);
 app.use('/columns', columnRoute);
 app.use('/issues', issueRoute);
 app.use('/tags', tagRoute);
+app.use('/login', authenticationRoute);
+
+app.use('/login', (req, res, next) => {
+      const authHeader = req.headers['Authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      if(token == null) {
+            return res.sendStatus(401);
+      } 
+      
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if(err) {
+                  res.send(403);
+            }
+            req.user = user;
+            next();
+      })
+
+      // if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+      //   jsonwebtoken.verify(req.headers.authorization.split(' ')[1], process.env.ACCESS_TOKEN_SECRET, function(err, user) {
+      //       if (err) req.user = undefined;
+      //       req.user = user;
+      //       next();
+      //   });
+      // } else {
+      //   req.user = undefined;
+      //   next();
+      // }
+});
+
 
 // universal route for handling 404 response if route not existing
 app.use((req, res, next) => {

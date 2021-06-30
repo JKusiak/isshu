@@ -69,8 +69,7 @@ function RegisterForm() {
                   setErrorText("Passwords must be the same");
                   setIsValid(false);
             };
-            
-      }, [repeatPassword]);
+      }, [password, repeatPassword]);
 
       const user = {
             name: name,
@@ -94,7 +93,6 @@ function RegisterForm() {
       }
 
       
-
       return (
       <>
       <Typography component="h1" variant="h4">
@@ -121,8 +119,7 @@ function RegisterForm() {
                                                 setIsValid(false);
                                           }
                                           setIsSent(false);
-                                          }
-                                    }
+                                          }}
                               />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -143,8 +140,7 @@ function RegisterForm() {
                                                 setIsValid(false);
                                           }
                                           setIsSent(false);
-                                          }
-                                    }
+                                    }}
                               />
                         </Grid>
                         <Grid item xs={12}>
@@ -165,8 +161,7 @@ function RegisterForm() {
                                                 setIsValid(false);
                                           }
                                           setIsSent(false);
-                                          }
-                                    }
+                                    }}
                               />
                         </Grid>
                         <Grid item xs={12}>
@@ -192,8 +187,7 @@ function RegisterForm() {
                                           }
                                           
                                           setIsSent(false);
-                                          }
-                                    }
+                                    }}
                               />
                         </Grid>
                         <Grid item xs={12}>

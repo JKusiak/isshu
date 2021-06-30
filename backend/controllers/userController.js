@@ -1,7 +1,11 @@
 import User from '../models/userModel.js';
+import Project from '../models/projectModel.js';
 import asyncHandler from 'express-async-handler';
+import bcrypt from 'bcrypt';
+const saltRounds = 10;
 
 
+// TODO simplify to get rid of boilerplate code for all API endpoints
 export const getAllUsers = asyncHandler(async(req, res) => {
     const users = await User.find({});
     
@@ -27,12 +31,19 @@ export const addUser = asyncHandler(async(req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const isAdmin = req.body.isAdmin;
+    const hashedPassword = '';
+
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+            hashedPassword = hash;
+        });
+    });
 
     const newUser = new User({
         name,
         surname,
         email,
-        password,
+        hashedPassword,
         isAdmin,
     });
     
@@ -54,7 +65,6 @@ export const updateUser = asyncHandler(async(req, res) => {
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email,
-            password: req.body.password,
             isAdmin: req.body.isAdmin,
         } 
     };
@@ -88,16 +98,28 @@ export const deleteUser = asyncHandler(async(req, res) => {
     }
 });
 
+// export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
-// TODO simplify to get rid of boilerplate code for all API endpoints
+//     const projects = await User.find({}).populate('projects');
+    
+//     res.json(projects) ;
+    
+
+//     // tokenFilteredProjects = projects.filter(project => project.email === req.user.email)
+
+//     // if(tokenFilteredProjects) {
+//     //     res.json(tokenFilteredProjects);   
+//     // } else {
+//     //     res.status(404).json({message: "User not found"});
+//     //     throw new Error('User not found');
+//     // }
+// }); 
+
+
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
     const projects = await User.findOne({_id: req.params.id})
         .populate('projects');
-
-    // const projectIDs = await User.find({_id: req.params.id}).select({projects: 1});
-    // const scrapedIDs = projectIDs[0].projects;
-    // const projects = await Project.find({_id: {$in: [scrapedIDs]}});
 
     if(projects) {
         res.json(projects);   
@@ -159,30 +181,3 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
         }
     });
 });
-
-
-// async function addToUser(documentType, req, res) {
-//     const id = req.params.id;
-
-//     const update = {
-//          $push: {
-//             [`${documentType}`]: req.body.documentType,
-//         } 
-//     };
-//     const options = {
-//         new: true, 
-//         useFindAndModify: false,
-//     };
-
-//     const user = await User.findByIdAndUpdate(id, update, options, function(err, data){
-//         if(err) {
-//             res.status(400).json({message: "Update unsuccessful"});
-//             throw new Error('Update unsuccessful');
-//         } else if(!data) {
-//             res.status(404).json({message: "User not found"});
-//             throw new Error('User not found');
-//         } else {
-//             res.json(`User's ${documentType} updated successfuly`);
-//         }
-//     });
-// }
