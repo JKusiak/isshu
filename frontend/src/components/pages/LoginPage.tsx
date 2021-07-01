@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -14,17 +14,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
+interface LoginPageProps {
+  setLoggedIn: any
+}
 
-function RegisterPage() {
+const LoginPage: FC<LoginPageProps> = (props) => {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <LoginForm/>
+        <LoginForm setLoggedIn={props.setLoggedIn}/>
       </div>
     </Container>
   );
 }
-export default RegisterPage;
+export default LoginPage;

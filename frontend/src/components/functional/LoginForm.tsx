@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '../ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -40,8 +40,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }));
 
+interface LoginFormProps {
+  setLoggedIn: any
+}
 
-function LoginForm() {
+const LoginForm: FC<LoginFormProps> = (props) => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +62,9 @@ function LoginForm() {
 
     axios.post('http://localhost:5000/login/', credentials)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        props.setLoggedIn(true);
         history.push("/projects");
       }).catch((err) => {
         console.log(err);

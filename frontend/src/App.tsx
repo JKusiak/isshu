@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
@@ -11,10 +11,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem('token') == '' ? false : true
+  );
+
+
   return (
     <CssBaseline>
       <Router>
-        <Navbar/>
+        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Switch>
         <Route path="/projects">
             <ProjectsPage/>
@@ -29,13 +34,13 @@ function App() {
           Settings
         </Route>
         <Route path="/login">
-            <LoginPage/>
+            <LoginPage setLoggedIn={setLoggedIn}/>
         </Route>
         <Route path="/register">
             <RegisterPage/>
         </Route>
         <Route path="/">
-            <HomePage/>
+            <HomePage setLoggedIn={setLoggedIn}/>
         </Route>
         </Switch>
       </Router>

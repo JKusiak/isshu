@@ -8,7 +8,7 @@ import LoginModal from "../modals/LoginModal";
 
 
 interface HomePageProps {
-
+      setLoggedIn: any
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -29,7 +29,7 @@ const HomePage: FC<HomePageProps> = (props) => {
                         src={logoText} 
                         alt='logo of the website saying "Isshu - minimalistic bug tracker"'>
                   </img>
-                  <LoginModal/>
+                  <LoginModal setLoggedIn={props.setLoggedIn}/>
                   <RegisterModal/>
             </Grid>
       </Box>

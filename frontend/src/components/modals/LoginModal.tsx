@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -29,7 +29,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
 }));
 
-function LoginModal() {
+interface LoginModalProps {
+      setLoggedIn: any
+}
+
+
+const LoginModal: FC<LoginModalProps> = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -67,7 +72,7 @@ function LoginModal() {
       >
         <Fade in={open}>
             <div className={classes.paper}>
-                  <LoginForm/>
+                  <LoginForm setLoggedIn={props.setLoggedIn}/>
             </div>
         </Fade>
       </Modal>

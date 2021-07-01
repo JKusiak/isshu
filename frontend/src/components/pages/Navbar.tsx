@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../resources/isshu_logo.svg';
 import Icon from '../../resources/isshu_icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +37,15 @@ const useStyles = makeStyles((theme) => ({
       
 }));
 
+interface NavbarProps {
+      loggedIn: boolean;
+      setLoggedIn: any;
+}
 
-function Navbar() {
+
+const Navbar: FC<NavbarProps> = (props) => {
       const classes = useStyles();
-      const [authenticated, setAuthenticated] = useState(true);
+      const [authenticated, setAuthenticated] = useState(false);
       const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
       const open = Boolean(anchorEl);
         
@@ -53,6 +59,8 @@ function Navbar() {
 
       const handleLogout = () => {
             handleClose();
+            localStorage.setItem('token', '');
+            props.setLoggedIn(false);
             // setAuthenticated(false);
       };
 
@@ -66,7 +74,7 @@ function Navbar() {
             <img className={classes.logo} src={Logo} alt='site logo'/>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-            {authenticated && (
+            {!props.loggedIn && (
                   <>
                   <Button color="secondary" component={Link} to="/">
                         Home
@@ -81,7 +89,7 @@ function Navbar() {
             )}
                   
 
-            {authenticated && (
+            {props.loggedIn && (
                   <>
                   <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
                         <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
