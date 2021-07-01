@@ -12,7 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem('token') == '' ? false : true
+    localStorage.getItem('token') === '' ? false : true
   );
 
 

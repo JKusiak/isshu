@@ -1,5 +1,4 @@
 import User from '../models/userModel.js';
-import Project from '../models/projectModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -12,7 +11,7 @@ export const getAllUsers = asyncHandler(async(req, res) => {
 
 
 export const getUserById = asyncHandler(async(req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user._id);
 
     if(user) {
         res.json(user);

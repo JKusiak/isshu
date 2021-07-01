@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import Logo from '../../resources/isshu_logo.svg';
 import Icon from '../../resources/isshu_icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
-import { useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +44,6 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = (props) => {
       const classes = useStyles();
-      const [authenticated, setAuthenticated] = useState(false);
       const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
       const open = Boolean(anchorEl);
         
