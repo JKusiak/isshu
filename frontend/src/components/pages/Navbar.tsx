@@ -26,12 +26,11 @@ const useStyles = makeStyles((theme) => ({
       },
       image: {
             marginLeft: "2em",
-            width: '5%',
-            height: '5%'
+            width: 75,
+            height: 75,
       },
       logo: {
-            width: '12%',
-            height: '12%'
+            height: 75,
       },
       
 }));
@@ -66,8 +65,7 @@ const Navbar: FC<NavbarProps> = (props) => {
       return (
       <div className={classes.grow}>
       <AppBar position="sticky">
-      <Toolbar>
-            
+      <Toolbar> 
             <img className={classes.image} src={Icon} alt='site icon'/>
             <img className={classes.logo} src={Logo} alt='site logo'/>
             <div className={classes.grow} />
@@ -126,8 +124,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                   </Menu>
                         
                   </>
-            )}
-                  
+            )}   
             </div>
             </Toolbar>
             </AppBar>

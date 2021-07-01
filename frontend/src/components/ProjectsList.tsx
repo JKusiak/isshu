@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { IconButton, ListItemSecondaryAction } from "@material-ui/core";
 
 
 interface ProjectListProps {
@@ -19,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: "100%",
       maxWidth: 360,
-      backgroundColor: theme.palette.background.paper
+      color: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.primary.main,
     },
-    nested: {
-      color: "#000000"
+    projectName: {
+          
     }
   })
 );
@@ -42,14 +44,20 @@ const ProjectsList: FC<ProjectListProps> = (props) => {
                         return(
                               <>
                                     <ListItem button onClick={handleClick}>
-                                          <ListItemText primary={project.name} />
-                                          {open ? <ExpandLess /> : <ExpandMore />}
+                                          <ListItemText className={classes.projectName} primary={project.name} />
+                                          <ListItemSecondaryAction>
+                                                <IconButton edge="end" aria-label="expand">
+                                                      {open ? <ExpandLess /> : <ExpandMore />}
+                                                </IconButton>
+                                          </ListItemSecondaryAction>
+                                          
                                     </ListItem>
                                     <Collapse in={open} timeout="auto" unmountOnExit>
-                                          <ListItem button className={classes.nested}>
-                                                <ListItemText primary={project.description} />
-                                          </ListItem>
-                                    </Collapse>
+                                                <ListItem>
+                                                      <ListItemText primary={project.description} />
+                                                </ListItem>
+                                          </Collapse>
+                                    
                               </>
                         );
                   }));

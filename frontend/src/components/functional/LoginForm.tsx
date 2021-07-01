@@ -76,7 +76,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
   return (
     <>
       <Typography component="h1" variant="h4">
-      Sign in
+        Sign in
       </Typography>
       <form className={classes.form} onSubmit={onSubmit} autoComplete="off">
         <Grid container spacing={3}>
