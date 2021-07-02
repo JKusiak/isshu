@@ -21,7 +21,7 @@ const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-        }, []);
+      }, []);
 
         
       return (

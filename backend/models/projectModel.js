@@ -4,14 +4,13 @@ import mongoose from 'mongoose';
 const projectSchema = mongoose.Schema({
       name: {
             type: String,
+            unique: true,
             required: true,
             trim: true,
-            unique: true,
       },
       description: {
             type: String,
             required: false,
-            default: null,
       },
       dateStart: {
             type: Date,
@@ -20,7 +19,6 @@ const projectSchema = mongoose.Schema({
       dateEnd: {
             type: Date,
             required: false,
-            default: null,
       },
       creator: {
             type: mongoose.Schema.Types.ObjectId,

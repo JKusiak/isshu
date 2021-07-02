@@ -1,10 +1,16 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@material-ui/core";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import ProjectCover from '../resources/project_cover.png';
+// hardcoded now just for aesthetic purposes during development <3
+import ProjectCover1 from '../resources/project_cover1.png';
+import ProjectCover2 from '../resources/project_cover2.png';
+import ProjectCover3 from '../resources/project_cover3.png';
+import ProjectCover4 from '../resources/project_cover4.png';
+import ProjectCover5 from '../resources/project_cover5.png';
+import ProjectCover6 from '../resources/project_cover6.png';
+import ProjectCover7 from '../resources/project_cover7.png';
 
 
 interface ProjectListProps {
@@ -65,6 +71,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function shuffleProjectCover() {
+      const coversArr = [ProjectCover1, ProjectCover2, ProjectCover3, ProjectCover4, ProjectCover5, ProjectCover6, ProjectCover7];
+
+      return coversArr[Math.floor(Math.random() * coversArr.length)];
+}
+
 
 const ProjectsBoard: FC<ProjectListProps> = (props) => {
       const classes = useStyles();
@@ -88,7 +100,7 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
                                                 <CardMedia
                                                       component={Link} to='/'
                                                       className={classes.image}
-                                                      image={ProjectCover}
+                                                      image={shuffleProjectCover()}
                                                       title="Project cover"
                                                 />
                                     </Card>

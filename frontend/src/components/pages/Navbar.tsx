@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
+import AddProjectModal from '../modals/AddProjectModal';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
 import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
-import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Logo from '../../resources/isshu_logo.svg';
@@ -93,9 +93,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         </IconButton>
                   </Tooltip>
                   <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
-                        <IconButton aria-label="add project" color="secondary" component={Link} to="/addProject">
-                              <AddProjectIcon/>
-                        </IconButton>
+                        <AddProjectModal/>
                   </Tooltip>
                   <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
                         <IconButton  aria-label="user profile" onClick={handleMenu} color="secondary">

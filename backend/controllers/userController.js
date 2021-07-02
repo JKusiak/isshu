@@ -1,4 +1,5 @@
 import User from '../models/userModel.js';
+import Project from '../models/projectModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -104,9 +105,15 @@ export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
 export const addProjectToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
+    const projectName = req.body.projectName;
+
+    const fetchedProject = Project.findONe({name: projectName});
+
+    projectId = fetchedProject._id;
+
     const update = {
          $push: {
-            projects: req.body.projectId,
+            projects: projectId,
         } 
     };
     const options = {

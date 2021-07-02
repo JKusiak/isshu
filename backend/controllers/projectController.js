@@ -24,13 +24,15 @@ export const getProjectById = asyncHandler(async(req, res) => {
 export const addProject = asyncHandler(async(req, res) => {
     const name = req.body.name;
     const description = req.body.description;
-    const dateStart = Date.parse(req.body.dateStart);
+    const dateStart = req.body.dateStart;
+    const dateEnd = req.body.dateEnd;
     const creator = req.body.creator;
     
     const newProject = new Project ({
         name,
         description,
         dateStart,
+        dateEnd,
         creator,
     });
 

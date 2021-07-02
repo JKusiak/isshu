@@ -24,9 +24,6 @@ function App() {
         <Route path="/projects">
             <ProjectsPage/>
         </Route>
-        <Route path="/addProject">
-          AddProject
-        </Route>
         <Route path="/profile">
             <UserProfile/>
         </Route>

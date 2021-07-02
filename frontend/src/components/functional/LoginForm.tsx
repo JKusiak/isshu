@@ -10,6 +10,10 @@ import axios from 'axios';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
+  header: {
+    display: 'grid',
+    justifyContent: 'center',
+  },
   form: {
     width: '100%',
     marginTop: theme.spacing(5),
@@ -75,7 +79,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 
   return (
     <>
-      <Typography component="h1" variant="h4">
+      <Typography className={classes.header} component="h1" variant="h4">
         Sign in
       </Typography>
       <form className={classes.form} onSubmit={onSubmit} autoComplete="off">
