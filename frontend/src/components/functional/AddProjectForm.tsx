@@ -77,7 +77,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
 
       const project = {
             name: projectName,
-            descrption: description,
+            description: description,
             dateStart: startDate,
             dateEnd: endDate,
             creator: getCreator()
@@ -120,9 +120,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   console.log(err);
                   setErrorText('Project name already taken');
                   setIsValid(false);
-            });
-
-            
+            });  
       } 
 
 
