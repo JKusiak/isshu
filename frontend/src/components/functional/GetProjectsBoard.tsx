@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import ProjectListMain from "../ProjectsBoard";
+import ProjectsBoard from "../ProjectsBoard";
+
 
 interface GetProjectsBoardProps {
 
@@ -26,7 +27,7 @@ const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
         
       return (
       <>
-            <ProjectListMain projects = {projects}/>
+            <ProjectsBoard projects = {projects}/>
       </>
       );
 }

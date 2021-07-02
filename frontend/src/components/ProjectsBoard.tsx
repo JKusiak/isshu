@@ -52,15 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: 120,
             filter: 'blur(0.5px)'
       },
-      header: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minWidth: 680,
-            marginTop: "1em",
-            marginBottom: "1em",
-            fontWeight: 'bold'
-      },
+      
       link: {
             textDecoration: 'none',
             color: theme.palette.secondary.dark,
@@ -117,9 +109,6 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
      
       return(
             <>
-            <Typography className={classes.header} component="h1" variant="h4">
-                  Your projects
-            </Typography>
             <div className={classes.gridContainer}>
                   {displayProjects()}
             </div>
