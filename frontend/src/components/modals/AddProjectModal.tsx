@@ -5,8 +5,6 @@ import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '../ButtonSpacing';
-import LoginForm from '../functional/LoginForm';
 import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

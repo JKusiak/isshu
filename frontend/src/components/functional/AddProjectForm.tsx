@@ -45,8 +45,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-const projectNameRegex = "^$|^[a-zA-Z\s]+$";
-
+const projectNameRegex = /^$|^[A-Za-z][a-z\s]*$/;
 
 
 interface AddProjectFormProps {
@@ -84,11 +83,12 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
             creator: getCreator()
       }
 
+
       const projectNameFetch = {
             projectName: projectName
       }
 
-      
+
       function getCreator() {
             const token = localStorage.getItem('token') || '';
             const base64Url = token.split('.')[1];
@@ -97,12 +97,10 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       }
 
 
-      async function onSubmit(e: any) {
+      function onSubmit(e: any) {
             e.preventDefault();
-            const creator = getCreator();
-            const creatorId = creator._id;
 
-            await axios.post('http://localhost:5000/projects/add', project, {
+            axios.post('http://localhost:5000/projects/add', project, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -114,7 +112,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   setErrorText(err);
             });
 
-            axios.post(`http://localhost:5000/users/addProject/${creatorId}`, projectNameFetch, {
+            axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameFetch, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
