@@ -64,7 +64,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
 
 
       useEffect(() => {
-            if (endDate > startDate) {
+            if (endDate >= startDate) {
                   setIsValid(true);
             } else {
                   setErrorText("End date can not be before start date");
@@ -84,6 +84,10 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
             creator: getCreator()
       }
 
+      const projectNameFetch = {
+            projectName: projectName
+      }
+
       
       function getCreator() {
             const token = localStorage.getItem('token') || '';
@@ -93,10 +97,12 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       }
 
 
-      function onSubmit(e: any) {
+      async function onSubmit(e: any) {
             e.preventDefault();
+            const creator = getCreator();
+            const creatorId = creator._id;
 
-            axios.post('http://localhost:5000/projects/add', {
+            await axios.post('http://localhost:5000/projects/add', project, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -108,8 +114,11 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   setErrorText(err);
             });
 
-            axios.post(`http://localhost:5000/users/addProject/${getCreator()}`, project.name)
-            .then((res) => {
+            axios.post(`http://localhost:5000/users/addProject/${creatorId}`, projectNameFetch, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then((res) => {
                   console.log(res.data);
                   // history.push("/projects");
             }).catch((err) => {

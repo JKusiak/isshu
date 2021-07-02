@@ -107,9 +107,9 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
     const id = req.params.id;
     const projectName = req.body.projectName;
 
-    const fetchedProject = Project.findONe({name: projectName});
+    const fetchedProject = await Project.findOne({name: projectName});
 
-    projectId = fetchedProject._id;
+    const projectId = fetchedProject._id;
 
     const update = {
          $push: {
