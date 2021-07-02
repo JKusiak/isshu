@@ -87,10 +87,12 @@ function RegisterForm() {
                   axios.post('http://localhost:5000/users/add', user)
                   .then(() => {
                         console.log(user);
+                        setIsSent(true);
                   }).catch((err) => {
                         console.log(err);
+                        setIsValid(false);
+                        setErrorText('Email already taken');
                   });
-                  setIsSent(true);
             } else (
                   console.log("Error")
             );

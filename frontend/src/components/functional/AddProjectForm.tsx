@@ -106,23 +106,23 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   }
             }).then((res) => {
                         console.log(res.data);
-                        // history.push("/projects");
+                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameFetch, {
+                              headers: {
+                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                              }
+                        }).then((res) => {
+                              console.log(res.data);
+                              // history.push("/projects");
+                        }).catch((err) => {
+                              console.log(err);
+                        });
             }).catch((err) => {
                   console.log(err);
-                  setErrorText(err);
+                  setErrorText('Project name already taken');
+                  setIsValid(false);
             });
 
-            axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameFetch, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then((res) => {
-                  console.log(res.data);
-                  // history.push("/projects");
-            }).catch((err) => {
-                  console.log(err);
-                  setErrorText(err);
-            });
+            
       } 
 
 
