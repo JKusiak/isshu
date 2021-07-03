@@ -5,7 +5,7 @@ import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {
@@ -48,14 +48,15 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
 
   return (
       <>
-      <IconButton 
-            aria-label="add project" 
-            color="secondary"
-            onClick={handleOpen}
-      >
-            <AddProjectIcon/>
-      </IconButton>
-
+      <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
+            <IconButton 
+                  aria-label="add project" 
+                  color="secondary"
+                  onClick={handleOpen}
+            >
+                  <AddProjectIcon/>
+            </IconButton>
+      </Tooltip>
       <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -75,11 +76,6 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
         </Fade>
       </Modal>
       </>
-      
-
-      
-
-
   );
 }
 

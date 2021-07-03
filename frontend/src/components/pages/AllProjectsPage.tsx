@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react"
 import GetProjectsBoard from "../functional/GetProjectsBoard";
 
+
 interface ProjectsPageProps {
 
 }
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
             marginBottom: "1em",
             fontWeight: 'bold'
       },
-  }))
+  }
+));
 
 const ProjectsPage: FC<ProjectsPageProps> = (props) => {
       const classes = useStyles();

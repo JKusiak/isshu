@@ -78,10 +78,10 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
             if(props.projects.length > 0) {
                   return(props.projects.map((project: any, index: any) => {
                         return(
-                              <Link className={classes.link} to="/">
+                              <Link className={classes.link} to={`/project/${project._id}`}>
                                     <Card className={classes.root}>
                                                 <div className={classes.details}>
-                                                      <CardContent className={classes.link} component={Link} to='/'>
+                                                      <CardContent className={classes.link} >
                                                             <Typography component="h5" variant="h5">
                                                                   {project.name}
                                                             </Typography>
@@ -91,7 +91,6 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
                                                       </CardContent>
                                                 </div>
                                                 <CardMedia
-                                                      component={Link} to='/'
                                                       className={classes.image}
                                                       image={shuffleProjectCover()}
                                                       title="Project cover"

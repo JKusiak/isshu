@@ -16,22 +16,28 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles((theme) => ({
       grow: {
             flexGrow: 1,
+            
+      },
+      appbar: {
+            height: "68px",
+      },
+      toolbar: {
+
       },
       sectionDesktop: {
-            display: 'none',
-            [theme.breakpoints.up('md')]: {
-                  display: 'flex',
-            },
-            marginRight: "2.5em"
+            marginRight: "2em"
       },
       image: {
             marginLeft: "2em",
-            width: 75,
             height: 75,
+            width: 75
       },
       logo: {
             height: 75,
       },
+      linkWrapper: {
+
+      }
       
 }));
 
@@ -64,11 +70,16 @@ const Navbar: FC<NavbarProps> = (props) => {
 
       return (
       <div className={classes.grow}>
-      <AppBar position="sticky">
-      <Toolbar> 
-            <img className={classes.image} src={Icon} alt='site icon'/>
-            <img className={classes.logo} src={Logo} alt='site logo'/>
-            <div className={classes.grow} />
+      <AppBar className={classes.appbar} position="sticky">
+      <Toolbar className={classes.toolbar}>
+            <Link className={classes.linkWrapper} to="/">
+
+                  <img className={classes.image} src={Icon} alt='site icon'/>
+
+                  <img className={classes.logo} src={Logo} alt='site logo'/>
+            </Link>
+            
+            <div className={classes.grow}/>
             <div className={classes.sectionDesktop}>
             {!props.loggedIn && (
                   <>
@@ -92,9 +103,9 @@ const Navbar: FC<NavbarProps> = (props) => {
                               <ProjectsIcon/>
                         </IconButton>
                   </Tooltip>
-                  <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
-                        <AddProjectModal/>
-                  </Tooltip>
+                  
+                  <AddProjectModal/>
+                  
                   <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
                         <IconButton  aria-label="user profile" onClick={handleMenu} color="secondary">
                               <ProfileIcon/>
@@ -124,8 +135,8 @@ const Navbar: FC<NavbarProps> = (props) => {
                   </>
             )}   
             </div>
-            </Toolbar>
-            </AppBar>
+      </Toolbar>
+      </AppBar>
       </div>
       );
 }
