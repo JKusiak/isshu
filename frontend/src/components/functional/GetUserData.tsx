@@ -12,7 +12,7 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
 
       // requests user object by their id
       useEffect(() => {
-            axios.get('http://localhost:5000/users/60dca3332045f733ac918b2b', {
+            axios.get('http://localhost:5000/users/hastobesomethinghereforsomereason', {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }

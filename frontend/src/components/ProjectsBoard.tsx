@@ -91,6 +91,7 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
                                                       </CardContent>
                                                 </div>
                                                 <CardMedia
+
                                                       className={classes.image}
                                                       image={shuffleProjectCover()}
                                                       title="Project cover"

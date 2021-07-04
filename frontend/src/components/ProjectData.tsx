@@ -1,6 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
-import { useParams } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,9 +20,6 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
       return (
             <>
-                  <div>
-                        Anything here pls
-                  </div>
                   <div>{ props.project.name }</div>
             </>
       );

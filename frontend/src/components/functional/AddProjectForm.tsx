@@ -84,7 +84,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       }
 
 
-      const projectNameFetch = {
+      const projectNameData = {
             projectName: projectName
       }
 
@@ -106,7 +106,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   }
             }).then((res) => {
                         console.log(res.data);
-                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameFetch, {
+                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameData, {
                               headers: {
                                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                               }

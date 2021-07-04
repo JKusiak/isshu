@@ -1,31 +1,42 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { FC } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme: Theme) =>
+      createStyles({
+  
+      }
+));
+
 
 interface UsersListProps {
-
+      users: any,
 }
 
+
 const UsersList: FC<UsersListProps> = (props) => {
-      const [users, setUsers] = useState([]);
+     
 
-      useEffect(() => {
-            axios.get('http://localhost:5000/users')
-            .then(resp => {
-                  if(resp.data.length > 0) {
-                        setUsers(resp.data.map((user: { name: any; }) => user.name));
-                  }
-            }).catch((err) => {
-                  console.log(err);
-            });;
-        
-        }, []);
+      function displayUsers() {
+            if(props.users.length > 0) {
+                  return(props.users.map((user: any, index: any) => {
+                        return(
+                              <>
+                              <div>{user.name} {user.surname}</div>
+                              </>                                 
+                        );
+                  }));
+            } else {
+                  return (
+                        <h3>No projects yet</h3>
+                  );
+            }
+      }
 
-        
       return (
-      <>
-            <div>{users}</div>
-      </>
+            <>
+            {displayUsers()}
+            </>
       );
 }
 

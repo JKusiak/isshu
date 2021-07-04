@@ -95,7 +95,7 @@ export const getProjectsOfUser = asyncHandler(async(req, res) => {
         .populate('projects');
 
     if(projects) {
-        res.json(projects);   
+        res.json(projects);  
     } else {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
