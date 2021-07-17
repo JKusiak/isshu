@@ -160,3 +160,31 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
         }
     });
 });
+
+
+export const getUsersByProject = asyncHandler(async(req, res) => {
+    const id = req.params.id;
+    const users = await User.find({projects: id});
+    
+
+    if(users) {
+        res.json(users);  
+    } else {
+        res.status(404).json({message: "No users in this project"});
+        throw new Error('No users in this project');
+    }
+});
+
+
+export const getUsersWithoutProject = asyncHandler(async(req, res) => {
+    const id = req.params.id;
+    const users = await User.find({projects: {"$ne": id}});
+    
+
+    if(users) {
+        res.json(users);  
+    } else {
+        res.status(404).json({message: "No users without this project"});
+        throw new Error('No users without this project');
+    }
+});

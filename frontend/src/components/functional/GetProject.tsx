@@ -12,7 +12,6 @@ interface GetProjectProps {
 const GetProject: FC<GetProjectProps> = (props) => {
       const { id } = useParams<{ id: string }>();
       const [project, setProject] = useState('');
-      const [usersList, setUsersList] = useState([{name: '', projects: ''}]);
 
 
       useEffect(() => {

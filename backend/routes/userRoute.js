@@ -9,6 +9,8 @@ import {
       addProjectToUser,
       getProjectsOfUser,
       deleteProjectFromUser,
+      getUsersByProject,
+      getUsersWithoutProject
 } from "../controllers/userController.js";
 
 
@@ -32,3 +34,7 @@ protectedUserRouter.route('/getProjects/:id').get(getProjectsOfUser);
 protectedUserRouter.route('/addProject/:id').post(addProjectToUser);
 
 protectedUserRouter.route('/deleteProject/:id').delete(deleteProjectFromUser);
+
+protectedUserRouter.route('/getUsersByProject/:id').get(getUsersByProject);
+
+protectedUserRouter.route('/getUsersWithoutProject/:id').get(getUsersWithoutProject);

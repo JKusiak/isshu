@@ -25,9 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             gap: '1.2em',
             gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
-            marginLeft: '5em',
-            marginRight: '5em',
-            marginBottom: '3em',
+            margin: '0, 5em, 3em, 5em'
       },
       root: {
             display: 'flex',

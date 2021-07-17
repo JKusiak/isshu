@@ -9,19 +9,16 @@ const useStyles = makeStyles((theme: Theme) =>
             pageContent: {
                   marginLeft: "15%"
             }
-
       }
 ));
 
 
 interface ProjectPageProps {
-
 }
 
 
 const ProjectPage: FC<ProjectPageProps> = (props) => {
       const classes = useStyles();
-
 
       return (
             <>
