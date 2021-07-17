@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
       gridContainer: {
             display: 'grid',
+            justifyContent: 'center',
             gap: '1.2em',
             gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
-            marginLeft: '10em',
-            marginRight: '10em',
+            marginLeft: '5em',
+            marginRight: '5em',
             marginBottom: '3em',
       },
       root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
             //change here to adjust infinite length of project displayed, but foto looks uglier
             height: 120,
             justifyContent: 'space-between',
+            alignItems: 'center',
             transition: 'all .12s linear',
             boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4)',
             "&:hover": {

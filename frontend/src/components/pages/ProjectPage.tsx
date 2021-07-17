@@ -6,7 +6,10 @@ import GetProject from "../functional/GetProject";
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
-  
+            pageContent: {
+                  marginLeft: "15%"
+            }
+
       }
 ));
 
@@ -23,7 +26,9 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
       return (
             <>
             <GetAllUsers/>
-            <GetProject/>
+            <div className={classes.pageContent}>
+                  <GetProject/>
+            </div>
             </>
       );
 }
