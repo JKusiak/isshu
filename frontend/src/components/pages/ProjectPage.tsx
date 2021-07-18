@@ -1,12 +1,12 @@
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useRef, useState } from "react";
-import { createNull } from "typescript";
+import { FC, useState } from "react";
 import GetAllUsers from "../functional/GetAllUsers";
 import GetProject from "../functional/GetProject";
+import MenuIcon from '@material-ui/icons/Menu';
 
 
-const sidebarWidth = 300;
+const sidebarWidth = 270;
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
@@ -14,15 +14,29 @@ const useStyles = makeStyles((theme: Theme) =>
                   display: 'flex',
             },
             sidebar: {
-                  width: sidebarWidth,
+                  [theme.breakpoints.up('sm')]: {
+                        width: sidebarWidth,
+                        flexShrink: 0,
+                  },
             },
             pageContent: {
-                  marginLeft: sidebarWidth,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexGrow: 1,
+                  marginLeft: '2em',
+                  marginRight: '2em',
             },
             menuButton: {
                   [theme.breakpoints.up("sm")]: {
                         display: "none"
-                  }
+                  },
+                  marginTop: '1em',
+                  marginBottom: '1em',
+            },
+            projectBoards: {
+
             },
       }
 ));
@@ -47,15 +61,17 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
                   </div>
                   <div className={classes.pageContent}>
                         <IconButton
+                              className={classes.menuButton}
                               color="inherit"
                               aria-label="open drawer"
                               edge="start"
                               onClick={() => {handleSidebarToggle()}}
-                              className={classes.menuButton}
                         >
-                              123
-                        </IconButton>  
-                        <GetProject/>
+                              <MenuIcon/>
+                        </IconButton>
+                        <div className={classes.projectBoards}>
+                              <GetProject/>
+                        </div>
                   </div>
             </div>
       );

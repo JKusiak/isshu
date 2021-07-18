@@ -6,10 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
 import { FC } from 'react';
 import Divider from '@material-ui/core/Divider';
-import { useState } from 'react';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,6 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
             listSubtitle: {
                   fontSize: '1.7em',
             },
+            drawerPaper: {
+                  marginTop: 70,
+                  width: 270,
+            }
       }),
 );
 
@@ -74,10 +76,13 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
             <nav>
                   <Hidden xsDown implementation="css">
                         <Drawer
+                              classes={{
+                                    paper: classes.drawerPaper,
+                              }}
                               variant="permanent"
                               open
                         >
-                              <Toolbar/>
+
                               {sidebar}
                         </Drawer>
                   </Hidden>
