@@ -4,7 +4,9 @@ import { FC } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
-  
+            divStyle: {
+                  fontSize: '20px',
+            }
       }
 ));
 
@@ -20,7 +22,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
       return (
             <>
-                  <div>{ props.project.name }</div>
+                  <div className={classes.divStyle}>{ props.project.name }</div>
             </>
       );
 }

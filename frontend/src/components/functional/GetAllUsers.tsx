@@ -21,7 +21,6 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             })
             .then(resp => {
                   setNoProjectUsers(resp.data);
-                  console.log(resp.data)
             }).catch((err) => {
                   console.log(err);
             });;
@@ -36,7 +35,6 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             })
             .then(resp => {
                   setProjectUsers(resp.data);
-                  console.log(resp.data)
             }).catch((err) => {
                   console.log(err);
             });;

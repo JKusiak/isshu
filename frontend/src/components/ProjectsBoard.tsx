@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { Link } from "react-router-dom";
 // hardcoded now just for aesthetic purposes during development <3
 import ProjectCover1 from '../resources/project_cover1.png';
@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             gap: '1.2em',
             gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
-            margin: '0, 5em, 3em, 5em'
+            marginRight: '5em',
+            marginLeft: '5em',
+            marginBottom: '3em',
       },
       root: {
             display: 'flex',
@@ -76,28 +78,31 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
 
       function displayProjects() {
             if(props.projects.length > 0) {
-                  return(props.projects.map((project: any, index: any) => {
+                  return(props.projects.map((project: any) => {
                         return(
-                              <Link className={classes.link} to={`/project/${project._id}`}>
-                                    <Card className={classes.root}>
-                                                <div className={classes.details}>
-                                                      <CardContent className={classes.link} >
-                                                            <Typography component="h5" variant="h5">
-                                                                  {project.name}
-                                                            </Typography>
-                                                            <Typography variant="subtitle1" color="textSecondary">
-                                                                  {project.description}
-                                                            </Typography>
-                                                      </CardContent>
-                                                </div>
-                                                <CardMedia
+                              <Fragment key={project._id}>
+                                    <Link className={classes.link} to={`/project/${project._id}`}>
+                                          <Card className={classes.root}>
+                                                      <div className={classes.details}>
+                                                            <CardContent className={classes.link} >
+                                                                  <Typography component="h5" variant="h5">
+                                                                        {project.name}
+                                                                  </Typography>
+                                                                  <Typography variant="subtitle1" color="textSecondary">
+                                                                        {project.description}
+                                                                  </Typography>
+                                                            </CardContent>
+                                                      </div>
+                                                      <CardMedia
 
-                                                      className={classes.image}
-                                                      image={shuffleProjectCover()}
-                                                      title="Project cover"
-                                                />
-                                    </Card>
-                              </Link> 
+                                                            className={classes.image}
+                                                            image={shuffleProjectCover()}
+                                                            title="Project cover"
+                                                      />
+                                          </Card>
+                                    </Link> 
+                              </Fragment>
+                              
                         );
                   }));
             } else {

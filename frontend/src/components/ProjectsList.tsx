@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, Fragment } from "react"
 import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -40,9 +40,9 @@ const ProjectsList: FC<ProjectListProps> = (props) => {
 
       function displayProjects() {
             if(props.projects.length > 0) {
-                  return(props.projects.map((project: any, index: any) => {
+                  return(props.projects.map((project: any) => {
                         return(
-                              <>
+                              <Fragment key={project._id}>
                                     <ListItem button onClick={handleClick}>
                                           <ListItemText className={classes.projectName} primary={project.name} />
                                           <ListItemSecondaryAction>
@@ -58,7 +58,7 @@ const ProjectsList: FC<ProjectListProps> = (props) => {
                                                 </ListItem>
                                           </Collapse>
                                     
-                              </>
+                              </Fragment>
                         );
                   }));
             } else {

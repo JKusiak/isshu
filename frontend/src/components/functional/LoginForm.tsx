@@ -66,7 +66,6 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 
     axios.post('http://localhost:5000/login/', credentials)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem('token', res.data.token);
         props.setLoggedIn(true);
         history.push("/projects");

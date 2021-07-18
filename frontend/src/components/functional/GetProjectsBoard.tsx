@@ -26,7 +26,7 @@ const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
         
       return (
       <>
-            <ProjectsBoard projects = {projects}/>
+            <ProjectsBoard projects={projects}/>
       </>
       );
 }

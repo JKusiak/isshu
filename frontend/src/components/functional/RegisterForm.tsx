@@ -86,7 +86,6 @@ function RegisterForm() {
             if(isValid) {
                   axios.post('http://localhost:5000/users/add', user)
                   .then(() => {
-                        console.log(user);
                         setIsSent(true);
                   }).catch((err) => {
                         console.log(err);

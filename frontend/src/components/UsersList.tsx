@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -44,14 +44,14 @@ const UsersList: FC<UsersListProps> = (props) => {
 
       function displayUsers(userType: any) {
             if(userType.length > 0) {
-                  return(userType.map((user: any, index: any) => {
+                  return(userType.map((user: any) => {
                         const fullName = `${user.name} ` + `${user.surname}`;
                         return(
-                              <>
-                              <ListItem button key={index}>
-                                    <ListItemText primary={fullName}/>
-                              </ListItem>
-                              </>                                 
+                              <Fragment key={user._id}>
+                                    <ListItem>
+                                          <ListItemText primary={fullName}/>
+                                    </ListItem>
+                              </Fragment>                               
                         );
                   }));
             }
