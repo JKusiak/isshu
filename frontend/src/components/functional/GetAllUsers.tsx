@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import UsersList from "../UsersList";
 
 interface GetAllUsersProps {
-
+      mobileOpen: any,
+      handleSidebarToggle: () => void,
 }
 
 const GetAllUsers: FC<GetAllUsersProps> = (props) => {
@@ -43,7 +44,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
         
       return (
       <>
-            <UsersList projectUsers={projectUsers} noProjectUsers={noProjectUsers}/>
+            <UsersList projectUsers={projectUsers} noProjectUsers={noProjectUsers} mobileOpen={props.mobileOpen} handleSidebarToggle={props.handleSidebarToggle}/>
       </>
       );
 }
