@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             display: 'grid',
             placeItems: 'center'
       },
-      credentials: {
-            
-      }
 }));
 
 interface UserPageProps {
@@ -23,7 +20,7 @@ const UserPage: FC<UserPageProps> = (props) => {
 
       return (
       <div className={classes.root}> 
-            <div className={classes.credentials}>
+            <div>
                   <GetUserData/>
             </div>  
             

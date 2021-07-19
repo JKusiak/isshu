@@ -8,17 +8,38 @@ import { FC } from 'react';
 import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
+import IconButton from '@material-ui/core/IconButton';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
             listSubtitle: {
-                  fontSize: '1.7em',
+                  fontSize: '1.6em',
+                  textAlign: 'center',
+                  marginTop: '0.4em',
+                  marginBottom: '0.4em',
+                  fontWeight: 600
             },
             drawerPaper: {
                   marginTop: 70,
                   width: 270,
-            }
+            },
+            listItem: {  
+                  '&:hover': {
+                        boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
+                  }
+            },
+            nameLink: {
+                  color: theme.palette.secondary.dark,
+                  textDecoration: 'none',
+                  '&:hover': {
+                        fontWeight: 700
+                  }
+            },
       }),
 );
 
@@ -45,13 +66,41 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
             if(userType.length > 0) {
                   return(userType.map((user: any) => {
                         const fullName = `${user.name} ${user.surname}`;
-                        return(
-                              <Fragment key={user._id}>
-                                    <ListItem>
-                                          <ListItemText primary={fullName}/>
-                                    </ListItem>
-                              </Fragment>
-                        );
+
+                        if(userType == props.projectUsers) {
+                              return(
+                                    <Fragment key={user._id}>
+                                          <ListItem className={classes.listItem}>
+                                                <Link className={classes.nameLink} to='/'>
+                                                      <ListItemText primary={fullName}/>
+                                                </Link>
+                                                
+                                                <ListItemSecondaryAction>
+                                                      <IconButton edge="end" aria-label="remove-user">
+                                                            <ClearOutlinedIcon />
+                                                      </IconButton>
+                                                </ListItemSecondaryAction>
+                                          </ListItem> 
+                                          
+                                    </Fragment>
+                              );
+                        } else {
+                              return(
+                                    <Fragment key={user._id}>
+                                          <ListItem className={classes.listItem}>
+                                                <Link className={classes.nameLink} to={`/project/${user._id}`}>
+                                                      <ListItemText primary={fullName}/>
+                                                </Link>
+                                                <ListItemSecondaryAction>
+                                                      <IconButton edge="end" aria-label="add-user">
+                                                            <AddOutlinedIcon/>
+                                                      </IconButton>
+                                                </ListItemSecondaryAction>
+                                          </ListItem>
+                                    </Fragment>
+                              );
+                        }
+                        
                   }));
             }
       }
@@ -60,10 +109,11 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
       const sidebar = (
             <div>
                   <List>
-                        <div className={classes.listSubtitle}>Project contributors:</div>
+                        <div className={classes.listSubtitle}>Contributors</div>
                         {displayUsers(props.projectUsers)}
+                        <br/>
                         <Divider />
-                        <div className={classes.listSubtitle}>Other users:</div>
+                        <div className={classes.listSubtitle}>Others</div>
                         {displayUsers(props.noProjectUsers)}
                   </List>
             </div>

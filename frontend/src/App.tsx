@@ -5,7 +5,7 @@ import LoginPage from './components/pages/LoginPage';
 import Navbar from './components/pages/Navbar';
 import AllProjectsPage from './components/pages/AllProjectsPage';
 import RegisterPage from './components/pages/RegisterPage';
-import UserProfile from './components/pages/UserPage';
+import UserPage from './components/pages/UserPage';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProjectPage from './components/pages/ProjectPage';
 
@@ -29,7 +29,7 @@ function App() {
               <AllProjectsPage/>
           </Route>
           <Route path="/profile">
-              <UserProfile/>
+              <UserPage/>
           </Route>
           <Route path="/settings">
             Settings

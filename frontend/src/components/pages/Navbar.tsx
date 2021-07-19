@@ -77,7 +77,6 @@ const Navbar: FC<NavbarProps> = (props) => {
             <Toolbar className={classes.toolbar}>
                   
                   <Link className={classes.linkWrapper} to="/">
-
                         <img className={classes.image} src={Icon} alt='site icon'/>
 
                         <img className={classes.logo} src={Logo} alt='site logo'/>

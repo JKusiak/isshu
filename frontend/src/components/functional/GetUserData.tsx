@@ -10,7 +10,6 @@ interface GetUserDataProps {
 const GetUserData: FC<GetUserDataProps> = (props) => {
       const [credentials, setCredentials] = useState({});
 
-      // requests user object by their id
       useEffect(() => {
             axios.get('http://localhost:5000/users/hastobesomethinghereforsomereason', {
                   headers: {
