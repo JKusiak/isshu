@@ -102,8 +102,6 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                         </Drawer>
                   </Hidden>
             </nav>
-                  
-
       </div>
       );
 });

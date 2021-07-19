@@ -14,15 +14,16 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
-      grow: {
+      root: {
             flexGrow: 1,
-            
       },
       appbar: {
-            height: "68px",
+            height: 68,
       },
       toolbar: {
-
+            position: "sticky",
+            top: 0,
+            
       },
       sectionDesktop: {
             marginRight: "2em"
@@ -37,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
       },
       linkWrapper: {
 
-      }
+      },
+      offset: theme.mixins.toolbar,
       
 }));
 
@@ -69,74 +71,76 @@ const Navbar: FC<NavbarProps> = (props) => {
 
 
       return (
-      <div className={classes.grow}>
-      <AppBar className={classes.appbar} position="sticky">
-      <Toolbar className={classes.toolbar}>
-            <Link className={classes.linkWrapper} to="/">
-
-                  <img className={classes.image} src={Icon} alt='site icon'/>
-
-                  <img className={classes.logo} src={Logo} alt='site logo'/>
-            </Link>
-            
-            <div className={classes.grow}/>
-            <div className={classes.sectionDesktop}>
-            {!props.loggedIn && (
-                  <>
-                  <Button color="secondary" component={Link} to="/">
-                        Home
-                  </Button>
-                  <Button color="secondary" component={Link} to="/login">
-                        Login
-                  </Button>
-                  <Button color="secondary" component={Link} to="/register"> 
-                        Register
-                  </Button>
-                  </>
-            )}
+      <div className={classes.root}>
+            <div className={classes.offset}/>
+            <AppBar className={classes.appbar} >
+            <Toolbar className={classes.toolbar}>
                   
+                  <Link className={classes.linkWrapper} to="/">
 
-            {props.loggedIn && (
-                  <>
-                  <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                        <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
-                              <ProjectsIcon/>
-                        </IconButton>
-                  </Tooltip>
+                        <img className={classes.image} src={Icon} alt='site icon'/>
+
+                        <img className={classes.logo} src={Logo} alt='site logo'/>
+                  </Link>
                   
-                  <AddProjectModal/>
-                  
-                  <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
-                        <IconButton  aria-label="user profile" onClick={handleMenu} color="secondary">
-                              <ProfileIcon/>
-                        </IconButton>
-                  </Tooltip>
-                  <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                              vertical: 'bottom',
-                              horizontal: 'center',
-                        }}
-                        getContentAnchorEl={null}
-                        keepMounted
-                        transformOrigin={{
-                              vertical: 'top',
-                              horizontal: 'center',
-                        }}
-                        open={open}
-                        onClose={handleClose}
-                        >
-                        <MenuItem onClick={handleClose} component={Link} to="/profile" >Profile</MenuItem>
-                        <MenuItem onClick={handleClose} component={Link} to="/settings" >My account</MenuItem>
-                        <MenuItem onClick={handleLogout} component={Link} to="/home" >Logout</MenuItem>
-                  </Menu>
+                  <div className={classes.root}/>
+                  <div className={classes.sectionDesktop}>
+                  {!props.loggedIn && (
+                        <>
+                        <Button color="secondary" component={Link} to="/">
+                              Home
+                        </Button>
+                        <Button color="secondary" component={Link} to="/login">
+                              Login
+                        </Button>
+                        <Button color="secondary" component={Link} to="/register"> 
+                              Register
+                        </Button>
+                        </>
+                  )}
                         
-                  </>
-            )}   
-            </div>
-      </Toolbar>
-      </AppBar>
+
+                  {props.loggedIn && (
+                        <>
+                        <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
+                              <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
+                                    <ProjectsIcon/>
+                              </IconButton>
+                        </Tooltip>
+                        
+                        <AddProjectModal/>
+                        
+                        <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
+                              <IconButton  aria-label="user profile" onClick={handleMenu} color="secondary">
+                                    <ProfileIcon/>
+                              </IconButton>
+                        </Tooltip>
+                        <Menu
+                              id="menu-appbar"
+                              anchorEl={anchorEl}
+                              anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                              }}
+                              getContentAnchorEl={null}
+                              keepMounted
+                              transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                              }}
+                              open={open}
+                              onClose={handleClose}
+                              >
+                              <MenuItem onClick={handleClose} component={Link} to="/profile" >Profile</MenuItem>
+                              <MenuItem onClick={handleClose} component={Link} to="/settings" >My account</MenuItem>
+                              <MenuItem onClick={handleLogout} component={Link} to="/home" >Logout</MenuItem>
+                        </Menu>
+                              
+                        </>
+                  )}   
+                  </div>
+            </Toolbar>
+            </AppBar>
       </div>
       );
 }
