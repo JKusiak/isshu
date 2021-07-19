@@ -15,9 +15,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
       const [noProjectUsers, setNoProjectUsers] = useState([]);
       const [projectUsers, setProjectUsers] = useState([]);
 
-      const projectNameData = {
-            projectName: 'TestProject',
-      }
+      
 
 
       // fetching currently displayed project
@@ -28,7 +26,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
                   }
             })
             .then(resp => {
-                  projectNameData.projectName = resp.data.name;
+                  setCurrentProject(resp.data.name);
                   console.log(resp.data.name);
             }).catch((err) => {
                   console.log(err);
@@ -68,19 +66,21 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
 
         // add currently displayed project to clicked user
         function addProjectToUser(userId: string) {
+            const projectNameData = {
+                  projectName: currentProject
+            }
+
             axios.post(`http://localhost:5000/users/addProject/${userId}`, projectNameData, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            })
-            .then(resp => {
-                  console.log(resp);
             }).catch((err) => {
                   console.log(err);
             });;    
         }
 
 
+      // remove currently displayed project from clicked user
         function removeProjectFromUser(userId: string) {
             axios.delete(`http://localhost:5000/users/deleteProject/${userId}`, {
                   headers: {
@@ -89,10 +89,6 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
                   data: {
                         projectId: id
                   }
-                  
-            })
-            .then(resp => {
-                        
             }).catch((err) => {
                   console.log(err);
             });;    

@@ -158,6 +158,7 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
     };
     const options =  {
         new: true,
+        useFindAndModify: false,
     };
 
     User.findByIdAndUpdate(userId, update, options, function(err, data){
