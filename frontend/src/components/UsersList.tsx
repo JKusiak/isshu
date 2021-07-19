@@ -71,7 +71,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <Link className={classes.nameLink} to='/'>
+                                                <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                       <ListItemText primary={fullName}/>
                                                 </Link>
                                                 
@@ -88,7 +88,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <Link className={classes.nameLink} to={`/project/${user._id}`}>
+                                                <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                       <ListItemText primary={fullName}/>
                                                 </Link>
                                                 <ListItemSecondaryAction>

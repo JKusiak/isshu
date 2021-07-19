@@ -12,6 +12,18 @@ export const getAllUsers = asyncHandler(async(req, res) => {
 
 
 export const getUserById = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if(user) {
+        res.json(user);
+    } else {
+        res.status(404).json({message: "User not found"});
+        throw new Error('User not found');
+    }
+});
+
+
+export const getLoggedUser = asyncHandler(async(req, res) => {
     const user = await User.findById(req.user._id);
 
     if(user) {

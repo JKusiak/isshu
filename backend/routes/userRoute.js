@@ -2,7 +2,8 @@ import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
 import { 
       getAllUsers,
-      getUserById, 
+      getUserById,
+      getLoggedUser, 
       addUser,
       updateUser, 
       deleteUser,
@@ -22,6 +23,8 @@ protectedUserRouter.use(authenticateJWT);
 protectedUserRouter.route('/').get(getAllUsers);
 
 protectedUserRouter.route('/:id').get(getUserById);
+
+protectedUserRouter.route('/profile/token').get(getLoggedUser);
 
 userRouter.route('/add').post(addUser);
 

@@ -5,9 +5,10 @@ import LoginPage from './components/pages/LoginPage';
 import Navbar from './components/pages/Navbar';
 import AllProjectsPage from './components/pages/AllProjectsPage';
 import RegisterPage from './components/pages/RegisterPage';
-import UserPage from './components/pages/UserPage';
+import LoggedUserPage from './components/pages/LoggedUserPage';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProjectPage from './components/pages/ProjectPage';
+import UserPage from './components/pages/UserPage';
 
 
 
@@ -28,9 +29,6 @@ function App() {
           <Route path="/projects">
               <AllProjectsPage/>
           </Route>
-          <Route path="/profile">
-              <UserPage/>
-          </Route>
           <Route path="/settings">
             Settings
           </Route>
@@ -39,6 +37,12 @@ function App() {
           </Route>
           <Route path="/register">
               <RegisterPage/>
+          </Route>
+          <Route path="/user/profile">
+              <LoggedUserPage/>
+          </Route>
+          <Route path="/user/:id">
+              <UserPage/>
           </Route>
           <Route path="/">
               <HomePage setLoggedIn={setLoggedIn}/>

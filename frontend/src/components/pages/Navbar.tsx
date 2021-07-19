@@ -130,9 +130,9 @@ const Navbar: FC<NavbarProps> = (props) => {
                               open={open}
                               onClose={handleClose}
                               >
-                              <MenuItem onClick={handleClose} component={Link} to="/profile" >Profile</MenuItem>
+                              <MenuItem onClick={handleClose} component={Link} to="/user/profile" >Profile</MenuItem>
                               <MenuItem onClick={handleClose} component={Link} to="/settings" >My account</MenuItem>
-                              <MenuItem onClick={handleLogout} component={Link} to="/home" >Logout</MenuItem>
+                              <MenuItem onClick={handleLogout} component={Link} to="/" >Logout</MenuItem>
                         </Menu>
                               
                         </>
