@@ -116,7 +116,7 @@ export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
 
 export const addProjectToUser = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const userId = req.params.id;
     const projectName = req.body.projectName;
 
     const fetchedProject = await Project.findOne({name: projectName});
@@ -135,7 +135,7 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
 
 
     // no await here, otherwise callback on update + await make execute twice
-    const user = User.findByIdAndUpdate(id, update, options, function(err, data){
+    const user = User.findByIdAndUpdate(userId, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -143,14 +143,14 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User's projects updated successfuly");
+            res.json("Project added to user successfully");
         }
     });
 });
 
 
 export const deleteProjectFromUser = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const userId = req.params.id;
     const update = { 
         $pullAll: {
             projects: [req.body.projectId],
@@ -160,7 +160,7 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
         new: true,
     };
 
-    User.findByIdAndUpdate(id, update, options, function(err, data){
+    User.findByIdAndUpdate(userId, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -168,7 +168,7 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
             res.status(404).json({message: "User not found"});
             throw new Error('User not found');
         } else {
-            res.json("User updated successfuly");
+            res.json("Project deleted from user successfully");
         }
     });
 });

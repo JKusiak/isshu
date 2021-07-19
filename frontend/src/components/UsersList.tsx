@@ -49,6 +49,8 @@ interface UsersListProps {
       noProjectUsers: any,
       mobileOpen: any,
       handleSidebarToggle: () => void,
+      addProjectToUser: (userId: string) => void,
+      removeProjectFromUser: (userId: string) => void,
       window?: () => Window,
 }
 
@@ -76,7 +78,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                 </Link>
                                                 
                                                 <ListItemSecondaryAction>
-                                                      <IconButton edge="end" aria-label="remove-user">
+                                                      <IconButton edge="end" aria-label="remove-user" onClick={() => props.removeProjectFromUser(user._id)}>
                                                             <ClearOutlinedIcon />
                                                       </IconButton>
                                                 </ListItemSecondaryAction>
@@ -92,7 +94,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                       <ListItemText primary={fullName}/>
                                                 </Link>
                                                 <ListItemSecondaryAction>
-                                                      <IconButton edge="end" aria-label="add-user">
+                                                      <IconButton edge="end" aria-label="add-user" onClick={() => props.addProjectToUser(user._id)}>
                                                             <AddOutlinedIcon/>
                                                       </IconButton>
                                                 </ListItemSecondaryAction>
