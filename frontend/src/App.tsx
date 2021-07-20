@@ -29,14 +29,14 @@ function App() {
           <Route path="/projects">
               <AllProjectsPage/>
           </Route>
-          <Route path="/user/settings">
-            Settings
-          </Route>
           <Route path="/login">
               <LoginPage setLoggedIn={setLoggedIn}/>
           </Route>
           <Route path="/register">
               <RegisterPage/>
+          </Route>
+          <Route path="/user/settings">
+            Settings
           </Route>
           <Route path="/user/profile">
               <LoggedUserPage/>

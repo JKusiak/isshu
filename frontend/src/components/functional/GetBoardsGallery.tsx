@@ -1,23 +1,23 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import ProjectsBoard from "../ProjectsBoard";
+import BoardsGallery from "../BoardsGallery";
 
 
-interface GetProjectsBoardProps {
-
+interface GetBoardsGalleryProps {
+      projectId: string,
 }
 
-const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
-      const [projects, setProjects] = useState('');
+const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
+      const [boards, setBoards] = useState('');
 
       useEffect (() => {
-            axios.get('http://localhost:5000/users/getProjects/hastobesomethinghereforsomereason', {
+            axios.get(`http://localhost:5000/projects/getBoards/${props.projectId}`, {
                   headers: {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             })
             .then(resp => {
-                  setProjects(resp.data.projects);
+                  setBoards(resp.data.boards);
             }).catch((err) => {
                   console.log(err);
             });;
@@ -26,9 +26,9 @@ const GetProjectsBoard: FC<GetProjectsBoardProps> = (props) => {
         
       return (
       <>
-            <ProjectsBoard projects={projects}/>
+            <BoardsGallery boards={boards}/>
       </>
       );
 }
 
-export default GetProjectsBoard;
+export default GetBoardsGallery;

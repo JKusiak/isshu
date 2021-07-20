@@ -15,8 +15,6 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
       const [noProjectUsers, setNoProjectUsers] = useState([]);
       const [projectUsers, setProjectUsers] = useState([]);
 
-      
-
 
       // fetching currently displayed project
       useEffect(() => {
@@ -27,7 +25,6 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             })
             .then(resp => {
                   setCurrentProject(resp.data.name);
-                  console.log(resp.data.name);
             }).catch((err) => {
                   console.log(err);
             });;

@@ -3,19 +3,6 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment } from "react";
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
-// hardcoded now just for aesthetic purposes during development <3
-import ProjectCover1 from '../resources/project_cover1.png';
-import ProjectCover2 from '../resources/project_cover2.png';
-import ProjectCover3 from '../resources/project_cover3.png';
-import ProjectCover4 from '../resources/project_cover4.png';
-import ProjectCover5 from '../resources/project_cover5.png';
-import ProjectCover6 from '../resources/project_cover6.png';
-import ProjectCover7 from '../resources/project_cover7.png';
-
-
-interface ProjectListProps {
-      projects: any;
-}
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -66,40 +53,32 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function shuffleProjectCover() {
-      const coversArr = [ProjectCover1, ProjectCover2, ProjectCover3, ProjectCover4, ProjectCover5, ProjectCover6, ProjectCover7];
 
-      return coversArr[Math.floor(Math.random() * coversArr.length)];
+
+interface BoardsGalleryProps {
+      boards: any;
 }
 
 
-const ProjectsBoard: FC<ProjectListProps> = (props) => {
+const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       const classes = useStyles();
       const location = useLocation();
 
-      function displayProjects() {
-            if(props.projects.length > 0) {
-                  return(props.projects.map((project: any) => {
+      function displayBoards() {
+            if(props.boards.length > 0) {
+                  return(props.boards.map((board: any) => {
                         return(
-                              <Fragment key={project._id}>
-                                    <Link className={classes.link} to={`${location.pathname}/${project._id}`}>
+                              <Fragment key={board._id}>
+                                    <Link 
+                                          className={classes.link} to={`${location.pathname}/${board._id}`}>
                                           <Card className={classes.root}>
                                                       <div className={classes.details}>
                                                             <CardContent className={classes.link} >
                                                                   <Typography component="h5" variant="h5">
-                                                                        {project.name}
-                                                                  </Typography>
-                                                                  <Typography variant="subtitle1" color="textSecondary">
-                                                                        {project.description}
+                                                                        {board.name}
                                                                   </Typography>
                                                             </CardContent>
                                                       </div>
-                                                      <CardMedia
-
-                                                            className={classes.image}
-                                                            image={shuffleProjectCover()}
-                                                            title="Project cover"
-                                                      />
                                           </Card>
                                     </Link> 
                               </Fragment>
@@ -108,7 +87,7 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
                   }));
             } else {
                   return(
-                        <h3>No projects yet</h3>
+                        <h3>No boards yet</h3>
                   );
             }
       }
@@ -116,10 +95,10 @@ const ProjectsBoard: FC<ProjectListProps> = (props) => {
       return(
             <>
             <div className={classes.gridContainer}>
-                  {displayProjects()}
+                  {displayBoards()}
             </div>
             </>
       );
 }
 
-export default ProjectsBoard;
+export default BoardsGallery;

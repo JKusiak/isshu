@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   marginTop: '1em',
                   marginBottom: '1em',
             },
-            projectBoards: {
-
-            },
       }
 ));
 
@@ -69,7 +66,7 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
                         >
                               <MenuIcon/>
                         </IconButton>
-                        <div className={classes.projectBoards}>
+                        <div>
                               <GetProject/>
                         </div>
                   </div>

@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react"
-import GetProjectsBoard from "../functional/GetProjectsBoard";
+import GetProjectsGallery from "../functional/GetProjectsGallery";
 
 
 interface ProjectsPageProps {
@@ -31,7 +31,7 @@ const ProjectsPage: FC<ProjectsPageProps> = (props) => {
             <Typography className={classes.header} component="h1" variant="h4">
                   Your projects
             </Typography>
-            <GetProjectsBoard/>
+            <GetProjectsGallery/>
       </>
       );
 }
