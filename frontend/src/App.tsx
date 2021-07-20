@@ -45,7 +45,7 @@ function App() {
               <UserPage/>
           </Route>
           <Route path="/">
-              <HomePage setLoggedIn={setLoggedIn}/>
+              <HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
           </Route>
         </Switch>
       </Router>

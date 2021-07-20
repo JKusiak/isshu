@@ -6,6 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import Button from '../ButtonSpacing';
 import RegisterForm from '../functional/RegisterForm';
 
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {
             backgroundColor: theme.palette.primary.main,
@@ -47,10 +48,10 @@ function RegisterModal() {
             className={classes.homePageButton}
             variant='contained'
             color='primary'
-            mt={"2em"}
+            mt={"5em"}
             size={'large'}
             onClick={handleOpen}> 
-            Register
+            GET STARTED
       </Button>
       
       <Modal

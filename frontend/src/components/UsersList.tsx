@@ -66,7 +66,6 @@ interface UsersListProps {
 const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
       const classes = useStyles();
       const theme = useTheme();
-      const [buttonVisible, setButtonVisible] = useState(false);
       const {window} = props;
 
 

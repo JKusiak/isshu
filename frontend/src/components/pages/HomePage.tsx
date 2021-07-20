@@ -5,9 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import RegisterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
+import ToProjectsButton from "../ToProjectsButton";
 
 
 interface HomePageProps {
+      loggedIn: boolean,
       setLoggedIn: any
 }
 
@@ -29,8 +31,14 @@ const HomePage: FC<HomePageProps> = (props) => {
                         src={logoText} 
                         alt='logo of the website saying "Isshu - minimalistic bug tracker"'>
                   </img>
-                  <LoginModal setLoggedIn={props.setLoggedIn}/>
-                  <RegisterModal/>
+                  {!props.loggedIn &&
+                        <> 
+                        <RegisterModal/>
+                        </>
+                  }
+                  {props.loggedIn &&
+                        <ToProjectsButton/>
+                  }
             </Grid>
       </Box>
       );
