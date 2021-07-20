@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import GetBoard from "./functional/GetBoard";
 import GetBoardsGallery from "./functional/GetBoardsGallery";
@@ -21,15 +21,15 @@ interface ProjectDataProps {
 
 const ProjectData: FC<ProjectDataProps> = (props) => {
       const classes = useStyles();
-      const location = useLocation();
+      const { path } = useRouteMatch();
 
       return (
             <>
             <Switch>
-                  <Route path={`${location.pathname}/:id`}>
+                  <Route path={`${path}/:id`}>
                         <GetBoard/>
                   </Route>
-                  <Route exact path={location.pathname}>
+                  <Route exact path={path}>
                         <GetBoardsGallery projectId={props.projectId}/>
                   </Route>
             </Switch>

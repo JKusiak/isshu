@@ -13,7 +13,6 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       const { id } = useParams<{ id: string }>();
       const [board, setBoard] = useState('');
 
-      console.log(id);
       useEffect(() => {
             axios.get(`http://localhost:5000/boards/${id}`, {
                   headers: {
