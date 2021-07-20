@@ -2,7 +2,7 @@ import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 // hardcoded now just for aesthetic purposes during development <3
 import ProjectCover1 from '../resources/project_cover1.png';
 import ProjectCover2 from '../resources/project_cover2.png';
@@ -75,13 +75,14 @@ function shuffleProjectCover() {
 
 const ProjectsBoard: FC<ProjectListProps> = (props) => {
       const classes = useStyles();
+      const location = useLocation();
 
       function displayProjects() {
             if(props.projects.length > 0) {
                   return(props.projects.map((project: any) => {
                         return(
                               <Fragment key={project._id}>
-                                    <Link className={classes.link} to={`/project/${project._id}`}>
+                                    <Link className={classes.link} to={`${location.pathname}/${project._id}`}>
                                           <Card className={classes.root}>
                                                       <div className={classes.details}>
                                                             <CardContent className={classes.link} >

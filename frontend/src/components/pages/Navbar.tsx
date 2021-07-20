@@ -131,7 +131,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                               onClose={handleClose}
                               >
                               <MenuItem onClick={handleClose} component={Link} to="/user/profile" >Profile</MenuItem>
-                              <MenuItem onClick={handleClose} component={Link} to="/settings" >My account</MenuItem>
+                              <MenuItem onClick={handleClose} component={Link} to="/user/settings" >My account</MenuItem>
                               <MenuItem onClick={handleLogout} component={Link} to="/" >Logout</MenuItem>
                         </Menu>
                               
