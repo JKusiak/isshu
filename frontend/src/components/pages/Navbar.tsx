@@ -45,7 +45,12 @@ const useStyles = makeStyles((theme) => ({
                   strokeWidth: 0.2,
             }
       },
+      icon: {
+            width: 25,
+            height: 25,
+      },
       navbarTextButton: {
+            fontSize: '16px',
             '&:hover': {
                   fontWeight: 600
             }
@@ -114,7 +119,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
                               <IconButton className={classes.navbarIconButton} aria-label="projects" color="secondary" component={Link} to="/projects">
-                                    <ProjectsIcon/>
+                                    <ProjectsIcon className={classes.icon}/>
                               </IconButton>
                         </Tooltip>
                         
@@ -122,7 +127,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         
                         <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
                               <IconButton className={classes.navbarIconButton}  aria-label="user profile" onClick={handleMenu} color="secondary">
-                                    <ProfileIcon/>
+                                    <ProfileIcon className={classes.icon}/>
                               </IconButton>
                         </Tooltip>
                         <Menu

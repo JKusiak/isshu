@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
       getAllBoards,
       getBoardById,
@@ -10,23 +11,24 @@ import {
       deleteColumnFromBoard,
 } from '../controllers/boardController.js';
 
+export const protectedBoardRouter = express.Router();
 
-const router = express.Router();
+protectedBoardRouter.use(authenticateJWT);
 
-router.route('/').get(getAllBoards);
+protectedBoardRouter.route('/').get(getAllBoards);
 
-router.route('/:id').get(getBoardById);
+protectedBoardRouter.route('/:id').get(getBoardById);
 
-router.route('/add').post(addBoard);
+protectedBoardRouter.route('/add').post(addBoard);
 
-router.route('/update/:id').post(updateBoard);
+protectedBoardRouter.route('/update/:id').post(updateBoard);
 
-router.route('/delete/:id').delete(deleteBoard);
+protectedBoardRouter.route('/delete/:id').delete(deleteBoard);
 
-router.route('/getColumns/:id').get(getColumnsOfBoard);
+protectedBoardRouter.route('/getColumns/:id').get(getColumnsOfBoard);
 
-router.route('/addColumn/:id').post(addColumnToBoard);
+protectedBoardRouter.route('/addColumn/:id').post(addColumnToBoard);
 
-router.route('/deleteColumn/:id').delete(deleteColumnFromBoard);
+protectedBoardRouter.route('/deleteColumn/:id').delete(deleteColumnFromBoard);
 
-export default router;
+export default protectedBoardRouter;

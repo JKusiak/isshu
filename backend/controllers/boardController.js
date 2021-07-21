@@ -22,7 +22,7 @@ export const getBoardById = asyncHandler(async(req, res) => {
 
 
 export const addBoard = asyncHandler(async(req, res) => {
-      const name = req.body.name;
+      const name = req.body.boardName;
       
       const newBoard = new Board ({
             name,

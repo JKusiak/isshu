@@ -21,7 +21,7 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-      }, []);
+      }, [boards]);
 
         
       return (

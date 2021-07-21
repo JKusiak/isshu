@@ -1,4 +1,5 @@
 import Project from '../models/projectModel.js';
+import Board from '../models/boardModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -103,10 +104,18 @@ export const getBoardsOfProject = asyncHandler(async(req, res) => {
 
 
 export const addBoardToProject = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const projectId = req.params.id;
+    const boardName = req.body.boardName;
+
+    // this has to be by name, because it happens right after creating the project
+    // and one can not know the id yet to get it
+    const fetchedBoard = await Board.findOne({name: boardName});
+
+    const boardId = fetchedBoard._id;
+
     const update = {
-        $push: {
-            boards: req.body.boardId,
+         $push: {
+            boards: boardId,
         } 
     };
     const options = {
@@ -116,7 +125,7 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
 
 
     // no await here, otherwise callback on update + await make execute twice
-    Project.findByIdAndUpdate(id, update, options, function(err, data){
+    Project.findByIdAndUpdate(projectId, update, options, function(err, data){
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');
@@ -124,7 +133,7 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
             res.status(404).json({message: "Project not found"});
             throw new Error('Project not found');
         } else {
-            res.json("Project's boards updated successfuly");
+            res.json("Board added to project successfuly");
         }
     });
 });

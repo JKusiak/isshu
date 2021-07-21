@@ -6,6 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { IconButton, Tooltip } from '@material-ui/core';
+import AddBoardForm from '../functional/AddBoardForm';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {
@@ -33,49 +34,34 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
 }));
 
-interface AddProjectModalProps {
+interface AddBoardModalProps {
+      open: boolean,
+      handleOpen: () => void,
+      handleClose: () => void,
+
 }
 
 
-const AddProjectModal: FC<AddProjectModalProps> = (props) => {
+const AddBoardModal: FC<AddBoardModalProps> = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
       <>
-      <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
-            <IconButton
-                  className={classes.homePageButton}
-                  aria-label="add project" 
-                  color="secondary"
-                  onClick={handleOpen}
-            >
-                  <AddProjectIcon className={classes.icon}/>
-            </IconButton>
-      </Tooltip>
       <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
-            open={open}
-            onClose={handleClose}
+            open={props.open}
+            onClose={props.handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
                   timeout: 500,
             }}
       >
-        <Fade in={open}>
+        <Fade in={props.open}>
             <div className={classes.paper}>
-                  <AddProjectForm/>
+                  <AddBoardForm handleClose={props.handleClose}/>
             </div>
         </Fade>
       </Modal>
@@ -83,4 +69,4 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
   );
 }
 
-export default AddProjectModal;
+export default AddBoardModal;

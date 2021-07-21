@@ -1,8 +1,10 @@
-import { Backdrop, Card, CardContent, CardMedia, Fade, Modal, Typography } from "@material-ui/core";
+import { Backdrop, Button, Card, CardContent, CardMedia, Fade, Modal, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import AddBoardModal from "./modals/AddBoardModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,7 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
             boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4)',
             "&:hover": {
                   boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
-            }
+                  cursor: 'pointer',
+            },
       },
       details: {
             display: 'flex',
@@ -65,41 +68,33 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       const {url} = useRouteMatch();
       const [open, setOpen] = useState(false);
 
-      const handleOpen = () => {
+      const handleOpenModal = () => {
         setOpen(true);
       };
     
-      const handleClose = () => {
+      const handleCloseModal = () => {
         setOpen(false);
       };
 
       
       function displayAddBoard() {
             return(
-                  123
+                  <>
+                  <div onClick={handleOpenModal}>
+                        <Card className={classes.root}>
+                                    <div className={classes.details}>
+                                    <CardContent className={classes.link} >
+                                          <Typography component="h5" variant="h5">
+                                                <AddOutlinedIcon/>
+                                          </Typography>
+                                    </CardContent>
+                              </div>
+                        </Card>
+                  </div>
+                  <AddBoardModal open={open} handleOpen={handleOpenModal} handleClose={handleCloseModal}/>
+                  </>
             );
       }
-      //             <>
-      //                   <Modal
-      //                   aria-labelledby="transition-modal-title"
-      //                   aria-describedby="transition-modal-description"
-      //                   className={classes.modal}
-      //                   open={open}
-      //                   onClose={handleClose}
-      //                   closeAfterTransition
-      //                   BackdropComponent={Backdrop}
-      //                   BackdropProps={{
-      //                         timeout: 500,
-      //                    }}
-      // >
-      //                         <Fade in={open}>
-      //                               <div className={classes.paper}>
-      //                                     <AddProjectForm/>
-      //                               </div>
-      //                         </Fade>
-      //                   </Modal>
-      //             </>
-                  
             
       
 
@@ -129,6 +124,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       return(
             <>
             <div className={classes.gridContainer}>
+                  {displayAddBoard()}
                   {displayBoards()}
             </div>
             </>

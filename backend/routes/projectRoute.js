@@ -1,5 +1,6 @@
 
-import express from 'express'
+import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
 import { 
       getAllProjects, 
       getProjectById,
@@ -11,23 +12,24 @@ import {
       deleteBoardFromProject,
 } from '../controllers/projectController.js';
 
+export const protectedProjectRouter = express.Router();
 
-const router = express.Router();
+protectedProjectRouter.use(authenticateJWT);
 
-router.route('/').get(getAllProjects);
+protectedProjectRouter.route('/').get(getAllProjects);
 
-router.route('/:id').get(getProjectById);
+protectedProjectRouter.route('/:id').get(getProjectById);
 
-router.route('/add').post(addProject);
+protectedProjectRouter.route('/add').post(addProject);
 
-router.route('/update/:id').post(updateProject);
+protectedProjectRouter.route('/update/:id').post(updateProject);
 
-router.route('/delete/:id').delete(deleteProject);
+protectedProjectRouter.route('/delete/:id').delete(deleteProject);
 
-router.route('/getBoards/:id').get(getBoardsOfProject);
+protectedProjectRouter.route('/getBoards/:id').get(getBoardsOfProject);
 
-router.route('/addBoard/:id').post(addBoardToProject);
+protectedProjectRouter.route('/addBoard/:id').post(addBoardToProject);
 
-router.route('/deleteBoard/:id').delete(deleteBoardFromProject);
+protectedProjectRouter.route('/deleteBoard/:id').delete(deleteBoardFromProject);
 
-export default router;
+export default protectedProjectRouter;
