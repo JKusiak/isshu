@@ -39,6 +39,17 @@ const useStyles = makeStyles((theme) => ({
       linkWrapper: {
 
       },
+      navbarIconButton: {
+            "&:hover": {
+                  stroke: 'black',
+                  strokeWidth: 0.2,
+            }
+      },
+      navbarTextButton: {
+            '&:hover': {
+                  fontWeight: 600
+            }
+      },
       offset: theme.mixins.toolbar,
       
 }));
@@ -86,13 +97,13 @@ const Navbar: FC<NavbarProps> = (props) => {
                   <div className={classes.sectionDesktop}>
                   {!props.loggedIn && (
                         <>
-                        <Button color="secondary" component={Link} to="/">
+                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/">
                               Home
                         </Button>
-                        <Button color="secondary" component={Link} to="/login">
+                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/login">
                               Login
                         </Button>
-                        <Button color="secondary" component={Link} to="/register"> 
+                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/register"> 
                               Register
                         </Button>
                         </>
@@ -102,7 +113,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                   {props.loggedIn && (
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
+                              <IconButton className={classes.navbarIconButton} aria-label="projects" color="secondary" component={Link} to="/projects">
                                     <ProjectsIcon/>
                               </IconButton>
                         </Tooltip>
@@ -110,7 +121,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <AddProjectModal/>
                         
                         <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton  aria-label="user profile" onClick={handleMenu} color="secondary">
+                              <IconButton className={classes.navbarIconButton}  aria-label="user profile" onClick={handleMenu} color="secondary">
                                     <ProfileIcon/>
                               </IconButton>
                         </Tooltip>

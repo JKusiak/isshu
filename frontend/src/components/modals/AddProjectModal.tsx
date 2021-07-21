@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import AddProjectForm from '../functional/AddProjectForm';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
@@ -22,10 +22,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       homePageButton: {
-            padding: '0.5em 4em',
-            borderRadius: '10px',
             "&:hover": {
-                  background: theme.palette.primary.dark
+                  stroke: 'black',
+                  strokeWidth: 0.2,
             }
       },
 }));
@@ -36,7 +35,7 @@ interface AddProjectModalProps {
 
 const AddProjectModal: FC<AddProjectModalProps> = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,7 +48,8 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
   return (
       <>
       <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
-            <IconButton 
+            <IconButton
+                  className={classes.homePageButton}
                   aria-label="add project" 
                   color="secondary"
                   onClick={handleOpen}

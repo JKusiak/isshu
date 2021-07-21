@@ -1,7 +1,7 @@
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Backdrop, Card, CardContent, CardMedia, Fade, Modal, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
-import { FC, Fragment } from "react";
+import { FC, Fragment, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 
@@ -63,14 +63,52 @@ interface BoardsGalleryProps {
 const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       const classes = useStyles();
       const {url} = useRouteMatch();
+      const [open, setOpen] = useState(false);
+
+      const handleOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
+      
+      function displayAddBoard() {
+            return(
+                  123
+            );
+      }
+      //             <>
+      //                   <Modal
+      //                   aria-labelledby="transition-modal-title"
+      //                   aria-describedby="transition-modal-description"
+      //                   className={classes.modal}
+      //                   open={open}
+      //                   onClose={handleClose}
+      //                   closeAfterTransition
+      //                   BackdropComponent={Backdrop}
+      //                   BackdropProps={{
+      //                         timeout: 500,
+      //                    }}
+      // >
+      //                         <Fade in={open}>
+      //                               <div className={classes.paper}>
+      //                                     <AddProjectForm/>
+      //                               </div>
+      //                         </Fade>
+      //                   </Modal>
+      //             </>
+                  
+            
+      
 
       function displayBoards() {
             if(props.boards.length > 0) {
                   return(props.boards.map((board: any) => {
                         return(
                               <Fragment key={board._id}>
-                                    <Link 
-                                          className={classes.link} to={`${url}/${board._id}`}>
+                                    <Link className={classes.link} to={`${url}/${board._id}`}>
                                           <Card className={classes.root}>
                                                       <div className={classes.details}>
                                                             <CardContent className={classes.link} >
@@ -85,10 +123,6 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
                               
                         );
                   }));
-            } else {
-                  return(
-                        <h3>No boards yet</h3>
-                  );
             }
       }
      
