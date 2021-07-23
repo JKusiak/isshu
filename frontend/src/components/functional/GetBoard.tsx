@@ -11,19 +11,20 @@ interface GetBoardProps {
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { id } = useParams<{ id: string }>();
-      const [board, setBoard] = useState('');
+      const [board, setBoard] = useState<object[]>();
 
-      useEffect(() => {
-            axios.get(`http://localhost:5000/boards/${id}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then(resp => {
-                  setBoard(resp.data);
-            }).catch((err) => {
-                  console.log(err);
-            });;
-      }, []);
+      // useEffect(() => {
+      //       axios.get(`http://localhost:5000/boards/getContent/${id}`, {
+      //             headers: {
+      //                   'Authorization': `Bearer ${localStorage.getItem('token')}`
+      //             }
+      //       }).then(resp => {
+      //             console.log(resp.data.columns);
+      //             setBoard([resp.data.columns]);
+      //       }).catch((err) => {
+      //             console.log(err);
+      //       });;
+      // }, );
 
 
       return (

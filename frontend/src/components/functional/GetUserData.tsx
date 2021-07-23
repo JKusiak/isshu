@@ -23,7 +23,7 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-        }, []);
+        }, [id]);
 
 
       return (

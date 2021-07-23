@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
             }
       },
       icon: {
-            width: 25,
-            height: 25,
+            fontSize: 24,
       },
       navbarTextButton: {
             fontSize: '16px',

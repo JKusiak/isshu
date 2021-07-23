@@ -24,7 +24,7 @@ const GetProject: FC<GetProjectProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-      }, []);
+      }, [id]);
 
 
       return (

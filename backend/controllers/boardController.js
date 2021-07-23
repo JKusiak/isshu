@@ -78,15 +78,27 @@ export const deleteBoard = asyncHandler(async(req, res) => {
 });
 
 
-export const getColumnsOfBoard = asyncHandler(async(req, res) => {
-      const columns = await Board.findOne({_id: req.params.id})
-            .populate('columns');
+export const getAllBoardContent = asyncHandler(async(req, res) => {
+      const content = await Board.findOne({_id: req.params.id})
+            .populate({ 
+                  path: 'columns',
+                  // populate: {
+                  //   path: 'issues',
+                  //   model: 'Issue',
+                  //   populate: {
+                  //         path: 'tags',
+                  //         model: 'Tag',
+                  //   }
+                  // } 
+               });
 
-      if(columns) {
-            res.json(columns);
+
+
+      if(content) {
+            res.json(content);
       } else {
-            res.status(404).json({message: "Board not found"});
-            throw new Error('Board not found');
+            res.status(404).json({message: "Board's content not found"});
+            throw new Error("Board's content not found");
       }
 });
 

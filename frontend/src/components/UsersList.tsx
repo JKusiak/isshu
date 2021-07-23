@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, Fragment} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -77,7 +77,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                   return(userType.map((user: any) => {
                         const fullName = `${user.name} ${user.surname}`;
 
-                        if(userType == props.projectUsers) {
+                        if(userType === props.projectUsers) {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>

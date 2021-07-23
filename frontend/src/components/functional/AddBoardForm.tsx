@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '../ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';

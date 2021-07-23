@@ -6,7 +6,7 @@ import {
       addBoard,
       updateBoard,
       deleteBoard,
-      getColumnsOfBoard,
+      getAllBoardContent,
       addColumnToBoard,
       deleteColumnFromBoard,
 } from '../controllers/boardController.js';
@@ -25,7 +25,7 @@ protectedBoardRouter.route('/update/:id').post(updateBoard);
 
 protectedBoardRouter.route('/delete/:id').delete(deleteBoard);
 
-protectedBoardRouter.route('/getColumns/:id').get(getColumnsOfBoard);
+protectedBoardRouter.route('/getContent/:id').get(getAllBoardContent);
 
 protectedBoardRouter.route('/addColumn/:id').post(addColumnToBoard);
 

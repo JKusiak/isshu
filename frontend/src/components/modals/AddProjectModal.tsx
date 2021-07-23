@@ -22,8 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       icon: {
-            width: 26,
-            height: 26,
+            fontSize: 25,
       },
       homePageButton: {
             "&:hover": {

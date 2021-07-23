@@ -1,11 +1,8 @@
-import React, { FC, useState } from 'react';
-import AddProjectForm from '../functional/AddProjectForm';
+import React, { FC } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { IconButton, Tooltip } from '@material-ui/core';
 import AddBoardForm from '../functional/AddBoardForm';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

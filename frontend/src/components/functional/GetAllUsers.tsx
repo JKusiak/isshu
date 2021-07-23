@@ -28,7 +28,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-        }, []);
+        }, [id]);
 
 
       // fetching users that do not belong to currently displayed project
@@ -43,7 +43,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-        }, [noProjectUsers]);
+        }, [id, setNoProjectUsers]);
 
 
        // fetching users that belong to currently displayed project
@@ -58,7 +58,7 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-        }, [projectUsers]);  
+        }, [id, setProjectUsers]);  
 
 
         // add currently displayed project to clicked user
