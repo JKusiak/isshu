@@ -3,8 +3,9 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '../ButtonSpacing';
 import LoginForm from '../functional/LoginForm';
+import Button from '@material-ui/core/Button';
+
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       paper: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       homePageButton: {
             padding: '0.5em 4em',
             borderRadius: '10px',
+            marginTop: '5em',
             "&:hover": {
                   background: theme.palette.primary.dark
             }
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface LoginModalProps {
-      setLoggedIn: any
+      setLoggedIn: any,
 }
 
 
@@ -52,7 +54,6 @@ const LoginModal: FC<LoginModalProps> = (props) => {
             className={classes.homePageButton}
             variant='contained'
             color='primary'
-            mt={"5em"}
             size={'large'}
             onClick={handleOpen}>
             Login

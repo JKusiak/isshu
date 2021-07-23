@@ -9,7 +9,7 @@ interface GetBoardsGalleryProps {
 
 const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
       const { id } = useParams<{ id: string }>();
-      const [boards, setBoards] = useState('');
+      const [boards, setBoards] = useState([]);
 
       useEffect(() => {
             let isUnmounted = false;
@@ -20,7 +20,6 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
                   }
             }).then(resp => {
                   if(!isUnmounted) {
-                        console.log(resp.data);
                         setBoards(resp.data.boards);
                   }
             }).catch((err) => {
@@ -30,12 +29,12 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
             return () => {
                   isUnmounted = true;
             }
-      }, []);
+      }, [id, boards.length]);
 
         
       return (
       <>
-            <BoardsGallery boards={boards}/>
+            <BoardsGallery boards={boards} setBoards={setBoards}/>
       </>
       );
 }

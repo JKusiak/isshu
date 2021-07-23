@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Button from './ButtonSpacing';
+import Button from '@material-ui/core/Button';
+
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       }
 }));
 
-function ToProjectsButton() {
+function ButtonToProjects() {
   const classes = useStyles();
 
 
@@ -48,4 +49,4 @@ function ToProjectsButton() {
   );
 }
 
-export default ToProjectsButton;
+export default ButtonToProjects;

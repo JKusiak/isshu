@@ -29,7 +29,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
             return () => {
                   isUnmounted = true;
             }
-      },[]);
+      },[id]);
 
 
       return (

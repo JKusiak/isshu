@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import AddBoardModal from "./modals/AddBoardModal";
 
@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardsGalleryProps {
       boards: any;
+      setBoards: any;
 }
 
 
@@ -90,7 +91,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       return(
             <>
             <div className={classes.gridContainer}>
-                  <AddBoardModal/>
+                  <AddBoardModal boards={props.boards} setBoards={props.setBoards}/>
                   {displayBoards()}
             </div>
             </>

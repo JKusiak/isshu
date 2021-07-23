@@ -59,6 +59,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddBoardModalProps {
+      boards: any,
+      setBoards: any,
 }
 
 
@@ -102,7 +104,7 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
       >
         <Fade in={open}>
             <div className={classes.paper}>
-                  <AddBoardForm handleClose={handleCloseModal}/>
+                  <AddBoardForm boards={props.boards} setBoards={props.setBoards} handleClose={handleCloseModal}/>
             </div>
         </Fade>
       </Modal>

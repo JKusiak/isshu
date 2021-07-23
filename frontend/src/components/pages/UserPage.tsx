@@ -1,6 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react"
-import GetProjectsList from "../functional/GetProjectsList";
 import GetUserData from "../functional/GetUserData";
 
 
@@ -24,8 +23,6 @@ const UserPage: FC<UserPageProps> = (props) => {
             <div>
                   <GetUserData/>
             </div>  
-            
-            <GetProjectsList/>
       </div>
       );
 }

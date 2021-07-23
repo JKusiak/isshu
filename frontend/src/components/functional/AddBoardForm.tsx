@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
-import Button from '../ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface AddBoardFormProps {
       handleClose: any,
+      boards: any,
+      setBoards: any,
 }
 
 
@@ -77,6 +79,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         }
                   }).then((res) => {
                         console.log(res.data);
+                        props.setBoards([]);
                         props.handleClose();
                   }).catch((err) => {
                         console.log(err);

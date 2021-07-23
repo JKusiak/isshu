@@ -53,9 +53,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface UsersListProps {
-      projectUsers: any,
-      noProjectUsers: any,
-      mobileOpen: any,
+      contributors: [],
+      otherUsers: [],
+      mobileOpen: boolean,
       handleSidebarToggle: () => void,
       addProjectToUser: (userId: string) => void,
       removeProjectFromUser: (userId: string) => void,
@@ -77,7 +77,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                   return(userType.map((user: any) => {
                         const fullName = `${user.name} ${user.surname}`;
 
-                        if(userType === props.projectUsers) {
+                        if(userType === props.contributors) {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
@@ -129,11 +129,11 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
             <div>
                   <List>
                         <div className={classes.listSubtitle}>Contributors</div>
-                        {displayUsers(props.projectUsers)}
+                        {displayUsers(props.contributors)}
                         <br/>
                         <Divider />
                         <div className={classes.listSubtitle}>Others</div>
-                        {displayUsers(props.noProjectUsers)}
+                        {displayUsers(props.otherUsers)}
                   </List>
             </div>
       )

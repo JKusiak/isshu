@@ -11,26 +11,10 @@ interface GetUsersListProps {
 
 const GetUsersList: FC<GetUsersListProps> = (props) => {
       const {id} = useParams<{id: string}>();
-      const [currentProject, setCurrentProject] = useState();
-      const [noProjectUsers, setNoProjectUsers] = useState([]);
-      const [projectUsers, setProjectUsers] = useState([]);
+      const [otherUsers, setOtherUsers] = useState<[]>([]);
+      const [contributors, setContributors] = useState<[]>([]);
 
-
-      // fetching currently displayed project
-      useEffect(() => {
-            axios.get(`http://localhost:5000/projects/${id}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            })
-            .then(resp => {
-                  setCurrentProject(resp.data.name);
-            }).catch((err) => {
-                  console.log(err);
-            });;
-        }, [id]);
-
-
+      
       // fetching users that do not belong to currently displayed project
       useEffect(() => {
             let isUnmounted = false;
@@ -39,10 +23,9 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            })
-            .then(resp => {
+            }).then(resp => {
                   if (!isUnmounted) {
-                        setNoProjectUsers(resp.data);
+                        setOtherUsers(resp.data);
                   }
             }).catch((err) => {
                   console.log(err);
@@ -51,7 +34,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
             return () => {
                   isUnmounted = true;
             };
-        }, [id, noProjectUsers]);
+        }, [id, otherUsers.length]);
 
 
        // fetching users that belong to currently displayed project
@@ -62,10 +45,9 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            })
-            .then(resp => {
+            }).then(resp => {
                   if(!isUnmounted) {
-                        setProjectUsers(resp.data);
+                        setContributors(resp.data);
                   }
             }).catch((err) => {
                   console.log(err);
@@ -74,19 +56,23 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
             return () => {
                   isUnmounted = true;
             };
-        }, [id, projectUsers]);  
+        }, [id, contributors.length]);  
 
 
         // add currently displayed project to clicked user
         function addProjectToUser(userId: string) {
-            const projectNameData = {
-                  projectName: currentProject
+            const projectId = {
+                  projectId: id
             }
 
-            axios.post(`http://localhost:5000/users/addProject/${userId}`, projectNameData, {
+            axios.post(`http://localhost:5000/users/addProject/${userId}`, projectId, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
+            }).then((resp) => {
+                  console.log(resp.data);
+                  setContributors([]);
+                  setOtherUsers([]);
             }).catch((err) => {
                   console.log(err);
             });;    
@@ -102,6 +88,9 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                   data: {
                         projectId: id
                   }
+            }).then(() => {
+                  setContributors([]);
+                  setOtherUsers([]);
             }).catch((err) => {
                   console.log(err);
             });;    
@@ -111,8 +100,8 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
       return (
       <>
             <UsersList 
-                  projectUsers={projectUsers} 
-                  noProjectUsers={noProjectUsers} 
+                  contributors={contributors} 
+                  otherUsers={otherUsers} 
                   mobileOpen={props.mobileOpen} 
                   handleSidebarToggle={props.handleSidebarToggle}
                   addProjectToUser={addProjectToUser}

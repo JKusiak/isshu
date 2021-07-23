@@ -8,16 +8,15 @@ interface GetProjectsGalleryProps {
 }
 
 const GetProjectsGallery: FC<GetProjectsGalleryProps> = (props) => {
-      const [projects, setProjects] = useState('');
+      const [projects, setProjects] = useState([]);
 
       useEffect (() => {
-            axios.get('http://localhost:5000/users/getProjects/hastobesomethinghereforsomereason', {
+            axios.get('http://localhost:5000/users/getProjects/whyHasToBeWithFlag', {
                   headers: {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             })
             .then(resp => {
-                  console.log(resp.data.projects);
                   setProjects(resp.data.projects);
             }).catch((err) => {
                   console.log(err);
