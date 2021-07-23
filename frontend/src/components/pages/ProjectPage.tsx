@@ -1,7 +1,7 @@
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
-import GetAllUsers from "../functional/GetAllUsers";
+import GetUsersList from "../functional/GetUsersList";
 import GetProject from "../functional/GetProject";
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -54,7 +54,7 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
       return (
             <div className={classes.root}>
                   <div className={classes.sidebar}>
-                        <GetAllUsers mobileOpen={mobileOpen} handleSidebarToggle={handleSidebarToggle}/>
+                        <GetUsersList mobileOpen={mobileOpen} handleSidebarToggle={handleSidebarToggle}/>
                   </div>
                   <div className={classes.pageContent}>
                         <IconButton

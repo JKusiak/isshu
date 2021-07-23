@@ -11,7 +11,7 @@ interface GetBoardProps {
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { id } = useParams<{ id: string }>();
-      const [board, setBoard] = useState<object[]>();
+      const [board, setBoard] = useState([]);
 
       // useEffect(() => {
       //       axios.get(`http://localhost:5000/boards/getContent/${id}`, {
@@ -20,11 +20,11 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       //             }
       //       }).then(resp => {
       //             console.log(resp.data.columns);
-      //             setBoard([resp.data.columns]);
+      //             setBoard(resp.data.columns);
       //       }).catch((err) => {
       //             console.log(err);
       //       });;
-      // }, );
+      // },[id, setBoard]);
 
 
       return (

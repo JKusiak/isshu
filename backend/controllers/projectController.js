@@ -105,13 +105,7 @@ export const getBoardsOfProject = asyncHandler(async(req, res) => {
 
 export const addBoardToProject = asyncHandler(async(req, res) => {
     const projectId = req.params.id;
-    const boardName = req.body.boardName;
-
-    // this has to be by name, because it happens right after creating the project
-    // and one can not know the id yet to get it
-    const fetchedBoard = await Board.findOne({name: boardName});
-
-    const boardId = fetchedBoard._id;
+    const boardId = req.body.boardId;
 
     const update = {
          $push: {

@@ -31,7 +31,7 @@ export const addBoard = asyncHandler(async(req, res) => {
       const savedBoard = await newBoard.save();
 
       if(savedBoard) {
-            res.json('Board saved successfully');
+            res.json(savedBoard);
       } else {
             res.status(400).json({message: "Can not save the board"});
             throw new Error('Can not save the board');

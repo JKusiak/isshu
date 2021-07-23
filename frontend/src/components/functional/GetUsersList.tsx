@@ -4,12 +4,12 @@ import { FC } from "react";
 import { useParams } from "react-router-dom";
 import UsersList from "../UsersList";
 
-interface GetAllUsersProps {
+interface GetUsersListProps {
       mobileOpen: any,
       handleSidebarToggle: () => void,
 }
 
-const GetAllUsers: FC<GetAllUsersProps> = (props) => {
+const GetUsersList: FC<GetUsersListProps> = (props) => {
       const {id} = useParams<{id: string}>();
       const [currentProject, setCurrentProject] = useState();
       const [noProjectUsers, setNoProjectUsers] = useState([]);
@@ -33,32 +33,48 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
 
       // fetching users that do not belong to currently displayed project
       useEffect(() => {
+            let isUnmounted = false;
+
             axios.get(`http://localhost:5000/users/getUsersWithoutProject/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             })
             .then(resp => {
-                  setNoProjectUsers(resp.data);
+                  if (!isUnmounted) {
+                        setNoProjectUsers(resp.data);
+                  }
             }).catch((err) => {
                   console.log(err);
             });;
-        }, [id, setNoProjectUsers]);
+
+            return () => {
+                  isUnmounted = true;
+            };
+        }, [id, noProjectUsers]);
 
 
        // fetching users that belong to currently displayed project
         useEffect(() => {
+            let isUnmounted = false;
+
             axios.get(`http://localhost:5000/users/getUsersByProject/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             })
             .then(resp => {
-                  setProjectUsers(resp.data);
+                  if(!isUnmounted) {
+                        setProjectUsers(resp.data);
+                  }
             }).catch((err) => {
                   console.log(err);
             });;
-        }, [id, setProjectUsers]);  
+
+            return () => {
+                  isUnmounted = true;
+            };
+        }, [id, projectUsers]);  
 
 
         // add currently displayed project to clicked user
@@ -106,4 +122,4 @@ const GetAllUsers: FC<GetAllUsersProps> = (props) => {
       );
 }
 
-export default GetAllUsers;
+export default GetUsersList;

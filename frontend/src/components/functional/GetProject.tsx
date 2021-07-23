@@ -15,16 +15,24 @@ const GetProject: FC<GetProjectProps> = (props) => {
 
 
       useEffect(() => {
+            let isUnmounted = false;
+
             axios.get(`http://localhost:5000/projects/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  setProject(resp.data);
+                  if(!isUnmounted) {
+                        setProject(resp.data);
+                  }
             }).catch((err) => {
                   console.log(err);
             });;
-      }, [id]);
+
+            return () => {
+                  isUnmounted = true;
+            }
+      }, [id, project]);
 
 
       return (

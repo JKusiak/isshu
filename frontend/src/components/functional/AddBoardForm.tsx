@@ -70,21 +70,21 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
+                  const boardToAdd = {
+                        boardId: res.data._id,
+                  };
+
+                  axios.post(`http://localhost:5000/projects/addBoard/${id}`, boardToAdd, {
+                        headers: {
+                              'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                  }).then((res) => {
                         console.log(res.data);
-                        console.log(id);
-                        axios.post(`http://localhost:5000/projects/addBoard/${id}`, board, {
-                              headers: {
-                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                              }
-                        }).then((res) => {
-                              console.log(res.data);
-                              // history.push("/projects");
-                        }).catch((err) => {
-                              console.log(err);
-                        });
-            }).catch((err) => {
-                  console.log(err);
-            });  
+                        // history.push("/projects");
+                  }).catch((err) => {
+                        console.log(err);
+                  });
+            })
       } 
 
 
