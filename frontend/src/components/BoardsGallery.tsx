@@ -3,7 +3,6 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import AddBoardModal from "./modals/AddBoardModal";
 
 
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       root: {
             display: 'flex',
-            //change here to adjust infinite length of project displayed, but foto looks uglier
             height: 120,
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -44,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
             width: 120,
             filter: 'blur(0.5px)'
       },
-      
       link: {
             textDecoration: 'none',
             color: theme.palette.secondary.dark,
@@ -66,36 +63,6 @@ interface BoardsGalleryProps {
 const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       const classes = useStyles();
       const {url} = useRouteMatch();
-      const [open, setOpen] = useState(false);
-
-      const handleOpenModal = () => {
-        setOpen(true);
-      };
-    
-      const handleCloseModal = () => {
-        setOpen(false);
-      };
-
-      
-      function displayAddBoard() {
-            return(
-                  <>
-                  <div onClick={handleOpenModal}>
-                        <Card className={classes.root}>
-                                    <div className={classes.details}>
-                                    <CardContent className={classes.link} >
-                                          <Typography component="h5" variant="h5">
-                                                <AddOutlinedIcon/>
-                                          </Typography>
-                                    </CardContent>
-                              </div>
-                        </Card>
-                  </div>
-                  <AddBoardModal open={open} handleOpen={handleOpenModal} handleClose={handleCloseModal}/>
-                  </>
-            );
-      }
-            
       
 
       function displayBoards() {
@@ -114,8 +81,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
                                                       </div>
                                           </Card>
                                     </Link> 
-                              </Fragment>
-                              
+                              </Fragment> 
                         );
                   }));
             }
@@ -124,7 +90,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       return(
             <>
             <div className={classes.gridContainer}>
-                  {displayAddBoard()}
+                  <AddBoardModal/>
                   {displayBoards()}
             </div>
             </>

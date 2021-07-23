@@ -80,7 +80,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         }
                   }).then((res) => {
                         console.log(res.data);
-                        // history.push("/projects");
+                        props.handleClose();
                   }).catch((err) => {
                         console.log(err);
                   });
@@ -115,7 +115,6 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
 
             <Button
                   className={classes.submit}
-                  onClick={props.handleClose}
                   fullWidth
                   type="submit"
                   variant="contained"

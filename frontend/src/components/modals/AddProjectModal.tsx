@@ -37,49 +37,49 @@ interface AddProjectModalProps {
 
 
 const AddProjectModal: FC<AddProjectModalProps> = (props) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
+      const classes = useStyles();
+      const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+      const handleOpen = () => {
+            setOpen(true);
+      };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+      const handleClose = () => {
+            setOpen(false);
+      };
 
-  return (
-      <>
-      <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
-            <IconButton
-                  className={classes.homePageButton}
-                  aria-label="add project" 
-                  color="secondary"
-                  onClick={handleOpen}
+      return (
+            <>
+            <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
+                  <IconButton
+                        className={classes.homePageButton}
+                        aria-label="add project" 
+                        color="secondary"
+                        onClick={handleOpen}
+                  >
+                        <AddProjectIcon className={classes.icon}/>
+                  </IconButton>
+            </Tooltip>
+            <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                        timeout: 500,
+                  }}
             >
-                  <AddProjectIcon className={classes.icon}/>
-            </IconButton>
-      </Tooltip>
-      <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-                  timeout: 500,
-            }}
-      >
-        <Fade in={open}>
-            <div className={classes.paper}>
-                  <AddProjectForm/>
-            </div>
-        </Fade>
-      </Modal>
-      </>
-  );
+            <Fade in={open}>
+                  <div className={classes.paper}>
+                        <AddProjectForm/>
+                  </div>
+            </Fade>
+            </Modal>
+            </>
+      );
 }
 
 export default AddProjectModal;

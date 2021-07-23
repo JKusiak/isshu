@@ -38,23 +38,70 @@ interface BoardDataProps {
 
 const BoardData: FC<BoardDataProps> = (props) => {
       const classes = useStyles();
+      const [columns, setColumns] = useState(props.board);
       let history = useHistory();
 
       function getPreviousPath() {
             history.goBack();
       }
 
+
+      const onDragEnd = (result: any, columns: { [x: string]: any; }, setColumns: (arg0: any) => void) => {
+            if (!result.destination) return;
+            const { source, destination } = result;
+
+            if (source.droppableId !== destination.droppableId) {
+                  const sourceColumn = columns[source.droppableId];
+                  const destColumn = columns[destination.droppableId];
+                  const sourceIssues = [...sourceColumn.issues];
+                  const destIssues = [...destColumn.issues];
+                  const [removed] = sourceIssues.splice(source.index, 1);
+
+                  destIssues.splice(destination.index, 0, removed);
+                  
+                  setColumns({
+                        ...columns,
+                        [source.droppableId]: {
+                              ...sourceColumn,
+                              items: sourceIssues
+                        },
+                        [destination.droppableId]: {
+                              ...destColumn,
+                              items: sourceIssues
+                        }
+                  });
+            } else {
+                  const column = columns[source.droppableId];
+                  const copiedIssues = [...column.issues];
+                  const [removed] = copiedIssues.splice(source.index, 1);
+
+                  copiedIssues.splice(destination.index, 0, removed);
+
+                  setColumns({
+                        ...columns,
+                        [source.droppableId]: {
+                              ...column,
+                              items: copiedIssues
+                        }
+                  });
+            }
+      };
+
+
       function displayColumns() {
             if(props.board.length > 0) {
                   return(
                         <div className={classes.root}>
-                        <DragDropContext onDragEnd={() => console.log('dropped')}>
-                                    {props.board.map((column: any) => {
+                        <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
+                                    {props.board.map((column: any, index: any) => {
                                           return(
                                                 <div className={classes.boardWrapper} key={column._id}>
                                                       <h2>{column.name}</h2>
                                                       <div style={{ margin: 8 }}>
-                                                            <Droppable droppableId={column._id} key={column._id}>
+                                                            <Droppable
+                                                                  key={column._id}
+                                                                  droppableId={column._id} 
+                                                            >
                                                                   {(provided, snapshot) => {
                                                                         return (
                                                                               <div
@@ -97,7 +144,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                                                       </div>
                                                 </div>          
                                           );
-                                    })};
+                                    })}
                         </DragDropContext>
                   </div> 
                   );
