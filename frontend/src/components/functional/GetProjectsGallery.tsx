@@ -17,6 +17,7 @@ const GetProjectsGallery: FC<GetProjectsGalleryProps> = (props) => {
                   }
             })
             .then(resp => {
+                  console.log(resp.data.projects);
                   setProjects(resp.data.projects);
             }).catch((err) => {
                   console.log(err);

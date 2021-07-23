@@ -82,16 +82,17 @@ export const getAllBoardContent = asyncHandler(async(req, res) => {
       const content = await Board.findOne({_id: req.params.id})
             .populate({ 
                   path: 'columns',
-                  // populate: {
-                  //   path: 'issues',
-                  //   model: 'Issue',
-                  //   populate: {
-                  //         path: 'tags',
-                  //         model: 'Tag',
-                  //   }
-                  // } 
-               });
-
+                  populate: {
+                        path: 'issues',
+                        model: 'Issue',
+                        populate: {
+                              path: 'tags',
+                              model: 'Tag',
+                        }
+                  } 
+            });
+            
+            
 
 
       if(content) {

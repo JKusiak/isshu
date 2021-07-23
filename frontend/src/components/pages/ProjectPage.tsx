@@ -2,8 +2,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
 import GetUsersList from "../functional/GetUsersList";
-import GetProject from "../functional/GetProject";
 import MenuIcon from '@material-ui/icons/Menu';
+import ProjectData from "../ProjectData";
 
 
 const sidebarWidth = 270;
@@ -67,7 +67,7 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
                               <MenuIcon/>
                         </IconButton>
                         <div>
-                              <GetProject/>
+                              <ProjectData/>
                         </div>
                   </div>
             </div>

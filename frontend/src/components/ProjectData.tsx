@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ProjectDataProps {
-      project: any,
-      projectId: any,
 }
 
 
@@ -30,7 +28,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                         <GetBoard/>
                   </Route>
                   <Route exact path={path}>
-                        <GetBoardsGallery projectId={props.projectId}/>
+                        <GetBoardsGallery/>
                   </Route>
             </Switch>
             </>
