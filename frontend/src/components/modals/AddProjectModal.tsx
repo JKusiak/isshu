@@ -74,7 +74,7 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
             >
             <Fade in={open}>
                   <div className={classes.paper}>
-                        <AddProjectForm/>
+                        <AddProjectForm handleClose={handleClose}/>
                   </div>
             </Fade>
             </Modal>

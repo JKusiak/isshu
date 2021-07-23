@@ -54,9 +54,6 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
       const [boardName, setBoardName] = useState('');
       let { id } = useParams<{id: string}>();
 
-      // let history = useHistory();
-
-
       const board = {
             boardName: boardName,
       }

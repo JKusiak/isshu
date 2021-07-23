@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Button from '../ButtonSpacing';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -47,11 +48,13 @@ const projectNameRegex = /^$|^[A-Za-z][a-z\s]*$/;
 
 
 interface AddProjectFormProps {
+      handleClose: any,
 }
 
 
 const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       const classes = useStyles();
+      let history = useHistory();
       const [projectName, setProjectName] = useState('');
       const [description, setDescription] = useState('');
       const [startDate, setStartDate] = useState('');
@@ -68,9 +71,6 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                   setIsValid(false);
             }
       }, [startDate, endDate]);
-      
-
-            // let history = useHistory();
 
 
       const project = {
@@ -81,10 +81,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
             creator: getCreator()
       }
 
-
-      const projectNameData = {
-            projectName: projectName
-      }
+      
 
 
       function getCreator() {
@@ -103,14 +100,17 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
-                        console.log(res.data);
-                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, projectNameData, {
+                        const newProjectId = {
+                              projectId: res.data._id,
+                        };
+
+                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, newProjectId, {
                               headers: {
                                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                               }
                         }).then((res) => {
-                              console.log(res.data);
-                              // history.push("/projects");
+                              props.handleClose();
+                              history.push(`/projects/${newProjectId.projectId}`);
                         }).catch((err) => {
                               console.log(err);
                         });
@@ -149,7 +149,6 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                         setIsValid(false);
                   }
               }}
-              
             />
           </Grid>
           <Grid item xs={12}>

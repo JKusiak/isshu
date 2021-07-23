@@ -117,13 +117,7 @@ export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
 export const addProjectToUser = asyncHandler(async(req, res) => {
     const userId = req.params.id;
-    const projectName = req.body.projectName;
-
-    // this has to be by name, because it happens right after creating the project
-    // and one can not know the id yet to get it
-    const fetchedProject = await Project.findOne({name: projectName});
-
-    const projectId = fetchedProject._id;
+    const projectId = req.body.projectId;
 
     const update = {
          $push: {

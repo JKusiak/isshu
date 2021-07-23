@@ -40,7 +40,7 @@ export const addProject = asyncHandler(async(req, res) => {
     const savedProject = await newProject.save();
 
     if(savedProject) {
-        res.json('Project saved successfully');
+        res.json(savedProject);
     } else {
         res.status(400).json({message: "Can not save the project"});
         throw new Error('Can not save the project');
