@@ -1,22 +1,14 @@
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Card, CardContent, Input, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
 import AddBoardModal from "./modals/AddBoardModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-      gridContainer: {
-            display: 'grid',
-            justifyContent: 'center',
-            gap: '1.2em',
-            gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
-            marginRight: '5em',
-            marginLeft: '5em',
-            marginBottom: '3em',
-      },
       root: {
             display: 'flex',
             height: 120,
@@ -28,6 +20,15 @@ const useStyles = makeStyles((theme: Theme) =>
                   boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
                   cursor: 'pointer',
             },
+      },
+      gridContainer: {
+            display: 'grid',
+            justifyContent: 'center',
+            gap: '1.2em',
+            gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 1fr))',
+            marginRight: '5em',
+            marginLeft: '5em',
+            marginBottom: '3em',
       },
       details: {
             display: 'flex',
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
       cardAction: {
             width: '100%',
             height: '100%',
-      }
+      },
   })
 );
 
@@ -90,6 +91,8 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
      
       return(
             <>
+            <GetProjectInfoBanner/>
+            
             <div className={classes.gridContainer}>
                   <AddBoardModal boards={props.boards} setBoards={props.setBoards}/>
                   {displayBoards()}

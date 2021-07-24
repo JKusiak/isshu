@@ -6,6 +6,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ProjectData from "../ProjectData";
 
 
+
+
 const sidebarWidth = 270;
 
 const useStyles = makeStyles((theme: Theme) =>

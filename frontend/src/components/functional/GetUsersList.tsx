@@ -70,7 +70,6 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((resp) => {
-                  console.log(resp.data);
                   setContributors([]);
                   setOtherUsers([]);
             }).catch((err) => {
@@ -88,7 +87,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                   data: {
                         projectId: id
                   }
-            }).then(() => {
+            }).then(() => { 
                   setContributors([]);
                   setOtherUsers([]);
             }).catch((err) => {
