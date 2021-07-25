@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardsGalleryProps {
       boards: any;
-      setBoards: any;
+      fetchBoards: any;
 }
 
 
@@ -81,9 +81,9 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       return(
             <>
             <GetProjectInfoBanner/>
-            
+
             <div className={classes.gridContainer}>
-                  <AddBoardModal boards={props.boards} setBoards={props.setBoards}/>
+                  <AddBoardModal boards={props.boards} fetchBoards={props.fetchBoards}/>
                   {displayBoards()}
             </div>
             </>

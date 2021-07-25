@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 interface AddBoardFormProps {
       handleClose: any,
       boards: any,
-      setBoards: any,
+      fetchBoards: any,
 }
 
 
@@ -79,7 +79,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         }
                   }).then((res) => {
                         console.log(res.data);
-                        props.setBoards([]);
+                        props.fetchBoards();
                         props.handleClose();
                   }).catch((err) => {
                         console.log(err);

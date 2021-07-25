@@ -11,7 +11,13 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
       const { id } = useParams<{ id: string }>();
       const [boards, setBoards] = useState([]);
 
+
       useEffect(() => {
+            fetchBoards();
+      }, [id]);
+
+
+      function fetchBoards() {
             axios.get(`http://localhost:5000/projects/getBoards/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -21,12 +27,12 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-      }, [id, boards.length]);
+      }
 
         
       return (
       <>
-            <BoardsGallery boards={boards} setBoards={setBoards}/>
+            <BoardsGallery boards={boards} fetchBoards={fetchBoards}/>
       </>
       );
 }
