@@ -36,20 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: 330,
             padding: '0.5em',
       },
-
-      image: {
-            flex: 'none',
-            height: 120,
-            width: 120,
-            filter: 'blur(0.5px)'
-      },
       link: {
             textDecoration: 'none',
             color: theme.palette.secondary.dark,
-      },
-      cardAction: {
-            width: '100%',
-            height: '100%',
       },
   })
 );

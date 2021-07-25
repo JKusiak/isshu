@@ -8,8 +8,8 @@ import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
 import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Logo from '../../resources/isshu_logo.svg';
-import Icon from '../../resources/isshu_icon.svg';
+import Logo from '../../resources/logo/isshu_logo.svg';
+import Icon from '../../resources/logo/isshu_icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
 
 

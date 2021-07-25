@@ -12,23 +12,15 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
       const [boards, setBoards] = useState([]);
 
       useEffect(() => {
-            let isUnmounted = false;
-
             axios.get(`http://localhost:5000/projects/getBoards/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  if(!isUnmounted) {
-                        setBoards(resp.data.boards);
-                  }
+                  setBoards(resp.data.boards);
             }).catch((err) => {
                   console.log(err);
             });
-
-            return () => {
-                  isUnmounted = true;
-            }
       }, [id, boards.length]);
 
         

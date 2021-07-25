@@ -11,6 +11,7 @@ import {
       deleteColumnFromBoard,
 } from '../controllers/boardController.js';
 
+
 export const protectedBoardRouter = express.Router();
 
 protectedBoardRouter.use(authenticateJWT);
@@ -30,5 +31,3 @@ protectedBoardRouter.route('/getContent/:id').get(getAllBoardContent);
 protectedBoardRouter.route('/addColumn/:id').post(addColumnToBoard);
 
 protectedBoardRouter.route('/deleteColumn/:id').delete(deleteColumnFromBoard);
-
-export default protectedBoardRouter;

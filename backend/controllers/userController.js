@@ -1,5 +1,4 @@
 import User from '../models/userModel.js';
-import Project from '../models/projectModel.js';
 import asyncHandler from 'express-async-handler';
 
 

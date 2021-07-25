@@ -15,48 +15,42 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
       const [contributors, setContributors] = useState<[]>([]);
 
       
-      // fetching users that do not belong to currently displayed project
       useEffect(() => {
-            let isUnmounted = false;
+            fetchOtherUsers();
+        }, [id]);
 
+      
+      useEffect(() => {
+            fetchContributors();
+      }, [id]); 
+
+      
+      // fetching users that do not belong to currently displayed project
+      function fetchOtherUsers() {
             axios.get(`http://localhost:5000/users/getUsersWithoutProject/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  if (!isUnmounted) {
-                        setOtherUsers(resp.data);
-                  }
+                  setOtherUsers(resp.data);
             }).catch((err) => {
                   console.log(err);
-            });;
-
-            return () => {
-                  isUnmounted = true;
-            };
-        }, [id, otherUsers.length]);
+            });
+      }
 
 
-       // fetching users that belong to currently displayed project
-        useEffect(() => {
-            let isUnmounted = false;
-
+      // fetching users that belong to currently displayed project
+        function fetchContributors() {
             axios.get(`http://localhost:5000/users/getUsersByProject/${id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  if(!isUnmounted) {
-                        setContributors(resp.data);
-                  }
+                  setContributors(resp.data);
             }).catch((err) => {
                   console.log(err);
             });;
-
-            return () => {
-                  isUnmounted = true;
-            };
-        }, [id, contributors.length]);  
+        }
 
 
         // add currently displayed project to clicked user
@@ -70,8 +64,8 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((resp) => {
-                  setContributors([]);
-                  setOtherUsers([]);
+                  fetchContributors();
+                  fetchOtherUsers();
             }).catch((err) => {
                   console.log(err);
             });;    
@@ -88,8 +82,8 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         projectId: id
                   }
             }).then(() => { 
-                  setContributors([]);
-                  setOtherUsers([]);
+                  fetchContributors();
+                  fetchOtherUsers();
             }).catch((err) => {
                   console.log(err);
             });;    

@@ -16,6 +16,7 @@ import {
 
 
 export const protectedUserRouter = express.Router();
+
 export const userRouter = express.Router();
 
 protectedUserRouter.use(authenticateJWT);

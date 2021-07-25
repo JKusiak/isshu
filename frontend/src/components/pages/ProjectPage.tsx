@@ -27,8 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexGrow: 1,
-                  marginLeft: '2em',
-                  marginRight: '2em',
             },
             menuButton: {
                   [theme.breakpoints.up("sm")]: {
@@ -68,9 +66,8 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
                         >
                               <MenuIcon/>
                         </IconButton>
-                        <div>
-                              <ProjectData/>
-                        </div>
+
+                        <ProjectData/>
                   </div>
             </div>
       );

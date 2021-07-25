@@ -1,5 +1,4 @@
 import Project from '../models/projectModel.js';
-import Board from '../models/boardModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -59,6 +58,7 @@ export const updateProject = asyncHandler(async(req, res) => {
             creator: req.body.creator,
         } 
     };
+    
     const options =  {
         new: true, 
         useFindAndModify: false,

@@ -82,8 +82,6 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       }
 
       
-
-
       function getCreator() {
             const token = localStorage.getItem('token') || '';
             const base64Url = token.split('.')[1];

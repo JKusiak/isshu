@@ -6,35 +6,27 @@ import ProjectInfoBanner from "../ProjectInfoBanner";
 
 interface GetProjectInfoBannerProps {
 }
-// previous => ({
-                              //       ...previous,
-                              //       movies: resp.data || []
-// })
+
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
       const { id } = useParams<{ id: string }>();
       const [project, setProject] = useState({});
 
       useEffect(() => {
-            let isUnmounted = false;
+            fetchProject();
+      }, [id]);
 
+      
+      function fetchProject() {
             axios.get(`http://localhost:5000/projects/${id}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
+            headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
             }).then(resp => {
-                  if(!isUnmounted) {
-                        setProject(resp.data
-                              
-                        );
-                  }
+                  setProject(resp.data);
             }).catch((err) => {
                   console.log(err);
-            });
-
-            return () => {
-                  isUnmounted = true;
-            }
-      }, []);
+            });  
+      }
 
 
       function changeData(newProjectData: any) {
@@ -43,6 +35,7 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
+                  fetchProject();
                   setProject(resp.data);
             }).catch((err) => {
                   console.log(err);

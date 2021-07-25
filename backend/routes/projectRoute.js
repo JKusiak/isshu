@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
 import { 
@@ -11,6 +10,7 @@ import {
       addBoardToProject,
       deleteBoardFromProject,
 } from '../controllers/projectController.js';
+
 
 export const protectedProjectRouter = express.Router();
 
@@ -31,5 +31,3 @@ protectedProjectRouter.route('/getBoards/:id').get(getBoardsOfProject);
 protectedProjectRouter.route('/addBoard/:id').post(addBoardToProject);
 
 protectedProjectRouter.route('/deleteBoard/:id').delete(deleteBoardFromProject);
-
-export default protectedProjectRouter;

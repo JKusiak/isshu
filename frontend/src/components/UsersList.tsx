@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             listItem: {  
                   '&:hover': {
-                        boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)!important',
+                        boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
                         '& *': {
                               fontWeight: 600
                         }
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   '&:hover': {
                         "& $listItem": {
                               boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
-                        }  
+                        }
                   }
             },
             
@@ -84,7 +84,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                 <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                       <ListItemText primary={fullName}/>
                                                 </Link>
-                                                      <ListItemSecondaryAction>
+                                                      <ListItemSecondaryAction className={classes.button}>
                                                             <IconButton 
                                                                   className={classes.button} 
                                                                   edge="end" 
