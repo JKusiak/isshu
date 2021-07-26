@@ -1,9 +1,12 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, Fragment, useState } from "react";
-import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
-import Button from "@material-ui/core/Button";
+import { FC, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useHistory } from "react-router-dom";
+import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
+import Button from "@material-ui/core/Button";
+import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import DeleteBoardModal from "./modals/DeleteBoardModal";
+
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
@@ -26,7 +29,25 @@ const useStyles = makeStyles((theme: Theme) =>
                   margin: "0 0 8px 0",
                   minHeight: "50px",
                   color: "white",
-            }
+            },
+            navigation: {
+                  display: 'grid',
+                  width: '100%',
+                  gridTemplateColumns: '1fr 1fr',
+                  margin: '1em 0 2em 0'
+            },
+            backButton: {
+                  justifySelf: 'start',
+                  marginLeft: '1em'
+            },
+            deleteModal: {
+                  justifySelf: 'end',
+                  marginRight: '1em'
+            },
+            backIcon: {
+                  fontSize: '50px',
+                  color: theme.palette.secondary.main
+            },            
       }
 ));
 
@@ -153,12 +174,19 @@ const BoardData: FC<BoardDataProps> = (props) => {
       }
 
       return (
-            <Fragment>
-                  <Button onClick={getPreviousPath}>
-                        <BackIcon/>
-                  </Button>
+            <>
+                  <div className={classes.navigation}>
+                        <Button className={classes.backButton} onClick={getPreviousPath}>
+                              <BackIcon className={classes.backIcon}/>
+                        </Button>
+                        <div className={classes.deleteModal}>
+                              <DeleteBoardModal />
+                        </div>
+                        
+                  </div>
+                  
                   {displayColumns()}
-            </Fragment>
+            </>
       );
 }
 

@@ -9,11 +9,11 @@ interface GetUserDataProps {
 }
 
 const GetUserData: FC<GetUserDataProps> = (props) => {
-      const { id } = useParams<{ id: string }>();
+      const { userId } = useParams<{ userId: string }>();
       const [credentials, setCredentials] = useState({});
 
       useEffect(() => {
-            axios.get(`http://localhost:5000/users/${id}`, {
+            axios.get(`http://localhost:5000/users/${userId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -23,7 +23,7 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-        }, [id]);
+        }, [userId]);
 
 
       return (

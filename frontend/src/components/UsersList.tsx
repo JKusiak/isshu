@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment} from 'react';
+import { forwardRef, Fragment, useState} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,8 +8,8 @@ import { FC } from 'react';
 import Divider from '@material-ui/core/Divider';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
+import AddIcon from '@material-ui/icons/AddOutlined';
+import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { Link } from 'react-router-dom';
@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
                   textAlign: 'center',
                   marginTop: '0.4em',
                   marginBottom: '0.4em',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  color: theme.palette.secondary.dark,
             },
             drawerPaper: {
                   marginTop: 70,
@@ -70,6 +71,11 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
 
 
       const container = window !== undefined ? () => window().document.body : undefined;
+   
+
+      function handleButtonHover() {
+           
+      }
 
 
       function displayUsers(userType: any) {
@@ -84,16 +90,16 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                 <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                       <ListItemText primary={fullName}/>
                                                 </Link>
-                                                      <ListItemSecondaryAction className={classes.button}>
-                                                            <IconButton 
-                                                                  className={classes.button} 
-                                                                  edge="end" 
-                                                                  aria-label="remove-user" 
-                                                                  onClick={() => props.removeProjectFromUser(user._id)}
-                                                            >
-                                                                  <ClearOutlinedIcon />
-                                                            </IconButton>
-                                                      </ListItemSecondaryAction>                                                
+                                                <ListItemSecondaryAction className={classes.button}>
+                                                      <IconButton 
+                                                            className={classes.button} 
+                                                            edge="end" 
+                                                            aria-label="remove-user" 
+                                                            onClick={() => props.removeProjectFromUser(user._id)}
+                                                      >
+                                                            <DeleteIcon />
+                                                      </IconButton>
+                                                </ListItemSecondaryAction>                       
                                           </ListItem> 
                                           
                                     </Fragment>
@@ -111,8 +117,9 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                             edge="end" 
                                                             aria-label="add-user" 
                                                             onClick={() => props.addProjectToUser(user._id)}
+                                                            onMouseOver={handleButtonHover}
                                                       >
-                                                            <AddOutlinedIcon/>
+                                                            <AddIcon/>
                                                       </IconButton>
                                                 </ListItemSecondaryAction>
                                           </ListItem>

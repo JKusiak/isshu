@@ -8,16 +8,16 @@ interface GetProjectInfoBannerProps {
 }
 
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
-      const { id } = useParams<{ id: string }>();
+      const { projectId } = useParams<{ projectId: string }>();
       const [project, setProject] = useState({});
 
       useEffect(() => {
             fetchProject();
-      }, [id]);
+      }, [projectId]);
 
       
       function fetchProject() {
-            axios.get(`http://localhost:5000/projects/${id}`, {
+            axios.get(`http://localhost:5000/projects/${projectId}`, {
             headers: {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -30,7 +30,7 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 
 
       function changeData(newProjectData: any) {
-            axios.post(`http://localhost:5000/projects/update/${id}`, newProjectData, {
+            axios.post(`http://localhost:5000/projects/update/${projectId}`, newProjectData, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }

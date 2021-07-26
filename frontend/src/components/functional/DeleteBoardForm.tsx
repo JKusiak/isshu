@@ -37,13 +37,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface DeleteProjectFormProps {
+interface DeleteBoardFormProps {
       handleClose: any,
 }
 
 
-const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
+const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       const classes = useStyles();
+      const { boardId } = useParams<{boardId: any}>();
       const { projectId } = useParams<{projectId: any}>();
       let history = useHistory();
 
@@ -51,13 +52,13 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
       function onDelete(e: any) {
             e.preventDefault();
 
-            axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
+            axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
                   props.handleClose();
-                  history.push(`/projects`);
+                  history.push(`/projects/${projectId}`);
             }).catch((err) => {
                   console.log(err);
             });  
@@ -102,4 +103,4 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
   );
 }
 
-export default DeleteProjectForm;
+export default DeleteBoardForm;

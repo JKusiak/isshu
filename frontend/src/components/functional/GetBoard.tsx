@@ -8,11 +8,11 @@ interface GetBoardProps {
 }
 
 const GetBoard: FC<GetBoardProps> = (props) => {
-      const { id } = useParams<{ id: string }>();
+      const { boardId } = useParams<{ boardId: string }>();
       const [board, setBoard] = useState([]);
 
       useEffect(() => {
-            axios.get(`http://localhost:5000/boards/getContent/${id}`, {
+            axios.get(`http://localhost:5000/boards/getContent/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -22,7 +22,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   console.log(err);
             });;
 
-      },[id]);
+      },[boardId]);
 
 
       return (

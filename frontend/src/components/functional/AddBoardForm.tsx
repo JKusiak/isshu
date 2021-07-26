@@ -54,7 +54,7 @@ interface AddBoardFormProps {
 const AddBoardForm: FC<AddBoardFormProps> = (props) => {
       const classes = useStyles();
       const [boardName, setBoardName] = useState('');
-      let { id } = useParams<{id: string}>();
+      let { boardId } = useParams<{boardId: string}>();
 
       const board = {
             boardName: boardName,
@@ -73,7 +73,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         boardId: res.data._id,
                   };
 
-                  axios.post(`http://localhost:5000/projects/addBoard/${id}`, boardToAdd, {
+                  axios.post(`http://localhost:5000/projects/addBoard/${boardId}`, boardToAdd, {
                         headers: {
                               'Authorization': `Bearer ${localStorage.getItem('token')}`
                         }

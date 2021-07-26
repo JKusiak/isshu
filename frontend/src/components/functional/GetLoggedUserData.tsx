@@ -20,7 +20,7 @@ const GetLoggedUserData: FC<GetLoggedUserDataProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-        }, []);
+      }, []);
 
 
       return (

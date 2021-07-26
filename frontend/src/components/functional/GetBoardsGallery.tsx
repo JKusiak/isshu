@@ -8,17 +8,17 @@ interface GetBoardsGalleryProps {
 }
 
 const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
-      const { id } = useParams<{ id: string }>();
+      const { projectId } = useParams<{ projectId: string }>();
       const [boards, setBoards] = useState([]);
 
 
       useEffect(() => {
             fetchBoards();
-      }, [id]);
+      }, [projectId]);
 
 
       function fetchBoards() {
-            axios.get(`http://localhost:5000/projects/getBoards/${id}`, {
+            axios.get(`http://localhost:5000/projects/getBoards/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }

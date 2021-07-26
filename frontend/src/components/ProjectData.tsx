@@ -16,7 +16,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       return (
             <>
             <Switch>
-                  <Route path={`${path}/:id`}>
+                  <Route path={`${path}/:boardId`}>
                         <GetBoard/>
                   </Route>
                   <Route exact path={path}>

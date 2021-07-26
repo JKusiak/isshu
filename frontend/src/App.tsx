@@ -23,7 +23,7 @@ function App() {
       <Router>
         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Switch>
-          <Route path="/projects/:id">
+          <Route path="/projects/:projectId">
               <ProjectPage/>
           </Route>
           <Route path="/projects">
@@ -41,7 +41,7 @@ function App() {
           <Route path="/user/profile">
               <LoggedUserPage/>
           </Route>
-          <Route path="/user/:id">
+          <Route path="/user/:userId">
               <UserPage/>
           </Route>
           <Route path="/">

@@ -10,24 +10,24 @@ interface GetUsersListProps {
 }
 
 const GetUsersList: FC<GetUsersListProps> = (props) => {
-      const {id} = useParams<{id: string}>();
+      const { projectId } = useParams<{projectId: string}>();
       const [otherUsers, setOtherUsers] = useState<[]>([]);
       const [contributors, setContributors] = useState<[]>([]);
 
       
       useEffect(() => {
             fetchOtherUsers();
-        }, [id]);
+        }, [projectId]);
 
       
       useEffect(() => {
             fetchContributors();
-      }, [id]); 
+      }, [projectId]); 
 
       
       // fetching users that do not belong to currently displayed project
       function fetchOtherUsers() {
-            axios.get(`http://localhost:5000/users/getUsersWithoutProject/${id}`, {
+            axios.get(`http://localhost:5000/users/getUsersWithoutProject/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -41,7 +41,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
 
       // fetching users that belong to currently displayed project
         function fetchContributors() {
-            axios.get(`http://localhost:5000/users/getUsersByProject/${id}`, {
+            axios.get(`http://localhost:5000/users/getUsersByProject/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -55,11 +55,11 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
 
         // add currently displayed project to clicked user
         function addProjectToUser(userId: string) {
-            const projectId = {
-                  projectId: id
+            const projectIdData = {
+                  projectId: projectId
             }
 
-            axios.post(`http://localhost:5000/users/addProject/${userId}`, projectId, {
+            axios.post(`http://localhost:5000/users/addProject/${userId}`, projectIdData, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -79,7 +79,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   },
                   data: {
-                        projectId: id
+                        projectId: projectId
                   }
             }).then(() => { 
                   fetchContributors();
