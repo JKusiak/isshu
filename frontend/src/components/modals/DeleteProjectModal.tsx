@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       deleteIcon: {
             fontSize: 25,
-            color: theme.palette.primary.dark,
+            color: 'white',
             "&:hover": {
                   cursor: 'pointer',
             }

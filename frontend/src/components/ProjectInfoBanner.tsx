@@ -2,10 +2,11 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { FC, useState } from "react";
 import { Box, ClickAwayListener, TextField } from "@material-ui/core";
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import Banner from '../resources/banners/banner.jpg';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
-
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,21 +26,21 @@ const useStyles = makeStyles((theme: Theme) =>
                         zIndex: -1,
                         background: `url(${Banner})`,
                         backgroundSize: 'cover',
-                        filter: 'blur(3.5px)',
+                        filter: 'blur(3px) brightness(75%)',
                   },
             },
             gridWrapper: {
                   display: 'grid',
                   width: '100%',
                   height: '100%',
-                  gridAutoColumns: '1fr',
                   gridTemplateColumns: '1fr 0.5fr 2fr 0.5fr 1fr',
-                  gridTemplateRows: '1fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr',
+                  gridTemplateRows: '1fr 0.5fr 1.5fr 0.5fr 0.5fr 0.5fr 0.5fr',
                   gridTemplateAreas:`
-                        ". . projectName . settings"
+                        ". . . . settings"
+                        ". . projectName . ."
                         ". description description description ."
-                        ". . . . creator"
-                        ". . . . dateStart"
+                        ". description description description creator"
+                        ". description description description dateStart"
                         ". . . . dateEnd"
                         ". . . . ."`
             },
@@ -79,25 +80,34 @@ const useStyles = makeStyles((theme: Theme) =>
             editIcon: {
                   fontSize: 25,
                   marginRight: '0.5em',
-                  color: theme.palette.primary.dark,
+                  color: 'white',
                   "&:hover": {
                         cursor: 'pointer',
                   }
             },
             fontColor: {
                   "& .MuiInputBase-root.Mui-disabled": {
-                        color: theme.palette.secondary.dark,
+                        color: 'white',
                   },
                   "& .MuiInputBase-root": {
-                        color: 'rgba(0, 0, 0, 0.4)',
+                        color: 'rgba(0, 0, 0, 0.6)',
                   },  
             },
             nameStyle: {
-                  fontSize: 50,
+                  fontSize: '3vw',
                   fontWeight: 600,
             },
             descriptionStyle: {
-                  fontSize: 25
+                  fontSize: '1.5vw',
+                  fontWeight: 500,
+            },
+            creatorStyle: {
+                  fontSize: '0.9vw',
+                  fontWeight: 600,
+            },
+            dateStyle: {
+                  fontSize: '0.9vw',
+                  fontWeight: 500,
             }
       }
 ));
@@ -114,13 +124,12 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       const [projectName, setProjectName] = useState('');
       const [projectDescription, setProjectDescription] = useState('');
       const [creator, setCreator] = useState({_id:'', name: '', surname: ''});
-      const [dateStart, setDateStart] = useState('');
-      const [dateEnd, setDateEnd] = useState('');
+      const [dateStart, setDateStart] = useState<Date | null>(new Date());
+      const [dateEnd, setDateEnd] = useState<Date | null>(new Date());
       const [isEditing, setIsEditing] = useState(false);
 
 
       useEffect(() => {
-            console.log(props.project.creator);
             setProjectName(props.project.name);
             setProjectDescription(props.project.description);
             setCreator(props.project.creator);
@@ -158,6 +167,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                           disabled={true}
                                           InputProps={{
                                                 disableUnderline: true,
+                                                classes: {
+                                                      input: classes.creatorStyle,
+                                                },
                                           }}
                                           inputProps={{min: 0, style: { textAlign: 'center' }}}
                                           value={`Creator: ${creator.name} ${creator.surname}`  || ''}
@@ -165,7 +177,6 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                         </form>
                   )
             }
-            <>123</>
       }
 
       
@@ -237,30 +248,43 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                         </form>
 
                         {displayCreator()}
-                        
 
                         <form className={classes.dateStart}>
-                              <TextField
-                                    className={classes.fontColor}
-                                    id="date-start"
-                                    type="date"
-                                    disabled={!isEditing}
-                                    inputProps={{min: 0, style: { textAlign: 'center' }}}
-                                    
-                                    onChange={e => {setDateStart(e.target.value)}}
-                              />
+                              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                          className={classes.fontColor}
+                                          id="date-start"
+                                          disabled={!isEditing}
+                                          InputProps={{
+                                                disableUnderline: true,
+                                                classes: {
+                                                      input: classes.dateStyle,
+                                                },
+                                          }}
+                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          value={dateStart}
+                                          onChange={newDate => setDateStart(newDate)}
+                                    />
+                              </MuiPickersUtilsProvider>
                         </form>
 
                         <form className={classes.dateEnd}>
-                              <TextField
-                                    className={classes.fontColor}
-                                    id="date-end"
-                                    type="date"
-                                    disabled={!isEditing}
-                                    inputProps={{min: 0, style: { textAlign: 'center' }}}
-                                    value={dateEnd || ''}
-                                    onChange={e => {setDateEnd(e.target.value)}}
-                              />
+                              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                          className={classes.fontColor}
+                                          id="date-start"
+                                          disabled={!isEditing}
+                                          InputProps={{
+                                                disableUnderline: true,
+                                                classes: {
+                                                      input: classes.dateStyle,
+                                                },
+                                          }}
+                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          value={dateEnd}
+                                          onChange={newDate => setDateStart(newDate)}
+                                    />
+                              </MuiPickersUtilsProvider>
                         </form>
                   </div>
             </Box>

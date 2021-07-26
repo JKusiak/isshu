@@ -36,7 +36,6 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
                   }
             }).then(resp => {
                   fetchProject();
-                  setProject(resp.data);
             }).catch((err) => {
                   console.log(err);
             });
