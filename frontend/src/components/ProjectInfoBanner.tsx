@@ -91,7 +91,10 @@ const useStyles = makeStyles((theme: Theme) =>
                   },
                   "& .MuiInputBase-root": {
                         color: 'rgba(0, 0, 0, 0.6)',
-                  },  
+                  },
+                  "& .MuiButtonBase-root.MuiIconButton-root.Mui-disabled": {
+                        color: 'white',
+                  },
             },
             nameStyle: {
                   fontSize: '3vw',
@@ -133,13 +136,13 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             setProjectName(props.project.name);
             setProjectDescription(props.project.description);
             setCreator(props.project.creator);
-            setDateStart(props.project.startDate);
-            setDateEnd(props.project.endDate);
+            setDateStart(props.project.dateStart);
+            setDateEnd(props.project.dateEnd);
       }, [props.project.name, 
             props.project.description,
             props.project.creator,
-            props.project.startDate,
-            props.project.endDate]);
+            props.project.dateStart,
+            props.project.dateEnd]);
 
 
       function onSubmit(e: any) {
@@ -253,6 +256,8 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
                                           className={classes.fontColor}
+                                          format='dd MMMM yyyy'
+                                          variant="inline"
                                           id="date-start"
                                           disabled={!isEditing}
                                           InputProps={{
@@ -272,7 +277,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
                                           className={classes.fontColor}
-                                          id="date-start"
+                                          format='dd MMMM yyyy'
+                                          variant="inline"
+                                          id="date-end"
                                           disabled={!isEditing}
                                           InputProps={{
                                                 disableUnderline: true,
@@ -281,8 +288,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                                 },
                                           }}
                                           inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          minDate={dateStart}
                                           value={dateEnd}
-                                          onChange={newDate => setDateStart(newDate)}
+                                          onChange={newDate => setDateEnd(newDate)}
                                     />
                               </MuiPickersUtilsProvider>
                         </form>

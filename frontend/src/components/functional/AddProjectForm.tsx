@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -57,14 +59,14 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       let history = useHistory();
       const [projectName, setProjectName] = useState('');
       const [description, setDescription] = useState('');
-      const [startDate, setStartDate] = useState('');
-      const [endDate, setEndDate] = useState('');
+      const [startDate, setStartDate] = useState<Date | null>(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
+      const [endDate, setEndDate] = useState<Date | null>(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
       const [isValid, setIsValid] = useState(true);
       const [errorText, setErrorText] = useState('');
 
 
       useEffect(() => {
-            if (endDate >= startDate) {
+            if(endDate! >= startDate!) {
                   setIsValid(true);
             } else {
                   setErrorText("End date can not be before start date");
@@ -166,36 +168,36 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              className={classes.inputField}
-              required
-              fullWidth
-              variant="outlined"
-              name="startDate"
-              id="startDate"
-              placeholder="Start Date"
-              autoComplete="startDate"
-              type="date"
-              helperText="Beginning date of the project"
-              onChange={e => {
-                setStartDate(e.target.value);
-              }}
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                        className={classes.inputField}
+                        required
+                        fullWidth
+                        format='dd/MM/yyyy'
+                        variant="inline"
+                        name="startDate"
+                        id="startDate"
+                        helperText="Beginning date of the project"
+                        value={startDate}
+                        onChange={newDate => setStartDate(newDate)}
+                  />
+            </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={6}>
-            <TextField
-              className={classes.inputField}
-              fullWidth
-              variant="outlined"
-              name="endDate"
-              id="endDate"
-              autoComplete="endDate"
-              type="date"
-              helperText="Ending date of the project (not required)"
-              onChange={e => {
-                  setEndDate(e.target.value);
-              }}
-            />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                        className={classes.inputField}
+                        required
+                        fullWidth
+                        format='dd/MM/yyyy'
+                        variant="inline"
+                        name="endDate"
+                        id="endDate"
+                        helperText="Ending date of the project"
+                        value={endDate}
+                        onChange={newDate => setEndDate(newDate)}
+                  />
+            </MuiPickersUtilsProvider>
           </Grid>
         </Grid>
         {!isValid && <div className={classes.wrongInput}><p>{errorText}</p></div>}
