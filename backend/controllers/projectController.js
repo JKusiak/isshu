@@ -10,7 +10,9 @@ export const getAllProjects = asyncHandler(async(req, res) => {
 
 
 export const getProjectById = asyncHandler(async(req, res) => {
-    const project = await Project.findById(req.params.id);
+    const project = await Project.findOne({_id: req.params.id})
+        .populate('creator');
+
     
     if(project) {
         res.json(project);
