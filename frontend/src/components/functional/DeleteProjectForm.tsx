@@ -1,7 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';

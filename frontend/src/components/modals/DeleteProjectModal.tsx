@@ -1,5 +1,4 @@
-import React, { FC, useState } from 'react';
-import AddProjectForm from '../functional/AddProjectForm';
+import { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';

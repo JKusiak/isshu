@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   gridArea: 'creator',
                   justifySelf: 'end',
                   alignSelf: 'center',
+                  marginRight: '1em',
             },
             dateStart: {
                   gridArea: 'dateStart',
@@ -174,7 +175,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                                       input: classes.creatorStyle,
                                                 },
                                           }}
-                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          inputProps={{min: 0, style: { textAlign: 'end' }}}
                                           value={`Creator: ${creator.name} ${creator.surname}`  || ''}
                                     />
                         </form>
@@ -196,7 +197,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
 
       function handleClickAway(e:any) {
-            if(isEditing == true) {
+            if(isEditing === true) {
                   setIsEditing(false);
                   onSubmit(e);
             }
@@ -266,7 +267,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                                       input: classes.dateStyle,
                                                 },
                                           }}
-                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          inputProps={{min: 0, style: { textAlign: 'end' }}}
                                           value={dateStart}
                                           onChange={newDate => setDateStart(newDate)}
                                     />
@@ -287,7 +288,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                                       input: classes.dateStyle,
                                                 },
                                           }}
-                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          inputProps={{min: 0, style: { textAlign: 'end' }}}
                                           minDate={dateStart}
                                           value={dateEnd}
                                           onChange={newDate => setDateEnd(newDate)}
