@@ -14,43 +14,28 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       form: {
+            display: 'flex',
             width: '100%',
             marginTop: theme.spacing(5),
       },
       delete: {
-            margin: theme.spacing(3, 0, 3),
+            margin: theme.spacing(3, 2, 3),
             borderRadius: '10px',
             fontWeight: 600,
-            background: 'red',
+            background: theme.palette.primary.main,
             "&:hover": {
                   background: theme.palette.primary.dark
             }
       },
       goBack: {
-            margin: theme.spacing(3, 0, 3),
+            margin: theme.spacing(3, 2, 3),
             borderRadius: '10px',
             fontWeight: 600,
-            background: 'green',
+            background: theme.palette.secondary.light,
             "&:hover": {
                   background: theme.palette.primary.dark
             }
       },
-      inputField: {
-      "& .MuiOutlinedInput-root": {
-            "& fieldset": { 
-            padding: '0.5em 4em',
-            borderRadius: '10px',
-            }, 
-            "&.Mui-focused fieldset": {
-            borderColor: theme.palette.secondary.main,
-            borderWidth: "2px",
-            }
-      },
-      },
-      wrongInput: {
-            color: "#C62828",   
-            textAlign: "center",
-      }
 }));
 
 
@@ -63,14 +48,6 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       const classes = useStyles();
       const {id} = useParams<{id: any}>();
       let history = useHistory();
-
-
-      function getCreator() {
-            const token = localStorage.getItem('token') || '';
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(atob(base64));
-      }
 
 
       function onDelete(e: any) {
@@ -98,7 +75,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
   return (
     <>
       <Typography className={classes.header} component="h1" variant="h4">
-        Do you want to delete project?
+        Delete project?
       </Typography>
       <div className={classes.form}>
         <Button

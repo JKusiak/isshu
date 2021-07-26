@@ -1,8 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { FC, useState } from "react";
-import { Box, ClickAwayListener, Grid, TextField } from "@material-ui/core";
-//added temporary for development purposes
+import { Box, ClickAwayListener, TextField } from "@material-ui/core";
 import EditIcon from '@material-ui/icons/EditOutlined';
 import Banner from '../resources/banners/banner.jpg';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
@@ -62,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             creator: {
                   gridArea: 'creator',
-                  justifySelf: 'center',
+                  justifySelf: 'end',
                   alignSelf: 'center',
             },
             dateStart: {
@@ -86,8 +85,20 @@ const useStyles = makeStyles((theme: Theme) =>
                   }
             },
             fontColor: {
-                  color: theme.palette.secondary.dark,
+                  "& .MuiInputBase-root.Mui-disabled": {
+                        color: theme.palette.secondary.dark,
+                  },
+                  "& .MuiInputBase-root": {
+                        color: 'rgba(0, 0, 0, 0.4)',
+                  },  
             },
+            nameStyle: {
+                  fontSize: 50,
+                  fontWeight: 600,
+            },
+            descriptionStyle: {
+                  fontSize: 25
+            }
       }
 ));
 
@@ -102,22 +113,22 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       const classes = useStyles();
       const [projectName, setProjectName] = useState('');
       const [projectDescription, setProjectDescription] = useState('');
+      const [creator, setCreator] = useState({_id:'', name: '', surname: ''});
       const [dateStart, setDateStart] = useState('');
       const [dateEnd, setDateEnd] = useState('');
-      const [creator, setCreator] = useState('');
       const [isEditing, setIsEditing] = useState(false);
 
 
       useEffect(() => {
-            // let projectCreator = `Creator: ${props.project.creator.name || ''} ${props.project.creator.surname || ''}`;
-            
+            console.log(props.project.creator);
             setProjectName(props.project.name);
             setProjectDescription(props.project.description);
-            // setCreator(projectCreator);
+            setCreator(props.project.creator);
             setDateStart(props.project.startDate);
             setDateEnd(props.project.endDate);
       }, [props.project.name, 
-            props.project.description, 
+            props.project.description,
+            props.project.creator,
             props.project.startDate,
             props.project.endDate]);
 
@@ -127,12 +138,34 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             let updatedProject = {
                   name: projectName,
                   description: projectDescription,
+                  creator: creator._id,
                   dateStart: dateStart,
                   dateEnd: dateEnd,
             }
 
             setIsEditing(false);
             props.changeData(updatedProject);
+      }
+
+
+      function displayCreator() {
+            if(creator !== undefined && creator !== null) {
+                  return(
+                        <form className={classes.creator}>
+                                    <TextField
+                                          className={classes.fontColor}
+                                          id="project-creator" 
+                                          disabled={true}
+                                          InputProps={{
+                                                disableUnderline: true,
+                                          }}
+                                          inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                          value={`Creator: ${creator.name} ${creator.surname}`  || ''}
+                                    />
+                        </form>
+                  )
+            }
+            <>123</>
       }
 
       
@@ -149,8 +182,10 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
 
       function handleClickAway(e:any) {
-            setIsEditing(false);
-            onSubmit(e);
+            if(isEditing == true) {
+                  setIsEditing(false);
+                  onSubmit(e);
+            }
       }
 
 
@@ -160,12 +195,15 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             <Box className={classes.projectInfoBanner}>
                   <div className={classes.gridWrapper}>
                         <form className={classes.nameForm} noValidate autoComplete="off" onSubmit={onSubmit}>
-                              <TextField 
+                              <TextField
+                                    className={classes.fontColor}
                                     id="project-name" 
                                     disabled={!isEditing}
                                     InputProps={{
                                           disableUnderline: true,
-                                          className: classes.fontColor,
+                                          classes: {
+                                                input: classes.nameStyle,
+                                          },
                                     }}
                                     inputProps={{min: 0, style: { textAlign: 'center' }}}
                                     value={projectName || ''}
@@ -180,6 +218,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
                         <form className={classes.description} noValidate autoComplete="off" onSubmit={onSubmit}>
                               <TextField
+                                    className={classes.fontColor}
                                     id="project-description"
                                     multiline
                                     onKeyDown={handleEnterMultiline}
@@ -187,6 +226,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                     fullWidth={true}
                                     InputProps={{
                                           disableUnderline: true,
+                                          classes: {
+                                                input: classes.descriptionStyle,
+                                          },
                                     }}
                                     inputProps={{min: 0, style: { textAlign: 'center' }}}
                                     value={projectDescription || ''}
@@ -194,20 +236,12 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                               />
                         </form>
 
-                        <div className={classes.creator}>
-                              <TextField 
-                                    id="project-creator" 
-                                    disabled={true}
-                                    InputProps={{
-                                          disableUnderline: true,
-                                    }}
-                                    inputProps={{min: 0, style: { textAlign: 'center' }}}
-                                    value={creator || ''}
-                              />
-                        </div>
+                        {displayCreator()}
+                        
 
                         <form className={classes.dateStart}>
                               <TextField
+                                    className={classes.fontColor}
                                     id="date-start"
                                     type="date"
                                     disabled={!isEditing}
@@ -219,6 +253,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
                         <form className={classes.dateEnd}>
                               <TextField
+                                    className={classes.fontColor}
                                     id="date-end"
                                     type="date"
                                     disabled={!isEditing}
