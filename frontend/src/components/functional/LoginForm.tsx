@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         borderRadius: '10px',
       }, 
       "&.Mui-focused fieldset": {
-        borderColor: theme.palette.secondary.main,
+        borderColor: theme.palette.secondary.light,
         borderWidth: "2px",
       }
     },

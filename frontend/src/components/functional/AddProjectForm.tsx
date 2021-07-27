@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       inputField: {
       "& .MuiOutlinedInput-root": {
             "& fieldset": { 
-            padding: '0.5em 4em',
-            borderRadius: '10px',
+                  padding: '0.5em 4em',
+                  borderRadius: '10px',
             }, 
             "&.Mui-focused fieldset": {
-            borderColor: theme.palette.secondary.main,
-            borderWidth: "2px",
+                  borderColor: theme.palette.secondary.light,
+                  borderWidth: "2px",
             }
       },
       },

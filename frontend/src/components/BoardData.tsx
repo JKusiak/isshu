@@ -4,7 +4,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useHistory } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
-import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 
 
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
             root: {
                   display: "flex", justifyContent: "center", height: "100%" 
             },
-            boardWrapper: {
+            columnTitleWrapper: {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center"
@@ -116,7 +115,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
                                     {props.board.map((column: any, index: any) => {
                                           return(
-                                                <div className={classes.boardWrapper} key={column._id}>
+                                                <div className={classes.columnTitleWrapper} key={column._id}>
                                                       <h2>{column.name}</h2>
                                                       <div style={{ margin: 8 }}>
                                                             <Droppable

@@ -1,11 +1,10 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import AddBoardForm from '../functional/AddBoardForm';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import Typography from '@material-ui/core/Typography';
 
@@ -25,19 +24,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       icon: {
-            width: 26,
-            height: 26,
+            fontSize: '35px',
+            color: theme.palette.secondary.main,
       },
-      homePageButton: {
-            "&:hover": {
-                  stroke: 'black',
-                  strokeWidth: 0.2,
-            }
-      },
-      root: {
+      boardCard: {
             display: 'flex',
-            height: 120,
-            justifyContent: 'space-between',
+            minHeight: '300px',
+            justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
             boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4)',
@@ -46,15 +39,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                   cursor: 'pointer',
             },
       },
-      details: {
-            display: 'flex',
-            flexDirection: 'column',
-            maxWidth: 330,
-            padding: '0.5em',
-      },
       link: {
             textDecoration: 'none',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
       },
 }));
 
@@ -79,14 +66,10 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
   return (
       <>
       <div onClick={handleOpenModal}>
-            <Card className={classes.root}>
-                        <div className={classes.details}>
-                        <CardContent className={classes.link} >
-                              <Typography component="h5" variant="h5">
-                                    <AddOutlinedIcon/>
-                              </Typography>
-                        </CardContent>
-                  </div>
+            <Card className={classes.boardCard}>
+                  <Typography component="h5" variant="h5">
+                        <AddOutlinedIcon className={classes.icon}/>
+                  </Typography>
             </Card>
       </div>
 

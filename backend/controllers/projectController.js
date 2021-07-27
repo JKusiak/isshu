@@ -121,7 +121,7 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
 
 
     // no await here, otherwise callback on update + await make execute twice
-    Project.findByIdAndUpdate(projectId, update, options, function(err, data){
+    Project.findByIdAndUpdate(projectId, update, options, function(err, data) {
         if(err) {
             res.status(400).json({message: "Update unsuccessful"});
             throw new Error('Update unsuccessful');

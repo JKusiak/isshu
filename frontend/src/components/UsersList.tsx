@@ -1,4 +1,4 @@
-import { forwardRef, Fragment, useState} from 'react';
+import { forwardRef, Fragment} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   }
             },
             nameLink: {
-                  color: theme.palette.secondary.dark,
+                  color: theme.palette.secondary.main,
                   textDecoration: 'none',
             },           
             button: {

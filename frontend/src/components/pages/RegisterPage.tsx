@@ -12,28 +12,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(5),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 3),
-    "&:hover": {
-      background: theme.palette.primary.dark
-    }
-  },
-  inputField: {
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": { 
-        padding: '0.5em 4em',
-        borderRadius: '10px',
-      }, 
-      "&.Mui-focused fieldset": {
-        borderColor: "#000000",
-        borderWidth: "2px",
-      }
-    },
-  }
 }));
 
 

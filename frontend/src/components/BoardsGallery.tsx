@@ -9,10 +9,18 @@ import AddBoardModal from "./modals/AddBoardModal";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-      root: {
+      gridContainer: {
+            display: 'grid',
+            width: '75%',
+            justifyContent: 'center',
+            gap: '2em',
+            gridTemplateColumns: 'repeat(auto-fill, minMax(450px, 1fr))',
+            margin: '3em 5em 3em 5em'
+      },
+      boardCard: {
             display: 'flex',
-            height: 120,
-            justifyContent: 'space-between',
+            minHeight: '300px',
+            justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
             boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4)',
@@ -21,28 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
                   cursor: 'pointer',
             },
       },
-      gridContainer: {
-            display: 'grid',
-            justifyContent: 'center',
-            gap: '1.2em',
-            gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 1fr))',
-            marginRight: '5em',
-            marginLeft: '5em',
-            marginBottom: '3em',
-      },
-      details: {
-            display: 'flex',
-            flexDirection: 'column',
-            maxWidth: 330,
-            padding: '0.5em',
-      },
       link: {
             textDecoration: 'none',
             color: theme.palette.secondary.dark,
       },
   })
 );
-
 
 
 interface BoardsGalleryProps {
@@ -62,14 +54,12 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
                         return(
                               <Fragment key={board._id}>
                                     <Link className={classes.link} to={`${url}/${board._id}`}>
-                                          <Card className={classes.root}>
-                                                      <div className={classes.details}>
-                                                            <CardContent className={classes.link} >
-                                                                  <Typography component="h5" variant="h5">
-                                                                        {board.name}
-                                                                  </Typography>
-                                                            </CardContent>
-                                                      </div>
+                                          <Card className={classes.boardCard}>
+                                                <CardContent className={classes.link} >
+                                                      <Typography component="h5" variant="h5">
+                                                            {board.name}
+                                                      </Typography>
+                                                </CardContent>
                                           </Card>
                                     </Link> 
                               </Fragment> 

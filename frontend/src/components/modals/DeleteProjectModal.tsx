@@ -21,16 +21,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             alignItems: 'center',
             justifyContent: 'center',
       },
-      deleteIcon: {
-            fontSize: 25,
-            color: 'white',
-            "&:hover": {
-                  cursor: 'pointer',
-            }
-      },
 }));
 
 interface DeleteProjectModalProps {
+      handleSettingsClose: any,
 }
 
 
@@ -41,6 +35,7 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
 
       const handleOpen = () => {
             setOpen(true);
+            props.handleSettingsClose();
       };
 
 
@@ -51,7 +46,7 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
 
       return (
             <>
-            <DeleteIcon className={classes.deleteIcon} onClick={handleOpen}/>
+            <div onClick={handleOpen}>Delete project</div>
             
             <Modal
                   aria-labelledby="transition-modal-title"

@@ -1,10 +1,10 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { FC, useState } from "react";
-import { Box, ClickAwayListener, TextField } from "@material-ui/core";
+import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField } from "@material-ui/core";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import EditIcon from '@material-ui/icons/EditOutlined';
+import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import Banner from '../resources/banners/banner.jpg';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
 
@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   overflow: 'hidden',
                   width: '100%',
                   height: '30vh',
-                  marginBottom: '5em',
                   '&::before': {
                         content: '""',    // why for the love of god...
                         display: 'block',
@@ -46,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             nameForm: {
                   gridArea: 'projectName',
-                  justifySelf: 'center',
-                  alignSelf: 'center',
+                  justifySelf: 'stretch',
+                  alignSelf: 'stretch',
             },
             settings: {
                   gridArea: 'settings',
@@ -57,8 +56,9 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             description: {
                   gridArea: 'description',
-                  justifySelf: 'center',
+                  justifySelf: 'stretch',
                   alignSelf: 'center',
+                  margin: '0 3em 0 3em'
             },
             creator: {
                   gridArea: 'creator',
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   alignSelf: 'center',
                   marginRight: '1em',
             },
-            editIcon: {
+            settingsIcon: {
                   fontSize: 25,
                   marginRight: '0.5em',
                   color: 'white',
@@ -91,18 +91,18 @@ const useStyles = makeStyles((theme: Theme) =>
                         color: 'white',
                   },
                   "& .MuiInputBase-root": {
-                        color: 'rgba(0, 0, 0, 0.6)',
+                        color: 'rgba(255, 255, 255, 0.6)',
                   },
                   "& .MuiButtonBase-root.MuiIconButton-root.Mui-disabled": {
                         color: 'white',
                   },
             },
             nameStyle: {
-                  fontSize: '3vw',
+                  fontSize: '48px',
                   fontWeight: 600,
             },
             descriptionStyle: {
-                  fontSize: '1.5vw',
+                  fontSize: '24px',
                   fontWeight: 500,
             },
             creatorStyle: {
@@ -125,6 +125,8 @@ interface ProjectDataProps {
 
 const ProjectData: FC<ProjectDataProps> = (props) => {
       const classes = useStyles();
+      const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+      const open = Boolean(anchorEl);
       const [projectName, setProjectName] = useState('');
       const [projectDescription, setProjectDescription] = useState('');
       const [creator, setCreator] = useState({_id:'', name: '', surname: ''});
@@ -183,9 +185,20 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             }
       }
 
+
+      function handleSettingsOpen(event: React.MouseEvent<HTMLElement>) {
+            setAnchorEl(event.currentTarget);
+      };
+
+
+      function handleSettingsClose() {
+            setAnchorEl(null);
+      };
+
       
       function handleEdit() {
             setIsEditing(!isEditing);
+            handleSettingsClose();
       }
 
 
@@ -227,8 +240,30 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                         </form>
 
                         <div className={classes.settings}>
-                              <EditIcon className={classes.editIcon} onClick={handleEdit}/>
-                              <DeleteProjectModal />
+
+                              <IconButton  onClick={handleSettingsOpen}>
+                                    <SettingsIcon className={classes.settingsIcon}/>
+                              </IconButton>
+                              
+                              <Menu
+                                    id="settings-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                          vertical: 'bottom',
+                                          horizontal: 'center',
+                                    }}
+                                    getContentAnchorEl={null}
+                                    keepMounted
+                                    transformOrigin={{
+                                          vertical: 'top',
+                                          horizontal: 'center',
+                                    }}
+                                    open={open}
+                                    onClose={handleSettingsClose}
+                              >
+                                    <MenuItem onClick={handleEdit}>Edit project</MenuItem>
+                                    <MenuItem ><DeleteProjectModal handleSettingsClose={handleSettingsClose}/></MenuItem>
+                              </Menu>
                         </div>
 
                         <form className={classes.description} noValidate autoComplete="off" onSubmit={onSubmit}>
