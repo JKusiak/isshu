@@ -66,17 +66,13 @@ export const updateProject = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    Project.findByIdAndUpdate(id, update, options, function(err, data) {
-        if(err) {
-            res.status(400).json({message: "Update unsuccessful"});
-            throw new Error('Update unsuccessful');
-        } else if(!data) {
-            res.status(404).json({message: "Project not found"});
-            throw new Error('Project not found');
-        } else {
-            res.json("Project updated successfuly");
-        }
-    });
+    try {
+        await Project.findByIdAndUpdate(id, update, options)
+    }
+    catch(err) {
+        res.status(400).json({message: "Update unsuccessful"});
+        throw new Error('Update unsuccessful');
+    }
 });
 
 

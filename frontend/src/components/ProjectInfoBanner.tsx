@@ -96,6 +96,9 @@ const useStyles = makeStyles((theme: Theme) =>
                   "& .MuiButtonBase-root.MuiIconButton-root.Mui-disabled": {
                         color: 'white',
                   },
+                  "& .MuiButtonBase-root.MuiIconButton-root": {
+                        color: 'rgba(255, 255, 255, 0.6)',
+                  },
             },
             nameStyle: {
                   fontSize: '48px',
