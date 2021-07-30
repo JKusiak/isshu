@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { FC, useState } from "react";
 import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField } from "@material-ui/core";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+
 import DateFnsUtils from '@date-io/date-fns';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
-import Banner from '../resources/banners/banner.jpg';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
 
 
