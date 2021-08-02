@@ -49,8 +49,8 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
 
       return (
             <>
-            <Button>
-                  <DeleteIcon className={classes.deleteIcon} onClick={handleOpen}/>
+            <Button onClick={handleOpen}>
+                  <DeleteIcon className={classes.deleteIcon} />
             </Button>
             
             

@@ -69,7 +69,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         props.setAddMode(false);
                         props.fetchBoards();
                         window.scroll({
-                              top: document.body.scrollHeight + 100, 
+                              top: document.body.scrollHeight, 
                               left: 0, 
                               behavior: 'smooth' 
                         });

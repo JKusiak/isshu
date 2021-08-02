@@ -43,6 +43,29 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       function onDelete(e: any) {
             e.preventDefault();
 
+            // axios.delete(`http://localhost:5000/projects/deleteBoard/${projectId}`, {
+            //       headers: {
+            //             'Authorization': `Bearer ${localStorage.getItem('token')}`
+            //       },
+            //       data: {
+            //             boardId: boardId,
+            //       }
+            // }).then((res) => {
+            //       axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
+            //             headers: {
+            //                   'Authorization': `Bearer ${localStorage.getItem('token')}`
+            //             }
+            //       }).then((res) => {
+            //             props.handleClose();
+            //             history.push(`/projects/${projectId}`);
+            //       }).catch((err) => {
+            //             console.log(err);
+            //       });  
+            // }).catch((err) => {
+            //       console.log(err);
+            // })
+
+
             axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -50,9 +73,21 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
             }).then((res) => {
                   props.handleClose();
                   history.push(`/projects/${projectId}`);
+
+                  axios.delete(`http://localhost:5000/projects/deleteBoard/${projectId}`, {
+                        headers: {
+                              'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
+                        data: {
+                              boardId: boardId,
+                        }
+                  }).then((res) => {
+                  }).catch((err) => {
+                        console.log(err);
+                  })
             }).catch((err) => {
                   console.log(err);
-            });  
+            });          
       }
 
       function onGoBack(e: any) {
