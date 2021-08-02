@@ -3,18 +3,21 @@ import asyncHandler from 'express-async-handler';
 
 
 export const getAllBoards = asyncHandler(async(req, res) => {
-      const boards = await Board.find({});
-      
-      res.json(boards);
+      try {
+            const boards = await Board.find({});
+            res.json(boards);
+      } catch(err) {
+            res.status(500).json({message: "Server error on fetching boards"});
+            throw new Error('Server error on fetching boards');
+      }
   });
   
   
 export const getBoardById = asyncHandler(async(req, res) => {
-      const board = await Board.findById(req.params.id);
-      
-      if(board) {
+      try {
+            const board = await Board.findById(req.params.id);
             res.json(board);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Board not found"});
             throw new Error('Board not found');
       }
@@ -23,16 +26,15 @@ export const getBoardById = asyncHandler(async(req, res) => {
 
 export const addBoard = asyncHandler(async(req, res) => {
       const name = req.body.boardName;
-      
+
       const newBoard = new Board ({
             name,
       });
 
-      const savedBoard = await newBoard.save();
-
-      if(savedBoard) {
+      try {
+            const savedBoard = await newBoard.save();
             res.json(savedBoard);
-      } else {
+      } catch(err) {
             res.status(400).json({message: "Can not save the board"});
             throw new Error('Can not save the board');
       }
@@ -52,26 +54,19 @@ export const updateBoard = asyncHandler(async(req, res) => {
             useFindAndModify: false,
       };
 
-      Board.findByIdAndUpdate(id, update, options, function(err, data) {
-            if(err) {
-                  res.status(400).json({message: "Update unsuccessful"});
-                  throw new Error('Update unsuccessful');
-            } else if(!data) {
-                  res.status(404).json({message: "Board not found"});
-                  throw new Error('Board not found');
-            } else {
-                  res.json("Board updated successfuly");
-            }
-      });
+      try {
+            await Board.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Update of board unsuccessful"});
+            throw new Error('Update of board unsuccessful');
+      }
 });
 
 
 export const deleteBoard = asyncHandler(async(req, res) => {
-      const board = await Board.findByIdAndDelete(req.params.id);
-
-      if(board) {
-            res.json("Board deleted successfuly");
-      } else {
+      try {
+            const board = await Board.findByIdAndDelete(req.params.id);
+      } catch(err) {
             res.status(404).json({message: "Board not found"});
             throw new Error('Board not found');
       }
@@ -79,25 +74,21 @@ export const deleteBoard = asyncHandler(async(req, res) => {
 
 
 export const getAllBoardContent = asyncHandler(async(req, res) => {
-      const content = await Board.findOne({_id: req.params.id})
-            .populate({ 
-                  path: 'columns',
-                  populate: {
-                        path: 'issues',
-                        model: 'Issue',
+      try {
+            const content = await Board.findOne({_id: req.params.id})
+                  .populate({ 
+                        path: 'columns',
                         populate: {
-                              path: 'tags',
-                              model: 'Tag',
-                        }
-                  } 
-            });
-            
-            
-
-
-      if(content) {
+                              path: 'issues',
+                              model: 'Issue',
+                              populate: {
+                                    path: 'tags',
+                                    model: 'Tag',
+                              }
+                        } 
+                  });
             res.json(content);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Board's content not found"});
             throw new Error("Board's content not found");
       }
@@ -116,19 +107,12 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
           useFindAndModify: false,
       };
   
-  
-      // no await here, otherwise callback on update + await make execute twice
-      Board.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Board not found"});
-              throw new Error('Board not found');
-          } else {
-              res.json("Board's columns updated successfuly");
-          }
-      });
+      try {
+            await Board.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not add column to board"});
+            throw new Error('Could not add column to board');
+      }
 });
 
 
@@ -144,15 +128,10 @@ export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
           upsert: true
       };
   
-      Board.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Board not found"});
-              throw new Error('Board not found');
-          } else {
-              res.json("Board updated successfuly");
-          }
-      });
+      try {
+            await Board.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not delete column from board"});
+              throw new Error('Could not delete column from board');
+      }
   });

@@ -3,18 +3,21 @@ import asyncHandler from 'express-async-handler';
 
 
 export const getAllTags = asyncHandler(async(req, res) => {
-      const tags = await Tag.find({});
-      
-      res.json(tags);
+      try {
+            const tags = await Tag.find({});
+            res.json(tags);
+      } catch(err) {
+            res.status(500).json({message: "Server error on fetching tags"});
+            throw new Error('Server error on fetching tags');
+      }
 });
   
   
 export const getTagById = asyncHandler(async(req, res) => {
-      const tag = await Tag.findById(req.params.id);
-      
-      if(tag) {
+      try {
+            const tag = await Tag.findById(req.params.id);
             res.json(tag);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Tag not found"});
             throw new Error('Tag not found');
       }
@@ -28,11 +31,10 @@ export const addTag = asyncHandler(async(req, res) => {
             name,
       });
 
-      const savedTag = await newTag.save();
-
-      if(savedTag) {
-            res.json('Tag saved successfully');
-      } else {
+      try {
+            await newTag.save();
+            res.json(newTag);
+      } catch(err) {
             res.status(400).json({message: "Can not save the tag"});
             throw new Error('Can not save the tag');
       }
@@ -51,26 +53,19 @@ export const updateTag = asyncHandler(async(req, res) => {
             useFindAndModify: false,
       };
 
-      Tag.findByIdAndUpdate(id, update, options, function(err, data) {
-            if(err) {
-                  res.status(400).json({message: "Update unsuccessful"});
-                  throw new Error('Update unsuccessful');
-            } else if(!data) {
-                  res.status(404).json({message: "Tag not found"});
-                  throw new Error('Tag not found');
-            } else {
-                  res.json("Tag updated successfuly");
-            }
-      });
+      try {
+            await Tag.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Update of tag unsuccessful"});
+                  throw new Error('Update of tag unsuccessful');
+      }
 });
 
 
 export const deleteTag = asyncHandler(async(req, res) => {
-      const tag = await Tag.findByIdAndDelete(req.params.id);
-
-      if(tag) {
-            res.json("Tag deleted successfuly");
-      } else {
+      try {
+            await Tag.findByIdAndDelete(req.params.id);
+      } catch(err) {
             res.status(404).json({message: "Tag not found"});
             throw new Error('Tag not found');
       }

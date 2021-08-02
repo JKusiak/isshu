@@ -25,7 +25,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   setBoard(resp.data);
             }).catch((err) => {
                   console.log(err);
-            });;
+            });
       }
 
 
@@ -39,10 +39,11 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  fetchBoard();
             }).catch((err) => {
                   console.log(err);
-            });;
+            });
+            
+            fetchBoard();
       }
 
 
@@ -58,7 +59,9 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   
             }).catch((err) => {
                   console.log(err);
-            });;
+            });
+
+            fetchBoard();
       }
 
 

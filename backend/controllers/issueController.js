@@ -3,18 +3,22 @@ import asyncHandler from 'express-async-handler';
 
 
 export const getAllIssues = asyncHandler(async(req, res) => {
-      const issues = await Issue.find({});
+      try {
+            const issues = await Issue.find({});
+            res.json(issues);
+      } catch(err) {
+            res.status(500).json({message: "Server error on fetching issues"});
+            throw new Error('Server error on fetching issues');
+      }
       
-      res.json(issues);
 });
   
   
 export const getIssueById = asyncHandler(async(req, res) => {
-      const issue = await Issue.findById(req.params.id);
-      
-      if(issue) {
+      try {
+            const issue = await Issue.findById(req.params.id);
             res.json(issue);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Issue not found"});
             throw new Error('Issue not found');
       }
@@ -30,11 +34,9 @@ export const addIssue = asyncHandler(async(req, res) => {
             creator,
       });
 
-      const savedIssue = await newIssue.save();
-
-      if(savedIssue) {
-            res.json('Issue saved successfully');
-      } else {
+      try {
+            const savedIssue = await newIssue.save();
+      } catch(err) {
             res.status(400).json({message: "Can not save the issue"});
             throw new Error('Can not save the issue');
       }
@@ -54,26 +56,19 @@ export const updateIssue = asyncHandler(async(req, res) => {
             useFindAndModify: false,
       };
 
-      Issue.findByIdAndUpdate(id, update, options, function(err, data) {
-            if(err) {
-                  res.status(400).json({message: "Update unsuccessful"});
-                  throw new Error('Update unsuccessful');
-            } else if(!data) {
-                  res.status(404).json({message: "Issue not found"});
-                  throw new Error('Issue not found');
-            } else {
-                  res.json("Issue updated successfuly");
-            }
-      });
+      try {
+            await  Issue.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Update of issue unsuccessful"});
+                  throw new Error('Update of issue unsuccessful');
+      }
 });
 
 
 export const deleteIssue = asyncHandler(async(req, res) => {
-      const issue = await Issue.findByIdAndDelete(req.params.id);
-
-      if(issue) {
-            res.json("Issue deleted successfuly");
-      } else {
+      try {
+            await Issue.findByIdAndDelete(req.params.id);
+      } catch(err) {
             res.status(404).json({message: "Issue not found"});
             throw new Error('Issue not found');
       }
@@ -81,12 +76,11 @@ export const deleteIssue = asyncHandler(async(req, res) => {
 
 
 export const getTagsOfIssue = asyncHandler(async(req, res) => {
-      const tags = await Issue.findOne({_id: req.params.id})
-            .populate('tags');
-
-      if(tags) {
+      try {
+            const tags = await Issue.findOne({_id: req.params.id})
+                  .populate('tags');
             res.json(tags);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Issue not found"});
             throw new Error('Issue not found');
       }
@@ -105,19 +99,12 @@ export const addTagToIssue = asyncHandler(async(req, res) => {
           useFindAndModify: false,
       };
   
-  
-      // no await here, otherwise callback on update + await make execute twice
-      Issue.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Issue not found"});
-              throw new Error('Issue not found');
-          } else {
-              res.json("Issue's tags updated successfuly");
-          }
-      });
+      try {
+            await Issue.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not add tag to issue"});
+            throw new Error('Could not add tag to issue');
+      }
 });
 
 
@@ -132,38 +119,33 @@ export const deleteTagFromIssue = asyncHandler(async(req, res) => {
           safe: true, 
           upsert: true
       };
-  
-      Issue.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Issue not found"});
-              throw new Error('Issue not found');
-          } else {
-              res.json("Issue updated successfuly");
-          }
-      });
+
+      try {
+            await Issue.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not delete tag from issue"});
+            throw new Error('Could not delete tag from issue');
+      }
 });
 
-export const getIssuesByCreator = asyncHandler(async(req, res) => {
-      const issue = await Issue.find({creator: req.params.id});
 
-      if(issue) {
+export const getIssuesByCreator = asyncHandler(async(req, res) => {
+      try {
+            const issue = await Issue.find({creator: req.params.id});
             res.json(issue);
-      } else {
-            res.status(404).json({message: "Issue not found"});
+      } catch(err) {
+            res.status(404).json({message: "Issues of creator not found"});
             throw new Error('Issue not found');
       }
 });
 
-export const getIssuesByContributor = asyncHandler(async(req, res) => {
-      const issue = await Issue.find({contributor: req.params.id});
 
-      if(issue) {
+export const getIssuesByContributor = asyncHandler(async(req, res) => {
+      try {
+            const issue = await Issue.find({contributor: req.params.id});
             res.json(issue);
-      } else {
-            res.status(404).json({message: "Issue not found"});
+      } catch(err) {
+            res.status(404).json({message: "Issues of contributor not found"});
             throw new Error('Issue not found');
       }
 });

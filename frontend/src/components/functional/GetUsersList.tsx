@@ -64,11 +64,13 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((resp) => {
-                  fetchContributors();
-                  fetchOtherUsers();
+                  
             }).catch((err) => {
                   console.log(err);
-            });;    
+            });
+
+            fetchContributors();
+            fetchOtherUsers();
         }
 
 
@@ -82,11 +84,13 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         projectId: projectId
                   }
             }).then(() => { 
-                  fetchContributors();
-                  fetchOtherUsers();
+
             }).catch((err) => {
                   console.log(err);
-            });;    
+            });
+
+            fetchContributors();
+            fetchOtherUsers();
         }
 
 

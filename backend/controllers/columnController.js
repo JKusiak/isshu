@@ -3,18 +3,22 @@ import asyncHandler from 'express-async-handler';
 
 
 export const getAllColumns = asyncHandler(async(req, res) => {
-      const columns = await Column.find({});
+      try {
+            const columns = await Column.find({});
+            res.json(columns);
+      } catch(err) {
+            res.status(500).json({message: "Server error on fetching columns"});
+            throw new Error('Server error on fetching columns');
+      }
       
-      res.json(columns);
   });
   
   
 export const getColumnById = asyncHandler(async(req, res) => {
-      const column = await Column.findById(req.params.id);
-      
-      if(column) {
+      try {
+            const column = await Column.findById(req.params.id);
             res.json(column);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Column not found"});
             throw new Error('Column not found');
       }
@@ -28,11 +32,10 @@ export const addColumn = asyncHandler(async(req, res) => {
             name,
       });
 
-      const savedColumn = await newColumn.save();
-
-      if(savedColumn) {
+      try {
+            const savedColumn = await newColumn.save();
             res.json(savedColumn);
-      } else {
+      } catch(err) {
             res.status(400).json({message: "Can not save the column"});
             throw new Error('Can not save the column');
       }
@@ -41,36 +44,31 @@ export const addColumn = asyncHandler(async(req, res) => {
 
 export const updateColumn = asyncHandler(async(req, res) => {
       const id = req.params.id;
+
       const update = { 
             $set: {
                   name: req.body.name,
             } 
       };
+
       const options =  {
             new: true, 
             useFindAndModify: false,
       };
 
-      Column.findByIdAndUpdate(id, update, options, function(err, data) {
-            if(err) {
-                  res.status(400).json({message: "Update unsuccessful"});
-                  throw new Error('Update unsuccessful');
-            } else if(!data) {
-                  res.status(404).json({message: "Column not found"});
-                  throw new Error('Column not found');
-            } else {
-                  res.json("Column updated successfuly");
-            }
-      });
+      try {
+            await Column.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Update of column unsuccessfull"});
+            throw new Error('Update of column unsuccessfull');
+      }
 });
 
 
 export const deleteColumn = asyncHandler(async(req, res) => {
-      const column = await Column.findByIdAndDelete(req.params.id);
-
-      if(column) {
-            res.json("Column deleted successfuly");
-      } else {
+      try {
+            await Column.findByIdAndDelete(req.params.id);
+      } catch(err) {
             res.status(404).json({message: "Column not found"});
             throw new Error('Column not found');
       }
@@ -78,12 +76,11 @@ export const deleteColumn = asyncHandler(async(req, res) => {
 
 
 export const getIssuesOfColumn = asyncHandler(async(req, res) => {
-      const issues = await Column.findOne({_id: req.params.id})
-            .populate('issues');
-
-      if(issues) {
+      try {
+            const issues = await Column.findOne({_id: req.params.id})
+                  .populate('issues');
             res.json(issues);
-      } else {
+      } catch(err) {
             res.status(404).json({message: "Column not found"});
             throw new Error('Column not found');
       }
@@ -103,18 +100,12 @@ export const addIssueToColumn = asyncHandler(async(req, res) => {
       };
   
   
-      // no await here, otherwise callback on update + await make execute twice
-      Column.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Column not found"});
-              throw new Error('Column not found');
-          } else {
-              res.json("Column's issues updated successfuly");
-          }
-      });
+      try {
+            await Column.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not add issue to column"});
+            throw new Error('Could not add issue to column');
+      }
 });
 
 
@@ -129,16 +120,11 @@ export const deleteIssueFromColumn = asyncHandler(async(req, res) => {
           safe: true, 
           upsert: true
       };
-  
-      Column.findByIdAndUpdate(id, update, options, function(err, data){
-          if(err) {
-              res.status(400).json({message: "Update unsuccessful"});
-              throw new Error('Update unsuccessful');
-          } else if(!data) {
-              res.status(404).json({message: "Column not found"});
-              throw new Error('Column not found');
-          } else {
-              res.json("Column updated successfuly");
-          }
-      });
+
+      try {
+            await Column.findByIdAndUpdate(id, update, options);
+      } catch(err) {
+            res.status(400).json({message: "Could not delete issue from column"});
+            throw new Error('Could not delete issue from column');
+      }
   });

@@ -5,13 +5,11 @@ import asyncHandler from 'express-async-handler';
 export const getAllProjects = asyncHandler(async(req, res) => {
     try {
         const projects = await Project.find({});
-    
         res.json(projects) ;
     } catch(err) {
-        res.status(404).json({message: "Issue during fetching project data"});
-        throw new Error('Issue during fetching project data');
+        res.status(500).json({message: "Server error on fetching projects"});
+        throw new Error('Server error on fetching projects');
     }
-    
 });
 
 
@@ -73,8 +71,8 @@ export const updateProject = asyncHandler(async(req, res) => {
         await Project.findByIdAndUpdate(id, update, options);
     }
     catch(err) {
-        res.status(400).json({message: "Update unsuccessful"});
-        throw new Error('Update unsuccessful');
+        res.status(400).json({message: "Update of project unsuccessful"});
+        throw new Error('Update of project unsuccessful');
     }
 });
 
