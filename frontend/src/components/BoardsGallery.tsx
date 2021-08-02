@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
-import { FC, Fragment } from "react";
+import { FC, Fragment, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
 import AddBoardModal from "./modals/AddBoardModal";
@@ -46,7 +46,7 @@ interface BoardsGalleryProps {
 const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
       const classes = useStyles();
       const {url} = useRouteMatch();
-      
+
 
       function displayBoards() {
             if(props.boards.length > 0) {
@@ -73,7 +73,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
             <GetProjectInfoBanner/>
 
             <div className={classes.gridContainer}>
-                  <AddBoardModal boards={props.boards} fetchBoards={props.fetchBoards}/>
+                  <AddBoardModal fetchBoards={props.fetchBoards}/>
                   {displayBoards()}
             </div>
             </>

@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { FC } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 import { useHistory } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
@@ -62,15 +62,11 @@ const BoardData: FC<BoardDataProps> = (props) => {
       const onDragEnd = (result: any) => {
             const { source, destination, draggableId } = result;
 
-            if (!result.destination) {
+            if (!result.destination || source.droppableId === destination.droppableId) {
                   return;
-            }
-
-            if (source.droppableId !== destination.droppableId) {
+            } else {
                   props.deleteFromColumn(source.droppableId, draggableId);
                   props.addToColumn(destination.droppableId, draggableId);
-            } else {
-                  return;
             }
       };
 
@@ -79,14 +75,17 @@ const BoardData: FC<BoardDataProps> = (props) => {
             if(props.board.columns !== undefined && props.board.columns.length > 0) {
                   return(
                         <div className={classes.container}>
-                        <DragDropContext onDragEnd={result => onDragEnd(result)}>
-                                    {props.board.columns.map((column: any, index: any) => {
-                                          return(
-                                                <ColumnData column={column} columnIndex={index}/>
-                                          );
-                                    })}
-                        </DragDropContext>
-                  </div> 
+                              <DragDropContext onDragEnd={result => onDragEnd(result)}>
+                                          {props.board.columns.map((column: any, index: any) => {
+                                                return(
+                                                      <>
+                                                      <div></div>
+                                                      <ColumnData column={column} columnIndex={index}/>
+                                                      </>                                                  
+                                                );
+                                          })}
+                              </DragDropContext>
+                        </div> 
                   );
                   
             }

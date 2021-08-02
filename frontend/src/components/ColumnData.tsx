@@ -1,10 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useHistory } from "react-router-dom";
-import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
-import Button from "@material-ui/core/Button";
-import DeleteBoardModal from "./modals/DeleteBoardModal";
+import { FC } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
 
 
@@ -47,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ColumnDataProps {
       column: any,
-      columnIndex: any,
+      columnIndex: number,
 }
 
 
@@ -56,7 +52,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
 
       function displayColumn() {
             return(
-                  <div className={classes.columnWrapper} key={props.columnIndex}>
+                  <div className={classes.columnWrapper}> 
                         <h2 className={classes.columnName}>{props.column.name}</h2>
                         <Droppable
                               key={props.columnIndex}
