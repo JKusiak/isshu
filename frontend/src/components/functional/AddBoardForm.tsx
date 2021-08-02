@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             color: "#C62828",   
             textAlign: "center",
       },
-      submitButton: {
-
-      },
       buttonIcon: {
             fontSize: '35px',
             color: theme.palette.secondary.main,
@@ -100,7 +97,6 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                               }}
                         />
                         <IconButton
-                              className={classes.submitButton}
                               type="submit"
                         >
                               <AddIcon className={classes.buttonIcon}/>

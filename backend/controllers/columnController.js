@@ -22,7 +22,7 @@ export const getColumnById = asyncHandler(async(req, res) => {
 
 
 export const addColumn = asyncHandler(async(req, res) => {
-      const name = req.body.name;
+      const name = req.body.columnName;
       
       const newColumn = new Column ({
             name,
@@ -31,7 +31,7 @@ export const addColumn = asyncHandler(async(req, res) => {
       const savedColumn = await newColumn.save();
 
       if(savedColumn) {
-            res.json('Column saved successfully');
+            res.json(savedColumn);
       } else {
             res.status(400).json({message: "Can not save the column"});
             throw new Error('Can not save the column');

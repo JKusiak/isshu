@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import DeleteBoardForm from '../functional/DeleteBoardForm';
 import { Button } from '@material-ui/core';
 

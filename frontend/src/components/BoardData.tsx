@@ -6,6 +6,7 @@ import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
+import AddColumnModal from "./modals/AddColumnModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,6 +55,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
       const classes = useStyles();
       let history = useHistory();
 
+
       function getPreviousPath() {
             history.goBack();
       }
@@ -85,6 +87,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                                                 );
                                           })}
                               </DragDropContext>
+                              <AddColumnModal/>
                         </div> 
                   );
                   

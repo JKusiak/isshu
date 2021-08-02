@@ -16,20 +16,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             width: '100%',
             marginTop: theme.spacing(5),
       },
-      delete: {
+      button: {
             margin: theme.spacing(3, 2, 3),
             borderRadius: '10px',
             fontWeight: 600,
             background: theme.palette.primary.main,
-            "&:hover": {
-                  background: theme.palette.primary.dark
-            }
-      },
-      goBack: {
-            margin: theme.spacing(3, 2, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            background: theme.palette.secondary.light,
             "&:hover": {
                   background: theme.palette.primary.dark
             }
@@ -74,11 +65,11 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
   return (
     <>
       <Typography className={classes.header} component="h1" variant="h4">
-        Delete project?
+        Delete board?
       </Typography>
       <div className={classes.form}>
         <Button
-          className={classes.delete}
+          className={classes.button}
           onClick={onDelete}
           fullWidth
           type="submit"
@@ -89,7 +80,7 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
         </Button>
 
         <Button
-          className={classes.goBack}
+          className={classes.button}
           onClick={onGoBack}
           fullWidth
           type="submit"
