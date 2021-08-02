@@ -5,42 +5,34 @@ import { useHistory } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
+import ColumnData from "./ColumnData";
 
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
-            root: {
+            container: {
                   display: "flex", justifyContent: "center", height: "100%" 
-            },
-            columnTitleWrapper: {
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-            },
-            columnWrapper: {
-                  padding: 4,
-                  width: 250,
-                  minHeight: 500
-            },
-            issueWrapper: {
-                  userSelect: "none",
-                  padding: 16,
-                  margin: "0 0 8px 0",
-                  minHeight: "50px",
-                  color: "white",
             },
             navigation: {
                   display: 'grid',
                   width: '100%',
-                  gridTemplateColumns: '1fr 1fr',
+                  gridTemplateColumns: '1fr 1fr 1fr',
                   margin: '1em 0 2em 0'
             },
             backButton: {
                   justifySelf: 'start',
+                  alignSelf: 'center',
                   marginLeft: '1em'
+            },
+            boardTitle: {
+                  justifySelf: 'center',
+                  alignSelf: 'center',
+                  fontSize: '36px',
+                  color: theme.palette.secondary.main,
             },
             deleteModal: {
                   justifySelf: 'end',
+                  alignSelf: 'center',
                   marginRight: '1em'
             },
             backIcon: {
@@ -53,12 +45,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardDataProps {
       board: any,
+      addToColumn: any,
+      deleteFromColumn: any,
 }
 
 
 const BoardData: FC<BoardDataProps> = (props) => {
       const classes = useStyles();
-      const [columns, setColumns] = useState(props.board);
       let history = useHistory();
 
       function getPreviousPath() {
@@ -66,103 +59,30 @@ const BoardData: FC<BoardDataProps> = (props) => {
       }
 
 
-      const onDragEnd = (result: any, columns: { [x: string]: any; }, setColumns: (arg0: any) => void) => {
-            if (!result.destination) return;
-            const { source, destination } = result;
+      const onDragEnd = (result: any) => {
+            const { source, destination, draggableId } = result;
+
+            if (!result.destination) {
+                  return;
+            }
 
             if (source.droppableId !== destination.droppableId) {
-                  const sourceColumn = columns[source.droppableId];
-                  const destColumn = columns[destination.droppableId];
-                  const sourceIssues = [...sourceColumn.issues];
-                  const destIssues = [...destColumn.issues];
-                  const [removed] = sourceIssues.splice(source.index, 1);
-
-                  destIssues.splice(destination.index, 0, removed);
-                  
-                  setColumns({
-                        ...columns,
-                        [source.droppableId]: {
-                              ...sourceColumn,
-                              items: sourceIssues
-                        },
-                        [destination.droppableId]: {
-                              ...destColumn,
-                              items: sourceIssues
-                        }
-                  });
+                  props.deleteFromColumn(source.droppableId, draggableId);
+                  props.addToColumn(destination.droppableId, draggableId);
             } else {
-                  const column = columns[source.droppableId];
-                  const copiedIssues = [...column.issues];
-                  const [removed] = copiedIssues.splice(source.index, 1);
-
-                  copiedIssues.splice(destination.index, 0, removed);
-
-                  setColumns({
-                        ...columns,
-                        [source.droppableId]: {
-                              ...column,
-                              items: copiedIssues
-                        }
-                  });
+                  return;
             }
       };
 
 
-      function displayColumns() {
-            if(props.board.length > 0) {
+      function displayBoard() {
+            if(props.board.columns !== undefined && props.board.columns.length > 0) {
                   return(
-                        <div className={classes.root}>
-                        <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
-                                    {props.board.map((column: any, index: any) => {
+                        <div className={classes.container}>
+                        <DragDropContext onDragEnd={result => onDragEnd(result)}>
+                                    {props.board.columns.map((column: any, index: any) => {
                                           return(
-                                                <div className={classes.columnTitleWrapper} key={column._id}>
-                                                      <h2>{column.name}</h2>
-                                                      <div style={{ margin: 8 }}>
-                                                            <Droppable
-                                                                  key={column._id}
-                                                                  droppableId={column._id} 
-                                                            >
-                                                                  {(provided, snapshot) => {
-                                                                        return (
-                                                                              <div
-                                                                                    className={classes.columnWrapper}
-                                                                                    {...provided.droppableProps}
-                                                                                    ref={provided.innerRef}
-                                                                              >
-                                                                                    {column.issues.map((issue: any, index: any) => {
-                                                                                          return (
-                                                                                                <Draggable
-                                                                                                      key={issue._id}
-                                                                                                      draggableId={issue._id}
-                                                                                                      index={index}
-                                                                                                >
-                                                                                                      {(provided, snapshot) => {
-                                                                                                            return (
-                                                                                                                  <div
-                                                                                                                        ref={provided.innerRef}
-                                                                                                                        {...provided.draggableProps}
-                                                                                                                        {...provided.dragHandleProps}
-                                                                                                                        style={{
-                                                                                                                              backgroundColor: snapshot.isDragging
-                                                                                                                              ? "#263B4A"
-                                                                                                                              : "#456C86",
-                                                                                                                              ...provided.draggableProps.style
-                                                                                                                        }}
-                                                                                                                  >
-                                                                                                                        {issue.description}
-                                                                                                                  </div>
-                                                                                                            );
-                                                                                                      }}
-                                                                                                </Draggable>
-                                                                                          );
-                                                                                    })}
-                                                                                    {provided.placeholder}
-                                                                              </div>
-                                                                        );
-                                                                  }}
-                                                            </Droppable>
-                                                      </div>
-                                                </div>          
+                                                <ColumnData column={column} columnIndex={index}/>
                                           );
                                     })}
                         </DragDropContext>
@@ -178,13 +98,16 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         <Button className={classes.backButton} onClick={getPreviousPath}>
                               <BackIcon className={classes.backIcon}/>
                         </Button>
+                        <div className={classes.boardTitle}>
+                              {props.board.name}
+                        </div>
                         <div className={classes.deleteModal}>
                               <DeleteBoardModal />
                         </div>
                         
                   </div>
                   
-                  {displayColumns()}
+                  {displayBoard()}
             </>
       );
 }
