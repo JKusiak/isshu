@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { Link } from 'react-router-dom';
+import { ButtonGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,11 +43,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   textDecoration: 'none',
             },           
             button: {
-                  '&:hover': {
-                        "& $listItem": {
-                              boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
-                        }
-                  }
             },
             
       }),
@@ -87,41 +83,44 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <Link className={classes.nameLink} to={`/user/${user._id}`}>
-                                                      <ListItemText primary={fullName}/>
-                                                </Link>
-                                                <ListItemSecondaryAction className={classes.button}>
-                                                      <IconButton 
-                                                            className={classes.button} 
-                                                            edge="end" 
-                                                            aria-label="remove-user" 
-                                                            onClick={() => props.removeProjectFromUser(user._id)}
-                                                      >
-                                                            <DeleteIcon />
-                                                      </IconButton>
-                                                </ListItemSecondaryAction>                       
+                                                <ButtonGroup>
+                                                      <Link className={classes.nameLink} to={`/user/${user._id}`}>
+                                                            <ListItemText primary={fullName}/>
+                                                      </Link>
+                                                      <ListItemSecondaryAction className={classes.button}>
+                                                            <IconButton 
+                                                                  className={classes.button} 
+                                                                  edge="end" 
+                                                                  aria-label="remove-user" 
+                                                                  onClick={() => props.removeProjectFromUser(user._id)}
+                                                            >
+                                                                  <DeleteIcon />
+                                                            </IconButton>
+                                                      </ListItemSecondaryAction>      
+                                                </ButtonGroup>                 
                                           </ListItem> 
-                                          
                                     </Fragment>
                               );
                         } else {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <Link className={classes.nameLink} to={`/user/${user._id}`}>
-                                                      <ListItemText primary={fullName}/>
-                                                </Link>
-                                                <ListItemSecondaryAction>
-                                                      <IconButton 
-                                                            className={classes.button} 
-                                                            edge="end" 
-                                                            aria-label="add-user" 
-                                                            onClick={() => props.addProjectToUser(user._id)}
-                                                            onMouseOver={handleButtonHover}
-                                                      >
-                                                            <AddIcon/>
-                                                      </IconButton>
-                                                </ListItemSecondaryAction>
+                                                <ButtonGroup>
+                                                      <Link className={classes.nameLink} to={`/user/${user._id}`}>
+                                                            <ListItemText primary={fullName}/>
+                                                      </Link>
+                                                      <ListItemSecondaryAction>
+                                                            <IconButton 
+                                                                  className={classes.button} 
+                                                                  edge="end" 
+                                                                  aria-label="add-user" 
+                                                                  onClick={() => props.addProjectToUser(user._id)}
+                                                                  onMouseOver={handleButtonHover}
+                                                            >
+                                                                  <AddIcon/>
+                                                            </IconButton>
+                                                      </ListItemSecondaryAction>
+                                                </ButtonGroup>
                                           </ListItem>
                                     </Fragment>
                               );

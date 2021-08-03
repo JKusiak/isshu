@@ -11,8 +11,14 @@ import AddColumnModal from "./modals/AddColumnModal";
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
+            wrapper: {
+                  display: 'flex',
+            },
             container: {
-                  display: "flex", justifyContent: "center", height: "100%" 
+                  display: "flex", 
+                  justifyContent: "flex-start", 
+                  height: "100%",
+                  marginLeft: '3em',
             },
             navigation: {
                   display: 'grid',
@@ -23,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
             backButton: {
                   justifySelf: 'start',
                   alignSelf: 'center',
-                  marginLeft: '1em'
+                  marginLeft: '1em',
             },
             boardTitle: {
                   justifySelf: 'center',
@@ -31,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   fontSize: '36px',
                   color: theme.palette.secondary.main,
             },
-            deleteModal: {
+            deleteButton: {
                   justifySelf: 'end',
                   alignSelf: 'center',
                   marginRight: '1em'
@@ -39,7 +45,10 @@ const useStyles = makeStyles((theme: Theme) =>
             backIcon: {
                   fontSize: '50px',
                   color: theme.palette.secondary.main
-            },            
+            },
+            addColumnButton: {
+                  marginLeft: '1em',
+            }  
       }
 ));
 
@@ -76,19 +85,22 @@ const BoardData: FC<BoardDataProps> = (props) => {
       function displayBoard() {
             if(props.board.columns !== undefined && props.board.columns.length > 0) {
                   return(
+                  <div className={classes.wrapper}>
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>
                                           {props.board.columns.map((column: any, index: any) => {
                                                 return(
                                                       <>
-                                                      <div></div>
                                                       <ColumnData column={column} columnIndex={index}/>
                                                       </>                                                  
                                                 );
                                           })}
                               </DragDropContext>
+                        </div>
+                        <div className={classes.addColumnButton}>
                               <AddColumnModal/>
-                        </div> 
+                        </div>
+                  </div>
                   );
                   
             }
@@ -103,7 +115,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         <div className={classes.boardTitle}>
                               {props.board.name}
                         </div>
-                        <div className={classes.deleteModal}>
+                        <div className={classes.deleteButton}>
                               <DeleteBoardModal />
                         </div>
                         
