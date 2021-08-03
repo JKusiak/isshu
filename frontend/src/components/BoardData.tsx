@@ -88,21 +88,15 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   <div className={classes.wrapper}>
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>
-                              
-                                    <Droppable direction="horizontal" key={1} droppableId={props.board._id}>
-                                          {provided => {
-                                                return(
-                                                      <div {...provided.droppableProps} ref={provided.innerRef}>
-                                                            {props.board.columns.map((column: any, index: any) => {
-                                                                  return(
-                                                                        <ColumnData column={column} columnIndex={index}/> 
-                                                                  );
-                                                            })}
-                                                      </div>
-                                                )
-                                          }}
-                                    </Droppable>
-                                    
+
+                                                
+                                    {props.board.columns.map((column: any, index: any) => {
+                                          return(
+                                                <ColumnData column={column} columnIndex={index}/> 
+                                          );
+                                    })}
+                                                
+                                
                               </DragDropContext>
                         </div>
                         

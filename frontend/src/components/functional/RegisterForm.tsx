@@ -5,7 +5,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink, useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -55,6 +55,7 @@ const passRegex = /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{
 
 function RegisterForm() {
       const classes = useStyles();
+      const history = useHistory();
       const [name, setName] = useState('');
       const [surname, setSurname] = useState('');
       const [email, setEmail] = useState('');
@@ -63,6 +64,7 @@ function RegisterForm() {
       const [isValid, setIsValid] = useState(true);
       const [isSent, setIsSent] = useState(false);
       const [errorText, setErrorText] = useState('');
+
 
       useEffect(() => {
             if(repeatPassword === password) {
@@ -87,6 +89,7 @@ function RegisterForm() {
                   axios.post('http://localhost:5000/users/add', user)
                   .then(() => {
                         setIsSent(true);
+                        setTimeout(() => {history.push('/login')}, 1000);
                   }).catch((err) => {
                         console.log(err);
                         setIsValid(false);

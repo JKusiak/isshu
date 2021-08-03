@@ -51,9 +51,12 @@ export const addUser = asyncHandler(async(req, res) => {
         isAdmin,
     });
 
-    try {
-        const savedUser = await newUser.save();
-    } catch(err) {
+
+    const savedUser = await newUser.save();
+
+    if(savedUser) {
+        res.json(savedUser);
+    } else {
         res.status(400).json({message: "Can not save the user"});
         throw new Error('Can not save the user');
     }
