@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useHistory } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
@@ -11,21 +11,6 @@ import AddColumnModal from "./modals/AddColumnModal";
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
-            wrapper: {
-                  display: 'flex',
-            },
-            container: {
-                  display: "flex", 
-                  justifyContent: "flex-start", 
-                  height: "100%",
-                  marginLeft: '3em',
-            },
-            navigation: {
-                  display: 'grid',
-                  width: '100%',
-                  gridTemplateColumns: '1fr 1fr 1fr',
-                  margin: '1em 0 2em 0'
-            },
             backButton: {
                   justifySelf: 'start',
                   alignSelf: 'center',
@@ -46,7 +31,22 @@ const useStyles = makeStyles((theme: Theme) =>
                   fontSize: '50px',
                   color: theme.palette.secondary.main
             },
+            wrapper: {
+                  display: 'flex',
+            },
+            container: {
+                  display: "flex", 
+                  // height: "100%",
+                  marginLeft: '3em',
+            },
+            navigation: {
+                  display: 'grid',
+                  width: '100%',
+                  gridTemplateColumns: '1fr 1fr 1fr',
+                  margin: '1em 0 2em 0'
+            },
             addColumnButton: {
+                  marginTop: '0.5em',
                   marginLeft: '1em',
             }  
       }
@@ -88,15 +88,25 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   <div className={classes.wrapper}>
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>
-                                          {props.board.columns.map((column: any, index: any) => {
+                              
+                                    <Droppable direction="horizontal" key={1} droppableId={props.board._id}>
+                                          {provided => {
                                                 return(
-                                                      <>
-                                                      <ColumnData column={column} columnIndex={index}/>
-                                                      </>                                                  
-                                                );
-                                          })}
+                                                      <div {...provided.droppableProps} ref={provided.innerRef}>
+                                                            {props.board.columns.map((column: any, index: any) => {
+                                                                  return(
+                                                                        <ColumnData column={column} columnIndex={index}/> 
+                                                                  );
+                                                            })}
+                                                      </div>
+                                                )
+                                          }}
+                                    </Droppable>
+                                    
                               </DragDropContext>
                         </div>
+                        
+
                         <div className={classes.addColumnButton}>
                               <AddColumnModal/>
                         </div>

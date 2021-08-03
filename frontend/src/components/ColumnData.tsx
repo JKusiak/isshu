@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
-import { Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import IssueData from "./IssueData";
 import { ButtonGroup, IconButton } from "@material-ui/core";
@@ -58,49 +58,61 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
 
       function displayColumn() {
             return(
-                  <div className={classes.columnWrapper}>
-                        <ButtonGroup 
-                              className={classes.columnHeader} 
-                              onMouseOver={() => setIsMouseOver(true)} 
-                              onMouseOut={() => setIsMouseOver(false)}
-                        >
-                              <h2 className={classes.columnName}>{props.column.name}</h2>
-                              
-                              
-                              {isMouseOver && 
-                              <IconButton 
-                                    className={classes.deleteColumnButton}
-                                    onMouseOver={() => setIsMouseOver(true)}
-                                    
-                              >
-                                    <DeleteIcon/>
-                              </IconButton>}
-                              
-                              
-                        </ButtonGroup>
-                        
-                        <Droppable
-                              key={props.columnIndex}
-                              droppableId={props.column._id}
-                        >
-                              {(provided, snapshot) => {
-                                    return (
-                                          <div className={classes.columnContentWrapper}
-                                                {...provided.droppableProps}
-                                                ref={provided.innerRef}
+                  <Draggable
+                        key={props.column._id} 
+                        draggableId={props.column._id} 
+                        index={props.column._id}
+                  >
+                        {provided => {
+                              return(
+                                    <div 
+                                          className={classes.columnWrapper}
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                    >
+                                          <ButtonGroup 
+                                                className={classes.columnHeader} 
+                                                onMouseOver={() => setIsMouseOver(true)} 
+                                                onMouseOut={() => setIsMouseOver(false)}
                                           >
-                                                {props.column.issues.map((issue: any, index: any) => {
+                                                <h2 className={classes.columnName}>{props.column.name}</h2>
+                                                
+                                                {isMouseOver && 
+                                                <IconButton 
+                                                      className={classes.deleteColumnButton}
+                                                      onMouseOver={() => setIsMouseOver(true)}
+                                                >
+                                                      <DeleteIcon/>
+                                                </IconButton>}
+                                          </ButtonGroup>
+                                          
+                                          <Droppable
+                                                key={props.columnIndex}
+                                                droppableId={props.column._id}
+                                          >
+                                                {(provided, snapshot) => {
                                                       return (
-                                                            <IssueData issue={issue} issueIndex={index}/>
-                                                            
+                                                            <div className={classes.columnContentWrapper}
+                                                                  {...provided.droppableProps}
+                                                                  ref={provided.innerRef}
+                                                            >
+                                                                  {props.column.issues.map((issue: any, index: any) => {
+                                                                        return (
+                                                                              <IssueData issue={issue} issueIndex={index}/>
+                                                                        );
+                                                                  })}
+                                                                  {provided.placeholder}
+                                                            </div>
                                                       );
-                                                })}
-                                                {provided.placeholder}
-                                          </div>
-                                    );
-                              }}
-                        </Droppable>
-                  </div>          
+                                                }}
+                                          </Droppable>
+                                    </div>          
+                              )
+                        }}
+                        
+                  </Draggable>
+                  
             )                           
       }
 
