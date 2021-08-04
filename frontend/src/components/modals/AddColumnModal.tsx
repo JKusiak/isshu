@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddColumnModalProps {
-      fetchBoard: any,
+      fetchBoard: () => void,
 }
 
 

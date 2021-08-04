@@ -9,7 +9,7 @@ import ButtonToProjects from "../ButtonToProjects";
 
 interface HomePageProps {
       loggedIn: boolean,
-      setLoggedIn: any
+      setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

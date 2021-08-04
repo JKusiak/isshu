@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -29,17 +29,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface DeleteProjectFormProps {
-      handleClose: any,
+      handleClose: () => void,
 }
 
 
 const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
       const classes = useStyles();
-      const { projectId } = useParams<{projectId: any}>();
+      const { projectId } = useParams<{projectId: string}>();
       let history = useHistory();
 
 
-      function onDelete(e: any) {
+      function onDelete(e: React.MouseEvent) {
             e.preventDefault();
 
             axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
@@ -54,7 +54,7 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
             });  
       }
 
-      function onGoBack(e: any) {
+      function onGoBack(e: React.MouseEvent) {
             e.preventDefault();
 
             props.handleClose();  

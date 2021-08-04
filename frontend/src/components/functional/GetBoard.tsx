@@ -61,13 +61,19 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   console.log(err);
             });
 
-            fetchBoard();
+           
       }
 
 
+      function changeColumns(sourceColumnId: string, destinationColumnId: string, issueId: string) {
+            deleteFromColumn(sourceColumnId, issueId);
+            addToColumn(destinationColumnId, issueId);
+            fetchBoard();
+      }
+
       return (
             <>
-                  <BoardData board={board} fetchBoard={fetchBoard} addToColumn={addToColumn} deleteFromColumn={deleteFromColumn}/>
+                  <BoardData board={board} fetchBoard={fetchBoard} changeColumns={changeColumns}/>
             </>
       );
 }

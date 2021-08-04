@@ -5,29 +5,56 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import IconButton from '@material-ui/core/IconButton';
+import { Card, Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      form: {
+      formWrapper: {
             width: '100%',
       },
-      buttonIcon: {
+      buttonContainer: {
+            display: 'grid',
+            padding: '0.5em',
+            gridTemplateColumns: '0.2fr 1fr',
+            width: '100%',
+            backgroundColor: 'white',
+            "&:hover": {
+                  cursor: 'pointer',
+                  backgroundColor: theme.palette.action.hover,
+            }
+      },
+      icon: {
+            gridColumn: '1',
+            justifySelf: 'start',
+            alignSelf: 'center',
             fontSize: '30px',
-            color: theme.palette.secondary.main,
+            color: theme.palette.secondary.light,
+      },
+      text: {
+            gridColumn: '2',
+            justifySelf: 'start',
+            alignSelf: 'center',
+            fontSize: 15,
+            color: theme.palette.secondary.light,
       },
 }));
 
 
 interface AddIssueFormProps {
       column: any,
-      fetchBoard: any,
-      setAddMode: any,
+      fetchBoard: () => void,
+      setAddMode: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
 const AddIssueForm: FC<AddIssueFormProps> = (props) => {
       const classes = useStyles();
       const [issueDescription, setIssueDescription] = useState('');
+
+      const issue = {
+            description: issueDescription,
+            creator: getCreator()._id,
+      }
 
 
       function getCreator() {
@@ -37,14 +64,8 @@ const AddIssueForm: FC<AddIssueFormProps> = (props) => {
             return JSON.parse(atob(base64));
       }
 
-
-      const issue = {
-            description: issueDescription,
-            creator: getCreator()._id,
-      }
-
       
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             
             axios.post('http://localhost:5000/issues/add', issue, {
@@ -72,25 +93,29 @@ const AddIssueForm: FC<AddIssueFormProps> = (props) => {
 
 
   return (
-    <> 
-      <form className={classes.form} onSubmit={onSubmit} autoComplete="off">
-            <TextField
-                  required
-                  autoFocus
-                  variant='outlined'
-                  name="issueDescription"
-                  id="issueDescription"
-                  placeholder="Enter description for the issue"
-                  autoComplete="issue-description"
-                  onChange={e => {
-                        setIssueDescription(e.target.value);
-                  }}
-            />
-            <IconButton type="submit">
-                  <AddIcon className={classes.buttonIcon}/> 
-            </IconButton> 
-      </form>
-    </>
+      <Card className={classes.formWrapper}> 
+            <form onSubmit={onSubmit} autoComplete="off">
+                  <TextField
+                        required
+                        autoFocus
+                        fullWidth
+                        variant='outlined'
+                        name="issueDescription"
+                        id="issueDescription"
+                        placeholder="Enter description for the issue"
+                        autoComplete="issue-description"
+                        onChange={e => {
+                              setIssueDescription(e.target.value);
+                        }}
+                  />
+                  <div className={classes.buttonContainer} onClick={onSubmit}>
+                        <AddIcon className={classes.icon}/>
+                        <Typography className={classes.text} component='h6' variant='h6'>
+                              Create issue
+                        </Typography>
+                  </div>
+            </form>
+      </Card>
   );
 }
 

@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface AddIssueModalProps {
       column: any,
-      fetchBoard: any,
+      fetchBoard: () => void,
 }
 
 

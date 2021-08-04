@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import UsersList from "../UsersList";
 
 interface GetUsersListProps {
-      mobileOpen: any,
+      mobileOpen: boolean,
       handleSidebarToggle: () => void,
 }
 

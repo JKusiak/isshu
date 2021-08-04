@@ -8,7 +8,7 @@ interface IssuesListProps {
 const IssuesList: FC<IssuesListProps> = (props) => {
       function displayIssues(type: 'issuesTaken' | 'issuesCreated') {
             if(props[type].length > 0 ) {
-                  return(props[type].map((issue: any, index: any) => {
+                  return(props[type].map((issue: any, index: number) => {
                         return(
                               <div className="issue_container" key={index}>
                                     <p className="issue_description"> {issue.description} </p>

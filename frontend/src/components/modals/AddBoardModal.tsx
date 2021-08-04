@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddBoardModalProps {
-      fetchBoards: any,
+      fetchBoards: () => void,
 }
 
 

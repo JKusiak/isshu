@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface DeleteProjectModalProps {
-      handleSettingsClose: any,
+      handleSettingsClose: () => void,
 }
 
 

@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface AddColumnFormProps {
-      setAddMode: any,
-      fetchBoard: any,
+      setAddMode: React.Dispatch<React.SetStateAction<boolean>>,
+      fetchBoard: () => void,
 }
 
 
@@ -31,7 +31,7 @@ const AddColumnForm: FC<AddColumnFormProps> = (props) => {
       }
 
       
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             
             axios.post('http://localhost:5000/columns/add', column, {

@@ -50,7 +50,7 @@ const projectNameRegex = /^$|^[A-Za-z][a-z\s]*$/;
 
 
 interface AddProjectFormProps {
-      handleClose: any,
+      handleClose: () => void,
 }
 
 
@@ -92,7 +92,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
       }
 
 
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
 
             axios.post('http://localhost:5000/projects/add', project, {

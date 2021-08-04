@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface DeleteBoardFormProps {
-      handleClose: any,
+      handleClose: () => void,
 }
 
 
 const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       const classes = useStyles();
-      const { boardId } = useParams<{boardId: any}>();
-      const { projectId } = useParams<{projectId: any}>();
+      const { boardId } = useParams<{boardId: string}>();
+      const { projectId } = useParams<{projectId: string}>();
       let history = useHistory();
 
 
@@ -69,7 +69,7 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       }
 
 
-      function handleDeleteClick(e: any) {
+      function handleDeleteClick(e: React.MouseEvent) {
             e.preventDefault();
 
             deleteFromProject();
@@ -80,7 +80,7 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       }
 
 
-      function onGoBack(e: any) {
+      function handleGoBack(e: React.MouseEvent) {
             e.preventDefault();
 
             props.handleClose();  
@@ -106,7 +106,7 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
 
         <Button
           className={classes.button}
-          onClick={onGoBack}
+          onClick={handleGoBack}
           fullWidth
           type="submit"
           variant="contained"

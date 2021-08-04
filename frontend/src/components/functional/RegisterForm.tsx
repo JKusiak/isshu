@@ -82,7 +82,7 @@ function RegisterForm() {
             password: password,
       }
 
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             
             if(isValid) {

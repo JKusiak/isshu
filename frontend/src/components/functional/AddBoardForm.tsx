@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface AddBoardFormProps {
-      fetchBoards: any,
-      setAddMode: any,
+      fetchBoards: () => void,
+      setAddMode: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
@@ -48,7 +48,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
       }
 
 
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
 
             axios.post('http://localhost:5000/boards/add', board, {

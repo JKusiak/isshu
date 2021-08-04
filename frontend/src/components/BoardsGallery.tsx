@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardsGalleryProps {
       boards: any;
-      fetchBoards: any;
+      fetchBoards: () => void;
 }
 
 

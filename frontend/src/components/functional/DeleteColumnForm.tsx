@@ -8,11 +8,11 @@ import ColumnData from "../ColumnData";
 
 interface DeleteColumnFormProps {
       column: any,
-      fetchBoard: any,
+      fetchBoard: () => void,
 }
 
 const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
-      const { boardId } = useParams<{boardId: any}>();
+      const { boardId } = useParams<{boardId: string}>();
 
 
       function deleteColumnReference() {

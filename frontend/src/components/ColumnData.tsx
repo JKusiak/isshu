@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ColumnDataProps {
       column: any,
-      fetchBoard: any,
+      fetchBoard: () => void,
 }
 
 
@@ -84,7 +84,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                           >
-                                                {props.column.issues.map((issue: any, index: any) => {
+                                                {props.column.issues.map((issue: any, index: number) => {
                                                       return (
                                                             <Fragment key={index}>
                                                                   <IssueData issue={issue}/>
