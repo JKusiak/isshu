@@ -7,18 +7,20 @@ import DeleteProjectForm from '../functional/DeleteProjectForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
+      modal: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+      },
       paper: {
+            width: '330px',
+            height: 'auto',
             backgroundColor: theme.palette.primary.main,
             border: '2px solid',
             borderColor: theme.palette.secondary.main,
             borderRadius: '10px',
             boxShadow: theme.shadows[2],
             padding: theme.spacing(2, 4, 3),
-      },
-      modal: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
       },
 }));
 

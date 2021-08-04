@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       paper: {
+            width: '35vw',
+            minWidth: '430px',
+            height: 'auto',
             backgroundColor: theme.palette.primary.main,
             border: '2px solid',
             borderColor: theme.palette.secondary.main,
