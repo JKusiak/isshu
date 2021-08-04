@@ -2,9 +2,7 @@ import { FC, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/AddOutlined';
-import IconButton from '@material-ui/core/IconButton';
 import { Card, Typography } from '@material-ui/core';
 
 
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             gridColumn: '1',
             justifySelf: 'start',
             alignSelf: 'center',
-            fontSize: '30px',
+            fontSize: '25px',
             color: theme.palette.secondary.light,
       },
       text: {
@@ -77,7 +75,9 @@ const AddIssueForm: FC<AddIssueFormProps> = (props) => {
                         issueId: res.data._id,
                   };
 
-                  axios.post(`http://localhost:5000/columns/addIssue/${props.column._id}`, issueToAdd, {
+                  const columnId = props.column._id;
+
+                  axios.post(`http://localhost:5000/columns/addIssue/${columnId}`, issueToAdd, {
                         headers: {
                               'Authorization': `Bearer ${localStorage.getItem('token')}`
                         }

@@ -1,9 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-
 import IssueData from "./IssueData";
-import { IconButton } from "@material-ui/core";
 import DeleteColumnForm from "./functional/DeleteColumnForm";
 import AddIssueModal from "./modals/AddIssueModal";
 
@@ -41,9 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             columnContentWrapper: {
                   width: 275,
+                  minHeight: '50vh',
                   height: 'auto',
                   margin: 8,
-                  backgroundColor: 'red',
+                  backgroundColor: theme.palette.primary.main,
             },
       }
 ));
@@ -80,6 +79,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
+                                          <>
                                           <div className={classes.columnContentWrapper}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
@@ -87,17 +87,21 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 {props.column.issues.map((issue: any, index: number) => {
                                                       return (
                                                             <Fragment key={index}>
-                                                                  <IssueData issue={issue}/>
+                                                                  <IssueData issue={issue} index={index}/>
                                                             </Fragment>
                                                       );
                                                 })}
                                                 {provided.placeholder}
+                                                <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
                                           </div>
+
+                                          
+                                          </>
                                     );
                               }}
                         </Droppable>
 
-                        <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
+                        
                   </div>          
             )                           
       }

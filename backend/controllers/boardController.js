@@ -104,6 +104,7 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
               columns: columnId,
           } 
       };
+      
       const options = {
           new: true, 
           useFindAndModify: false,

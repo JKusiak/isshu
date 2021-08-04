@@ -36,6 +36,7 @@ export const addIssue = asyncHandler(async(req, res) => {
 
       try {
             const savedIssue = await newIssue.save();
+            res.json(savedIssue);
       } catch(err) {
             res.status(400).json({message: "Can not save the issue"});
             throw new Error('Can not save the issue');

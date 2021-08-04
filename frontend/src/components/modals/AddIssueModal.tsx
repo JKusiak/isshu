@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/AddOutlined';
-import { Button, ClickAwayListener, Typography } from '@material-ui/core';
+import { ClickAwayListener, Typography } from '@material-ui/core';
 import AddIssueForm from '../functional/AddIssueForm';
 
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             gridColumn: '1',
             justifySelf: 'start',
             alignSelf: 'center',
-            fontSize: '30px',
+            fontSize: '25px',
             color: theme.palette.secondary.light,
       },
       text: {

@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
-import DeleteColumnForm from "./functional/DeleteColumnForm";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,12 +73,14 @@ const BoardData: FC<BoardDataProps> = (props) => {
       const onDragEnd = (result: DropResult) => {
             const { source, destination, draggableId } = result;
 
-            if (destination !== undefined) {
-                  if(source.droppableId === destination.droppableId) {
-                        return;
-                  } else {
+            if (destination !== undefined && destination !== null) {
+                  if(source.droppableId !== destination.droppableId) {
                         props.changeColumns(source.droppableId, destination.droppableId, draggableId);
+                  } else {
+                        return;
                   }
+            } else {
+                  return;
             }
       };
 

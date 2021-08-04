@@ -89,19 +89,22 @@ export const getIssuesOfColumn = asyncHandler(async(req, res) => {
 
 export const addIssueToColumn = asyncHandler(async(req, res) => {
       const id = req.params.id;
+      const issueId = req.body.issueId;
+
       const update = {
           $push: {
-              issues: req.body.issueId,
+              issues: issueId,
           } 
       };
+
       const options = {
           new: true, 
           useFindAndModify: false,
       };
   
-  
       try {
             await Column.findByIdAndUpdate(id, update, options);
+            res.json("Issue added to column successfuly");
       } catch(err) {
             res.status(400).json({message: "Could not add issue to column"});
             throw new Error('Could not add issue to column');
@@ -111,11 +114,13 @@ export const addIssueToColumn = asyncHandler(async(req, res) => {
 
 export const deleteIssueFromColumn = asyncHandler(async(req, res) => {
       const id = req.params.id;
+
       const update = {
             $pullAll: {
                   issues: [req.body.issueId],
             } 
       };
+
       const options =  {
           safe: true, 
           upsert: true
