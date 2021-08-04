@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             fontWeight: 600,
             background: theme.palette.primary.main,
             "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       },
 }));

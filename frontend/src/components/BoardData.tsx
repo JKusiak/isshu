@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             container: {
                   display: "flex", 
-                  // height: "100%",
+                  
                   marginLeft: '3em',
             },
             navigation: {

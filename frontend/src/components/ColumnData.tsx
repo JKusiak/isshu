@@ -5,6 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
 import { IconButton } from "@material-ui/core";
 import DeleteColumnForm from "./functional/DeleteColumnForm";
+import AddIssueModal from "./modals/AddIssueModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -12,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
             columnWrapper: {
                   display: "flex",
                   flexDirection: "column",
+                  minHeight: 500,
                   alignItems: "center",
                   "&:not(:last-child)": {
                         borderRight: '0.1px solid',
@@ -38,10 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
                   justifySelf: 'end',
             },
             columnContentWrapper: {
-                  margin: 8,
-                  background: theme.palette.primary.main,
                   width: 275,
-                  minHeight: 500
+                  height: 'auto',
+                  margin: 8,
+                  backgroundColor: 'red',
             },
       }
 ));
@@ -66,18 +68,15 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                               onMouseOver={() => setIsMouseOver(true)} 
                               onMouseOut={() => setIsMouseOver(false)}        
                         >
-                                    <h2 className={classes.columnName}>{props.column.name}</h2>
-                                    
-                                    {true &&
-                                    <div className={classes.deleteColumnButton}>
-                                           <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
-                                    </div>
-                                    }
-                        </div>
-
+                              <h2 className={classes.columnName}>{props.column.name}</h2>
                               
-
-                        
+                              {true &&
+                              <div className={classes.deleteColumnButton}>
+                                          <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
+                              </div>
+                              }
+                        </div>
+                              
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
@@ -97,6 +96,8 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                     );
                               }}
                         </Droppable>
+
+                        <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
                   </div>          
             )                           
       }

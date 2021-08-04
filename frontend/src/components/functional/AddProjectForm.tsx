@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             borderRadius: '10px',
             fontWeight: 600,
             "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       },
       inputField: {

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             borderRadius: '10px',
             marginTop: '5em',
             "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       }
 }));
