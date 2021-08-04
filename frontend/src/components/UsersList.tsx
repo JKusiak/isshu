@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   marginTop: 70,
                   width: 270,
                   backgroundColor: theme.palette.primary.main,
+                  boxShadow: theme.shadows[2],
             },
             listItem: {  
                   '&:hover': {

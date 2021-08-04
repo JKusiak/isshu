@@ -12,22 +12,29 @@ interface DeleteColumnFormProps {
 
 const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
       const { boardId } = useParams<{boardId: string}>();
+      const columnId = props.column._id;
 
 
-      function deleteColumnReference() {
-            deleteFromBoard();
-            deleteColumn();
-            props.fetchBoard();
+      function deleteColumn() {
+            axios.delete(`http://localhost:5000/columns/delete/${columnId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then(resp => {
+                  
+            }).catch((err) => {
+                  console.log(err);
+            });
       }
 
 
       function deleteFromBoard() {
-            axios.delete(`http://localhost:5000/projects/deleteBoard/${boardId}`, {
+            axios.delete(`http://localhost:5000/boards/deleteColumn/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   },
                   data: {
-                        columnId: props.column._id,
+                        columnId: columnId,
                   }
             }).then((res) => {
 
@@ -37,16 +44,10 @@ const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
       }
 
 
-      function deleteColumn() {
-            axios.delete(`http://localhost:5000/columns/delete/${props.column._id}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then(resp => {
-                  
-            }).catch((err) => {
-                  console.log(err);
-            });
+      function deleteColumnReference() {
+            deleteFromBoard();
+            deleteColumn();
+            props.fetchBoard();
       }
 
 

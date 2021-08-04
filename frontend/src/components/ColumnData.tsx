@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
                   justifySelf: 'end',
             },
             columnContentWrapper: {
-                  width: 275,
+                  width: '275px',
                   minHeight: '50vh',
                   height: 'auto',
-                  margin: 8,
+                  margin: '15px',
                   backgroundColor: theme.palette.primary.main,
             },
       }

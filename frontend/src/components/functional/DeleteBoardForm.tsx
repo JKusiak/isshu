@@ -40,6 +40,19 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       let history = useHistory();
 
 
+      function deleteBoard() {
+            axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then((res) => {
+                  
+            }).catch((err) => {
+                  console.log(err);
+            });  
+      }
+
+
       function deleteFromProject() {
             axios.delete(`http://localhost:5000/projects/deleteBoard/${projectId}`, {
                   headers: {
@@ -53,19 +66,6 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             })
-      }
-
-
-      function deleteBoard() {
-            axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then((res) => {
-                  
-            }).catch((err) => {
-                  console.log(err);
-            });  
       }
 
 

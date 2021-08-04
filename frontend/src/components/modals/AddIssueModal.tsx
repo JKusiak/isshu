@@ -7,7 +7,7 @@ import AddIssueForm from '../functional/AddIssueForm';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       container: {
-            width: '90%',
+            width: '100%',
       },
       buttonContainer: {
             display: 'grid',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             gridColumn: '2',
             justifySelf: 'start',
             alignSelf: 'center',
-            fontSize: 15,
+            fontSize: '15px',
             color: theme.palette.secondary.light,
       },
       

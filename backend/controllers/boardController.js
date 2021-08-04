@@ -128,6 +128,7 @@ export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
                   columns: [req.body.columnId],
             } 
       };
+      
       const options =  {
           safe: true, 
           upsert: true
