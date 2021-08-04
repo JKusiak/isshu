@@ -12,22 +12,68 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       const [board, setBoard] = useState([]);
 
       useEffect(() => {
+            fetchBoard();
+      },[boardId]);
+
+
+      function fetchBoard() {
             axios.get(`http://localhost:5000/boards/getContent/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  setBoard(resp.data.columns);
+                  setBoard(resp.data);
             }).catch((err) => {
                   console.log(err);
-            });;
+            });
+      }
 
-      },[boardId]);
 
+      function addToColumn(columnId: string, issueId: string) {
+            const issue = {
+                  issueId: issueId
+            }
+
+            axios.post(`http://localhost:5000/columns/addIssue/${columnId}`, issue, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then(resp => {
+            }).catch((err) => {
+                  console.log(err);
+            });
+            
+            fetchBoard();
+      }
+
+
+      function deleteFromColumn(columnId: string, issueId: string) {
+            axios.delete(`http://localhost:5000/columns/deleteIssue/${columnId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  },
+                  data: {
+                        issueId: issueId
+                  }
+            }).then(resp => {
+                  
+            }).catch((err) => {
+                  console.log(err);
+            });
+
+           
+      }
+
+
+      function changeColumns(sourceColumnId: string, destinationColumnId: string, issueId: string) {
+            deleteFromColumn(sourceColumnId, issueId);
+            addToColumn(destinationColumnId, issueId);
+            fetchBoard();
+      }
 
       return (
             <>
-                  <BoardData board={board}/>
+                  <BoardData board={board} fetchBoard={fetchBoard} changeColumns={changeColumns}/>
             </>
       );
 }

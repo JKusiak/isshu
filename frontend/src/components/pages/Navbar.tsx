@@ -59,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface NavbarProps {
-      loggedIn: boolean;
-      setLoggedIn: any;
+      loggedIn: boolean,
+      setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 

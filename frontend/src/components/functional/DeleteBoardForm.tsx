@@ -16,55 +16,71 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             width: '100%',
             marginTop: theme.spacing(5),
       },
-      delete: {
+      button: {
             margin: theme.spacing(3, 2, 3),
             borderRadius: '10px',
             fontWeight: 600,
             background: theme.palette.primary.main,
             "&:hover": {
-                  background: theme.palette.primary.dark
-            }
-      },
-      goBack: {
-            margin: theme.spacing(3, 2, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            background: theme.palette.secondary.light,
-            "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       },
 }));
 
 
 interface DeleteBoardFormProps {
-      handleClose: any,
+      handleClose: () => void,
 }
 
 
 const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       const classes = useStyles();
-      const { boardId } = useParams<{boardId: any}>();
-      const { projectId } = useParams<{projectId: any}>();
+      const { boardId } = useParams<{boardId: string}>();
+      const { projectId } = useParams<{projectId: string}>();
       let history = useHistory();
 
 
-      function onDelete(e: any) {
-            e.preventDefault();
-
+      function deleteBoard() {
             axios.delete(`http://localhost:5000/boards/delete/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
-                  props.handleClose();
-                  history.push(`/projects/${projectId}`);
+                  
             }).catch((err) => {
                   console.log(err);
             });  
       }
 
-      function onGoBack(e: any) {
+
+      function deleteFromProject() {
+            axios.delete(`http://localhost:5000/projects/deleteBoard/${projectId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  },
+                  data: {
+                        boardId: boardId,
+                  }
+            }).then((res) => {
+
+            }).catch((err) => {
+                  console.log(err);
+            })
+      }
+
+
+      function handleDeleteClick(e: React.MouseEvent) {
+            e.preventDefault();
+
+            deleteFromProject();
+            deleteBoard();
+
+            props.handleClose();
+            history.push(`/projects/${projectId}`);
+      }
+
+
+      function handleGoBack(e: React.MouseEvent) {
             e.preventDefault();
 
             props.handleClose();  
@@ -74,12 +90,12 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
   return (
     <>
       <Typography className={classes.header} component="h1" variant="h4">
-        Delete project?
+        Delete board?
       </Typography>
       <div className={classes.form}>
         <Button
-          className={classes.delete}
-          onClick={onDelete}
+          className={classes.button}
+          onClick={handleDeleteClick}
           fullWidth
           type="submit"
           variant="contained"
@@ -89,8 +105,8 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
         </Button>
 
         <Button
-          className={classes.goBack}
-          onClick={onGoBack}
+          className={classes.button}
+          onClick={handleGoBack}
           fullWidth
           type="submit"
           variant="contained"

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: '10px',
     fontWeight: 600,
     "&:hover": {
-      background: theme.palette.primary.dark
+      background: theme.palette.action.hover,
     }
   },
   inputField: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface LoginFormProps {
-  setLoggedIn: any
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const LoginForm: FC<LoginFormProps> = (props) => {
@@ -61,7 +61,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
     password: password,
   }
 
-  function onSubmit(e: any) {
+  function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
 
     axios.post('http://localhost:5000/login/', credentials)

@@ -12,7 +12,7 @@ const mainTheme = createMuiTheme({
     secondary: {
       main: '#424242',
     },
-  }
+  },
 });
 
 ReactDOM.render(

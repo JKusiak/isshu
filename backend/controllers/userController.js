@@ -4,18 +4,21 @@ import asyncHandler from 'express-async-handler';
 
 // TODO simplify to get rid of boilerplate code for all API endpoints
 export const getAllUsers = asyncHandler(async(req, res) => {
-    const users = await User.find({});
-    
-    res.json(users) ;
+    try {
+        const users = await User.find({});
+        res.json(users) ;
+    } catch(err) {
+        res.status(500).json({message: "Server error on fetching users"});
+        throw new Error('Server error on fetching users');
+    }
 });
 
 
 export const getUserById = asyncHandler(async(req, res) => {
-    const user = await User.findById(req.params.id);
-
-    if(user) {
+    try {
+        const user = await User.findById(req.params.id);
         res.json(user);
-    } else {
+    } catch(err) {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
     }
@@ -23,11 +26,10 @@ export const getUserById = asyncHandler(async(req, res) => {
 
 
 export const getLoggedUser = asyncHandler(async(req, res) => {
-    const user = await User.findById(req.user._id);
-
-    if(user) {
+    try {
+        const user = await User.findById(req.user._id);
         res.json(user);
-    } else {
+    } catch(err) {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
     }
@@ -48,11 +50,12 @@ export const addUser = asyncHandler(async(req, res) => {
         password,
         isAdmin,
     });
-    
+
+
     const savedUser = await newUser.save();
 
     if(savedUser) {
-        res.json('User saved successfully');
+        res.json(savedUser);
     } else {
         res.status(400).json({message: "Can not save the user"});
         throw new Error('Can not save the user');
@@ -75,26 +78,19 @@ export const updateUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    User.findByIdAndUpdate(id, update, options, function(err, data) {
-        if(err) {
-            res.status(400).json({message: "Update unsuccessful"});
-            throw new Error('Update unsuccessful');
-        } else if(!data) {
-            res.status(404).json({message: "User not found"});
-            throw new Error('User not found');
-        } else {
-            res.json("User updated successfuly");
-        }
-    });
+    try {
+        await User.findByIdAndUpdate(id, update, options);
+    } catch(err) {
+        res.status(400).json({message: "Update of user unsuccessful"});
+            throw new Error('Update of user unsuccessful');
+    }
 });
 
 
 export const deleteUser = asyncHandler(async(req, res) => {
-    const user = await User.findByIdAndDelete(req.params.id);
-
-    if(user) {
-        res.json("User deleted successfuly");
-    } else {
+    try {
+        await User.findByIdAndDelete(req.params.id);
+    } catch(err) {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
     }
@@ -102,12 +98,11 @@ export const deleteUser = asyncHandler(async(req, res) => {
 
 
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
-    const projects = await User.findOne({email: req.user.email})
-        .populate('projects');
-
-    if(projects) {
+    try {
+        const projects = await User.findOne({email: req.user.email})
+            .populate('projects');
         res.json(projects);  
-    } else {
+    } catch(err) {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
     }
@@ -128,19 +123,12 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-
-    // no await here, otherwise callback on update + await make execute twice
-    User.findByIdAndUpdate(userId, update, options, function(err, data){
-        if(err) {
-            res.status(400).json({message: "Update unsuccessful"});
-            throw new Error('Update unsuccessful');
-        } else if(!data) {
-            res.status(404).json({message: "User not found"});
-            throw new Error('User not found');
-        } else {
-            res.json("Project added to user successfully");
-        }
-    });
+    try {
+        await User.findByIdAndUpdate(userId, update, options);
+    } catch(err) {
+        res.status(400).json({message: "Could not add project to user"});
+        throw new Error('Update unsuccessful');
+    }
 });
 
 
@@ -156,28 +144,23 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
         useFindAndModify: false,
     };
 
-    User.findByIdAndUpdate(userId, update, options, function(err, data){
-        if(err) {
-            res.status(400).json({message: "Update unsuccessful"});
-            throw new Error('Update unsuccessful');
-        } else if(!data) {
-            res.status(404).json({message: "User not found"});
-            throw new Error('User not found');
-        } else {
-            res.json("Project deleted from user successfully");
-        }
-    });
+    try {
+        await User.findByIdAndUpdate(userId, update, options);
+
+    } catch(err) {
+        res.status(400).json({message: "Could not delete project from user"});
+        throw new Error('Could not delete project from user');
+    }
 });
 
 
 export const getUsersByProject = asyncHandler(async(req, res) => {
     const id = req.params.id;
-    const users = await User.find({projects: id});
     
-
-    if(users) {
+    try {
+        const users = await User.find({projects: id});
         res.json(users);  
-    } else {
+    } catch(err) {
         res.status(404).json({message: "No users in this project"});
         throw new Error('No users in this project');
     }
@@ -186,12 +169,11 @@ export const getUsersByProject = asyncHandler(async(req, res) => {
 
 export const getUsersWithoutProject = asyncHandler(async(req, res) => {
     const id = req.params.id;
-    const users = await User.find({projects: {"$ne": id}});
     
-
-    if(users) {
+    try {
+        const users = await User.find({projects: {"$ne": id}});
         res.json(users);  
-    } else {
+    } catch(err) {
         res.status(404).json({message: "No users without this project"});
         throw new Error('No users without this project');
     }

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -16,39 +16,30 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             width: '100%',
             marginTop: theme.spacing(5),
       },
-      delete: {
+      button: {
             margin: theme.spacing(3, 2, 3),
             borderRadius: '10px',
             fontWeight: 600,
             background: theme.palette.primary.main,
             "&:hover": {
-                  background: theme.palette.primary.dark
-            }
-      },
-      goBack: {
-            margin: theme.spacing(3, 2, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            background: theme.palette.secondary.light,
-            "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       },
 }));
 
 
 interface DeleteProjectFormProps {
-      handleClose: any,
+      handleClose: () => void,
 }
 
 
 const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
       const classes = useStyles();
-      const { projectId } = useParams<{projectId: any}>();
+      const { projectId } = useParams<{projectId: string}>();
       let history = useHistory();
 
 
-      function onDelete(e: any) {
+      function onDelete(e: React.MouseEvent) {
             e.preventDefault();
 
             axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
@@ -63,7 +54,7 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
             });  
       }
 
-      function onGoBack(e: any) {
+      function onGoBack(e: React.MouseEvent) {
             e.preventDefault();
 
             props.handleClose();  
@@ -77,7 +68,7 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
       </Typography>
       <div className={classes.form}>
         <Button
-          className={classes.delete}
+          className={classes.button}
           onClick={onDelete}
           fullWidth
           type="submit"
@@ -88,7 +79,7 @@ const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
         </Button>
 
         <Button
-          className={classes.goBack}
+          className={classes.button}
           onClick={onGoBack}
           fullWidth
           type="submit"

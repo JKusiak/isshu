@@ -1,38 +1,32 @@
 import { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import AddBoardForm from '../functional/AddBoardForm';
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/AddOutlined';
-import Typography from '@material-ui/core/Typography';
-import { ClickAwayListener } from '@material-ui/core';
+import { ClickAwayListener, IconButton } from '@material-ui/core';
+import AddColumnForm from '../functional/AddColumnForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      boardCard: {
+      iconButton: {
             display: 'flex',
-            minHeight: '300px',
+            minHeight: '35px',
+            minWidth: '35px',
             justifyContent: 'center',
             alignItems: 'center',
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                  boxShadow: theme.shadows[5],
-                  cursor: 'pointer',
-            },
       },
       icon: {
-            fontSize: '35px',
+            fontSize: '30px',
             color: theme.palette.secondary.main,
       },
       
 }));
 
-interface AddBoardModalProps {
-      fetchBoards: () => void,
+interface AddColumnModalProps {
+      fetchBoard: () => void,
 }
 
 
-const AddBoardModal: FC<AddBoardModalProps> = (props) => {
+const AddColumnModal: FC<AddColumnModalProps> = (props) => {
       const classes = useStyles();
       const [addMode, setAddMode] = useState(false);
 
@@ -49,15 +43,15 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
       <>
       <div onClick={handleClickAddBoard}>
             <ClickAwayListener onClickAway={handleClickAway}>
-                  <Card className={classes.boardCard}>
-                        <Typography component="h5" variant="h5">
+                  <Card >
                               {addMode && 
-                                    <AddBoardForm fetchBoards={props.fetchBoards} setAddMode={setAddMode}/>
+                                    <AddColumnForm setAddMode={setAddMode} fetchBoard={props.fetchBoard}/>
                               }
-                              {!addMode && 
-                                    <AddIcon className={classes.icon}/>
+                              {!addMode &&
+                                    <IconButton className={classes.iconButton}>
+                                          <AddIcon className={classes.icon}/> 
+                                    </IconButton>  
                               }
-                        </Typography>
                   </Card>
             </ClickAwayListener>
       </div>
@@ -65,4 +59,4 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
   );
 }
 
-export default AddBoardModal;
+export default AddColumnModal;

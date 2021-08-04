@@ -8,25 +8,29 @@ import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      paper: {
-            backgroundColor: theme.palette.primary.main,
-            border: '2px solid',
-            borderColor: theme.palette.secondary.main,
-            borderRadius: '10px',
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-      },
       modal: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+      },    
+      paper: {
+            width: '40vw',
+            minWidth: '430px',
+            height: 'auto',
+            backgroundColor: theme.palette.primary.main,
+            border: '2px solid',
+            borderColor: theme.palette.secondary.main,
+            borderRadius: '10px',
+            boxShadow: theme.shadows[2],
+            padding: theme.spacing(2, 4, 3),
       },
+      
       homePageButton: {
             padding: '0.5em 4em',
             borderRadius: '10px',
             marginTop: '5em',
             "&:hover": {
-                  background: theme.palette.primary.dark
+                  background: theme.palette.action.hover,
             }
       }
 }));

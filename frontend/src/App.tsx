@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import Navbar from './components/pages/Navbar';
@@ -9,7 +9,6 @@ import LoggedUserPage from './components/pages/LoggedUserPage';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProjectPage from './components/pages/ProjectPage';
 import UserPage from './components/pages/UserPage';
-
 
 
 function App() {

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface LoginPageProps {
-  setLoggedIn: any
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const LoginPage: FC<LoginPageProps> = (props) => {

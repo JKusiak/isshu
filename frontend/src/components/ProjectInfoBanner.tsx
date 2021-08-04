@@ -151,7 +151,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             props.project.dateEnd]);
 
 
-      function onSubmit(e: any) {
+      function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             let updatedProject = {
                   name: projectName,
@@ -205,14 +205,14 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       }
 
 
-      function handleEnterMultiline(e: any) {
+      function handleEnterMultiline(e: React.KeyboardEvent) {
             if(e.which === 13) {
                   onSubmit(e);
             }
       }
 
 
-      function handleClickAway(e:any) {
+      function handleClickAway(e: any) {
             if(isEditing === true) {
                   setIsEditing(false);
                   onSubmit(e);
