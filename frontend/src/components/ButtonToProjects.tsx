@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             border: '2px solid',
             borderColor: theme.palette.secondary.main,
             borderRadius: '10px',
-            boxShadow: theme.shadows[5],
+            boxShadow: theme.shadows[2],
             padding: theme.spacing(2, 4, 3),
       },
       buttonLink: {

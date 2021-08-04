@@ -13,7 +13,6 @@ import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { Link } from 'react-router-dom';
-import { ButtonGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,10 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
             drawerPaper: {
                   marginTop: 70,
                   width: 270,
+                  backgroundColor: theme.palette.primary.main,
             },
             listItem: {  
                   '&:hover': {
-                        boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
+                        boxShadow: theme.shadows[5],
                         '& *': {
                               fontWeight: 600
                         }
@@ -83,7 +83,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <ButtonGroup>
+                                                <div>
                                                       <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                             <ListItemText primary={fullName}/>
                                                       </Link>
@@ -97,7 +97,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                                   <DeleteIcon />
                                                             </IconButton>
                                                       </ListItemSecondaryAction>      
-                                                </ButtonGroup>                 
+                                                </div>                 
                                           </ListItem> 
                                     </Fragment>
                               );
@@ -105,7 +105,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                               return(
                                     <Fragment key={user._id}>
                                           <ListItem className={classes.listItem}>
-                                                <ButtonGroup>
+                                                <div>
                                                       <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                             <ListItemText primary={fullName}/>
                                                       </Link>
@@ -120,7 +120,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                                   <AddIcon/>
                                                             </IconButton>
                                                       </ListItemSecondaryAction>
-                                                </ButtonGroup>
+                                                </div>
                                           </ListItem>
                                     </Fragment>
                               );

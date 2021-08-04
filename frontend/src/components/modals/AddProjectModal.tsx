@@ -8,23 +8,23 @@ import Fade from '@material-ui/core/Fade';
 import { IconButton, Tooltip } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      paper: {
-            backgroundColor: theme.palette.primary.main,
-            border: '2px solid',
-            borderColor: theme.palette.secondary.main,
-            borderRadius: '10px',
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-      },
       modal: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
       },
+      paper: {
+            backgroundColor: theme.palette.primary.main,
+            border: '2px solid',
+            borderColor: theme.palette.secondary.main,
+            borderRadius: '10px',
+            boxShadow: theme.shadows[2],
+            padding: theme.spacing(2, 4, 3),
+      },
       icon: {
             fontSize: 25,
       },
-      homePageButton: {
+      addProjectButton: {
             "&:hover": {
                   stroke: 'black',
                   strokeWidth: 0.2,
@@ -52,7 +52,7 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
             <>
             <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
                   <IconButton
-                        className={classes.homePageButton}
+                        className={classes.addProjectButton}
                         aria-label="add project" 
                         color="secondary"
                         onClick={handleOpen}
@@ -61,9 +61,9 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
                   </IconButton>
             </Tooltip>
             <Modal
+                  className={classes.modal}
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
-                  className={classes.modal}
                   open={open}
                   onClose={handleClose}
                   closeAfterTransition
@@ -72,11 +72,11 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
                         timeout: 500,
                   }}
             >
-            <Fade in={open}>
-                  <div className={classes.paper}>
-                        <AddProjectForm handleClose={handleClose}/>
-                  </div>
-            </Fade>
+                  <Fade in={open}>
+                        <div className={classes.paper}>
+                              <AddProjectForm handleClose={handleClose}/>
+                        </div>
+                  </Fade>
             </Modal>
             </>
       );

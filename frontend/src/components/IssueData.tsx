@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IssueDataProps {
       issue: any,
-      issueIndex: any,
 }
 
 
@@ -20,11 +19,7 @@ const IssueData: FC<IssueDataProps> = (props) => {
 
       function displayIssue() {
             return (
-                  <Draggable
-                        key={props.issueIndex}
-                        draggableId={props.issue._id}
-                        index={props.issueIndex}
-                  >
+                  <Draggable draggableId={props.issue._id} index={props.issue._id}>
                         {(provided, snapshot) => {
                               return (
                                     <div

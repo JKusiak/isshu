@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
 import AddBoardModal from "./modals/AddBoardModal";

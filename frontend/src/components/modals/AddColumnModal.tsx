@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddColumnModalProps {
-
+      fetchBoard: any,
 }
 
 
@@ -45,7 +45,7 @@ const AddColumnModal: FC<AddColumnModalProps> = (props) => {
             <ClickAwayListener onClickAway={handleClickAway}>
                   <Card >
                               {addMode && 
-                                    <AddColumnForm setAddMode={setAddMode}/>
+                                    <AddColumnForm setAddMode={setAddMode} fetchBoard={props.fetchBoard}/>
                               }
                               {!addMode &&
                                     <IconButton className={classes.iconButton}>

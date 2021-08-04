@@ -97,9 +97,11 @@ export const getAllBoardContent = asyncHandler(async(req, res) => {
 
 export const addColumnToBoard = asyncHandler(async(req, res) => {
       const id = req.params.id;
+      const columnId = req.body.columnId;
+
       const update = {
           $push: {
-              columns: req.body.columnId,
+              columns: columnId,
           } 
       };
       const options = {
@@ -109,6 +111,7 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
   
       try {
             await Board.findByIdAndUpdate(id, update, options);
+            res.json("Column added to board successfuly");
       } catch(err) {
             res.status(400).json({message: "Could not add column to board"});
             throw new Error('Could not add column to board');
@@ -118,6 +121,7 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
 
 export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
       const id = req.params.id;
+
       const update = {
             $pullAll: {
                   columns: [req.body.columnId],
@@ -132,6 +136,6 @@ export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
             await Board.findByIdAndUpdate(id, update, options);
       } catch(err) {
             res.status(400).json({message: "Could not delete column from board"});
-              throw new Error('Could not delete column from board');
+            throw new Error('Could not delete column from board');
       }
   });

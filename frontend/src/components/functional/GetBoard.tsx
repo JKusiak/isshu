@@ -67,7 +67,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
       return (
             <>
-                  <BoardData board={board} addToColumn={addToColumn} deleteFromColumn={deleteFromColumn}/>
+                  <BoardData board={board} fetchBoard={fetchBoard} addToColumn={addToColumn} deleteFromColumn={deleteFromColumn}/>
             </>
       );
 }

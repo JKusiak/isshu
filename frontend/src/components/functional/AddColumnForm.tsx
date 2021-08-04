@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface AddColumnFormProps {
       setAddMode: any,
+      fetchBoard: any,
 }
 
 
@@ -25,13 +26,14 @@ const AddColumnForm: FC<AddColumnFormProps> = (props) => {
       const [columnName, setColumnName] = useState('');
       let { boardId } = useParams<{boardId: string}>();
 
+      const column = {
+            columnName: columnName,
+      }
 
+      
       function onSubmit(e: any) {
             e.preventDefault();
-            const column = {
-                  columnName: columnName,
-            }
-
+            
             axios.post('http://localhost:5000/columns/add', column, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -48,6 +50,7 @@ const AddColumnForm: FC<AddColumnFormProps> = (props) => {
                   }).then((res) => {
                         console.log(res.data);
                         props.setAddMode(false);
+                        props.fetchBoard();
                   }).catch((err) => {
                         console.log(err);
                   });
@@ -70,9 +73,7 @@ const AddColumnForm: FC<AddColumnFormProps> = (props) => {
                         setColumnName(e.target.value);
                   }}
             />
-            <IconButton
-                  type="submit"
-            >
+            <IconButton type="submit">
                   <AddIcon className={classes.buttonIcon}/>
             </IconButton>
       </form>

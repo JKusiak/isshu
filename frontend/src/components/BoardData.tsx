@@ -1,12 +1,13 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC } from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { FC, Fragment } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 import { useHistory } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
+import DeleteColumnForm from "./functional/DeleteColumnForm";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardDataProps {
       board: any,
+      fetchBoard: any,
       addToColumn: any,
       deleteFromColumn: any,
 }
@@ -87,22 +89,19 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   return(
                   <div className={classes.wrapper}>
                         <div className={classes.container}>
-                              <DragDropContext onDragEnd={result => onDragEnd(result)}>
-
-                                                
+                              <DragDropContext onDragEnd={result => onDragEnd(result)}>           
                                     {props.board.columns.map((column: any, index: any) => {
                                           return(
-                                                <ColumnData column={column} columnIndex={index}/> 
+                                                <Fragment key={index}>
+                                                      <ColumnData column={column} fetchBoard={props.fetchBoard}/> 
+                                                </Fragment>
                                           );
-                                    })}
-                                                
-                                
+                                    })}       
                               </DragDropContext>
                         </div>
                         
-
                         <div className={classes.addColumnButton}>
-                              <AddColumnModal/>
+                              <AddColumnModal fetchBoard={props.fetchBoard}/>
                         </div>
                   </div>
                   );
@@ -121,8 +120,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         </div>
                         <div className={classes.deleteButton}>
                               <DeleteBoardModal />
-                        </div>
-                        
+                        </div>          
                   </div>
                   
                   {displayBoard()}

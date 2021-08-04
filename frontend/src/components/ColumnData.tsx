@@ -1,9 +1,10 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useState } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import { FC, Fragment, useState } from "react";
+import { Droppable } from "react-beautiful-dnd";
+
 import IssueData from "./IssueData";
-import { ButtonGroup, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
+import DeleteColumnForm from "./functional/DeleteColumnForm";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
             columnHeader: {
                   display: 'grid',
                   gridTemplateColumns: '0.5fr 1fr 0.5fr',
-                  width: '100%',
+                  minWidth: '100%',
                   paddingBottom: '0.5em',
                   borderBottom: '0.1px solid',
                   borderBottomColor: theme.palette.primary.dark,
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ColumnDataProps {
       column: any,
-      columnIndex: number,
+      fetchBoard: any,
 }
 
 
@@ -56,30 +57,29 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
       const classes = useStyles();
       const [isMouseOver, setIsMouseOver] = useState(false);
 
+
       function displayColumn() {
             return(
                   <div className={classes.columnWrapper}>
-                        <ButtonGroup 
+                        <div 
                               className={classes.columnHeader} 
                               onMouseOver={() => setIsMouseOver(true)} 
-                              onMouseOut={() => setIsMouseOver(false)}
+                              onMouseOut={() => setIsMouseOver(false)}        
                         >
-                              <h2 className={classes.columnName}>{props.column.name}</h2>
+                                    <h2 className={classes.columnName}>{props.column.name}</h2>
+                                    
+                                    {true &&
+                                    <div className={classes.deleteColumnButton}>
+                                           <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
+                                    </div>
+                                    }
+                        </div>
+
                               
-                              {isMouseOver && 
-                              <IconButton 
-                                    className={classes.deleteColumnButton}
-                                    onMouseOver={() => setIsMouseOver(true)}
-                              >
-                                    <DeleteIcon/>
-                              </IconButton>}
-                        </ButtonGroup>
+
                         
-                        <Droppable
-                              key={props.columnIndex}
-                              droppableId={props.column._id}
-                        >
-                              {(provided, snapshot) => {
+                        <Droppable droppableId={props.column._id}>
+                              {provided => {
                                     return (
                                           <div className={classes.columnContentWrapper}
                                                 {...provided.droppableProps}
@@ -87,7 +87,9 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                           >
                                                 {props.column.issues.map((issue: any, index: any) => {
                                                       return (
-                                                            <IssueData issue={issue} issueIndex={index}/>
+                                                            <Fragment key={index}>
+                                                                  <IssueData issue={issue}/>
+                                                            </Fragment>
                                                       );
                                                 })}
                                                 {provided.placeholder}

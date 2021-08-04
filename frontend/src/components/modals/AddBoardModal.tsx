@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
-            boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4)',
+            boxShadow: theme.shadows[2],
             "&:hover": {
-                  boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.2)',
+                  boxShadow: theme.shadows[5],
                   cursor: 'pointer',
             },
       },

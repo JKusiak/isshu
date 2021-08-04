@@ -83,24 +83,24 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
   return (
     <> 
       <form onSubmit={onSubmit} autoComplete="off">
-                        <TextField
-                              className={classes.inputField}
-                              required
-                              autoFocus
-                              variant='outlined'
-                              name="boardName"
-                              id="boardName"
-                              placeholder="Board name"
-                              autoComplete="board-name"
-                              onChange={e => {
-                                    setBoardName(e.target.value);
-                              }}
-                        />
-                        <IconButton
-                              type="submit"
-                        >
-                              <AddIcon className={classes.buttonIcon}/>
-                        </IconButton>
+            <TextField
+                  className={classes.inputField}
+                  required
+                  autoFocus
+                  variant='outlined'
+                  name="boardName"
+                  id="boardName"
+                  placeholder="Board name"
+                  autoComplete="board-name"
+                  onChange={e => {
+                        setBoardName(e.target.value);
+                  }}
+            />
+            <IconButton
+                  type="submit"
+            >
+                  <AddIcon className={classes.buttonIcon}/>
+            </IconButton>
       </form>
     </>
   );
