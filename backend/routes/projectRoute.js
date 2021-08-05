@@ -8,7 +8,6 @@ import {
       deleteProject,
       getBoardsOfProject,
       addBoardToProject,
-      deleteBoardFromProject,
 } from '../controllers/projectController.js';
 
 
@@ -29,5 +28,3 @@ protectedProjectRouter.route('/delete/:id').delete(deleteProject);
 protectedProjectRouter.route('/getBoards/:id').get(getBoardsOfProject);
 
 protectedProjectRouter.route('/addBoard/:id').post(addBoardToProject);
-
-protectedProjectRouter.route('/deleteBoard/:id').delete(deleteBoardFromProject);

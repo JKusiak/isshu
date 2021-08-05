@@ -110,26 +110,3 @@ export const addIssueToColumn = asyncHandler(async(req, res) => {
             throw new Error('Could not add issue to column');
       }
 });
-
-
-export const deleteIssueFromColumn = asyncHandler(async(req, res) => {
-      const id = req.params.id;
-
-      const update = {
-            $pullAll: {
-                  issues: [req.body.issueId],
-            } 
-      };
-
-      const options =  {
-          safe: true, 
-          upsert: true
-      };
-
-      try {
-            await Column.findByIdAndUpdate(id, update, options);
-      } catch(err) {
-            res.status(400).json({message: "Could not delete issue from column"});
-            throw new Error('Could not delete issue from column');
-      }
-  });

@@ -8,7 +8,6 @@ import {
       deleteBoard,
       getAllBoardContent,
       addColumnToBoard,
-      deleteColumnFromBoard,
 } from '../controllers/boardController.js';
 
 
@@ -29,5 +28,3 @@ protectedBoardRouter.route('/delete/:id').delete(deleteBoard);
 protectedBoardRouter.route('/getContent/:id').get(getAllBoardContent);
 
 protectedBoardRouter.route('/addColumn/:id').post(addColumnToBoard);
-
-protectedBoardRouter.route('/deleteColumn/:id').delete(deleteColumnFromBoard);

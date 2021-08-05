@@ -25,28 +25,7 @@ const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-      }
 
-
-      function deleteFromBoard() {
-            axios.delete(`http://localhost:5000/boards/deleteColumn/${boardId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  },
-                  data: {
-                        columnId: columnId,
-                  }
-            }).then((res) => {
-
-            }).catch((err) => {
-                  console.log(err);
-            })
-      }
-
-
-      function deleteColumnReference() {
-            deleteFromBoard();
-            deleteColumn();
             props.fetchBoard();
       }
 
@@ -54,7 +33,7 @@ const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
       return (
             <>
                   <IconButton 
-                        onClick={() => deleteColumnReference()}
+                        onClick={() => deleteColumn()}
                   >
                         <DeleteIcon />
                   </IconButton>

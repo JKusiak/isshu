@@ -65,7 +65,7 @@ export const updateBoard = asyncHandler(async(req, res) => {
 
 export const deleteBoard = asyncHandler(async(req, res) => {
       try {
-            const board = await Board.findByIdAndDelete(req.params.id);
+            await Board.findByIdAndDelete(req.params.id);
       } catch(err) {
             res.status(404).json({message: "Board not found"});
             throw new Error('Board not found');
@@ -118,26 +118,3 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
             throw new Error('Could not add column to board');
       }
 });
-
-
-export const deleteColumnFromBoard = asyncHandler(async(req, res) => {
-      const id = req.params.id;
-
-      const update = {
-            $pullAll: {
-                  columns: [req.body.columnId],
-            } 
-      };
-      
-      const options =  {
-          safe: true, 
-          upsert: true
-      };
-  
-      try {
-            await Board.findByIdAndUpdate(id, update, options);
-      } catch(err) {
-            res.status(400).json({message: "Could not delete column from board"});
-            throw new Error('Could not delete column from board');
-      }
-  });

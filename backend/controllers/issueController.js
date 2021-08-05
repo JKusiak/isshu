@@ -109,27 +109,6 @@ export const addTagToIssue = asyncHandler(async(req, res) => {
 });
 
 
-export const deleteTagFromIssue = asyncHandler(async(req, res) => {
-      const id = req.params.id;
-      const update = { 
-            $pullAll: {
-                tags: [req.body.tagId],
-            } 
-      };
-      const options =  {
-          safe: true, 
-          upsert: true
-      };
-
-      try {
-            await Issue.findByIdAndUpdate(id, update, options);
-      } catch(err) {
-            res.status(400).json({message: "Could not delete tag from issue"});
-            throw new Error('Could not delete tag from issue');
-      }
-});
-
-
 export const getIssuesByCreator = asyncHandler(async(req, res) => {
       try {
             const issue = await Issue.find({creator: req.params.id});

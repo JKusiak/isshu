@@ -124,26 +124,3 @@ export const addBoardToProject = asyncHandler(async(req, res) => {
         throw new Error('Could not add board to project');
     }
 });
-
-
-export const deleteBoardFromProject = asyncHandler(async(req, res) => {
-    const id = req.params.id;
-
-    const update = { 
-        $pullAll: {
-            boards: [req.body.boardId],
-        } 
-    };
-
-    const options =  {
-        safe: true, 
-        upsert: true
-    };
-
-    try {
-        await Project.findByIdAndUpdate(id, update, options);
-    } catch(err) {
-        res.status(400).json({message: "Could not delete board from project"});
-        throw new Error('Could not delete board from project');
-    }
-});

@@ -53,26 +53,9 @@ const DeleteBoardForm: FC<DeleteBoardFormProps> = (props) => {
       }
 
 
-      function deleteFromProject() {
-            axios.delete(`http://localhost:5000/projects/deleteBoard/${projectId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  },
-                  data: {
-                        boardId: boardId,
-                  }
-            }).then((res) => {
-
-            }).catch((err) => {
-                  console.log(err);
-            })
-      }
-
-
       function handleDeleteClick(e: React.MouseEvent) {
             e.preventDefault();
 
-            deleteFromProject();
             deleteBoard();
 
             props.handleClose();
