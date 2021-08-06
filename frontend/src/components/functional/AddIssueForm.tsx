@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { Card, Typography } from '@material-ui/core';
-import { IColumn, INestedColumn } from '../../types/ModelTypes';
+import { INestedColumn } from '../../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

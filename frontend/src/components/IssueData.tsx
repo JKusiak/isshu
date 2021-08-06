@@ -2,7 +2,7 @@ import { Card, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { IIssue, INestedIssue } from "../types/ModelTypes";
+import { INestedIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>

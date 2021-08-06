@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
-import { IBoard, IColumn, INestedBoard, INestedColumn } from "../types/ModelTypes";
+import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface BoardDataProps {
       board: INestedBoard,
       fetchBoard: () => void, 
-      changeColumns: (arg0: string, arg1: string, arg2: string) => void,
+      swapColumns: (arg0: string, arg1: string, arg2: string) => void,
 }
 
 
@@ -76,7 +76,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
             if (destination !== undefined && destination !== null) {
                   if(source.droppableId !== destination.droppableId) {
-                        props.changeColumns(source.droppableId, destination.droppableId, draggableId);
+                        props.swapColumns(source.droppableId, destination.droppableId, draggableId);
                   } else {
                         return;
                   }

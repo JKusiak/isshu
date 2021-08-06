@@ -1,9 +1,8 @@
 import { IconButton } from "@material-ui/core";
 import axios from "axios";
 import { FC } from "react";
-import { useParams } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import { IColumn, INestedColumn } from "../../types/ModelTypes";
+import { INestedColumn } from "../../types/ModelTypes";
 
 
 interface DeleteColumnFormProps {
@@ -12,7 +11,6 @@ interface DeleteColumnFormProps {
 }
 
 const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
-      const { boardId } = useParams<{boardId: string}>();
       const columnId = props.column._id;
 
 

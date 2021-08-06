@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FC, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ColumnTemplate } from "../../types/ModelContentTemplate";
+import { BoardTemplate } from "../../types/ModelContentTemplate";
 import { INestedBoard } from "../../types/ModelTypes";
 import BoardData from "../BoardData";
 
@@ -11,11 +11,7 @@ interface GetBoardProps {
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
-      const [board, setBoard] = useState<INestedBoard>({
-            _id: '',
-            name: '',
-            columns: [ColumnTemplate]
-      });
+      const [board, setBoard] = useState<INestedBoard>(BoardTemplate);
 
       useEffect(() => {
             fetchBoard();
@@ -71,7 +67,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       }
 
 
-      function changeColumns(sourceColumnId: string, destinationColumnId: string, issueId: string) {
+      function swapColumns(sourceColumnId: string, destinationColumnId: string, issueId: string) {
             deleteFromColumn(sourceColumnId, issueId);
             addToColumn(destinationColumnId, issueId);
             fetchBoard();
@@ -79,7 +75,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
       return (
             <>
-                  <BoardData board={board} fetchBoard={fetchBoard} changeColumns={changeColumns}/>
+                  <BoardData board={board} fetchBoard={fetchBoard} swapColumns={swapColumns}/>
             </>
       );
 }

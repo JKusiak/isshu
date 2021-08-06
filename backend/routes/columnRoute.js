@@ -7,6 +7,7 @@ import {
       deleteColumn,
       getIssuesOfColumn,
       addIssueToColumn,
+      deleteIssueFromColumn,
 } from '../controllers/columnController.js';
 
 
@@ -25,5 +26,7 @@ router.route('/delete/:id').delete(deleteColumn);
 router.route('/getIssues/:id').get(getIssuesOfColumn);
 
 router.route('/addIssue/:id').post(addIssueToColumn);
+
+router.route('/deleteIssue/:id').delete(deleteIssueFromColumn);
 
 export default router;

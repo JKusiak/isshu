@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { ClickAwayListener, Typography } from '@material-ui/core';
 import AddIssueForm from '../functional/AddIssueForm';
-import { IColumn, INestedColumn } from '../../types/ModelTypes';
+import { INestedColumn } from '../../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

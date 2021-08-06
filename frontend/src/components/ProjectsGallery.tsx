@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
             height: 140,
             width: 400,
             justifyContent: 'space-between',
-            // alignItems: 'center',
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {

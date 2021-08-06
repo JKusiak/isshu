@@ -7,7 +7,7 @@ import Banner from '../resources/banners/banner.jpg'
 import DateFnsUtils from '@date-io/date-fns';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
-import { IProject, IUser } from "../types/ModelTypes";
+import { IProject } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -171,19 +171,19 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
             if(creator !== undefined && creator !== null) {
                   return(
                         <form className={classes.creator}>
-                                    <TextField
-                                          className={classes.fontColor}
-                                          id="project-creator" 
-                                          disabled={true}
-                                          InputProps={{
-                                                disableUnderline: true,
-                                                classes: {
-                                                      input: classes.creatorStyle,
-                                                },
-                                          }}
-                                          inputProps={{min: 0, style: { textAlign: 'end' }}}
-                                          value={`Creator: ${creator.name} ${creator.surname}`  || ''}
-                                    />
+                              <TextField
+                                    className={classes.fontColor}
+                                    id="project-creator" 
+                                    disabled={true}
+                                    InputProps={{
+                                          disableUnderline: true,
+                                          classes: {
+                                                input: classes.creatorStyle,
+                                          },
+                                    }}
+                                    inputProps={{min: 0, style: { textAlign: 'end' }}}
+                                    value={`Creator: ${creator.name} ${creator.surname}`  || ''}
+                              />
                         </form>
                   )
             }
