@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { IProject } from "../../types/ModelTypes";
 import ProjectInfoBanner from "../ProjectInfoBanner";
 
 
@@ -9,7 +10,15 @@ interface GetProjectInfoBannerProps {
 
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
       const { projectId } = useParams<{ projectId: string }>();
-      const [project, setProject] = useState({});
+      const [project, setProject] = useState<IProject>({
+            _id: '',
+            name: '',
+            description: '',
+            dateStart: new Date(),
+            dateEnd: new Date(),
+            creator: '',
+            boards: [''],
+      });
 
       useEffect(() => {
             fetchProject();
@@ -29,7 +38,7 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
       }
 
 
-      function changeData(newProjectData: any) {
+      function changeData(newProjectData: IProject) {
             axios.post(`http://localhost:5000/projects/update/${projectId}`, newProjectData, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`

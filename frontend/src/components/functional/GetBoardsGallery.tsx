@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { IBoard } from "../../types/ModelTypes";
 import BoardsGallery from "../BoardsGallery";
 
 
@@ -9,7 +10,11 @@ interface GetBoardsGalleryProps {
 
 const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
       const { projectId } = useParams<{ projectId: string }>();
-      const [boards, setBoards] = useState([]);
+      const [boards, setBoards] = useState<[IBoard]>([{
+            _id: '',
+            name: '',
+            columns: [''],
+      }]);
 
 
       useEffect(() => {

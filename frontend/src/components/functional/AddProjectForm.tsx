@@ -108,7 +108,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                               headers: {
                                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                               }
-                        }).then((res) => {
+                        }).then(() => {
                               props.handleClose();
                               history.push(`/projects/${newProjectId.projectId}`);
                         }).catch((err) => {

@@ -4,6 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
 import DeleteColumnForm from "./functional/DeleteColumnForm";
 import AddIssueModal from "./modals/AddIssueModal";
+import { IColumn, IIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ColumnDataProps {
-      column: any,
+      column: IColumn,
       fetchBoard: () => void,
 }
 

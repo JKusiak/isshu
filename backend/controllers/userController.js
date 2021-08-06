@@ -125,6 +125,7 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
 
     try {
         await User.findByIdAndUpdate(userId, update, options);
+        res.json();
     } catch(err) {
         res.status(400).json({message: "Could not add project to user"});
         throw new Error('Update unsuccessful');

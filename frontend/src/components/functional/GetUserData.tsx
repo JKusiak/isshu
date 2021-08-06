@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { IUser } from "../../types/ModelTypes";
 import PersonalData from "../PersonalData";
 
 
@@ -10,7 +11,15 @@ interface GetUserDataProps {
 
 const GetUserData: FC<GetUserDataProps> = (props) => {
       const { userId } = useParams<{ userId: string }>();
-      const [credentials, setCredentials] = useState({});
+      const [user, setUser] = useState<IUser>({
+            _id: '',
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+            isAdmin: false,
+            projects: [''],
+      });
 
       useEffect(() => {
             axios.get(`http://localhost:5000/users/${userId}`, {
@@ -19,7 +28,7 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
                   }
             }).then(resp => {
                   const userCredentials = resp.data;
-                  setCredentials(userCredentials);
+                  setUser(userCredentials);
             }).catch((err) => {
                   console.log(err);
             });
@@ -28,7 +37,7 @@ const GetUserData: FC<GetUserDataProps> = (props) => {
 
       return (
       <>
-            <PersonalData credentials={credentials}/>
+            <PersonalData user={user}/>
       </>
       );
 }

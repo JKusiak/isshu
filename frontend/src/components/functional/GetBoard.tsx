@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { IBoard } from "../../types/ModelTypes";
 import BoardData from "../BoardData";
 
 
@@ -9,7 +10,11 @@ interface GetBoardProps {
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
-      const [board, setBoard] = useState([]);
+      const [board, setBoard] = useState<IBoard>({
+            _id: '',
+            name: '',
+            columns: ['']
+      });
 
       useEffect(() => {
             fetchBoard();

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
+import { IUser } from "../../types/ModelTypes";
 import PersonalData from "../PersonalData";
+import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface GetLoggedUserDataProps {
@@ -8,15 +10,23 @@ interface GetLoggedUserDataProps {
 }
 
 const GetLoggedUserData: FC<GetLoggedUserDataProps> = (props) => {
-      const [credentials, setCredentials] = useState({});
+      const [user, setUser] = useState<IUser>({
+            _id: '',
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+            isAdmin: false,
+            projects: [''],
+      });
 
       useEffect(() => {
-            axios.get('http://localhost:5000/users/profile/token', {
+            axios.get(`http://localhost:5000/users/${getLoggedInUser()._id}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  setCredentials(resp.data);
+                  setUser(resp.data);
             }).catch((err) => {
                   console.log(err);
             });
@@ -25,7 +35,7 @@ const GetLoggedUserData: FC<GetLoggedUserDataProps> = (props) => {
 
       return (
       <>
-            <PersonalData credentials={credentials}/>
+            <PersonalData user={user}/>
       </>
       );
 }

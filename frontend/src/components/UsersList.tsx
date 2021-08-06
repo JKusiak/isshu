@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { Link } from 'react-router-dom';
+import { IUser } from '../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,8 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface UsersListProps {
-      contributors: [],
-      otherUsers: [],
+      contributors: [IUser],
+      otherUsers: [IUser],
       mobileOpen: boolean,
       handleSidebarToggle: () => void,
       addProjectToUser: (userId: string) => void,
@@ -75,9 +76,9 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
       }
 
 
-      function displayUsers(userType: any) {
+      function displayUsers(userType: [IUser]) {
             if(userType.length > 0) {
-                  return(userType.map((user: any) => {
+                  return(userType.map((user: IUser) => {
                         const fullName = `${user.name} ${user.surname}`;
 
                         if(userType === props.contributors) {

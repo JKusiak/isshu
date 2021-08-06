@@ -3,10 +3,11 @@ import axios from "axios";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import { IColumn } from "../../types/ModelTypes";
 
 
 interface DeleteColumnFormProps {
-      column: any,
+      column: IColumn,
       fetchBoard: () => void,
 }
 

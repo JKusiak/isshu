@@ -3,6 +3,7 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import { IBoard } from "../types/ModelTypes";
 import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
 import AddBoardModal from "./modals/AddBoardModal";
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardsGalleryProps {
-      boards: any;
+      boards: [IBoard];
       fetchBoards: () => void;
 }
 
@@ -50,7 +51,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
 
       function displayBoards() {
             if(props.boards.length > 0) {
-                  return(props.boards.map((board: any) => {
+                  return(props.boards.map((board: IBoard) => {
                         return(
                               <Fragment key={board._id}>
                                     <Link className={classes.link} to={`${url}/${board._id}`}>

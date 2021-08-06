@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
+import { IBoard, IColumn } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardDataProps {
-      board: any,
+      board: IBoard,
       fetchBoard: () => void, 
       changeColumns: (arg0: string, arg1: string, arg2: string) => void,
 }

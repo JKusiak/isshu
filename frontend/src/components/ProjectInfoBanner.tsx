@@ -1,5 +1,5 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { FC, useState } from "react";
 import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField } from "@material-ui/core";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -7,6 +7,7 @@ import Banner from '../resources/banners/banner.jpg'
 import DateFnsUtils from '@date-io/date-fns';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
+import { IProject, IUser } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -121,7 +122,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ProjectDataProps {
-      project: any, 
+      project: IProject, 
       changeData: (newProjectData: any) => void,
 }
 
@@ -130,9 +131,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       const classes = useStyles();
       const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
       const open = Boolean(anchorEl);
-      const [projectName, setProjectName] = useState('');
-      const [projectDescription, setProjectDescription] = useState('');
-      const [creator, setCreator] = useState({_id:'', name: '', surname: ''});
+      const [projectName, setProjectName] = useState<string>('');
+      const [projectDescription, setProjectDescription] = useState<string>('');
+      const [creator, setCreator] = useState<any>('');
       const [dateStart, setDateStart] = useState<Date | null>(new Date());
       const [dateEnd, setDateEnd] = useState<Date | null>(new Date());
       const [isEditing, setIsEditing] = useState(false);
@@ -212,10 +213,11 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       }
 
 
-      function handleClickAway(e: any) {
+      function handleClickAway(e: React.MouseEvent<Document, MouseEvent>) {
             if(isEditing === true) {
                   setIsEditing(false);
-                  onSubmit(e);
+                  // type casting like this necessary because of insuficient overlap of types
+                  onSubmit(e as unknown as React.SyntheticEvent);
             }
       }
 

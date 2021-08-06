@@ -11,6 +11,7 @@ import ProjectCover4 from '../resources/covers/project_cover4.png';
 import ProjectCover5 from '../resources/covers/project_cover5.png';
 import ProjectCover6 from '../resources/covers/project_cover6.png';
 import ProjectCover7 from '../resources/covers/project_cover7.png';
+import { IProject } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -70,7 +71,7 @@ function shuffleProjectCover() {
 
 
 interface ProjectListProps {
-      projects: any;
+      projects: [IProject];
 }
 
 
@@ -80,7 +81,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 
       function displayProjects() {
             if(props.projects.length > 0) {
-                  return(props.projects.map((project: any) => {
+                  return(props.projects.map((project: IProject) => {
                         return(
                               <Fragment key={project._id}>
                                     <Link className={classes.link} to={`${url}/${project._id}`}>

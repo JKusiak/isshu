@@ -2,6 +2,7 @@ import { Card, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { IIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface IssueDataProps {
-      issue: any,
+      issue: IIssue,
       index: number,
 }
 
