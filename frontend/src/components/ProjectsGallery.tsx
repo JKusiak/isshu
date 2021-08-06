@@ -16,7 +16,7 @@ import { IProject } from "../types/ModelTypes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-      gridContainer: {
+      projectsGrid: {
             display: 'grid',
             justifyContent: 'center',
             gap: '1.2em',
@@ -25,40 +25,38 @@ const useStyles = makeStyles((theme: Theme) =>
             marginLeft: '5em',
             marginBottom: '3em',
       },
-      root: {
+      link: {
+            textDecoration: 'none',
+            color: theme.palette.secondary.dark,
+      },
+      cardContainer: {
             display: 'flex',
-            //change here to adjust infinite length of project displayed, but foto looks uglier
-            height: 120,
+            height: 140,
+            width: 400,
             justifyContent: 'space-between',
-            alignItems: 'center',
+            // alignItems: 'center',
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
                   boxShadow: theme.shadows[5],
             }
       },
+      image: {
+            flex: 'none',
+            height: 140,
+            width: 140,
+            filter: 'blur(0.5px)'
+      },
       details: {
             display: 'flex',
             flexDirection: 'column',
-            maxWidth: 330,
-            padding: '0.5em',
+            maxHeight: 120,
       },
-
-      image: {
-            flex: 'none',
-            height: 120,
-            width: 120,
-            filter: 'blur(0.5px)'
+      // dirty trick to make content display in the center if text
+      // is short, if long 'empty' will shrink to zero
+      empty: {
+            flexBasis: '20px',
       },
-      
-      link: {
-            textDecoration: 'none',
-            color: theme.palette.secondary.dark,
-      },
-      cardAction: {
-            width: '100%',
-            height: '100%',
-      }
   })
 );
 
@@ -85,19 +83,19 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
                         return(
                               <Fragment key={project._id}>
                                     <Link className={classes.link} to={`${url}/${project._id}`}>
-                                          <Card className={classes.root}>
-                                                      <div className={classes.details}>
-                                                            <CardContent className={classes.link} >
+                                          <Card className={classes.cardContainer}>
+                                                      <CardContent>
+                                                            <div className={classes.details}>
+                                                                  <div className={classes.empty} />
                                                                   <Typography component="h5" variant="h5">
                                                                         {project.name}
                                                                   </Typography>
                                                                   <Typography variant="subtitle1" color="textSecondary">
                                                                         {project.description}
                                                                   </Typography>
-                                                            </CardContent>
-                                                      </div>
+                                                            </div>
+                                                      </CardContent>
                                                       <CardMedia
-
                                                             className={classes.image}
                                                             image={shuffleProjectCover()}
                                                             title="Project cover"
@@ -117,7 +115,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
      
       return(
             <>
-            <div className={classes.gridContainer}>
+            <div className={classes.projectsGrid}>
                   {displayProjects()}
             </div>
             </>
