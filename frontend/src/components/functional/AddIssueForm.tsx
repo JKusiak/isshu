@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import axios from 'axios';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { Card, Typography } from '@material-ui/core';
-import { IColumn } from '../../types/ModelTypes';
+import { IColumn, INestedColumn } from '../../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface AddIssueFormProps {
-      column: IColumn,
+      column: INestedColumn,
       fetchBoard: () => void,
       setAddMode: React.Dispatch<React.SetStateAction<boolean>>,
 }

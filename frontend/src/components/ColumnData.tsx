@@ -4,7 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
 import DeleteColumnForm from "./functional/DeleteColumnForm";
 import AddIssueModal from "./modals/AddIssueModal";
-import { IColumn, IIssue } from "../types/ModelTypes";
+import { IColumn, IIssue, INestedColumn, INestedIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ColumnDataProps {
-      column: IColumn,
+      column: INestedColumn,
       fetchBoard: () => void,
 }
 
@@ -85,7 +85,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                           >
-                                                {props.column.issues.map((issue: any, index: number) => {
+                                                {props.column.issues.map((issue: INestedIssue, index: number) => {
                                                       return (
                                                             <Fragment key={index}>
                                                                   <IssueData issue={issue} index={index}/>

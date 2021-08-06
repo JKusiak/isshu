@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
-import { IBoard, IColumn } from "../types/ModelTypes";
+import { IBoard, IColumn, INestedBoard, INestedColumn } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardDataProps {
-      board: IBoard,
+      board: INestedBoard,
       fetchBoard: () => void, 
       changeColumns: (arg0: string, arg1: string, arg2: string) => void,
 }
@@ -92,7 +92,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   <div className={classes.wrapper}>
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>           
-                                    {props.board.columns.map((column: any, index: number) => {
+                                    {props.board.columns.map((column: INestedColumn, index: number) => {
                                           return(
                                                 <Fragment key={index}>
                                                       <ColumnData column={column} fetchBoard={props.fetchBoard}/> 
