@@ -11,6 +11,7 @@ interface GetBoardProps {
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
+      const [isLoaded, setIsLoaded] = useState<boolean>(false);
       const [board, setBoard] = useState<INestedBoard>(BoardTemplate);
 
       useEffect(() => {
@@ -25,6 +26,8 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   }
             }).then(resp => {
                   setBoard(resp.data);
+                  // is loaded necessary for dnd components to receive columnIDs on first render
+                  setIsLoaded(true);
             }).catch((err) => {
                   console.log(err);
             });
@@ -75,7 +78,9 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
       return (
             <>
+            {isLoaded &&
                   <BoardData board={board} fetchBoard={fetchBoard} swapColumns={swapColumns}/>
+            }      
             </>
       );
 }

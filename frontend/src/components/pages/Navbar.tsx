@@ -90,8 +90,7 @@ const Navbar: FC<NavbarProps> = (props) => {
             <div className={classes.offset}/>
             <AppBar className={classes.appbar} >
             <Toolbar className={classes.toolbar}>
-                  
-                  <Link className={classes.linkWrapper} to="/">
+                  <Link className={classes.linkWrapper} to={props.loggedIn? '/projects' : '/'}>
                         <img className={classes.image} src={Icon} alt='site icon'/>
 
                         <img className={classes.logo} src={Logo} alt='site logo'/>
