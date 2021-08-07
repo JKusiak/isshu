@@ -8,6 +8,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { getLoggedInUser } from './GetLoggedInUser';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -80,15 +81,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
             description: description,
             dateStart: startDate,
             dateEnd: endDate,
-            creator: getCreator()
-      }
-
-      
-      function getCreator() {
-            const token = localStorage.getItem('token') || '';
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(atob(base64));
+            creator: getLoggedInUser(),
       }
 
 
@@ -104,7 +97,7 @@ const AddProjectForm: FC<AddProjectFormProps> = (props) => {
                               projectId: res.data._id,
                         };
 
-                        axios.post(`http://localhost:5000/users/addProject/${getCreator()._id}`, newProjectId, {
+                        axios.post(`http://localhost:5000/users/addProject/${getLoggedInUser()._id}`, newProjectId, {
                               headers: {
                                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                               }

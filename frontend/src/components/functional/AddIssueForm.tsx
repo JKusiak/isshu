@@ -5,6 +5,7 @@ import axios from 'axios';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { Card, Typography } from '@material-ui/core';
 import { INestedColumn } from '../../types/ModelTypes';
+import { getLoggedInUser } from './GetLoggedInUser';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -52,18 +53,9 @@ const AddIssueForm: FC<AddIssueFormProps> = (props) => {
 
       const issue = {
             description: issueDescription,
-            creator: getCreator()._id,
+            creator: getLoggedInUser()._id,
       }
-
-
-      function getCreator() {
-            const token = localStorage.getItem('token') || '';
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(atob(base64));
-      }
-
-      
+  
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             
