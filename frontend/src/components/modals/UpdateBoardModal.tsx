@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
 
@@ -9,12 +9,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             alignSelf: 'center',
             fontSize: '36px',
             color: theme.palette.secondary.main,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            "&:hover": {
-                  cursor: 'pointer',
-            }
+
       },
       inputField: {
             "& .MuiOutlinedInput-root": {
@@ -31,8 +26,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       nameText: {
             textAlign: 'center',
+            "&:hover": {
+                  cursor: 'pointer'
+            }
       }
 }));
+
 
 interface AddBoardModalProps {
       boardName: string,
@@ -48,9 +47,9 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
  
 
       return (
-            <div onClick={() => props.setUpdateMode(true)}>
+            <div className={classes.boardTitle}>
                   <ClickAwayListener onClickAway={props.onSubmit}>
-                        <div className={classes.boardTitle}> 
+                        <div onClick={() => props.setUpdateMode(true)}>
                               {props.updateMode && 
                                     <form onSubmit={props.onSubmit} autoComplete="off">
                                           <TextField
@@ -68,13 +67,13 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
                                           />
                                     </form>
                               }
+
                               {!props.updateMode &&
                                           <div className={classes.nameText}>{props.boardName}</div>
                               }
                         </div>
                   </ClickAwayListener>
             </div>
-
       );
 }
 
