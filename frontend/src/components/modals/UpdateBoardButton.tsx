@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface AddBoardModalProps {
+interface UpdateBoardButtonProps {
       boardName: string,
       setBoardName: React.Dispatch<React.SetStateAction<string>>,
       updateMode: boolean,
@@ -42,7 +42,7 @@ interface AddBoardModalProps {
 }
 
 
-const AddBoardModal: FC<AddBoardModalProps> = (props) => {
+const UpdateBoardButton: FC<UpdateBoardButtonProps> = (props) => {
       const classes = useStyles();
  
 
@@ -59,7 +59,7 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
                                                 variant='outlined'
                                                 name="boardName"
                                                 id="boardName"
-                                                placeholder="Board name"
+                                                placeholder={props.boardName}
                                                 autoComplete="board-name"
                                                 onChange={e => {
                                                       props.setBoardName(e.target.value);
@@ -78,11 +78,4 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
 }
 
 
-
-
-
-
-
-
-
-export default AddBoardModal;
+export default UpdateBoardButton;

@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
       getAllColumns,
       getColumnById,
@@ -11,22 +12,22 @@ import {
 } from '../controllers/columnController.js';
 
 
-const router = express.Router();
+export const protectedColumnRouter = express.Router();
 
-router.route('/').get(getAllColumns);
+protectedColumnRouter.use(authenticateJWT);
 
-router.route('/:id').get(getColumnById);
+protectedColumnRouter.route('/').get(getAllColumns);
 
-router.route('/add').post(addColumn);
+protectedColumnRouter.route('/:id').get(getColumnById);
 
-router.route('/update/:id').post(updateColumn);
+protectedColumnRouter.route('/add').post(addColumn);
 
-router.route('/delete/:id').delete(deleteColumn);
+protectedColumnRouter.route('/update/:id').post(updateColumn);
 
-router.route('/getIssues/:id').get(getIssuesOfColumn);
+protectedColumnRouter.route('/delete/:id').delete(deleteColumn);
 
-router.route('/addIssue/:id').post(addIssueToColumn);
+protectedColumnRouter.route('/getIssues/:id').get(getIssuesOfColumn);
 
-router.route('/deleteIssue/:id').delete(deleteIssueFromColumn);
+protectedColumnRouter.route('/addIssue/:id').post(addIssueToColumn);
 
-export default router;
+protectedColumnRouter.route('/deleteIssue/:id').delete(deleteIssueFromColumn);

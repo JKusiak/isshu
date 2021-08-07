@@ -4,8 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { IBoard } from "../types/ModelTypes";
+import AddBoard from "./functional/AddBoard";
 import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
-import AddBoardModal from "./modals/AddBoardModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,7 +74,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
             <GetProjectInfoBanner/>
 
             <div className={classes.gridContainer}>
-                  <AddBoardModal fetchBoards={props.fetchBoards}/>
+                  <AddBoard fetchBoards={props.fetchBoards}/>
                   {displayBoards()}
             </div>
             </>

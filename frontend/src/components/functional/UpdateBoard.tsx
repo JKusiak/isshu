@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import UpdateBoardModal from '../modals/UpdateBoardModal';
+import UpdateBoardButton from '../modals/UpdateBoardButton';
 
 
 interface AddBoardFormProps {
@@ -37,7 +37,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
 
       return (
       <> 
-            <UpdateBoardModal 
+            <UpdateBoardButton 
                   boardName={boardName} 
                   setBoardName={setBoardName} 
                   updateMode={updateMode}

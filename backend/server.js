@@ -3,14 +3,13 @@ import dotenv  from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
-import columnRouter from './routes/columnRoute.js';
 import issueRouter from './routes/issueRoute.js';
 import tagRouter from './routes/tagRoute.js';
+import { router, protectedRouter } from './routes/authenticationRoute.js';
 import { userRouter, protectedUserRouter } from './routes/userRoute.js';
 import { protectedProjectRouter } from './routes/projectRoute.js';
 import { protectedBoardRouter } from './routes/boardRoute.js';
-import { router, protectedRouter } from './routes/authenticationRoute.js';
+import { protectedColumnRouter } from './routes/columnRoute.js';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -32,7 +31,7 @@ app.use(cookieParser());
 app.use('/users', userRouter, protectedUserRouter);
 app.use('/projects', protectedProjectRouter);
 app.use('/boards', protectedBoardRouter);
-app.use('/columns', columnRouter);
+app.use('/columns', protectedColumnRouter);
 app.use('/issues', issueRouter);
 app.use('/tags', tagRouter);
 app.use('/login', router, protectedRouter);

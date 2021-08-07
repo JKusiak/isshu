@@ -6,9 +6,9 @@ import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
-import AddColumnModal from "./modals/AddColumnModal";
 import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 import UpdateBoard from "./functional/UpdateBoard";
+import AddColumn from "./functional/AddColumn";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -116,7 +116,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   <div className={classes.wrapper}>
                         {displayBoard()}
                         <div className={classes.addColumnButton}>
-                                    <AddColumnModal fetchBoard={props.fetchBoard}/>
+                              <AddColumn fetchBoard={props.fetchBoard}/>
                         </div>
                   </div>
             </>

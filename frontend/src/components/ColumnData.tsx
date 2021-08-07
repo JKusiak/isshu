@@ -36,7 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             deleteColumnButton: {
                   gridColumn: '3',
-                  justifySelf: 'end',
+                  justifySelf: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
             },
             columnContentWrapper: {
                   width: '275px',
@@ -73,7 +76,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                               
                               {showDeleteColumn &&
                                     <div className={classes.deleteColumnButton}>
-                                                <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
+                                          <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
                                     </div>
                               }
                         </div>

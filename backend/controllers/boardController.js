@@ -96,7 +96,7 @@ export const getAllBoardContent = asyncHandler(async(req, res) => {
 
 
 export const addColumnToBoard = asyncHandler(async(req, res) => {
-      const id = req.params.id;
+      const boardId = req.params.id;
       const columnId = req.body.columnId;
 
       const update = {
@@ -111,7 +111,7 @@ export const addColumnToBoard = asyncHandler(async(req, res) => {
       };
   
       try {
-            await Board.findByIdAndUpdate(id, update, options);
+            await Board.findByIdAndUpdate(boardId, update, options);
             res.json("Column added to board successfuly");
       } catch(err) {
             res.status(400).json({message: "Could not add column to board"});
