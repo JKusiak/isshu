@@ -8,20 +8,21 @@ import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import AddColumnModal from "./modals/AddColumnModal";
 import { INestedBoard, INestedColumn } from "../types/ModelTypes";
+import UpdateBoard from "./functional/UpdateBoard";
 
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
+            navigation: {
+                  display: 'grid',
+                  width: '100%',
+                  gridTemplateColumns: '1fr 0.2fr 1fr',
+                  margin: '1em 0 2em 0'
+            },
             backButton: {
                   justifySelf: 'start',
                   alignSelf: 'center',
                   marginLeft: '1em',
-            },
-            boardTitle: {
-                  justifySelf: 'center',
-                  alignSelf: 'center',
-                  fontSize: '36px',
-                  color: theme.palette.secondary.main,
             },
             deleteButton: {
                   justifySelf: 'end',
@@ -34,17 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             wrapper: {
                   display: 'flex',
+                  justifyContent: 'center',
             },
             container: {
                   display: "flex", 
-                  
                   marginLeft: '3em',
-            },
-            navigation: {
-                  display: 'grid',
-                  width: '100%',
-                  gridTemplateColumns: '1fr 1fr 1fr',
-                  margin: '1em 0 2em 0'
             },
             addColumnButton: {
                   marginTop: '0.5em',
@@ -89,7 +84,6 @@ const BoardData: FC<BoardDataProps> = (props) => {
       function displayBoard() {
             if(props.board.columns !== undefined && props.board.columns.length > 0) {
                   return(
-                  <div className={classes.wrapper}>
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>           
                                     {props.board.columns.map((column: INestedColumn, index: number) => {
@@ -101,11 +95,6 @@ const BoardData: FC<BoardDataProps> = (props) => {
                                     })}       
                               </DragDropContext>
                         </div>
-                        
-                        <div className={classes.addColumnButton}>
-                              <AddColumnModal fetchBoard={props.fetchBoard}/>
-                        </div>
-                  </div>
                   );
             }
       }
@@ -116,15 +105,21 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         <Button className={classes.backButton} onClick={getPreviousPath}>
                               <BackIcon className={classes.backIcon}/>
                         </Button>
-                        <div className={classes.boardTitle}>
-                              {props.board.name}
-                        </div>
+
+                        <UpdateBoard boardName={props.board.name} fetchBoard={props.fetchBoard}/>
+
                         <div className={classes.deleteButton}>
                               <DeleteBoardModal />
                         </div>          
                   </div>
+
+                  <div className={classes.wrapper}>
+                        {displayBoard()}
+                        <div className={classes.addColumnButton}>
+                                    <AddColumnModal fetchBoard={props.fetchBoard}/>
+                        </div>
+                  </div>
                   
-                  {displayBoard()}
             </>
       );
 }

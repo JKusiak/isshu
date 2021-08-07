@@ -43,10 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
             nameLink: {
                   color: theme.palette.secondary.main,
                   textDecoration: 'none',
-            },           
-            button: {
             },
-            
       }),
 );
 
@@ -89,9 +86,8 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                       <Link className={classes.nameLink} to={`/user/${user._id}`}>
                                                             <ListItemText primary={fullName}/>
                                                       </Link>
-                                                      <ListItemSecondaryAction className={classes.button}>
+                                                      <ListItemSecondaryAction>
                                                             <IconButton 
-                                                                  className={classes.button} 
                                                                   edge="end" 
                                                                   aria-label="remove-user" 
                                                                   onClick={() => props.removeProjectFromUser(user._id)}
@@ -99,7 +95,7 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                                   <DeleteIcon />
                                                             </IconButton>
                                                       </ListItemSecondaryAction>      
-                                                </div>                 
+                                                </div>
                                           </ListItem> 
                                     </Fragment>
                               );
@@ -113,7 +109,6 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
                                                       </Link>
                                                       <ListItemSecondaryAction>
                                                             <IconButton 
-                                                                  className={classes.button} 
                                                                   edge="end" 
                                                                   aria-label="add-user" 
                                                                   onClick={() => props.addProjectToUser(user._id)}

@@ -57,7 +57,8 @@ interface ColumnDataProps {
 
 const ColumnData: FC<ColumnDataProps> = (props) => {
       const classes = useStyles();
-      const [isMouseOver, setIsMouseOver] = useState(false);
+      const [showDeleteColumn, setShowDeleteColumn] = useState<boolean>(false);
+      const [showAddIssue, setShowAddIssue] = useState<boolean>(false);
 
 
       function displayColumn() {
@@ -65,39 +66,42 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                   <div className={classes.columnWrapper}>
                         <div 
                               className={classes.columnHeader} 
-                              onMouseOver={() => setIsMouseOver(true)} 
-                              onMouseOut={() => setIsMouseOver(false)}        
+                              onMouseOver={() => setShowDeleteColumn(true)} 
+                              onMouseLeave={() => setShowDeleteColumn(false)}        
                         >
                               <h2 className={classes.columnName}>{props.column.name}</h2>
                               
-                              {true &&
-                              <div className={classes.deleteColumnButton}>
-                                          <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
-                              </div>
+                              {showDeleteColumn &&
+                                    <div className={classes.deleteColumnButton}>
+                                                <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
+                                    </div>
                               }
                         </div>
                               
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
-                                          <>
-                                          <div className={classes.columnContentWrapper}
+                                          <div 
+                                                className={classes.columnContentWrapper}
+                                                onMouseOver={() => setShowAddIssue(true)} 
+                                                onMouseLeave={() => setShowAddIssue(false)}        
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                           >
-                                                {props.column.issues.map((issue: INestedIssue, index: number) => {
-                                                      return (
-                                                            <Fragment key={index}>
-                                                                  <IssueData issue={issue} index={index}/>
-                                                            </Fragment>
-                                                      );
-                                                })}
-                                                {provided.placeholder}
-                                                <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
+                                                <div>
+                                                      {props.column.issues.map((issue: INestedIssue, index: number) => {
+                                                            return (
+                                                                  <Fragment key={index}>
+                                                                        <IssueData issue={issue} index={index}/>
+                                                                  </Fragment>
+                                                            );
+                                                      })}
+                                                      {provided.placeholder}
+                                                      {showAddIssue &&
+                                                            <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
+                                                      }
+                                                </div>
                                           </div>
-
-                                          
-                                          </>
                                     );
                               }}
                         </Droppable>
