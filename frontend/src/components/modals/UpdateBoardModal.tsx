@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
-import UpdateBoardForm from '../functional/UpdateBoard';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -12,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             color: theme.palette.secondary.main,
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
             "&:hover": {
                   cursor: 'pointer',
             }
@@ -29,13 +29,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                   }
             },
       },
-      wrongInput: {
-            color: "#C62828",   
-            textAlign: "center",
-      },
-      buttonIcon: {
-            fontSize: '35px',
-            color: theme.palette.secondary.main,
+      nameText: {
+            textAlign: 'center',
       }
 }));
 
@@ -74,7 +69,7 @@ const AddBoardModal: FC<AddBoardModalProps> = (props) => {
                                     </form>
                               }
                               {!props.updateMode &&
-                                          props.boardName
+                                          <div className={classes.nameText}>{props.boardName}</div>
                               }
                         </div>
                   </ClickAwayListener>

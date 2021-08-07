@@ -1,16 +1,7 @@
 import { FC, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/AddOutlined';
-import IconButton from '@material-ui/core/IconButton';
 import UpdateBoardModal from '../modals/UpdateBoardModal';
-
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-
-}));
 
 
 interface AddBoardFormProps {
@@ -20,7 +11,6 @@ interface AddBoardFormProps {
 
 
 const AddBoardForm: FC<AddBoardFormProps> = (props) => {
-      const classes = useStyles();
       const [boardName, setBoardName] = useState<string>(props.boardName);
       let { boardId } = useParams<{boardId: string}>();
       const [updateMode, setUpdateMode] = useState(false);      
@@ -39,7 +29,7 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {})
-            
+
             setUpdateMode(false);
             props.fetchBoard();
       } 

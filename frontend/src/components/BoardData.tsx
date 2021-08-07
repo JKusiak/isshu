@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
             navigation: {
                   display: 'grid',
                   width: '100%',
-                  gridTemplateColumns: '1fr 0.2fr 1fr',
+                  gridTemplateColumns: '1fr 0.6fr 1fr',
                   margin: '1em 0 2em 0'
             },
             backButton: {
