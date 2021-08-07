@@ -58,7 +58,6 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
-                  console.log(res.data);
                   props.setAddMode(false);
                   props.fetchBoards();
                   window.scroll({
