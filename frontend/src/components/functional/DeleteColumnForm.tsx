@@ -20,12 +20,10 @@ const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  console.log('Attempt delete');
+                  props.fetchBoard();
             }).catch((err) => {
                   console.log(err);
             });
-
-            props.fetchBoard();
       }
 
 

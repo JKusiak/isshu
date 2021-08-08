@@ -3,8 +3,8 @@ import { FC, Fragment, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
 import DeleteColumnForm from "./functional/DeleteColumnForm";
-import AddIssueModal from "./modals/AddIssueModal";
 import { INestedColumn, INestedIssue } from "../types/ModelTypes";
+import AddIssue from "./functional/AddIssue";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -101,7 +101,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                       })}
                                                       {provided.placeholder}
                                                       {showAddIssue &&
-                                                            <AddIssueModal column={props.column} fetchBoard={props.fetchBoard}/>
+                                                            <AddIssue column={props.column} fetchBoard={props.fetchBoard}/>
                                                       }
                                                 </div>
                                           </div>

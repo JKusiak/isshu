@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddColumnButtonProps {
-      setColumnName: any
-      addMode: any,
-      setAddMode: any,
-      onSubmit: any,
+      onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
+      addMode: boolean,
+      setAddMode: React.Dispatch<SetStateAction<boolean>>,
+      setColumnName: React.Dispatch<SetStateAction<string>>,
 }
 
 

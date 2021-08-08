@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import DeleteBoardModal from "./modals/DeleteBoardModal";
@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
                   justifySelf: 'start',
                   alignSelf: 'center',
                   marginLeft: '1em',
+                  color: theme.palette.secondary.dark,
+                  textDecoration: 'none',
             },
             deleteButton: {
                   justifySelf: 'end',
@@ -58,11 +60,12 @@ interface BoardDataProps {
 
 const BoardData: FC<BoardDataProps> = (props) => {
       const classes = useStyles();
-      let history = useHistory();
+      const history = useHistory();
+      const { projectId } = useParams<{projectId: string}>();
 
 
-      function getPreviousPath() {
-            history.goBack();
+      function handleGoBack() {
+            history.push(`/projects/${projectId}`);
       }
 
 
@@ -102,7 +105,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
       return (
             <>
                   <div className={classes.navigation}>
-                        <Button className={classes.backButton} onClick={getPreviousPath}>
+                        <Button className={classes.backButton} onClick={handleGoBack}>
                               <BackIcon className={classes.backIcon}/>
                         </Button>
 

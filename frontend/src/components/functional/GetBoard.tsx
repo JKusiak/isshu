@@ -16,7 +16,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
       useEffect(() => {
             fetchBoard();
-      },[boardId]);
+      }, []);
 
 
       function fetchBoard() {
@@ -47,8 +47,6 @@ const GetBoard: FC<GetBoardProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-            
-            fetchBoard();
       }
 
 
@@ -65,8 +63,6 @@ const GetBoard: FC<GetBoardProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });
-
-           
       }
 
 

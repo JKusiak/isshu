@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, SetStateAction } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import Typography from '@material-ui/core/Typography';
 import { ClickAwayListener, IconButton, TextField } from '@material-ui/core';
+import React from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -40,10 +41,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface AddBoardModalProps {
-      onSubmit: any,
-      addMode: any,
-      setAddMode: any,
-      setBoardName: any,
+      onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
+      addMode: boolean,
+      setAddMode: React.Dispatch<SetStateAction<boolean>>,
+      setBoardName: React.Dispatch<SetStateAction<string>>,
 }
 
 
