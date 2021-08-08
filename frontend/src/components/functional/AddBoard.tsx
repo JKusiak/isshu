@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
-import AddBoardButton from '../modals/AddBoardButton';
+import AddBoardButton from '../buttons/AddBoardButton';
 
 
 interface AddBoardProps {

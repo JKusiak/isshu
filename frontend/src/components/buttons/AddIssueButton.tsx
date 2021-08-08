@@ -1,9 +1,7 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { Card, ClickAwayListener, TextField, Typography } from '@material-ui/core';
-import AddIssue from '../functional/AddIssue';
-import { INestedColumn } from '../../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

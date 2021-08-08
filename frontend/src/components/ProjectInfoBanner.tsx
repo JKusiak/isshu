@@ -8,6 +8,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import DeleteProjectModal from "./modals/DeleteProjectModal";
 import { IProject } from "../types/ModelTypes";
+import DeleteProject from "./functional/DeleteProject";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -266,8 +267,12 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                                     open={open}
                                     onClose={handleSettingsClose}
                               >
-                                    <MenuItem onClick={handleEdit}>Edit project</MenuItem>
-                                    <MenuItem ><DeleteProjectModal handleSettingsClose={handleSettingsClose}/></MenuItem>
+                                    <MenuItem onClick={handleEdit}>
+                                          Edit project
+                                    </MenuItem>
+                                    <MenuItem >
+                                          <DeleteProject handleSettingsClose={handleSettingsClose}/>
+                                    </MenuItem>
                               </Menu>
                         </div>
 

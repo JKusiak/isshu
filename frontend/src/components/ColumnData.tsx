@@ -2,9 +2,9 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
-import DeleteColumnForm from "./functional/DeleteColumnForm";
 import { INestedColumn, INestedIssue } from "../types/ModelTypes";
 import AddIssue from "./functional/AddIssue";
+import DeleteColumn from "./functional/DeleteColumn";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,7 +76,7 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                               
                               {showDeleteColumn &&
                                     <div className={classes.deleteColumnButton}>
-                                          <DeleteColumnForm column={props.column} fetchBoard={props.fetchBoard}/>
+                                          <DeleteColumn column={props.column} fetchBoard={props.fetchBoard}/>
                                     </div>
                               }
                         </div>
@@ -113,8 +113,6 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                   </div>          
             )                           
       }
-
-
 
 
       return (

@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import AddProjectModal from '../modals/AddProjectModal';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +10,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../resources/logo/isshu_logo.svg';
 import Icon from '../../resources/logo/isshu_icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
+import AddProject from '../functional/AddProject';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -121,7 +121,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                               </IconButton>
                         </Tooltip>
                         
-                        <AddProjectModal/>
+                        <AddProject/>
                         
                         <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
                               <IconButton className={classes.navbarIconButton}  aria-label="user profile" onClick={handleMenu} color="secondary">

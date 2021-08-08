@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import RegisterModal from "../modals/RegisterModal";
-import ButtonToProjects from "../ButtonToProjects";
+import ToProjectsButton from "../buttons/ToProjectsButton";
 
 
 interface HomePageProps {
@@ -36,7 +36,7 @@ const HomePage: FC<HomePageProps> = (props) => {
                         </>
                   }
                   {props.loggedIn &&
-                        <ButtonToProjects/>
+                        <ToProjectsButton/>
                   }
             </Grid>
       </Box>

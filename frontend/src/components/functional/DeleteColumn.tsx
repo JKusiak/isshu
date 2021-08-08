@@ -1,16 +1,16 @@
-import { IconButton } from "@material-ui/core";
 import axios from "axios";
 import { FC } from "react";
-import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import { INestedColumn } from "../../types/ModelTypes";
+import DeleteColumnButton from "../buttons/DeleteColumnButton";
 
 
-interface DeleteColumnFormProps {
+interface DeleteColumnProps {
       column: INestedColumn,
       fetchBoard: () => void,
 }
 
-const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
+
+const DeleteColumn: FC<DeleteColumnProps> = (props) => {
       const columnId = props.column._id;
 
 
@@ -29,13 +29,9 @@ const DeleteColumnForm: FC<DeleteColumnFormProps> = (props) => {
 
       return (
             <>
-                  <IconButton 
-                        onClick={() => deleteColumn()}
-                  >
-                        <DeleteIcon />
-                  </IconButton>
+                  <DeleteColumnButton deleteColumn={deleteColumn}/>
             </>
       );
 }
 
-export default DeleteColumnForm;
+export default DeleteColumn;

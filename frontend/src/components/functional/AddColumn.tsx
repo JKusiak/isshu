@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
-import AddColumnButton from '../modals/AddColumnButton';
+import AddColumnButton from '../buttons/AddColumnButton';
 
 
 interface AddColumnProps {

@@ -1,14 +1,14 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
-import DeleteBoardModal from "./modals/DeleteBoardModal";
 import ColumnData from "./ColumnData";
 import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 import UpdateBoard from "./functional/UpdateBoard";
 import AddColumn from "./functional/AddColumn";
+import DeleteBoard from "./functional/DeleteBoard";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -112,7 +112,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         <UpdateBoard boardName={props.board.name} fetchBoard={props.fetchBoard}/>
 
                         <div className={classes.deleteButton}>
-                              <DeleteBoardModal />
+                              <DeleteBoard />
                         </div>          
                   </div>
 

@@ -15,28 +15,28 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
       },
       form: {
-      width: '100%',
-      marginTop: theme.spacing(5),
+            width: '100%',
+            marginTop: theme.spacing(5),
       },
       submit: {
-      margin: theme.spacing(3, 0, 3),
-      borderRadius: '10px',
-      fontWeight: 600,
-      "&:hover": {
-            background: theme.palette.action.hover,
+            margin: theme.spacing(3, 0, 3),
+            borderRadius: '10px',
+            fontWeight: 600,
+            "&:hover": {
+                  background: theme.palette.action.hover,
       }
       },
       inputField: {
-      "& .MuiOutlinedInput-root": {
-            "& fieldset": { 
-            padding: '0.5em 4em',
-            borderRadius: '10px',
-            }, 
-            "&.Mui-focused fieldset": {
-            borderColor: theme.palette.secondary.light,
-            borderWidth: "2px",
-            }
-      },
+            "& .MuiOutlinedInput-root": {
+                  "& fieldset": { 
+                  padding: '0.5em 4em',
+                  borderRadius: '10px',
+                  }, 
+                  "&.Mui-focused fieldset": {
+                  borderColor: theme.palette.secondary.light,
+                  borderWidth: "2px",
+                  }
+            },
       },
       createdAccount: {
             color: "green",
