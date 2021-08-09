@@ -50,9 +50,9 @@ interface LoginFormProps {
 
 const LoginForm: FC<LoginFormProps> = (props) => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isValid, setIsValid] = useState(true);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   let history = useHistory();
 

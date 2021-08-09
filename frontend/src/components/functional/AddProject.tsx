@@ -12,13 +12,14 @@ interface AddProjectProps {
 
 const AddProject: FC<AddProjectProps> = (props) => {
       let history = useHistory();
-      const [isOpen, setIsOpen] = useState(false);
-      const [projectName, setProjectName] = useState('');
-      const [description, setDescription] = useState('');
-      const [startDate, setStartDate] = useState<Date | null>(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
-      const [endDate, setEndDate] = useState<Date | null>(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
-      const [isValid, setIsValid] = useState(true);
-      const [errorText, setErrorText] = useState('');
+      const formattedDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+      const [isOpen, setIsOpen] = useState<boolean>(false);
+      const [projectName, setProjectName] = useState<string>('');
+      const [description, setDescription] = useState<string>('');
+      const [startDate, setStartDate] = useState<Date | null>(formattedDate);
+      const [endDate, setEndDate] = useState<Date | null>(formattedDate);
+      const [isValid, setIsValid] = useState<boolean>(true);
+      const [errorText, setErrorText] = useState<string>('');
 
 
       useEffect(() => {

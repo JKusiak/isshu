@@ -45,7 +45,7 @@ interface ProjectPageProps {
 
 const ProjectPage: FC<ProjectPageProps> = (props) => {
       const classes = useStyles();
-      const [mobileOpen, setMobileOpen] = useState(false);
+      const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
       const handleSidebarToggle = () => {
             setMobileOpen(!mobileOpen);

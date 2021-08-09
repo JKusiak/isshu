@@ -43,7 +43,7 @@ interface AddIssueButtonProps {
       onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
       addMode: boolean,
       setAddMode: React.Dispatch<React.SetStateAction<boolean>>,
-      setIssueDescription: React.Dispatch<React.SetStateAction<string>>,
+      setIssueName: React.Dispatch<React.SetStateAction<string>>,
 }
 
 
@@ -63,12 +63,12 @@ const AddIssueButton: FC<AddIssueButtonProps> = (props) => {
                                           autoFocus
                                           fullWidth
                                           variant='outlined'
-                                          name="issueDescription"
-                                          id="issueDescription"
-                                          placeholder="Enter description for the issue"
-                                          autoComplete="issue-description"
+                                          name="issueName"
+                                          id="issueName"
+                                          placeholder="Enter title for the issue"
+                                          autoComplete="issue-name"
                                           onChange={e => {
-                                                props.setIssueDescription(e.target.value);
+                                                props.setIssueName(e.target.value);
                                           }}
                                     />
                                     <div className={classes.buttonContainer} onClick={props.onSubmit}>

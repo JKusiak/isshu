@@ -1,19 +1,19 @@
 import { FC } from "react";
-import { IIssue } from "../types/ModelTypes";
+import { IIssue, INestedIssue } from "../types/ModelTypes";
 
 
 interface IssuesListProps {
-      issuesTaken: [IIssue];
-      issuesCreated: [IIssue];
+      issuesTaken: [INestedIssue];
+      issuesCreated: [INestedIssue];
 }
 
 const IssuesList: FC<IssuesListProps> = (props) => {
       function displayIssues(type: 'issuesTaken' | 'issuesCreated') {
             if(props[type].length > 0 ) {
-                  return(props[type].map((issue: IIssue, index: number) => {
+                  return(props[type].map((issue: INestedIssue, index: number) => {
                         return(
                               <div className="issue_container" key={index}>
-                                    <p className="issue_description"> {issue.description} </p>
+                                    <p className="issue_description"> {issue.name} </p>
                               </div>
                         );
                   }));

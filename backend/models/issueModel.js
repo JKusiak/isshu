@@ -3,7 +3,7 @@ import Column from './columnModel.js';
 
 
 const issueSchema = mongoose.Schema({
-      description: {
+      name: {
             type: String,
             required: true,
       },

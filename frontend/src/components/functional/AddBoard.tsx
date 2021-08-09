@@ -11,8 +11,8 @@ interface AddBoardProps {
 
 const AddBoard: FC<AddBoardProps> = (props) => {
       let { projectId } = useParams<{projectId: string}>();
-      const [boardName, setBoardName] = useState('');
-      const [addMode, setAddMode] = useState(false);
+      const [boardName, setBoardName] = useState<string>('');
+      const [addMode, setAddMode] = useState<boolean>(false);
      
 
       function addBoardToProject(boardResponse: AxiosResponse) {

@@ -12,12 +12,12 @@ interface AddIssueProps {
 
 
 const AddIssue: FC<AddIssueProps> = (props) => {
-      const [issueDescription, setIssueDescription] = useState('');
-      const [addMode, setAddMode] = useState(false);
+      const [issueName, setIssueName] = useState<string>('');
+      const [addMode, setAddMode] = useState<boolean>(false);
 
 
       const issue = {
-            description: issueDescription,
+            name: issueName,
             creator: getLoggedInUser()._id,
       }
   
@@ -60,7 +60,7 @@ const AddIssue: FC<AddIssueProps> = (props) => {
                   onSubmit={onSubmit}
                   addMode={addMode}
                   setAddMode={setAddMode}
-                  setIssueDescription={setIssueDescription}
+                  setIssueName={setIssueName}
             />
       );
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FC, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BoardTemplate } from "../../types/ModelContentTemplate";
+import { NestedBoardTemplate } from "../../types/ModelContentTemplate";
 import { INestedBoard } from "../../types/ModelTypes";
 import BoardData from "../BoardData";
 
@@ -12,7 +12,7 @@ interface GetBoardProps {
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
       const [isLoaded, setIsLoaded] = useState<boolean>(false);
-      const [board, setBoard] = useState<INestedBoard>(BoardTemplate);
+      const [board, setBoard] = useState<INestedBoard>(NestedBoardTemplate);
 
       useEffect(() => {
             fetchBoard();

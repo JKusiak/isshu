@@ -12,7 +12,7 @@ interface UpdateColumnProps {
 
 const UpdateColumn: FC<UpdateColumnProps> = (props) => {
       const [columnName, setColumnName] = useState<string>(props.column.name);
-      const [updateMode, setUpdateMode] = useState(false);      
+      const [updateMode, setUpdateMode] = useState<boolean>(false);      
 
 
       function onSubmit(e: React.SyntheticEvent) {

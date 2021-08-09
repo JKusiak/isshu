@@ -26,11 +26,11 @@ export const getIssueById = asyncHandler(async(req, res) => {
 
 
 export const addIssue = asyncHandler(async(req, res) => {
-      const description = req.body.description;
+      const name = req.body.name;
       const creator = req.body.creator;
       
       const newIssue = new Issue({
-            description,
+            name,
             creator,
       });
 

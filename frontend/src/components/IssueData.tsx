@@ -50,9 +50,8 @@ const IssueData: FC<IssueDataProps> = (props) => {
                                           }}
                                     >
                                           <Typography className={classes.description} component='h6' variant='h6'>
-                                                {props.issue.description}
+                                                {props.issue.name}
                                           </Typography>
-                                          
                                     </Card>
                               );
                         }}

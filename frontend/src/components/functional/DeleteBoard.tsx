@@ -12,7 +12,7 @@ interface DeleteBoardProps {
 const DeleteBoard: FC<DeleteBoardProps> = (props) => {
       const { boardId } = useParams<{boardId: string}>();
       const { projectId } = useParams<{projectId: string}>();
-      const [open, setOpen] = useState(false);
+      const [open, setOpen] = useState<boolean>(false);
       let history = useHistory();
 
 

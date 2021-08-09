@@ -51,7 +51,7 @@ interface DeleteProjectModalProps {
 
 const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
       const classes = useStyles();
-      const [open, setOpen] = useState(false);
+      const [open, setOpen] = useState<boolean>(false);
 
 
       const handleOpen = () => {

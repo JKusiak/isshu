@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
+import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
 import UsersList from "../UsersList";
 
@@ -12,24 +13,8 @@ interface GetUsersListProps {
 
 const GetUsersList: FC<GetUsersListProps> = (props) => {
       const { projectId } = useParams<{projectId: string}>();
-      const [otherUsers, setOtherUsers] = useState<[IUser]>([{
-            _id: '',
-            name: '',
-            surname: '',
-            email: '',
-            password: '',
-            isAdmin: false,
-            projects: [''],
-      }]);
-      const [contributors, setContributors] = useState<[IUser]>([{
-            _id: '',
-            name: '',
-            surname: '',
-            email: '',
-            password: '',
-            isAdmin: false,
-            projects: [''],
-      }]);
+      const [otherUsers, setOtherUsers] = useState<[IUser]>([UserTemplate]);
+      const [contributors, setContributors] = useState<[IUser]>([UserTemplate]);
 
       
       useEffect(() => {

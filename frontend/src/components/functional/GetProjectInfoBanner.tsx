@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ProjectTemplate } from "../../types/ModelContentTemplate";
 import { IProject } from "../../types/ModelTypes";
 import ProjectInfoBanner from "../ProjectInfoBanner";
 
@@ -10,15 +11,7 @@ interface GetProjectInfoBannerProps {
 
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
       const { projectId } = useParams<{ projectId: string }>();
-      const [project, setProject] = useState<IProject>({
-            _id: '',
-            name: '',
-            description: '',
-            dateStart: new Date(),
-            dateEnd: new Date(),
-            creator: '',
-            boards: [''],
-      });
+      const [project, setProject] = useState<IProject>(ProjectTemplate);
 
       useEffect(() => {
             fetchProject();

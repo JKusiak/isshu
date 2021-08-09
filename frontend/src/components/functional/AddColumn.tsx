@@ -11,7 +11,7 @@ interface AddColumnProps {
 
 const AddColumn: FC<AddColumnProps> = (props) => {
       let { boardId } = useParams<{boardId: string}>();
-      const [columnName, setColumnName] = useState('');
+      const [columnName, setColumnName] = useState<string>('');
       const [addMode, setAddMode] = useState<boolean>(false);
 
 

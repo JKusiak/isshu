@@ -12,7 +12,7 @@ import UserPage from './components/pages/UserPage';
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(
+  const [loggedIn, setLoggedIn] = useState<boolean>(
     localStorage.getItem('token') === '' ? false : true
   );
 

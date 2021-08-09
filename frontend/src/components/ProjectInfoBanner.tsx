@@ -6,9 +6,9 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import Banner from '../resources/banners/banner.jpg'
 import DateFnsUtils from '@date-io/date-fns';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
-import DeleteProjectModal from "./modals/DeleteProjectModal";
-import { IProject } from "../types/ModelTypes";
+import { IProject, IUser } from "../types/ModelTypes";
 import DeleteProject from "./functional/DeleteProject";
+import { UserTemplate } from "../types/ModelContentTemplate";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -134,7 +134,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
       const open = Boolean(anchorEl);
       const [projectName, setProjectName] = useState<string>('');
       const [projectDescription, setProjectDescription] = useState<string>('');
-      const [creator, setCreator] = useState<any>('');
+      const [creator, setCreator] = useState<IUser>(UserTemplate);
       const [dateStart, setDateStart] = useState<Date | null>(new Date());
       const [dateEnd, setDateEnd] = useState<Date | null>(new Date());
       const [isEditing, setIsEditing] = useState(false);

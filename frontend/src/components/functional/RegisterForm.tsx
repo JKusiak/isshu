@@ -56,14 +56,14 @@ const passRegex = /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{
 function RegisterForm() {
       const classes = useStyles();
       const history = useHistory();
-      const [name, setName] = useState('');
-      const [surname, setSurname] = useState('');
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-      const [repeatPassword, setRepeatPassword] = useState('');
-      const [isValid, setIsValid] = useState(true);
-      const [isSent, setIsSent] = useState(false);
-      const [errorText, setErrorText] = useState('');
+      const [name, setName] = useState<string>('');
+      const [surname, setSurname] = useState<string>('');
+      const [email, setEmail] = useState<string>('');
+      const [password, setPassword] = useState<string>('');
+      const [repeatPassword, setRepeatPassword] = useState<string>('');
+      const [isValid, setIsValid] = useState<boolean>(true);
+      const [isSent, setIsSent] = useState<boolean>(false);
+      const [errorText, setErrorText] = useState<string>('');
 
 
       useEffect(() => {

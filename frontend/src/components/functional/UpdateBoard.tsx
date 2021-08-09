@@ -11,9 +11,9 @@ interface UpdateBoardProps {
 
 
 const UpdateBoard: FC<UpdateBoardProps> = (props) => {
-      const [boardName, setBoardName] = useState<string>(props.boardName);
       let { boardId } = useParams<{boardId: string}>();
-      const [updateMode, setUpdateMode] = useState(false);      
+      const [boardName, setBoardName] = useState<string>(props.boardName);
+      const [updateMode, setUpdateMode] = useState<boolean>(false);      
 
 
       function onSubmit(e: React.SyntheticEvent) {
