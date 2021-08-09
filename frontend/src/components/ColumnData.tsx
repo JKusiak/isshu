@@ -5,6 +5,7 @@ import IssueData from "./IssueData";
 import { INestedColumn, INestedIssue } from "../types/ModelTypes";
 import AddIssue from "./functional/AddIssue";
 import DeleteColumn from "./functional/DeleteColumn";
+import UpdateColumn from "./functional/UpdateColumn";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,13 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
                   display: 'grid',
                   gridTemplateColumns: '0.5fr 1fr 0.5fr',
                   minWidth: '100%',
-                  paddingBottom: '0.5em',
                   borderBottom: '0.1px solid',
                   borderBottomColor: theme.palette.primary.dark,
             },
             columnName: {
                   gridColumn: '2',
                   justifySelf: 'center',
+                  paddingTop: '0.7em',
+                  paddingBottom: '0.7em',
                   fontSize: '20px',
                   fontWeight: 400,
                   color: theme.palette.secondary.light,    
@@ -72,7 +74,9 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                               onMouseOver={() => setShowDeleteColumn(true)} 
                               onMouseLeave={() => setShowDeleteColumn(false)}        
                         >
-                              <h2 className={classes.columnName}>{props.column.name}</h2>
+                              <div className={classes.columnName}>
+                                    <UpdateColumn column={props.column} fetchBoard={props.fetchBoard}/>
+                              </div>
                               
                               {showDeleteColumn &&
                                     <div className={classes.deleteColumnButton}>
@@ -108,8 +112,6 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                     );
                               }}
                         </Droppable>
-
-                        
                   </div>          
             )                           
       }

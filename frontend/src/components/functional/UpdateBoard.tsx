@@ -1,28 +1,27 @@
 import { FC, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import UpdateBoardButton from '../modals/UpdateBoardButton';
+import UpdateBoardButton from '../buttons/UpdateBoardButton';
 
 
-interface AddBoardFormProps {
+interface UpdateBoardProps {
       boardName: string,
       fetchBoard: () => void,
 }
 
 
-const AddBoardForm: FC<AddBoardFormProps> = (props) => {
+const UpdateBoard: FC<UpdateBoardProps> = (props) => {
       const [boardName, setBoardName] = useState<string>(props.boardName);
       let { boardId } = useParams<{boardId: string}>();
       const [updateMode, setUpdateMode] = useState(false);      
 
 
-      const board = {
-            name: boardName,
-      }
-
-
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
+            
+            const board = {
+                  name: boardName,
+            }
 
             axios.post(`http://localhost:5000/boards/update/${boardId}`, board, {
                   headers: {
@@ -48,4 +47,4 @@ const AddBoardForm: FC<AddBoardFormProps> = (props) => {
       );
 }
 
-export default AddBoardForm;
+export default UpdateBoard;

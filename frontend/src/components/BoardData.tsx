@@ -20,13 +20,23 @@ const useStyles = makeStyles((theme: Theme) =>
                   margin: '1em 0 2em 0'
             },
             backButton: {
+                  gridColumn: '1',
                   justifySelf: 'start',
                   alignSelf: 'center',
                   marginLeft: '1em',
                   color: theme.palette.secondary.dark,
                   textDecoration: 'none',
             },
+            boardTitle: {
+                  gridColumn: '2',
+                  justifySelf: 'center',
+                  alignSelf: 'center',
+                  fontSize: '36px',
+                  color: theme.palette.secondary.main,
+      
+            },
             deleteButton: {
+                  gridColumn: '3',
                   justifySelf: 'end',
                   alignSelf: 'center',
                   marginRight: '1em'
@@ -109,7 +119,9 @@ const BoardData: FC<BoardDataProps> = (props) => {
                               <BackIcon className={classes.backIcon}/>
                         </Button>
 
-                        <UpdateBoard boardName={props.board.name} fetchBoard={props.fetchBoard}/>
+                        <div className={classes.boardTitle}>
+                              <UpdateBoard boardName={props.board.name} fetchBoard={props.fetchBoard}/>
+                        </div>
 
                         <div className={classes.deleteButton}>
                               <DeleteBoard />
