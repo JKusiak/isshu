@@ -1,4 +1,5 @@
 import Board from '../models/boardModel.js';
+import Column from '../models/columnModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -12,7 +13,7 @@ export const getAllBoards = asyncHandler(async(req, res) => {
       }
   });
   
-  
+
 export const getBoardById = asyncHandler(async(req, res) => {
       try {
             const board = await Board.findById(req.params.id);
@@ -24,11 +25,26 @@ export const getBoardById = asyncHandler(async(req, res) => {
 });
 
 
+export const getColumnsOfBoard = asyncHandler(async(req, res) => {
+      const boardId = req.params.boardId;
+  
+      try {
+          const columns = await Column.find({boardId: boardId})
+          res.json(columns);
+      } catch(err) {
+          res.status(404).json({message: "Project not found"});
+          throw new Error('Project not found');
+      }
+}); 
+
+
 export const addBoard = asyncHandler(async(req, res) => {
       const name = req.body.boardName;
+      const projectId = req.body.projectId;
 
       const newBoard = new Board ({
             name,
+            projectId,
       });
 
       try {
@@ -65,56 +81,13 @@ export const updateBoard = asyncHandler(async(req, res) => {
 
 export const deleteBoard = asyncHandler(async(req, res) => {
       try {
-            await Board.findByIdAndDelete(req.params.id);
-      } catch(err) {
+            const board = await Board.findByIdAndDelete(req.params.id);
+
+            if(board) {
+                  return res.status(204);
+            }
             res.status(404).json({message: "Board not found"});
-            throw new Error('Board not found');
-      }
-});
-
-
-export const getAllBoardContent = asyncHandler(async(req, res) => {
-      try {
-            const content = await Board.findOne({_id: req.params.id})
-                  .populate({ 
-                        path: 'columns',
-                        populate: {
-                              path: 'issues',
-                              model: 'Issue',
-                              populate: {
-                                    path: 'tags',
-                                    model: 'Tag',
-                              }
-                        } 
-                  });
-            res.json(content);
       } catch(err) {
-            res.status(404).json({message: "Board's content not found"});
-            throw new Error("Board's content not found");
-      }
-});
-
-
-export const addColumnToBoard = asyncHandler(async(req, res) => {
-      const boardId = req.params.id;
-      const columnId = req.body.columnId;
-
-      const update = {
-          $push: {
-              columns: columnId,
-          } 
-      };
-      
-      const options = {
-          new: true, 
-          useFindAndModify: false,
-      };
-  
-      try {
-            await Board.findByIdAndUpdate(boardId, update, options);
-            res.json("Column added to board successfuly");
-      } catch(err) {
-            res.status(400).json({message: "Could not add column to board"});
-            throw new Error('Could not add column to board');
+            next(err);
       }
 });

@@ -1,19 +1,25 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import UpdateBoardButton from '../buttons/UpdateBoardButton';
+import { FetchBoardContext } from './GetBoard';
 
 
 interface UpdateBoardProps {
       boardName: string,
-      fetchBoard: () => void,
 }
 
 
 const UpdateBoard: FC<UpdateBoardProps> = (props) => {
       let { boardId } = useParams<{boardId: string}>();
       const [boardName, setBoardName] = useState<string>(props.boardName);
-      const [updateMode, setUpdateMode] = useState<boolean>(false);      
+      const [updateMode, setUpdateMode] = useState<boolean>(false);
+      const fetchBoard = useContext(FetchBoardContext);
+
+
+      useEffect(() => {
+            fetchBoard();
+      }, [setUpdateMode]);
 
 
       function onSubmit(e: React.SyntheticEvent) {
@@ -27,10 +33,10 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {})
-
-            setUpdateMode(false);
-            props.fetchBoard();
+            }).then((res) => {
+                  setUpdateMode(false);
+                  fetchBoard();
+            })            
       } 
 
 

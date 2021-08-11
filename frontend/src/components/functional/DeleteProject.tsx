@@ -4,40 +4,37 @@ import axios from 'axios';
 import DeleteProjectModal from '../modals/DeleteProjectModal';
 
 
-interface DeleteProjectFormProps {
+interface DeleteProjectProps {
       handleSettingsClose: () => void,
 }
 
 
-const DeleteProjectForm: FC<DeleteProjectFormProps> = (props) => {
+const DeleteProject: FC<DeleteProjectProps> = (props) => {
       const { projectId } = useParams<{projectId: string}>();
       let history = useHistory();
 
 
-      function onDelete(e: React.MouseEvent) {
-            e.preventDefault();
-
-            axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
+      async function deleteProject(e: React.MouseEvent) {
+            await axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {
-                  props.handleSettingsClose();
-                  history.push(`/projects`);
             }).catch((err) => {
                   console.log(err);
-            });  
+            });
+            
+            history.push(`/projects`);
       }
       
 
   return (
       <>
             <DeleteProjectModal
-                  onDelete={onDelete}
+                  deleteProject={deleteProject}
                   handleSettingsClose={props.handleSettingsClose}
             />
       </>
   );
 }
 
-export default DeleteProjectForm;
+export default DeleteProject;

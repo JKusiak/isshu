@@ -1,16 +1,16 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import { NestedIssueTemplate } from "../../types/ModelContentTemplate";
-import { INestedIssue } from "../../types/ModelTypes";
+import { IssueTemplate } from "../../types/ModelContentTemplate";
+import { IIssue } from "../../types/ModelTypes";
 import IssuesList from "../IssuesList";
 
-interface GetIssuesProps {
+interface GetIssuesGalleryProps {
 
 }
 
-const GetIssues: FC<GetIssuesProps> = (props) => {
-      const [issuesCreated, setIssuesCreated] = useState<[INestedIssue]>([NestedIssueTemplate]);
-      const [issuesTaken, setIssuesTaken] = useState<[INestedIssue]>([NestedIssueTemplate]);
+const GetIssuesGallery: FC<GetIssuesGalleryProps> = (props) => {
+      const [issuesCreated, setIssuesCreated] = useState<[IIssue]>([IssueTemplate]);
+      const [issuesTaken, setIssuesTaken] = useState<[IIssue]>([IssueTemplate]);
 
       // requests issues created by user
       useEffect(() => {
@@ -42,4 +42,4 @@ const GetIssues: FC<GetIssuesProps> = (props) => {
             );
 }
 
-export default GetIssues;
+export default GetIssuesGallery;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -49,37 +49,50 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface DeleteBoardModalProps {
-      setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-      open: boolean,
-      handleGoBack: (e: React.MouseEvent) => void,
-      handleDelete: (e: React.MouseEvent) => void,
+      deleteBoard: (e: React.MouseEvent) => void,
 }
 
 
 const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
       const classes = useStyles();
+      const [open, setOpen] = useState<boolean>(false);
+
+
+      function handleOpen(e: React.MouseEvent) {
+            e.preventDefault();
+ 
+            setOpen(true);
+      }
+
+
+      function handleClose(e: React.MouseEvent) {
+            e.preventDefault();
+ 
+            setOpen(false);
+      }
+
 
 
       return (
             <>
-            <Button onClick={() => props.setOpen(true)}>
+            <Button onClick={handleOpen}>
                   <DeleteIcon className={classes.deleteIcon} />
             </Button>
-            
+
             
             <Modal
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
                   className={classes.modal}
-                  open={props.open}
-                  onClose={() => props.setOpen(false)}
+                  open={open}
+                  onClose={handleClose}
                   closeAfterTransition
                   BackdropComponent={Backdrop}
                   BackdropProps={{
                         timeout: 500,
                   }}
             >
-                  <Fade in={props.open}>
+                  <Fade in={open}>
                         <div className={classes.paper}>
                               <Typography className={classes.header} component="h1" variant="h4">
                                     Delete board?
@@ -87,7 +100,7 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
                               <div className={classes.form}>
                                     <Button
                                           className={classes.button}
-                                          onClick={props.handleDelete}
+                                          onClick={props.deleteBoard}
                                           fullWidth
                                           type="submit"
                                           variant="contained"
@@ -98,7 +111,7 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
 
                                     <Button
                                           className={classes.button}
-                                          onClick={props.handleGoBack}
+                                          onClick={handleClose}
                                           fullWidth
                                           type="submit"
                                           variant="contained"

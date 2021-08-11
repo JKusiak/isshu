@@ -2,10 +2,10 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import IssueData from "./IssueData";
-import { INestedColumn, INestedIssue } from "../types/ModelTypes";
 import AddIssue from "./functional/AddIssue";
 import DeleteColumn from "./functional/DeleteColumn";
 import UpdateColumn from "./functional/UpdateColumn";
+import { IColumn, IIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,8 +55,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ColumnDataProps {
-      column: INestedColumn,
-      fetchBoard: () => void,
+      column: IColumn,
+      issues: [IIssue],
 }
 
 
@@ -64,6 +64,19 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
       const classes = useStyles();
       const [showDeleteColumn, setShowDeleteColumn] = useState<boolean>(false);
       const [showAddIssue, setShowAddIssue] = useState<boolean>(false);
+
+      
+      function displayIssues() {
+            if(props.issues !== null) {
+                  props.issues.map((issue: IIssue, index: number) => {
+                        return (
+                              <Fragment key={index}>
+                                    <IssueData issue={issue} index={index}/>
+                              </Fragment>
+                        );
+                  })
+            }  
+      }
 
 
       function displayColumn() {
@@ -75,12 +88,12 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                               onMouseLeave={() => setShowDeleteColumn(false)}        
                         >
                               <div className={classes.columnName}>
-                                    <UpdateColumn column={props.column} fetchBoard={props.fetchBoard}/>
+                                    <UpdateColumn column={props.column}/>
                               </div>
                               
                               {showDeleteColumn &&
                                     <div className={classes.deleteColumnButton}>
-                                          <DeleteColumn column={props.column} fetchBoard={props.fetchBoard}/>
+                                          <DeleteColumn column={props.column}/>
                                     </div>
                               }
                         </div>
@@ -96,16 +109,10 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 ref={provided.innerRef}
                                           >
                                                 <div>
-                                                      {props.column.issues.map((issue: INestedIssue, index: number) => {
-                                                            return (
-                                                                  <Fragment key={index}>
-                                                                        <IssueData issue={issue} index={index}/>
-                                                                  </Fragment>
-                                                            );
-                                                      })}
+                                                      {displayIssues()}
                                                       {provided.placeholder}
                                                       {showAddIssue &&
-                                                            <AddIssue column={props.column} fetchBoard={props.fetchBoard}/>
+                                                            <AddIssue column={props.column}/>
                                                       }
                                                 </div>
                                           </div>

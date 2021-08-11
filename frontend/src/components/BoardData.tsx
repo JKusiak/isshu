@@ -5,10 +5,11 @@ import { useHistory, useParams } from "react-router-dom";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import Button from "@material-ui/core/Button";
 import ColumnData from "./ColumnData";
-import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 import UpdateBoard from "./functional/UpdateBoard";
 import AddColumn from "./functional/AddColumn";
 import DeleteBoard from "./functional/DeleteBoard";
+import { IBoard, IColumn } from "../types/ModelTypes";
+import GetColumn from "./functional/GetColumn";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,9 +63,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardDataProps {
-      board: INestedBoard,
-      fetchBoard: () => void, 
-      swapColumns: (arg0: string, arg1: string, arg2: string) => void,
+      board: IBoard,
+      columns: [IColumn],
+      changeColumn: (arg0: string, arg1: string) => void,
 }
 
 
@@ -82,12 +83,8 @@ const BoardData: FC<BoardDataProps> = (props) => {
       const onDragEnd = (result: DropResult) => {
             const { source, destination, draggableId } = result;
 
-            if (destination !== undefined && destination !== null) {
-                  if(source.droppableId !== destination.droppableId) {
-                        props.swapColumns(source.droppableId, destination.droppableId, draggableId);
-                  } else {
-                        return;
-                  }
+            if (destination !== undefined && destination !== null && source.droppableId !== destination.droppableId) {
+                  props.changeColumn(destination.droppableId, draggableId);
             } else {
                   return;
             }
@@ -95,14 +92,14 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
 
       function displayBoard() {
-            if(props.board.columns !== undefined && props.board.columns.length > 0) {
+            if(props.columns !== undefined && props.columns.length > 0) {
                   return(
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>           
-                                    {props.board.columns.map((column: INestedColumn, index: number) => {
+                                    {props.columns.map((column: IColumn, index: number) => {
                                           return(
                                                 <Fragment key={index}>
-                                                      <ColumnData column={column} fetchBoard={props.fetchBoard}/> 
+                                                      <GetColumn column={column}/> 
                                                 </Fragment>
                                           );
                                     })}       
@@ -120,7 +117,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                         </Button>
 
                         <div className={classes.boardTitle}>
-                              <UpdateBoard boardName={props.board.name} fetchBoard={props.fetchBoard}/>
+                              <UpdateBoard boardName={props.board.name}/>
                         </div>
 
                         <div className={classes.deleteButton}>
@@ -131,7 +128,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   <div className={classes.wrapper}>
                         {displayBoard()}
                         <div className={classes.addColumnButton}>
-                              <AddColumn fetchBoard={props.fetchBoard}/>
+                              <AddColumn/>
                         </div>
                   </div>
             </>

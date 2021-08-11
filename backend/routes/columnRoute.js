@@ -3,12 +3,10 @@ import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
       getAllColumns,
       getColumnById,
+      getIssuesOfColumn,
       addColumn,
       updateColumn,
       deleteColumn,
-      getIssuesOfColumn,
-      addIssueToColumn,
-      deleteIssueFromColumn,
 } from '../controllers/columnController.js';
 
 
@@ -20,14 +18,10 @@ protectedColumnRouter.route('/').get(getAllColumns);
 
 protectedColumnRouter.route('/:id').get(getColumnById);
 
+protectedColumnRouter.route('/getIssues/:columnId').get(getIssuesOfColumn);
+
 protectedColumnRouter.route('/add').post(addColumn);
 
 protectedColumnRouter.route('/update/:id').post(updateColumn);
 
 protectedColumnRouter.route('/delete/:id').delete(deleteColumn);
-
-protectedColumnRouter.route('/getIssues/:id').get(getIssuesOfColumn);
-
-protectedColumnRouter.route('/addIssue/:id').post(addIssueToColumn);
-
-protectedColumnRouter.route('/deleteIssue/:id').delete(deleteIssueFromColumn);

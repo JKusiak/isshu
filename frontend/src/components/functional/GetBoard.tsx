@@ -1,18 +1,25 @@
 import axios from "axios";
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, createContext } from "react";
 import { useParams } from "react-router-dom";
-import { NestedBoardTemplate } from "../../types/ModelContentTemplate";
-import { INestedBoard } from "../../types/ModelTypes";
+import { BoardTemplate, ColumnTemplate } from "../../types/ModelContentTemplate";
+import { IBoard, IColumn } from "../../types/ModelTypes";
 import BoardData from "../BoardData";
 
 
 interface GetBoardProps {
 }
 
+// context for avoiding propagating function fetchBoard() for refreshing 
+// the board content to child components
+export const FetchBoardContext = createContext<() => void>(() => null);
+
+
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
       const [isLoaded, setIsLoaded] = useState<boolean>(false);
-      const [board, setBoard] = useState<INestedBoard>(NestedBoardTemplate);
+      const [board, setBoard] = useState<IBoard>(BoardTemplate);
+      const [columns, setColumns] = useState<[IColumn]>([ColumnTemplate]);
+      
 
       useEffect(() => {
             fetchBoard();
@@ -20,12 +27,26 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
 
       function fetchBoard() {
-            axios.get(`http://localhost:5000/boards/getContent/${boardId}`, {
+            axios.get(`http://localhost:5000/boards/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
                   setBoard(resp.data);
+                  fetchColumns();
+            }).catch((err) => {
+                  console.log(err);
+            });
+      }
+
+
+      function fetchColumns() {
+            axios.get(`http://localhost:5000/boards/getColumns/${boardId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then(resp => {
+                  setColumns(resp.data);
                   // is loaded necessary for dnd components to receive columnIDs on first render
                   setIsLoaded(true);
             }).catch((err) => {
@@ -34,49 +55,31 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       }
 
 
-      function addToColumn(columnId: string, issueId: string) {
+      function changeColumn(newColumnId: string, issueId: string) {
             const issue = {
-                  issueId: issueId
+                  columnId: newColumnId,
             }
 
-            axios.post(`http://localhost:5000/columns/addIssue/${columnId}`, issue, {
+            axios.post(`http://localhost:5000/issues/update/${issueId}`, issue, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then(resp => {
             }).catch((err) => {
                   console.log(err);
             });
-      }
 
-
-      function deleteFromColumn(columnId: string, issueId: string) {
-            axios.delete(`http://localhost:5000/columns/deleteIssue/${columnId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  },
-                  data: {
-                        issueId: issueId
-                  }
-            }).then(resp => {
-                  
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }
-
-
-      function swapColumns(sourceColumnId: string, destinationColumnId: string, issueId: string) {
-            deleteFromColumn(sourceColumnId, issueId);
-            addToColumn(destinationColumnId, issueId);
             fetchBoard();
       }
+
 
       return (
             <>
             {isLoaded &&
-                  <BoardData board={board} fetchBoard={fetchBoard} swapColumns={swapColumns}/>
-            }      
+             <FetchBoardContext.Provider value={fetchBoard}>
+                  <BoardData board={board} columns={columns} changeColumn={changeColumn}/>
+             </FetchBoardContext.Provider>
+                  
+            }
             </>
       );
 }

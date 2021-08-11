@@ -7,7 +7,6 @@ import {
       updateProject,
       deleteProject,
       getBoardsOfProject,
-      addBoardToProject,
 } from '../controllers/projectController.js';
 
 
@@ -17,14 +16,12 @@ protectedProjectRouter.use(authenticateJWT);
 
 protectedProjectRouter.route('/').get(getAllProjects);
 
-protectedProjectRouter.route('/:id').get(getProjectById);
+protectedProjectRouter.route('/:projectId').get(getProjectById);
 
 protectedProjectRouter.route('/add').post(addProject);
 
-protectedProjectRouter.route('/update/:id').post(updateProject);
+protectedProjectRouter.route('/update/:projectId').post(updateProject);
 
-protectedProjectRouter.route('/delete/:id').delete(deleteProject);
+protectedProjectRouter.route('/delete/:projectId').delete(deleteProject);
 
-protectedProjectRouter.route('/getBoards/:id').get(getBoardsOfProject);
-
-protectedProjectRouter.route('/addBoard/:id').post(addBoardToProject);
+protectedProjectRouter.route('/getBoards/:projectId').get(getBoardsOfProject);

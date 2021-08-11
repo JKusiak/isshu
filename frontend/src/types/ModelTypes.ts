@@ -6,7 +6,7 @@ export interface IUser {
       email: string;
       password: string;
       isAdmin: boolean;
-      projects: [string];
+      projects: [string];     // ref id
 }
 
 export interface IProject {
@@ -16,53 +16,33 @@ export interface IProject {
       dateStart: Date;
       dateEnd: Date;
       creator: IUser;
-      boards: [string];
 }
 
 export interface IBoard {
       _id: string;
       name: string;
-      columns: [string];
+      projectId: string;      // ref id
 }
 
 export interface IColumn {
       _id: string;
       name: string;
-      issues: [string];
+      boardId: string;       // ref id
 }
 
 export interface IIssue {
       _id: string;
       name: string;
-      creator: string;
-      contributor:string;
-      tags: [string];
+      description: string;
+      creator: string;        // ref id
+      contributors: [string]; // ref id
+      tags: [string];         // ref id
+      messages: [string];
+      steps: [string];
+      columnId: string;
 }
 
 export interface ITag {
       _id: string;
       name: string;
-}
-
-
-// types with nested subtypes for call on BoardContent
-// that fetches all data of board and children at once
-export interface INestedBoard {
-      _id: string;
-      name: string;
-      columns: [INestedColumn]
-}
-
-export interface INestedColumn {
-      _id: string;
-      name: string;
-      issues: [INestedIssue]
-}
-
-export interface INestedIssue {
-      _id: string;
-      name: string;
-      creator: string;
-      contributor:string;
-      tags: [ITag]
 }

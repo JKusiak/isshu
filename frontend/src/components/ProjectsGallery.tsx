@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
             boxShadow: theme.shadows[2],
             "&:hover": {
                   boxShadow: theme.shadows[5],
-            }
+            },
       },
       image: {
             flex: 'none',
@@ -50,6 +50,8 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             maxHeight: 120,
+            overflow: 'hidden',
+            minWidth: 0,
       },
       // dirty trick to make content display in the center if text
       // is short, if long 'empty' will shrink to zero

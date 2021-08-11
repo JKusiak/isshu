@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import Column from './columnModel.js';
-import Project from './projectModel.js';
 
 
 const boardSchema = mongoose.Schema({
@@ -8,45 +7,25 @@ const boardSchema = mongoose.Schema({
             type: String,
             required: true,
       },
-      columns: [{
+      projectId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Column',
-            required: false,
-            default: null,
-      }],
+            ref: 'Project',
+            required: true,
+      },
 });
 
 
-// middleware for deleting all Columns stored in Board and Board id
-// reference stored in Project upon Board removal
 boardSchema.post('findOneAndDelete', async function(res) {
-      const projectId = await Project.findOne({ boards: res._id }).select('_id');
       const boardId = res._id;
-      const columnIdArr = res.columns;
-
-      const update = { 
-            $pullAll: {
-                boards: [boardId],
-            } 
-      };
-
-      const options =  {
-            safe: true, 
-            upsert: true
-      };
-
-      // map function returns an array of promises stored in removedColumns
-      const removedColumns = columnIdArr.map(async columnId => {
-            return await Column.findByIdAndDelete(columnId);
-      });
+      
+      const childColumns = await Column.find({boardId: boardId});
 
       // array of promises is passed to Promise.all to resolve concurrently
-      Promise.all(removedColumns);
-      
-      if(projectId) {
-            await Project.findByIdAndUpdate(projectId, update, options);
-      }
-      
+      Promise.all(
+            childColumns.map(async column => {
+                  await Column.findByIdAndDelete(column._id)
+            })
+      );
 });
 
 

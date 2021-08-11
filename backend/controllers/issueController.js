@@ -1,5 +1,5 @@
-import Issue from '../models/issueModel.js';
 import asyncHandler from 'express-async-handler';
+import Issue from '../models/issueModel.js';
 
 
 export const getAllIssues = asyncHandler(async(req, res) => {
@@ -28,10 +28,12 @@ export const getIssueById = asyncHandler(async(req, res) => {
 export const addIssue = asyncHandler(async(req, res) => {
       const name = req.body.name;
       const creator = req.body.creator;
-      
+      const columnId = req.body.columnId;
+
       const newIssue = new Issue({
             name,
             creator,
+            columnId,
       });
 
       try {
@@ -47,10 +49,7 @@ export const addIssue = asyncHandler(async(req, res) => {
 export const updateIssue = asyncHandler(async(req, res) => {
       const id = req.params.id;
       const update = { 
-            $set: {
-                  description: req.body.description,
-                  contributor: req.body.contributor,
-            } 
+            $set: req.body
       };
       const options =  {
             new: true, 

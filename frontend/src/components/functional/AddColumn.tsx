@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import AddColumnButton from '../buttons/AddColumnButton';
+import { FetchBoardContext } from './GetBoard';
 
 
 interface AddColumnProps {
-      fetchBoard: () => void,
 }
 
 
@@ -13,6 +13,12 @@ const AddColumn: FC<AddColumnProps> = (props) => {
       let { boardId } = useParams<{boardId: string}>();
       const [columnName, setColumnName] = useState<string>('');
       const [addMode, setAddMode] = useState<boolean>(false);
+      const fetchBoard = useContext(FetchBoardContext);
+
+      
+      useEffect(() => {
+            fetchBoard();
+      }, [setAddMode]);
 
 
       function addColumnToBoard(columnResponse: AxiosResponse) {
@@ -26,7 +32,7 @@ const AddColumn: FC<AddColumnProps> = (props) => {
                   }
             }).then((res) => {
                   setAddMode(false);
-                  props.fetchBoard();
+                  fetchBoard();
             }).catch((err) => {
                   console.log(err);
             });

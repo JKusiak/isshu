@@ -1,18 +1,24 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { INestedColumn } from '../../types/ModelTypes';
+import { IColumn } from '../../types/ModelTypes';
 import UpdateColumnButton from '../buttons/UpdateColumnButton';
+import { FetchBoardContext } from './GetBoard';
 
 
 interface UpdateColumnProps {
-      column: INestedColumn,
-      fetchBoard: () => void,
+      column: IColumn,
 }
 
 
 const UpdateColumn: FC<UpdateColumnProps> = (props) => {
       const [columnName, setColumnName] = useState<string>(props.column.name);
-      const [updateMode, setUpdateMode] = useState<boolean>(false);      
+      const [updateMode, setUpdateMode] = useState<boolean>(false);
+      const fetchBoard = useContext(FetchBoardContext);
+
+
+      useEffect(() => {
+            fetchBoard();
+      }, [setUpdateMode]);
 
 
       function onSubmit(e: React.SyntheticEvent) {
@@ -26,10 +32,10 @@ const UpdateColumn: FC<UpdateColumnProps> = (props) => {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {})
-
-            setUpdateMode(false);
-            props.fetchBoard();
+            }).then((res) => {
+                  setUpdateMode(false);
+                  fetchBoard();
+            })
       } 
 
 

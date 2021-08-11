@@ -3,7 +3,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import DeleteProjectForm from '../functional/DeleteProject';
 import { Button, Typography } from '@material-ui/core';
 
 
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface DeleteProjectModalProps {
       handleSettingsClose: () => void,
-      onDelete: (e: React.MouseEvent) => void,
+      deleteProject: (e: React.MouseEvent) => void,
 }
 
 
@@ -54,7 +53,9 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
       const [open, setOpen] = useState<boolean>(false);
 
 
-      const handleOpen = () => {
+      const handleOpen = (e: React.SyntheticEvent) => {
+            e.preventDefault();
+
             setOpen(true);
             props.handleSettingsClose();
       };
@@ -65,6 +66,13 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
 
             setOpen(false);
             props.handleSettingsClose();
+      };
+
+
+      const handleDelete = (e: any) => {
+            e.preventDefault();
+
+            props.deleteProject(e);
       };
 
 
@@ -84,36 +92,36 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
                         timeout: 500,
                   }}
             >
-            <Fade in={open}>
-                  <div className={classes.paper}>
-                        <Typography className={classes.header} component="h1" variant="h4">
-                              Delete project?
-                        </Typography>
-                        <div className={classes.form}>
-                              <Button
-                                    className={classes.button}
-                                    onClick={props.onDelete}
-                                    fullWidth
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                              >
-                                    Yes
-                              </Button>
+                  <Fade in={open}>
+                        <div className={classes.paper}>
+                              <Typography className={classes.header} component="h1" variant="h4">
+                                    Delete project?
+                              </Typography>
+                              <div className={classes.form}>
+                                    <Button
+                                          className={classes.button}
+                                          onClick={handleDelete}
+                                          fullWidth
+                                          type="submit"
+                                          variant="contained"
+                                          color="primary"
+                                    >
+                                          Yes
+                                    </Button>
 
-                              <Button
-                                    className={classes.button}
-                                    onClick={handleClose}
-                                    fullWidth
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                              >
-                                    No
-                              </Button>
+                                    <Button
+                                          className={classes.button}
+                                          onClick={handleClose}
+                                          fullWidth
+                                          type="submit"
+                                          variant="contained"
+                                          color="primary"
+                                    >
+                                          No
+                                    </Button>
+                              </div>
                         </div>
-                  </div>
-            </Fade>
+                  </Fade>
             </Modal>
             </>
       );

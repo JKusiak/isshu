@@ -19,7 +19,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
                   <Route path={`${path}/:boardId`}>
                         <GetBoard/>
                   </Route>
-                  <Route exact path={path}>
+                  <Route path={path}>
                         <GetBoardsGallery/>
                   </Route>
             </Switch>

@@ -16,7 +16,7 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
 
       useEffect(() => {
             fetchBoards();
-      }, [projectId]);
+      }, []);
 
 
       function fetchBoards() {
@@ -25,7 +25,7 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  setBoards(resp.data.boards);
+                  setBoards(resp.data);
             }).catch((err) => {
                   console.log(err);
             });

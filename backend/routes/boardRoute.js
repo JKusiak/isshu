@@ -3,11 +3,10 @@ import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
       getAllBoards,
       getBoardById,
+      getColumnsOfBoard,
       addBoard,
       updateBoard,
       deleteBoard,
-      getAllBoardContent,
-      addColumnToBoard,
 } from '../controllers/boardController.js';
 
 
@@ -19,12 +18,10 @@ protectedBoardRouter.route('/').get(getAllBoards);
 
 protectedBoardRouter.route('/:id').get(getBoardById);
 
+protectedBoardRouter.route('/getColumns/:boardId').get(getColumnsOfBoard);
+
 protectedBoardRouter.route('/add').post(addBoard);
 
 protectedBoardRouter.route('/update/:id').post(updateBoard);
 
 protectedBoardRouter.route('/delete/:id').delete(deleteBoard);
-
-protectedBoardRouter.route('/getContent/:id').get(getAllBoardContent);
-
-protectedBoardRouter.route('/addColumn/:id').post(addColumnToBoard);

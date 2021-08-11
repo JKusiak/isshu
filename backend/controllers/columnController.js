@@ -1,4 +1,5 @@
 import Column from '../models/columnModel.js';
+import Issue from '../models/issueModel.js';
 import asyncHandler from 'express-async-handler';
 
 
@@ -24,20 +25,34 @@ export const getColumnById = asyncHandler(async(req, res) => {
       }
 });
 
+export const getIssuesOfColumn = asyncHandler(async(req, res) => {
+      const columnId = req.params.columnId;
+  
+      try {
+          const issues = await Issue.find({columnId: columnId})
+          res.json(issues);
+      } catch(err) {
+          res.status(404).json({message: "Project not found"});
+          throw new Error('Project not found');
+      }
+});
+
 
 export const addColumn = asyncHandler(async(req, res) => {
       const name = req.body.columnName;
-      
+      const boardId = req.body.boardId;
+
       const newColumn = new Column ({
             name,
+            boardId,
       });
 
       try {
             const savedColumn = await newColumn.save();
             res.json(savedColumn);
       } catch(err) {
-            res.status(400).json({message: "Can not save the column"});
-            throw new Error('Can not save the column');
+            res.status(400).json({message: "Can not save the board"});
+            throw new Error('Can not save the board');
       }
 });
 
@@ -75,59 +90,3 @@ export const deleteColumn = asyncHandler(async(req, res) => {
 });
 
 
-export const getIssuesOfColumn = asyncHandler(async(req, res) => {
-      try {
-            const issues = await Column.findOne({_id: req.params.id})
-                  .populate('issues');
-            res.json(issues);
-      } catch(err) {
-            res.status(404).json({message: "Column not found"});
-            throw new Error('Column not found');
-      }
-});
-
-
-export const addIssueToColumn = asyncHandler(async(req, res) => {
-      const id = req.params.id;
-      const issueId = req.body.issueId;
-
-      const update = {
-          $push: {
-              issues: issueId,
-          } 
-      };
-
-      const options = {
-          new: true, 
-          useFindAndModify: false,
-      };
-  
-      try {
-            await Column.findByIdAndUpdate(id, update, options);
-            res.json("Issue added to column successfuly");
-      } catch(err) {
-            res.status(400).json({message: "Could not add issue to column"});
-            throw new Error('Could not add issue to column');
-      }
-});
-
-
-export const deleteIssueFromColumn = asyncHandler(async(req, res) => {
-      const id = req.params.id;
-      const update = {
-            $pullAll: {
-                  issues: [req.body.issueId],
-            } 
-      };
-      const options =  {
-          safe: true, 
-          upsert: true
-      };
-      
-      try {
-            await Column.findByIdAndUpdate(id, update, options);
-      } catch(err) {
-            res.status(400).json({message: "Could not delete issue from column"});
-            throw new Error('Could not delete issue from column');
-      }
-  });

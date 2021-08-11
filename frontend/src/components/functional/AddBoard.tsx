@@ -10,65 +10,31 @@ interface AddBoardProps {
 
 
 const AddBoard: FC<AddBoardProps> = (props) => {
-      let { projectId } = useParams<{projectId: string}>();
+      const { projectId } = useParams<{projectId: string}>();
       const [boardName, setBoardName] = useState<string>('');
       const [addMode, setAddMode] = useState<boolean>(false);
-     
-
-      function addBoardToProject(boardResponse: AxiosResponse) {
-            const boardToAdd = {
-                  boardId: boardResponse.data._id,
-            };
-
-            axios.post(`http://localhost:5000/projects/addBoard/${projectId}`, boardToAdd, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then((res) => {
-                  setAddMode(false);
-                  window.scroll({
-                        top: document.body.scrollHeight, 
-                        left: 0, 
-                        behavior: 'smooth' 
-                  });
-                  props.fetchBoards();
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }
 
 
-      function createAndAddColumn(columnName: string, boardResponse: AxiosResponse) {
-            const column = {
+      function createColumn(columnName: string, boardResponse: AxiosResponse) {
+            const newBoardId = boardResponse.data._id;
+
+            const requestBody = {
                   columnName: columnName,
+                  boardId: newBoardId,
             }
 
-            axios.post('http://localhost:5000/columns/add', column, {
+            axios.post('http://localhost:5000/columns/add', requestBody, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {
-                  const columnToAdd = {
-                        columnId: res.data._id,
-                  };
-
-                  axios.post(`http://localhost:5000/boards/addColumn/${boardResponse.data._id}`, columnToAdd, {
-                        headers: {
-                              'Authorization': `Bearer ${localStorage.getItem('token')}`
-                        }
-                  }).then((res) => {
-
-                  }).catch((err) => {
-                        console.log(err);
-                  });
             })
       }
 
 
       function createDefaultColumns(boardResponse: AxiosResponse) {
-            createAndAddColumn('TO DO', boardResponse);
-            createAndAddColumn('IN PROGRESS', boardResponse);
-            createAndAddColumn('DONE', boardResponse);
+            createColumn('TO DO', boardResponse);
+            createColumn('IN PROGRESS', boardResponse);
+            createColumn('DONE', boardResponse);
       }
 
 
@@ -77,6 +43,7 @@ const AddBoard: FC<AddBoardProps> = (props) => {
 
             const board = {
                   boardName: boardName,
+                  projectId: projectId,
             }
 
             axios.post('http://localhost:5000/boards/add', board, {
@@ -84,10 +51,16 @@ const AddBoard: FC<AddBoardProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
-                  addBoardToProject(res);
                   createDefaultColumns(res);
+                  setAddMode(false);
+                  
+                  window.scroll({
+                        top: document.body.scrollHeight, 
+                        left: 0, 
+                        behavior: 'smooth' 
+                  });
+                  props.fetchBoards();
             })
-
       } 
 
 
