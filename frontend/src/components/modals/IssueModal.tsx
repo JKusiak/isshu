@@ -1,6 +1,7 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
+import IssueDescriptionButton from "../buttons/IssueDescriptionButton";
 import UpdateIssue from "../functional/UpdateIssueModal";
 import TagsGallery from "../TagsGallery";
 
@@ -82,6 +83,7 @@ interface IssueModalProps {
       issue: INestedIssue,
       isModalOpen: boolean,
       setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+      onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
 }
 
 
@@ -113,7 +115,7 @@ const IssueModal: FC<IssueModalProps> = (props) => {
                                           </div>
                                           <div className={classes.description}>
                                                 Description
-                                               
+                                                <IssueDescriptionButton description={props.issue.description} onSubmit={props.onSubmit}/>
                                           </div>
                                           <div className={classes.photos}>
                                                 Attachments

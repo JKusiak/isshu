@@ -1,6 +1,8 @@
-import { FC, useState} from 'react';
+import { FC, useContext, useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
+import { BoardReducerContext } from '../functional/GetBoard';
+import { ActionTypes } from '../reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -26,15 +28,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface UpdateColumnButtonProps {
-      description: string,
-      setDescription: React.Dispatch<React.SetStateAction<string>>,
       onSubmit: (e: any) => void,
+      description: string,
 }
 
 
 const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
       const classes = useStyles();
       const [updateMode, setUpdateMode] = useState<boolean>(false);  
+      const dispatch = useContext(BoardReducerContext);
 
 
       function handleSubmit(e: any) {
@@ -44,10 +46,10 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
 
 
       return (
-            <ClickAwayListener onClickAway={e =>handleSubmit(e)}>
+            <ClickAwayListener onClickAway={handleSubmit}>
                   <div onClick={() => setUpdateMode(true)}>
                         {updateMode && 
-                              <form onSubmit={e =>handleSubmit(e)} autoComplete="off">
+                              <form onSubmit={handleSubmit} autoComplete="off">
                                     <TextField
                                           className={classes.inputField}
                                           required
@@ -56,14 +58,14 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
                                           variant='outlined'
                                           name="issueDescription"
                                           id="issueDescription"
-                                          placeholder={props.description}
+                                          placeholder={props.description || 'Add description of the issue'}
                                           autoComplete="issue-description"
                                           inputProps={{style: {fontSize: 15, padding:5}}}
                                           onChange={e => {
                                                 if(e.target.value !== '') {
-                                                      props.setDescription(e.target.value);
+                                                      dispatch({type: ActionTypes.UpdateIssue, payload: {name: e.target.value}});
                                                 } else {
-                                                      props.setDescription('Add description of the issue');
+                                                      dispatch({type: ActionTypes.UpdateIssue, payload: {name: 'Add description of the issue'}});
                                                 }
                                           }}
                                     />

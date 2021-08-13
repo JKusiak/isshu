@@ -36,9 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   '&:hover': {
                         backgroundColor: 'white',
                         boxShadow: theme.shadows[5],
-                        '& *': {
-                              fontWeight: 600
-                        }
                   }
             },
             nameLink: {
