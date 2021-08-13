@@ -17,7 +17,7 @@ export const getAllColumns = asyncHandler(async(req, res) => {
   
 export const getColumnById = asyncHandler(async(req, res) => {
       try {
-            const column = await Column.findById(req.params.id);
+            const column = await Column.findById(req.params.columnId);
             res.json(column);
       } catch(err) {
             res.status(404).json({message: "Column not found"});
@@ -58,7 +58,7 @@ export const addColumn = asyncHandler(async(req, res) => {
 
 
 export const updateColumn = asyncHandler(async(req, res) => {
-      const id = req.params.id;
+      const id = req.params.columnId;
 
       const update = { 
             $set: {
@@ -72,7 +72,8 @@ export const updateColumn = asyncHandler(async(req, res) => {
       };
 
       try {
-            await Column.findByIdAndUpdate(id, update, options);
+            const updatedColumn = await Column.findByIdAndUpdate(id, update, options);
+            res.json(updatedColumn);
       } catch(err) {
             res.status(400).json({message: "Update of column unsuccessfull"});
             throw new Error('Update of column unsuccessfull');
@@ -82,7 +83,8 @@ export const updateColumn = asyncHandler(async(req, res) => {
 
 export const deleteColumn = asyncHandler(async(req, res) => {
       try {
-            await Column.findByIdAndDelete(req.params.id);
+            await Column.findByIdAndDelete(req.params.columnId);
+            res.json();
       } catch(err) {
             res.status(404).json({message: "Column not found"});
             throw new Error('Column not found');

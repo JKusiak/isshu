@@ -1,9 +1,10 @@
 import axios from "axios";
-import { FC, useState, useEffect, createContext } from "react";
+import { FC, useState, useEffect, createContext, useReducer, Dispatch } from "react";
 import { useParams } from "react-router-dom";
-import { BoardTemplate, ColumnTemplate } from "../../types/ModelContentTemplate";
-import { IBoard, IColumn } from "../../types/ModelTypes";
+import { BoardTemplate, ColumnTemplate, NestedBoardTemplate } from "../../types/ModelContentTemplate";
+import { IBoard, IColumn, INestedBoard } from "../../types/ModelTypes";
 import BoardData from "../BoardData";
+import { Action, ActionTypes, boardContentReducer } from "../reducers/BoardReducer";
 
 
 interface GetBoardProps {
@@ -11,14 +12,13 @@ interface GetBoardProps {
 
 // context for avoiding propagating function fetchBoard() for refreshing 
 // the board content to child components
-export const FetchBoardContext = createContext<() => void>(() => null);
+export const BoardReducerContext = createContext<Dispatch<Action>>(() => null);
 
 
 const GetBoard: FC<GetBoardProps> = (props) => {
       const { boardId } = useParams<{ boardId: string }>();
       const [isLoaded, setIsLoaded] = useState<boolean>(false);
-      const [board, setBoard] = useState<IBoard>(BoardTemplate);
-      const [columns, setColumns] = useState<[IColumn]>([ColumnTemplate]);
+      const [boardState, dispatch] = useReducer(boardContentReducer, NestedBoardTemplate)
       
 
       useEffect(() => {
@@ -27,27 +27,12 @@ const GetBoard: FC<GetBoardProps> = (props) => {
 
 
       function fetchBoard() {
-            axios.get(`http://localhost:5000/boards/${boardId}`, {
+            axios.get(`http://localhost:5000/boards/getContent/${boardId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then(resp => {
-                  setBoard(resp.data);
-                  fetchColumns();
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }
-
-
-      function fetchColumns() {
-            axios.get(`http://localhost:5000/boards/getColumns/${boardId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then(resp => {
-                  setColumns(resp.data);
-                  // is loaded necessary for dnd components to receive columnIDs on first render
+                  dispatch({type: ActionTypes.FetchData, payload: resp.data});
                   setIsLoaded(true);
             }).catch((err) => {
                   console.log(err);
@@ -55,30 +40,37 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       }
 
 
-      function changeColumn(newColumnId: string, issueId: string) {
-            const issue = {
+      function changeColumn(oldColumnId: string, newColumnId: string, issueId: string) {
+            const issueChanges = {
                   columnId: newColumnId,
             }
 
-            axios.post(`http://localhost:5000/issues/update/${issueId}`, issue, {
+            axios.post(`http://localhost:5000/issues/update/${issueId}`, issueChanges, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
+            }).then((res) => {
+                  // moving this out of .then() would probably remove flickering, how to
+                  // move updated object between arrays in reducer?
+                  const payload = {
+                        oldColumnId: oldColumnId,
+                        newColumnId: newColumnId,
+                        issueContent: res.data,
+                  }
+
+                  dispatch({type: ActionTypes.ChangeColumns, payload: payload});
             }).catch((err) => {
                   console.log(err);
             });
-
-            fetchBoard();
       }
 
 
       return (
             <>
             {isLoaded &&
-             <FetchBoardContext.Provider value={fetchBoard}>
-                  <BoardData board={board} columns={columns} changeColumn={changeColumn}/>
-             </FetchBoardContext.Provider>
-                  
+             <BoardReducerContext.Provider value={dispatch}>
+                  <BoardData board={boardState} changeColumn={changeColumn}/>
+             </BoardReducerContext.Provider> 
             }
             </>
       );

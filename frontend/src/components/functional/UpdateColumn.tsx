@@ -1,52 +1,50 @@
 import { FC, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { IColumn } from '../../types/ModelTypes';
+import { IColumn, INestedColumn } from '../../types/ModelTypes';
 import UpdateColumnButton from '../buttons/UpdateColumnButton';
-import { FetchBoardContext } from './GetBoard';
+import { BoardReducerContext } from './GetBoard';
+import { ActionTypes } from '../reducers/BoardReducer';
 
 
 interface UpdateColumnProps {
-      column: IColumn,
+      column: INestedColumn,
 }
 
 
 const UpdateColumn: FC<UpdateColumnProps> = (props) => {
-      const [columnName, setColumnName] = useState<string>(props.column.name);
-      const [updateMode, setUpdateMode] = useState<boolean>(false);
-      const fetchBoard = useContext(FetchBoardContext);
-
-
-      useEffect(() => {
-            fetchBoard();
-      }, [setUpdateMode]);
+      const [tempColumnName, setTempColumnName] = useState(props.column.name);
+      const dispatch = useContext(BoardReducerContext);
 
 
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
 
             const column = {
-                  name: columnName,
+                  name: tempColumnName,
             }
 
             axios.post(`http://localhost:5000/columns/update/${props.column._id}`, column, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {
-                  setUpdateMode(false);
-                  fetchBoard();
             })
+            
+            const payload = {
+                  newName: tempColumnName,
+                  columnId: props.column._id,
+            }
+
+            dispatch({type: ActionTypes.UpdateColumn, payload: payload})
       } 
 
 
       return (
       <> 
             <UpdateColumnButton
+                  tempColumnName={tempColumnName}
+                  setTempColumnName={setTempColumnName}
+                  permColumnName={props.column.name}
                   onSubmit={onSubmit}
-                  columnName={columnName} 
-                  setColumnName={setColumnName} 
-                  updateMode={updateMode}
-                  setUpdateMode={setUpdateMode}
             />
       </>
       );

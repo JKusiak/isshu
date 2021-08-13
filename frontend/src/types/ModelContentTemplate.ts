@@ -1,17 +1,21 @@
 // templates used for state hooks to reduce boilerplate code
 // as I don't know how to solve it with types 
 
-import { IUser } from "./ModelTypes";
+import { 
+      IBoard, 
+      IColumn, 
+      IIssue, 
+      INestedBoard, 
+      INestedColumn, 
+      INestedIssue, 
+      INestedUser, 
+      IProject, 
+      ITag, 
+      IUser 
+} from "./ModelTypes";
 
-export const UserTemplate: {
-      _id: string, 
-      name: string, 
-      surname: string, 
-      email: string,
-      password: string, 
-      isAdmin: boolean,
-      projects: [string]
-} = {
+
+export const UserTemplate: IUser = {
       _id: '',
       name: '',
       surname: '',
@@ -21,14 +25,7 @@ export const UserTemplate: {
       projects: [''],
 };
 
-export const ProjectTemplate: {
-      _id: string, 
-      name: string, 
-      description: string, 
-      dateStart: Date, 
-      dateEnd: Date, 
-      creator: IUser, 
-} = {
+export const ProjectTemplate: IProject = {
       _id: '',
       name: '',
       description: '',
@@ -38,31 +35,21 @@ export const ProjectTemplate: {
 };
 
 
-export const BoardTemplate: {_id: string, name: string, projectId: string} = {
+export const BoardTemplate: IBoard = {
       _id: '',
       name: '',
       projectId: '',
 };
 
 
-export const ColumnTemplate: {_id: string, name: string, boardId: string} = {
+export const ColumnTemplate: IColumn = {
       _id: '',
       name: '',
       boardId: '',
 };
 
 
-export const IssueTemplate: {
-      _id: string, 
-      name: string, 
-      description:string, 
-      creator: string, 
-      contributors: [string], 
-      tags: [string], 
-      messages: [string], 
-      steps: [string],
-      columnId: string,
-} = {
+export const IssueTemplate: IIssue = {
       _id: '',
       name: '',
       description: '',
@@ -75,9 +62,33 @@ export const IssueTemplate: {
 };
 
 
-export const TagTemplate: {_id: string, name: string} = {
+export const TagTemplate: ITag = {
       _id: '',
       name: '',
 };
 
 
+// needed for providing initial value for BoardReducer
+
+export const NestedUserTemplate: INestedUser = {
+      _id: '',
+      name: '',
+      surname: '',
+}
+
+export const NestedIssueTemplate: INestedIssue = {
+      ...IssueTemplate,
+      tags: [TagTemplate],
+      contributors: [NestedUserTemplate],
+      creator: NestedUserTemplate,
+}
+
+export const NestedColumnTemplate: INestedColumn = {
+      ...ColumnTemplate,
+      issues:[NestedIssueTemplate],
+}
+
+export const NestedBoardTemplate: INestedBoard = {
+      ...BoardTemplate,
+      columns: [NestedColumnTemplate],
+}

@@ -1,4 +1,5 @@
 // types for basic database models
+
 export interface IUser {
       _id: string;
       name: string;
@@ -27,7 +28,7 @@ export interface IBoard {
 export interface IColumn {
       _id: string;
       name: string;
-      boardId: string;       // ref id
+      boardId: string;        // ref id
 }
 
 export interface IIssue {
@@ -39,10 +40,47 @@ export interface IIssue {
       tags: [string];         // ref id
       messages: [string];
       steps: [string];
-      columnId: string;
+      columnId: string;       // ref id
 }
 
 export interface ITag {
       _id: string;
       name: string;
+}
+
+
+// types with nested subtypes for call on getNestedBoard
+// that fetches all data of board and its children based on
+// virtual properties to create nested object
+
+export interface INestedUser {
+      _id: string;
+      name: string;
+      surname: string;
+}
+
+export interface INestedBoard {
+      _id: string;
+      name: string;
+      projectId: string;
+      columns: [INestedColumn];
+}
+
+export interface INestedColumn {
+      _id: string;
+      name: string;
+      boardId: string;
+      issues: [INestedIssue];
+}
+
+export interface INestedIssue {
+      _id: string;
+      name: string;
+      description: string;
+      creator: INestedUser;
+      columnId: string,
+      messages: [string];
+      steps: [string];
+      tags: [ITag];
+      contributors: [INestedUser];
 }

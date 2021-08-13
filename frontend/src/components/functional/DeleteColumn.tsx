@@ -2,7 +2,8 @@ import axios from "axios";
 import { FC, useContext, useEffect } from "react";
 import { IColumn } from "../../types/ModelTypes";
 import DeleteColumnButton from "../buttons/DeleteColumnButton";
-import { FetchBoardContext } from "./GetBoard";
+import { ActionTypes } from "../reducers/BoardReducer";
+import { BoardReducerContext } from "./GetBoard";
 
 
 interface DeleteColumnProps {
@@ -12,21 +13,16 @@ interface DeleteColumnProps {
 
 const DeleteColumn: FC<DeleteColumnProps> = (props) => {
       const columnId = props.column._id;
-      const fetchBoard = useContext(FetchBoardContext);
-
-
-      useEffect(() => {
-            fetchBoard();
-      }, [deleteColumn]);
+      const dispatch = useContext(BoardReducerContext);
 
 
       function deleteColumn() {
-            axios.delete(`http://localhost:5000/columns/delete/${columnId}`, {
+            axios.delete(`http://localhost:5000/columns/delete/${columnId}`, {   
                   headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
                   }
-            }).then((res) => {
-                  fetchBoard();
+            }).then(() => {
+                  dispatch({type: ActionTypes.DeleteColumn, payload: columnId})
             }).catch((err) => {
                   console.log(err);
             });

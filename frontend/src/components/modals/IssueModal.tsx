@@ -1,6 +1,6 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC } from "react";
-import { IIssue } from "../../types/ModelTypes";
+import { INestedIssue } from "../../types/ModelTypes";
 import UpdateIssue from "../functional/UpdateIssueModal";
 import TagsGallery from "../TagsGallery";
 
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface IssueModalProps {
-      issue: IIssue,
+      issue: INestedIssue,
       isModalOpen: boolean,
       setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }

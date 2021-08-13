@@ -1,6 +1,8 @@
-import { FC} from 'react';
+import { FC, useContext, useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
+import { ActionTypes } from '../reducers/BoardReducer';
+import { BoardReducerContext } from '../functional/GetBoard';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -28,23 +30,31 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface UpdateColumnButtonProps {
-      columnName: string,
-      setColumnName: React.Dispatch<React.SetStateAction<string>>,
-      updateMode: boolean,
-      setUpdateMode: React.Dispatch<React.SetStateAction<boolean>>,
+      tempColumnName: string,
+      setTempColumnName: React.Dispatch<React.SetStateAction<string>>,
+      permColumnName: string,
       onSubmit: (e: any) => void,
 }
 
 
 const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
       const classes = useStyles();
- 
+      const [updateMode, setUpdateMode] = useState<boolean>(false);
+      
+
+      function handleSubmit(e: any) {
+            if(updateMode) {
+                  props.onSubmit(e);
+            }
+            setUpdateMode(false);
+      }
+
 
       return (
-            <ClickAwayListener onClickAway={props.onSubmit}>
-                  <div onClick={() => props.setUpdateMode(true)}>
-                        {props.updateMode && 
-                              <form onSubmit={props.onSubmit} autoComplete="off">
+            <ClickAwayListener onClickAway={handleSubmit}>
+                  <div onClick={() => setUpdateMode(true)}>
+                        {updateMode && 
+                              <form onSubmit={handleSubmit} autoComplete="off">
                                     <TextField
                                           className={classes.inputField}
                                           required
@@ -53,22 +63,22 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
                                           variant='outlined'
                                           name="columnName"
                                           id="columnName"
-                                          placeholder={props.columnName}
+                                          value={props.tempColumnName}
                                           autoComplete="column-name"
                                           inputProps={{style: {fontSize: 15, padding:5}}}
                                           onChange={e => {
                                                 if(e.target.value !== '') {
-                                                      props.setColumnName(e.target.value);
+                                                      props.setTempColumnName(e.target.value);
                                                 } else {
-                                                      props.setColumnName('Enter value');
+                                                      props.setTempColumnName('Enter value');
                                                 }
                                           }}
                                     />
                               </form>
                         }
 
-                        {!props.updateMode &&
-                              <div className={classes.nameText}>{props.columnName}</div>
+                        {!updateMode &&
+                              <div className={classes.nameText}>{props.permColumnName}</div>
                         }
                   </div>
                   </ClickAwayListener>

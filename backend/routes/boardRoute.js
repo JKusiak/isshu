@@ -4,6 +4,7 @@ import {
       getAllBoards,
       getBoardById,
       getColumnsOfBoard,
+      getNestedBoard,
       addBoard,
       updateBoard,
       deleteBoard,
@@ -19,6 +20,8 @@ protectedBoardRouter.route('/').get(getAllBoards);
 protectedBoardRouter.route('/:id').get(getBoardById);
 
 protectedBoardRouter.route('/getColumns/:boardId').get(getColumnsOfBoard);
+
+protectedBoardRouter.route('/getContent/:boardId').get(getNestedBoard);
 
 protectedBoardRouter.route('/add').post(addBoard);
 

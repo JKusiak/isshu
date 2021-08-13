@@ -16,12 +16,12 @@ protectedColumnRouter.use(authenticateJWT);
 
 protectedColumnRouter.route('/').get(getAllColumns);
 
-protectedColumnRouter.route('/:id').get(getColumnById);
+protectedColumnRouter.route('/:columnId').get(getColumnById);
 
 protectedColumnRouter.route('/getIssues/:columnId').get(getIssuesOfColumn);
 
 protectedColumnRouter.route('/add').post(addColumn);
 
-protectedColumnRouter.route('/update/:id').post(updateColumn);
+protectedColumnRouter.route('/update/:columnId').post(updateColumn);
 
-protectedColumnRouter.route('/delete/:id').delete(deleteColumn);
+protectedColumnRouter.route('/delete/:columnId').delete(deleteColumn);

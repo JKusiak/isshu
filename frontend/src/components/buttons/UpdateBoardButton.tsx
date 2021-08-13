@@ -1,4 +1,4 @@
-import { FC} from 'react';
+import React, { FC, useState} from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
 
@@ -27,23 +27,31 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface UpdateBoardButtonProps {
-      boardName: string,
-      setBoardName: React.Dispatch<React.SetStateAction<string>>,
-      updateMode: boolean,
-      setUpdateMode: React.Dispatch<React.SetStateAction<boolean>>,
+      tempBoardName: string,
+      setTempBoardName: React.Dispatch<React.SetStateAction<string>>,
+      permBoardName: string,
       onSubmit: (e: any) => void,
 }
 
 
 const UpdateBoardButton: FC<UpdateBoardButtonProps> = (props) => {
       const classes = useStyles();
- 
+      const [updateMode, setUpdateMode] = useState<boolean>(false);
 
+
+      function handleSubmit(e: any) {
+            if(updateMode) {
+                  props.onSubmit(e);
+            }
+            setUpdateMode(false);
+      }
+
+      
       return (
-            <ClickAwayListener onClickAway={props.onSubmit}>
-                  <div onClick={() => props.setUpdateMode(true)}>
-                        {props.updateMode && 
-                              <form onSubmit={props.onSubmit} autoComplete="off">
+            <ClickAwayListener onClickAway={handleSubmit}>
+                  <div onClick={() => setUpdateMode(true)}>
+                        {updateMode && 
+                              <form onSubmit={handleSubmit} autoComplete="off">
                                     <TextField
                                           className={classes.inputField}
                                           required
@@ -51,21 +59,21 @@ const UpdateBoardButton: FC<UpdateBoardButtonProps> = (props) => {
                                           variant='outlined'
                                           name="boardName"
                                           id="boardName"
-                                          placeholder={props.boardName}
+                                          value={props.tempBoardName}
                                           autoComplete="board-name"
                                           onChange={e => {
                                                 if(e.target.value !== '') {
-                                                      props.setBoardName(e.target.value);
+                                                      props.setTempBoardName(e.target.value);
                                                 } else {
-                                                      props.setBoardName('Enter value');
+                                                      props.setTempBoardName('Enter value');
                                                 }
                                           }}
                                     />
                               </form>
                         }
 
-                        {!props.updateMode &&
-                                    <div className={classes.nameText}>{props.boardName}</div>
+                        {!updateMode &&
+                              <div className={classes.nameText}>{props.permBoardName}</div>
                         }
                   </div>
             </ClickAwayListener>

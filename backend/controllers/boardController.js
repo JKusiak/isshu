@@ -35,7 +35,39 @@ export const getColumnsOfBoard = asyncHandler(async(req, res) => {
           res.status(404).json({message: "Project not found"});
           throw new Error('Project not found');
       }
-}); 
+});
+
+
+export const getNestedBoard = asyncHandler(async(req, res) => {
+      const boardId = req.params.boardId;
+      
+      try {
+            const board = await Board.findById(boardId).populate({ 
+                  path: 'columns',
+                  model: 'Column',
+                  populate: {
+                        path: 'issues',
+                        model: 'Issue',
+                        populate: [{
+                              path: 'tags',
+                              model: 'Tag',
+                        },{
+                              path: 'creator',
+                              select: 'name surname',
+                              model: 'User',
+                        },{
+                              path: 'contributors',
+                              select: 'name surname',
+                              model: 'User',
+                        }]       
+                  } 
+            });
+            res.json(board);
+      } catch(err) {
+            res.status(404).json({message: "Board's content not found"});
+            throw new Error("Board's content not found");
+      }
+});
 
 
 export const addBoard = asyncHandler(async(req, res) => {

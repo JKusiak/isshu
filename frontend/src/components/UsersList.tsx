@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             listItem: {  
                   '&:hover': {
+                        backgroundColor: 'white',
                         boxShadow: theme.shadows[5],
                         '& *': {
                               fontWeight: 600
@@ -43,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
             nameLink: {
                   color: theme.palette.secondary.main,
                   textDecoration: 'none',
+                  '&:hover': {
+                        '& *': {
+                              fontWeight: 600
+                        }
+                  }
             },
       }),
 );

@@ -57,10 +57,24 @@ export const updateIssue = asyncHandler(async(req, res) => {
       };
 
       try {
-            await  Issue.findByIdAndUpdate(id, update, options);
+            const updatedIssue = await Issue.findByIdAndUpdate(id, update, options);
+            const populatedUpdatedIssue = await Issue.findById(updatedIssue._id)
+                  .populate([{
+                        path: 'tags',
+                        model: 'Tag',
+                  },{
+                        path: 'creator',
+                        select: 'name surname',
+                        model: 'User',
+                  },{
+                        path: 'contributors',
+                        select: 'name surname',
+                        model: 'User',
+                  }]);
+            res.json(populatedUpdatedIssue);
       } catch(err) {
             res.status(400).json({message: "Update of issue unsuccessful"});
-                  throw new Error('Update of issue unsuccessful');
+            throw new Error('Update of issue unsuccessful');
       }
 });
 

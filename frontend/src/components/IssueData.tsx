@@ -2,7 +2,7 @@ import { Backdrop, Card, Fade, Modal, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { IIssue } from "../types/ModelTypes";
+import { IIssue, INestedIssue } from "../types/ModelTypes";
 import UpdateIssueModal from "./functional/UpdateIssueModal";
 import IssueModal from "./modals/IssueModal";
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface IssueDataProps {
-      issue: IIssue,
+      issue: INestedIssue,
       index: number,
 }
 
@@ -38,10 +38,11 @@ const IssueData: FC<IssueDataProps> = (props) => {
       const classes = useStyles();
       const [isModalOpen, setIsModalOpen] = useState(false);
 
-      function displayIssue() {
-            return (
+
+      return (
+            <>
                   <Draggable draggableId={props.issue._id} index={props.index}>
-                        {(provided, snapshot) => {
+                        {(provided) => {
                               return (
                                     <>
                                           <Card
@@ -68,16 +69,6 @@ const IssueData: FC<IssueDataProps> = (props) => {
                               );
                         }}
                   </Draggable>
-            );
-                                               
-      }
-
-
-
-
-      return (
-            <>
-                  {displayIssue()}
             </>
       );
 }

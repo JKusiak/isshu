@@ -1,4 +1,4 @@
-import { FC, SetStateAction } from 'react';
+import { FC, SetStateAction, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/AddOutlined';
@@ -22,26 +22,30 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface AddColumnButtonProps {
       onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
-      addMode: boolean,
-      setAddMode: React.Dispatch<SetStateAction<boolean>>,
       setColumnName: React.Dispatch<SetStateAction<string>>,
 }
 
 
 const AddColumnButton: FC<AddColumnButtonProps> = (props) => {
       const classes = useStyles();
+      const [addMode, setAddMode] = useState<boolean>(false);
+
+
+      function handleSubmit(e: any) {
+            e.preventDefault();
+
+            setAddMode(false);
+            props.onSubmit(e);
+      }
 
 
       return (
             <>
-            <div onClick={() => props.setAddMode(true)}>
-                  <ClickAwayListener onClickAway={() => props.setAddMode(false)}>
+            <div onClick={() => setAddMode(true)}>
+                  <ClickAwayListener onClickAway={() => setAddMode(false)}>
                         <Card>
-                              <Typography component="h5" variant="h5">
-                                    {props.addMode &&
-                                          // I have no clue why, bu the submit function call
-                                          // has to come from button not form, otherwise not working
-                                          <form onSubmit={() => {}} autoComplete="off">
+                              {addMode &&
+                                          <form onSubmit={handleSubmit} autoComplete="off">
                                                 <TextField
                                                       required
                                                       autoFocus
@@ -54,17 +58,16 @@ const AddColumnButton: FC<AddColumnButtonProps> = (props) => {
                                                             props.setColumnName(e.target.value);
                                                       }}
                                                 />
-                                                <IconButton onClick={props.onSubmit} type="submit">
+                                                <IconButton type="submit">
                                                       <AddIcon className={classes.icon}/>
                                                 </IconButton>
-                                          </form>
-                                    }
-                                    {!props.addMode &&
-                                          <IconButton className={classes.iconButton}>
-                                                <AddIcon className={classes.icon}/> 
-                                          </IconButton>  
-                                    }
-                              </Typography>
+                                          </form>     
+                              }
+                              {!addMode &&
+                                    <IconButton className={classes.iconButton}>
+                                          <AddIcon className={classes.icon}/> 
+                                    </IconButton>  
+                              }
                         </Card>
                   </ClickAwayListener>
             </div>

@@ -2,9 +2,10 @@ import { FC, useContext, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { getLoggedInUser } from './GetLoggedInUser';
 import AddIssueButton from '../buttons/AddIssueButton';
-import { FetchBoardContext } from './GetBoard';
+import { BoardReducerContext } from './GetBoard';
 import { useParams } from 'react-router-dom';
 import { IColumn } from '../../types/ModelTypes';
+import { ActionTypes } from '../reducers/BoardReducer';
 
 
 interface AddIssueProps {
@@ -15,7 +16,7 @@ interface AddIssueProps {
 const AddIssue: FC<AddIssueProps> = (props) => {
       const [issueName, setIssueName] = useState<string>('');
       const [addMode, setAddMode] = useState<boolean>(false);
-      const fetchBoard = useContext(FetchBoardContext);
+      const dispatch = useContext(BoardReducerContext);
 
 
       function onSubmit(e: React.SyntheticEvent) {
@@ -33,7 +34,7 @@ const AddIssue: FC<AddIssueProps> = (props) => {
                   }
             }).then((res) => {
                   setAddMode(false);
-                  fetchBoard();
+                  dispatch({type: ActionTypes.AddIssue, payload: res.data})
             })
       } 
 

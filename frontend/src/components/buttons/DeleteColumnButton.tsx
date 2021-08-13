@@ -11,9 +11,7 @@ interface DeleteColumnButtonProps {
 const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
       return (
             <>
-                  <IconButton 
-                        onClick={props.deleteColumn}
-                  >
+                  <IconButton onClick={props.deleteColumn}>
                         <DeleteIcon />
                   </IconButton>
             </>

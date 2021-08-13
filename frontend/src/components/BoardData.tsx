@@ -8,8 +8,7 @@ import ColumnData from "./ColumnData";
 import UpdateBoard from "./functional/UpdateBoard";
 import AddColumn from "./functional/AddColumn";
 import DeleteBoard from "./functional/DeleteBoard";
-import { IBoard, IColumn } from "../types/ModelTypes";
-import GetColumn from "./functional/GetColumn";
+import { IBoard, IColumn, INestedBoard, INestedColumn } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,9 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardDataProps {
-      board: IBoard,
-      columns: [IColumn],
-      changeColumn: (arg0: string, arg1: string) => void,
+      board: INestedBoard,
+      changeColumn: (oldColumnId: string, newColumnId: string, issueId: string) => void,
 }
 
 
@@ -84,22 +82,22 @@ const BoardData: FC<BoardDataProps> = (props) => {
             const { source, destination, draggableId } = result;
 
             if (destination !== undefined && destination !== null && source.droppableId !== destination.droppableId) {
-                  props.changeColumn(destination.droppableId, draggableId);
+                  props.changeColumn(source.droppableId, destination.droppableId, draggableId);
             } else {
                   return;
             }
       };
 
 
-      function displayBoard() {
-            if(props.columns !== undefined && props.columns.length > 0) {
+      function displayBoardContent() {
+            if(props.board.columns !== undefined && props.board.columns.length > 0) {
                   return(
                         <div className={classes.container}>
                               <DragDropContext onDragEnd={result => onDragEnd(result)}>           
-                                    {props.columns.map((column: IColumn, index: number) => {
+                                    {props.board.columns.map((column: INestedColumn, index: number) => {
                                           return(
                                                 <Fragment key={index}>
-                                                      <GetColumn column={column}/> 
+                                                      <ColumnData column={column}/> 
                                                 </Fragment>
                                           );
                                     })}       
@@ -109,6 +107,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
             }
       }
 
+      
       return (
             <>
                   <div className={classes.navigation}>
@@ -126,7 +125,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   </div>
 
                   <div className={classes.wrapper}>
-                        {displayBoard()}
+                        {displayBoardContent()}
                         <div className={classes.addColumnButton}>
                               <AddColumn/>
                         </div>

@@ -51,7 +51,7 @@ interface AddBoardModalProps {
 const AddBoardModal: FC<AddBoardModalProps> = (props) => {
       const classes = useStyles();
       
-
+      
       return (
             <>
             <div onClick={() => props.setAddMode(true)}>

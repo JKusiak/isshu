@@ -5,7 +5,7 @@ import IssueData from "./IssueData";
 import AddIssue from "./functional/AddIssue";
 import DeleteColumn from "./functional/DeleteColumn";
 import UpdateColumn from "./functional/UpdateColumn";
-import { IColumn, IIssue } from "../types/ModelTypes";
+import { INestedColumn, INestedIssue } from "../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,8 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface ColumnDataProps {
-      column: IColumn,
-      issues: [IIssue],
+      column: INestedColumn,
 }
 
 
@@ -66,21 +65,21 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
       const [showAddIssue, setShowAddIssue] = useState<boolean>(false);
 
       
-      function displayIssues() {
-            if(props.issues !== null) {
-                  props.issues.map((issue: IIssue, index: number) => {
+      function displayColumnContent() {
+            return(
+                  props.column.issues.map((issue: INestedIssue, index: number) => {
                         return (
                               <Fragment key={index}>
                                     <IssueData issue={issue} index={index}/>
                               </Fragment>
                         );
                   })
-            }  
+            )
       }
+      
 
-
-      function displayColumn() {
-            return(
+      return (
+            <>
                   <div className={classes.columnWrapper}>
                         <div 
                               className={classes.columnHeader} 
@@ -101,7 +100,8 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
-                                          <div 
+                                          <>
+                                           <div 
                                                 className={classes.columnContentWrapper}
                                                 onMouseOver={() => setShowAddIssue(true)} 
                                                 onMouseLeave={() => setShowAddIssue(false)}        
@@ -109,24 +109,19 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 ref={provided.innerRef}
                                           >
                                                 <div>
-                                                      {displayIssues()}
+                                                      {displayColumnContent()}
                                                       {provided.placeholder}
                                                       {showAddIssue &&
                                                             <AddIssue column={props.column}/>
                                                       }
                                                 </div>
                                           </div>
+                                          </>
+                                          
                                     );
                               }}
                         </Droppable>
-                  </div>          
-            )                           
-      }
-
-
-      return (
-            <>
-                  {displayColumn()}
+                  </div>      
             </>
       );
 }

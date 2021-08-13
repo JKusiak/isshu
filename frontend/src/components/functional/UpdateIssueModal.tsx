@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 import axios from 'axios';
-import { IIssue, ITag } from '../../types/ModelTypes';
+import { IIssue, INestedIssue, ITag } from '../../types/ModelTypes';
 import IssueModal from '../modals/IssueModal';
 import { TagTemplate } from '../../types/ModelContentTemplate';
 
 
 interface UpdateIssueModalProps {
-      issue: IIssue,
+      issue: INestedIssue,
       isModalOpen: boolean,
       setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
