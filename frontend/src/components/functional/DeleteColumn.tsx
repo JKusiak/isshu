@@ -13,7 +13,7 @@ interface DeleteColumnProps {
 
 const DeleteColumn: FC<DeleteColumnProps> = (props) => {
       const columnId = props.column._id;
-      const dispatch = useContext(BoardReducerContext);
+      const { dispatch } = useContext(BoardReducerContext);
 
 
       function deleteColumn() {

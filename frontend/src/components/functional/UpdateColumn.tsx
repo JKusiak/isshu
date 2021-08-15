@@ -13,7 +13,7 @@ interface UpdateColumnProps {
 
 const UpdateColumn: FC<UpdateColumnProps> = (props) => {
       const [tempColumnName, setTempColumnName] = useState(props.column.name);
-      const dispatch = useContext(BoardReducerContext);
+      const { dispatch } = useContext(BoardReducerContext);
 
 
       function onSubmit(e: React.SyntheticEvent) {

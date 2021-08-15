@@ -76,15 +76,13 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                               if(column._id === payload.columnId) {
                                     column.issues.map(issue => {
                                           if(issue._id === payload.issueId) {
-                                                if(payload.modified.name) issue.name = payload.name;
-                                                if(payload.modified.description) issue.description = payload.description;
-                                                if(payload.modified.columnId) issue.columnId = payload.columnId;
-                                                if(payload.modified.creator) issue.creator = payload.creator;
-                                                if(payload.modified.steps) issue.steps = payload.steps;
-                                                if(payload.modified.messages) issue.messages = payload.messages;
-                                                if(payload.modified.tags) issue.tags = payload.tags;
-                                                if(payload.modified.contributors) issue.contributors = payload.contributors;
-                                                
+                                                if(payload.modified.name) issue.name = payload.modified.name;
+                                                if(payload.modified.description) issue.description = payload.modified.description;
+                                                if(payload.modified.columnId) issue.columnId = payload.modified.columnId;
+                                                if(payload.modified.steps) issue.steps = payload.modified.steps;
+                                                if(payload.modified.messages) issue.messages = payload.modified.messages;
+                                                if(payload.modified.tags) issue.tags = payload.modified.tags;
+                                                if(payload.modified.contributors) issue.contributors = payload.modified.contributors;
                                           }
                                           return issue;
                                     })

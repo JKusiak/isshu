@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { IIssue, INestedIssue } from "../types/ModelTypes";
-import UpdateIssueModal from "./functional/UpdateIssueModal";
 import IssueModal from "./modals/IssueModal";
 
 
@@ -60,10 +59,10 @@ const IssueData: FC<IssueDataProps> = (props) => {
                                                 </Typography>
                                           </Card>
 
-                                          <UpdateIssueModal 
+                                          <IssueModal 
                                                 issue={props.issue} 
-                                                isModalOpen={isModalOpen} 
-                                                setIsModalOpen={setIsModalOpen}
+                                                isIssueModalOpen={isModalOpen} 
+                                                setIssueModalOpen={setIsModalOpen}
                                           />
                                     </>
                               );

@@ -16,7 +16,7 @@ interface AddIssueProps {
 const AddIssue: FC<AddIssueProps> = (props) => {
       const [issueName, setIssueName] = useState<string>('');
       const [addMode, setAddMode] = useState<boolean>(false);
-      const dispatch = useContext(BoardReducerContext);
+      const { dispatch } = useContext(BoardReducerContext);
 
 
       function onSubmit(e: React.SyntheticEvent) {

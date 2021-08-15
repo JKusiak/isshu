@@ -1,9 +1,12 @@
-import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
-import React, { FC } from "react";
+import { Backdrop, createStyles, Fade, IconButton, makeStyles, Modal, Theme } from "@material-ui/core";
+import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
-import IssueDescriptionButton from "../buttons/IssueDescriptionButton";
-import UpdateIssue from "../functional/UpdateIssueModal";
-import TagsGallery from "../TagsGallery";
+import UpdateDescription from "../functional/issueFunctionals/UpdateDescription";
+import UpdateName from "../functional/issueFunctionals/UpdateName";
+import UpdateTags from "../functional/issueFunctionals/ManageTags";
+import TagsModal from "./TagsModal";
+import IssueTagsGallery from "../IssueTagsGallery";
+
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
@@ -28,13 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             leftColumn: {
                   gridColumn: 1,
-                  display: 'flex',
                   minHeight: 0,
                   minWidth: 0,
             },
             rightColumn: {
                   gridColumn: 2,
-                  display: 'flex',
                   minHeight: 0,
                   minWidth: 0,
             },
@@ -43,99 +44,68 @@ const useStyles = makeStyles((theme: Theme) =>
                   flexDirection: 'column',
                   overflow: 'auto',
             },
-            name: {
-                 fontWeight: 'bold',
-                 fontSize: '24px',
-                 marginBottom: theme.spacing(2),
+            tagContainer: {
+                  display: 'flex',
+                  flexDirection: 'row',
+                  marginBottom: theme.spacing(4),
             },
-            tags: {
-                  fontSize: '14px',
-                  marginBottom: theme.spacing(2),
-            },
-            description: {
-                  fontWeight: 'bold',
-                  fontSize: '16px',
-                  marginBottom: theme.spacing(2),
-            },
-            photos: {
 
-
-            },
-            messages: {
-
-            },
-            creator: {
-
-            },
-            contributors: {
-                  
-
-            },
-            steps: {
-                 
-
-            },
       }
 ));
 
 
 interface IssueModalProps {
       issue: INestedIssue,
-      isModalOpen: boolean,
-      setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
-      onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,
+      isIssueModalOpen: boolean,
+      setIssueModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
 const IssueModal: FC<IssueModalProps> = (props) => {
       const classes = useStyles();
+      const [isTagsModalOpen, setTagsModalOpen] = useState(false);
 
       return(
             <Modal
                   className={classes.modal}
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
-                  open={props.isModalOpen}
-                  onClose={() => props.setIsModalOpen(false)}
+                  open={props.isIssueModalOpen}
+                  onClose={() => props.setIssueModalOpen(false)}
                   closeAfterTransition
                   BackdropComponent={Backdrop}
                   BackdropProps={{
                         timeout: 500,
                   }}
             >
-                  <Fade in={props.isModalOpen}>
+                  <Fade in={props.isIssueModalOpen}>
                         <div className={classes.paper}>
                               <div className={classes.leftColumn}>
                                     <div className={classes.scrollableContent}>
-                                          <div className={classes.name}>
-                                               
+                                          <UpdateName issue={props.issue} />
+
+                                          <div className={classes.tagContainer}>
+                                                <IssueTagsGallery 
+                                                      tags={props.issue.tags}
+                                                      isTagsModalOpen={isTagsModalOpen} 
+                                                      setTagsModalOpen={setTagsModalOpen}
+                                                />
+
+                                                <TagsModal
+                                                      issue={props.issue}
+                                                      isTagsModalOpen={isTagsModalOpen} 
+                                                      setTagsModalOpen={setTagsModalOpen}
+                                                />
                                           </div>
-                                          <div className={classes.tags}>
-                                                
-                                          </div>
-                                          <div className={classes.description}>
-                                                Description
-                                                <IssueDescriptionButton description={props.issue.description} onSubmit={props.onSubmit}/>
-                                          </div>
-                                          <div className={classes.photos}>
-                                                Attachments
-                                          </div>
-                                          <div className={classes.messages}>
-                                                
-                                          </div>
+
+                                          <UpdateDescription issue={props.issue} />
+
+
                                     </div>
                               </div>
                               <div className={classes.rightColumn}>
                                     <div className={classes.scrollableContent}>
-                                          <div className={classes.creator}>
-                                                
-                                          </div>
-                                          <div className={classes.contributors}>
-                                               
-                                          </div>
-                                          <div className={classes.steps}>
-                                               
-                                          </div>
+
                                     </div>
                                     
                               </div>

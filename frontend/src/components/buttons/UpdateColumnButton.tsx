@@ -6,7 +6,6 @@ import { BoardReducerContext } from '../functional/GetBoard';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-
       inputField: {
             width: '150px',
             "& .MuiOutlinedInput-root": {

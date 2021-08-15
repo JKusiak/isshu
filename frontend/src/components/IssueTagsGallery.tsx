@@ -1,8 +1,9 @@
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Card, CardContent, IconButton, Typography } from "@material-ui/core";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";      
 import { FC, Fragment } from "react";
 import { ITag } from "../types/ModelTypes";
+import AddIcon from '@material-ui/icons/AddOutlined';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -12,6 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       tagCard: {
             display: 'flex',
+            minWidth: '30px',
+            marginRight: '5px',
             justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
@@ -27,12 +30,18 @@ const useStyles = makeStyles((theme: Theme) =>
       tagName: {
             fontSize: '12px',
       },
+      modalButtonIcon: {
+            fontSize: '15px',
+            color: theme.palette.secondary.main,
+      },
   })
 );
 
 
 interface TagsGalleryProps {
-      tags: [ITag];
+      tags: [ITag],
+      isTagsModalOpen: boolean,
+      setTagsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
@@ -45,7 +54,7 @@ const TagsGallery: FC<TagsGalleryProps> = (props) => {
                   return(props.tags.map((tag: ITag) => {
                         return(
                               <Fragment key={tag._id}>
-                                    <Card className={classes.tagCard} style={{padding: 0}}>
+                                    <Card className={classes.tagCard} onClick={() => props.setTagsModalOpen(true)}>
                                           <CardContent>
                                                 <Typography className={classes.tagName} component="h5" variant="h5">
                                                       {tag.name}
@@ -63,6 +72,9 @@ const TagsGallery: FC<TagsGalleryProps> = (props) => {
             <>
             <div className={classes.tagsContainer}>
                   {displayTags()}
+                  <Card className={classes.tagCard} onClick={() => props.setTagsModalOpen(true)}>
+                        <AddIcon className={classes.modalButtonIcon}/> 
+                  </Card>
             </div>
             </>
       );

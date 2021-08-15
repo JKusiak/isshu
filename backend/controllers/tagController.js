@@ -65,6 +65,7 @@ export const updateTag = asyncHandler(async(req, res) => {
 export const deleteTag = asyncHandler(async(req, res) => {
       try {
             await Tag.findByIdAndDelete(req.params.id);
+            res.json();
       } catch(err) {
             res.status(404).json({message: "Tag not found"});
             throw new Error('Tag not found');

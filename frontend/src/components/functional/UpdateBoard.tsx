@@ -14,7 +14,7 @@ interface UpdateBoardProps {
 const UpdateBoard: FC<UpdateBoardProps> = (props) => {
       let { boardId } = useParams<{boardId: string}>();
       const [tempBoardName, setTempBoardName] = useState(props.boardName);
-      const dispatch = useContext(BoardReducerContext);
+      const { dispatch } = useContext(BoardReducerContext);
       
 
       function onSubmit(e: React.SyntheticEvent) {

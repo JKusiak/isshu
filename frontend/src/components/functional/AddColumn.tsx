@@ -13,7 +13,7 @@ interface AddColumnProps {
 const AddColumn: FC<AddColumnProps> = (props) => {
       const { boardId } = useParams<{boardId: string}>();
       const [columnName, setColumnName] = useState<string>('');
-      const dispatch = useContext(BoardReducerContext);
+      const { dispatch } = useContext(BoardReducerContext);
       
 
       function onSubmit(e: React.SyntheticEvent) {
