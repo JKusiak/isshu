@@ -49,7 +49,9 @@ const AddTagButton: FC<AddTagButtonProps> = (props) => {
     function handleSubmit(e: any) {
         e.preventDefault();
 
-        props.addTag(e, newTagName);
+        if(newTagName !== ''){
+            props.addTag(e, newTagName);
+        }
 
         setAddMode(false);
     }

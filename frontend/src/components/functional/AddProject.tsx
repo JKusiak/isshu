@@ -1,8 +1,8 @@
+import axios, { AxiosResponse } from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import axios, { AxiosResponse } from 'axios';
-import { getLoggedInUser } from './GetLoggedInUser';
 import AddProjectModal from '../modals/AddProjectModal';
+import { getLoggedInUser } from './GetLoggedInUser';
 
 
 interface AddProjectProps {

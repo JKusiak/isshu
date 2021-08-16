@@ -1,9 +1,9 @@
-import React, { FC, useContext, useState } from 'react';
 import axios from 'axios';
-import { INestedIssue} from '../../../types/ModelTypes';
-import { BoardReducerContext } from '../GetBoard';
-import { ActionTypes } from '../../reducers/BoardReducer';
+import React, { FC, useContext, useState } from 'react';
+import { INestedIssue } from '../../../types/ModelTypes';
 import UpdateDescriptionButton from '../../buttons/issueButtons/UpdateDescriptionButton';
+import { ActionTypes } from '../../reducers/BoardReducer';
+import { BoardReducerContext } from '../GetBoard';
 
 
 interface UpdateDescriptionProps {

@@ -1,9 +1,9 @@
-import React, { FC, useContext, useState } from 'react';
 import axios from 'axios';
-import { INestedIssue} from '../../../types/ModelTypes';
-import { BoardReducerContext } from '../GetBoard';
-import { ActionTypes } from '../../reducers/BoardReducer';
+import React, { FC, useContext, useState } from 'react';
+import { INestedIssue } from '../../../types/ModelTypes';
 import UpdateNameButton from '../../buttons/issueButtons/UpdateNameButton';
+import { ActionTypes } from '../../reducers/BoardReducer';
+import { BoardReducerContext } from '../GetBoard';
 
 
 
@@ -23,7 +23,7 @@ const UpdateName: FC<UpdateNameProps> = (props) => {
             if(tempName === '') return;
 
             const requestBody = {
-                  description: tempName,
+                  name: tempName,
             }
 
             axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {

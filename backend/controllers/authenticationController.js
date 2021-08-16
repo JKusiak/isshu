@@ -1,7 +1,7 @@
-import asyncHandler from 'express-async-handler';
-import User from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import asyncHandler from 'express-async-handler';
+import jwt from 'jsonwebtoken';
+import User from '../models/userModel.js';
 
 
 export const loginUser = asyncHandler(async(req, res) => {
@@ -10,6 +10,8 @@ export const loginUser = asyncHandler(async(req, res) => {
       const user = {
             _id: userData._id,
             email: userData.email,
+            name: userData.name,
+            surname: userData.surname,
       }
 
       if (bcrypt.compareSync(req.body.password, userData.password)) {

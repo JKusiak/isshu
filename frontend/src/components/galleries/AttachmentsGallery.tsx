@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         attachmentCard: {
             display: 'flex',
+            flexShrink: 0,
             height: '120px',
             width: '214px',
             justifyContent: 'center',
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   boxShadow: theme.shadows[5],
                   cursor: 'pointer',
             },
+            marginBottom: theme.spacing(4),
       },
         addAttachmentIcon: {
             fontSize: '35px',

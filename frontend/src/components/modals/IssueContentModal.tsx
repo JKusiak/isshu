@@ -1,6 +1,7 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
+import ManageMessages from "../functional/issueFunctionals/ManageMessages";
 import UpdateAttachments from "../functional/issueFunctionals/UpdateAttachments";
 import UpdateDescription from "../functional/issueFunctionals/UpdateDescription";
 import UpdateName from "../functional/issueFunctionals/UpdateName";
@@ -30,19 +31,19 @@ const useStyles = makeStyles((theme: Theme) =>
                   padding: theme.spacing(4, 4, 4),
             },
             leftColumn: {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'auto',
                   gridColumn: 1,
                   minHeight: 0,
                   minWidth: 0,
             },
             rightColumn: {
+                  display: 'flex',
+                  flexDirection: 'column',
                   gridColumn: 2,
                   minHeight: 0,
                   minWidth: 0,
-            },
-            scrollableContent: {
-                  display: 'flex',
-                  flexDirection: 'column',
-                  overflow: 'auto',
             },
             tagContainer: {
                   display: 'flex',
@@ -80,7 +81,6 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                   <Fade in={props.isIssueModalOpen}>
                         <div className={classes.paper}>
                               <div className={classes.leftColumn}>
-                                    <div className={classes.scrollableContent}>
                                           <UpdateName issue={props.issue} />
 
                                           <div className={classes.tagContainer}>
@@ -100,13 +100,11 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                                           <UpdateDescription issue={props.issue} />
 
                                           <UpdateAttachments issue={props.issue} />
-                                          
-                                    </div>
+
+                                          <ManageMessages issue={props.issue} />
                               </div>
                               <div className={classes.rightColumn}>
-                                    <div className={classes.scrollableContent}>
-
-                                    </div>
+   
                                     
                               </div>
                         </div>

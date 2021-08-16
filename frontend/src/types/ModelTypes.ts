@@ -38,7 +38,11 @@ export interface IIssue {
       creator: string;        // ref id
       contributors: [string]; // ref id
       tags: [string];         // ref id
-      messages: [string];
+      messages: [{
+            content: string, 
+            sender: string    // ref id
+            addTime: Date,
+      }];
       steps: [string];
       columnId: string;       // ref id
 }
@@ -48,10 +52,24 @@ export interface ITag {
       name: string;
 }
 
+export interface IMessage {
+      _id: string;
+      content: string;
+      sender: string,
+      addTime: Date,
+}
+
 
 // types with nested subtypes for call on getNestedBoard
 // that fetches all data of board and its children based on
 // virtual properties to create nested object
+
+export interface INestedMessage {
+      _id: string;
+      content: string;
+      sender: INestedUser,
+      addTime: Date,
+}
 
 export interface INestedUser {
       _id: string;
@@ -79,7 +97,7 @@ export interface INestedIssue {
       description: string;
       creator: INestedUser;
       columnId: string,
-      messages: [string];
+      messages: [INestedMessage];
       steps: [string];
       tags: [ITag];
       contributors: [INestedUser];

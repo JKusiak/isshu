@@ -1,11 +1,11 @@
-import { FC, useState} from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       descriptionContainer: {
-            width: '100%',
+            maxWidth: '100%',
             marginBottom: theme.spacing(4),
       },
       descriptionTitle: {
@@ -21,14 +21,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       formContainer: {
             width: '100%',
-            height: '10vh',
       },
       inputField: {
             width: '100%',
             height: '100%',
             "& .MuiOutlinedInput-root": {
                   height: '100%',
+                  minHeight: '10vh',
                   "& fieldset": {
+                        
                         height: 'auto',
                         borderColor: theme.palette.secondary.light,
                         borderRadius: '10px',
@@ -79,6 +80,7 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
                                           required
                                           autoFocus
                                           size="small"
+                                          multiline={true}
                                           variant='outlined'
                                           name="issueDescription"
                                           id="issueDescription"

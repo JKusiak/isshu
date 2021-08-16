@@ -29,9 +29,22 @@ const issueSchema = mongoose.Schema({
             default: null,
       }],
       messages: [{
-            type: String,
-            required: false,
-            default: null,
+            content: {
+                  type: String,
+                  required: false,
+                  default: null,
+            },
+            sender: {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: 'Tag',
+                  required: false,
+                  default: null,
+            }, 
+            addTime: {
+                  type: Date,
+                  required: false,
+                  default: null,
+            }
       }],
       steps: [{
             type: String,

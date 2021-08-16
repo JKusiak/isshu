@@ -1,17 +1,19 @@
 // templates used for state hooks to reduce boilerplate code
 // as I don't know how to solve it with types 
 
-import { 
-      IBoard, 
-      IColumn, 
-      IIssue, 
-      INestedBoard, 
-      INestedColumn, 
-      INestedIssue, 
-      INestedUser, 
-      IProject, 
-      ITag, 
-      IUser 
+import {
+      IBoard,
+      IColumn,
+      IIssue,
+      IMessage,
+      INestedBoard,
+      INestedColumn,
+      INestedIssue,
+      INestedMessage,
+      INestedUser,
+      IProject,
+      ITag,
+      IUser
 } from "./ModelTypes";
 
 
@@ -56,7 +58,11 @@ export const IssueTemplate: IIssue = {
       creator: '',
       contributors: [''],
       tags: [''],
-      messages: [''],
+      messages: [{
+            content: '',
+            sender: '',
+            addTime: new Date(),
+      }],
       steps: [''],
       columnId: '',
 };
@@ -67,6 +73,13 @@ export const TagTemplate: ITag = {
       name: '',
 };
 
+export const MessageTemplate: IMessage = {
+      _id: '',
+      content: '',
+      sender: '',
+      addTime: new Date(),
+}
+
 
 // needed for providing initial value for BoardReducer
 
@@ -76,11 +89,19 @@ export const NestedUserTemplate: INestedUser = {
       surname: '',
 }
 
+export const NestedMessageTemplate: INestedMessage = {
+      _id: '',
+      content: '',
+      sender: NestedUserTemplate,
+      addTime: new Date(),
+}
+
 export const NestedIssueTemplate: INestedIssue = {
       ...IssueTemplate,
       tags: [TagTemplate],
       contributors: [NestedUserTemplate],
       creator: NestedUserTemplate,
+      messages: [NestedMessageTemplate],
 }
 
 export const NestedColumnTemplate: INestedColumn = {

@@ -70,6 +70,13 @@ export const updateIssue = asyncHandler(async(req, res) => {
                         path: 'contributors',
                         select: 'name surname',
                         model: 'User',
+                  },{
+                        path: 'messages',
+                        populate: {
+                              path: 'sender',
+                              select: 'name surname',
+                              model: 'User',
+                        },
                   }]);
             res.json(populatedUpdatedIssue);
       } catch(err) {

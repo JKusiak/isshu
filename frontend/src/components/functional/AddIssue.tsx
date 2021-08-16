@@ -21,6 +21,11 @@ const AddIssue: FC<AddIssueProps> = (props) => {
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
             
+            if(issueName === '') {
+                  setAddMode(false);
+                  return;
+            }
+
             const requestBody = {
                   name: issueName,
                   creator: getLoggedInUser()._id,

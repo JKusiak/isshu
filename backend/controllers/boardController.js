@@ -1,6 +1,6 @@
+import asyncHandler from 'express-async-handler';
 import Board from '../models/boardModel.js';
 import Column from '../models/columnModel.js';
-import asyncHandler from 'express-async-handler';
 
 
 export const getAllBoards = asyncHandler(async(req, res) => {
@@ -59,6 +59,13 @@ export const getNestedBoard = asyncHandler(async(req, res) => {
                               path: 'contributors',
                               select: 'name surname',
                               model: 'User',
+                        },{
+                              path: 'messages',
+                              populate: {
+                                    path: 'sender',
+                                    select: 'name surname',
+                                    model: 'User',
+                              },
                         }]       
                   } 
             });
