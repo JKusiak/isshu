@@ -1,9 +1,9 @@
-import { FC, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { FC, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import UpdateBoardButton from '../buttons/UpdateBoardButton';
-import { BoardReducerContext } from './GetBoard';
 import { ActionTypes } from '../reducers/BoardReducer';
+import { BoardReducerContext } from './GetBoard';
 
 
 interface UpdateBoardProps {

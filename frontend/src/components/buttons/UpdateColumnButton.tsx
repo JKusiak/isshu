@@ -1,8 +1,6 @@
-import { FC, useContext, useState} from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
-import { ActionTypes } from '../reducers/BoardReducer';
-import { BoardReducerContext } from '../functional/GetBoard';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

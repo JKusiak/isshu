@@ -1,11 +1,10 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { getLoggedInUser } from './GetLoggedInUser';
-import AddIssueButton from '../buttons/AddIssueButton';
-import { BoardReducerContext } from './GetBoard';
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { FC, useContext, useState } from 'react';
 import { IColumn } from '../../types/ModelTypes';
+import AddIssueButton from '../buttons/AddIssueButton';
 import { ActionTypes } from '../reducers/BoardReducer';
+import { BoardReducerContext } from './GetBoard';
+import { getLoggedInUser } from './GetLoggedInUser';
 
 
 interface AddIssueProps {

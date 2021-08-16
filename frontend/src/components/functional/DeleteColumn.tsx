@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 import { IColumn } from "../../types/ModelTypes";
 import DeleteColumnButton from "../buttons/DeleteColumnButton";
 import { ActionTypes } from "../reducers/BoardReducer";

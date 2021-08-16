@@ -1,14 +1,14 @@
+import Button from "@material-ui/core/Button";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import { FC, Fragment } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useHistory, useParams } from "react-router-dom";
-import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
-import Button from "@material-ui/core/Button";
+import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 import ColumnData from "./ColumnData";
-import UpdateBoard from "./functional/UpdateBoard";
 import AddColumn from "./functional/AddColumn";
 import DeleteBoard from "./functional/DeleteBoard";
-import { IBoard, IColumn, INestedBoard, INestedColumn } from "../types/ModelTypes";
+import UpdateBoard from "./functional/UpdateBoard";
 
 
 const useStyles = makeStyles((theme: Theme) =>

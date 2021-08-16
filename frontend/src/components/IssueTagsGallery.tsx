@@ -1,9 +1,8 @@
-import { Card, CardContent, IconButton, Typography } from "@material-ui/core";
-import { createStyles, Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";      
+import { Card, CardContent, Typography } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AddIcon from '@material-ui/icons/AddOutlined';
 import { FC, Fragment } from "react";
 import { ITag } from "../types/ModelTypes";
-import AddIcon from '@material-ui/icons/AddOutlined';
 
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { FC } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-import axios from 'axios';
 import DeleteProjectModal from '../modals/DeleteProjectModal';
 
 

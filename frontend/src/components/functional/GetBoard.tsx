@@ -1,8 +1,7 @@
 import axios from "axios";
-import { FC, useState, useEffect, createContext, useReducer, Dispatch } from "react";
+import { createContext, Dispatch, FC, useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BoardTemplate, ColumnTemplate, NestedBoardTemplate } from "../../types/ModelContentTemplate";
-import { IBoard, IColumn, INestedBoard } from "../../types/ModelTypes";
+import { NestedBoardTemplate } from "../../types/ModelContentTemplate";
 import BoardData from "../BoardData";
 import { Action, ActionTypes, boardContentReducer } from "../reducers/BoardReducer";
 

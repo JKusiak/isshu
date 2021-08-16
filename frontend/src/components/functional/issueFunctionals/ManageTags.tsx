@@ -1,8 +1,7 @@
-import React, { FC, useState } from 'react';
 import axios from 'axios';
-import { INestedIssue, ITag} from '../../../types/ModelTypes';
+import React, { FC, useEffect, useState } from 'react';
 import { TagTemplate } from '../../../types/ModelContentTemplate';
-import { useEffect } from 'react';
+import { INestedIssue, ITag } from '../../../types/ModelTypes';
 import AllTagsList from '../../AllTagsList';
 
 

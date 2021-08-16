@@ -1,11 +1,10 @@
-import { Backdrop, createStyles, Fade, IconButton, makeStyles, Modal, Theme } from "@material-ui/core";
+import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
 import UpdateDescription from "../functional/issueFunctionals/UpdateDescription";
 import UpdateName from "../functional/issueFunctionals/UpdateName";
-import UpdateTags from "../functional/issueFunctionals/ManageTags";
-import TagsModal from "./TagsModal";
 import IssueTagsGallery from "../IssueTagsGallery";
+import TagsModal from "./TagsModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>

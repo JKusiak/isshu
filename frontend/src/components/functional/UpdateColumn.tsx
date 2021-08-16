@@ -1,9 +1,9 @@
-import { FC, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { IColumn, INestedColumn } from '../../types/ModelTypes';
+import { FC, useContext, useState } from 'react';
+import { INestedColumn } from '../../types/ModelTypes';
 import UpdateColumnButton from '../buttons/UpdateColumnButton';
-import { BoardReducerContext } from './GetBoard';
 import { ActionTypes } from '../reducers/BoardReducer';
+import { BoardReducerContext } from './GetBoard';
 
 
 interface UpdateColumnProps {

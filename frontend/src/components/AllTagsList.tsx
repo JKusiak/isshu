@@ -1,8 +1,8 @@
 import { Button, Card, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import React, { FC, Fragment, useContext, useState } from 'react';
+import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import React, { FC, useContext } from 'react';
 import { INestedIssue, ITag } from '../types/ModelTypes';
 import AddTagButton from './buttons/issueButtons/AddTagButton';
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { BoardReducerContext } from './functional/GetBoard';
 import { ActionTypes } from './reducers/BoardReducer';
 
@@ -85,7 +85,7 @@ const AllTagsList: FC<AllTagsListProps> = (props) => {
 
     function checkIfChosen(tag: ITag) {
         return (
-            props.issue.tags.some((issueTag: ITag) => issueTag._id == tag._id)? true : false
+            props.issue.tags.some((issueTag: ITag) => issueTag._id === tag._id)? true : false
         );
     }
 

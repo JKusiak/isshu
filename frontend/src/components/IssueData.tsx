@@ -1,8 +1,8 @@
-import { Backdrop, Card, Fade, Modal, Typography } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { IIssue, INestedIssue } from "../types/ModelTypes";
+import { INestedIssue } from "../types/ModelTypes";
 import IssueModal from "./modals/IssueModal";
 
 

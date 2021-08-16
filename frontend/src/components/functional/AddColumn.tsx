@@ -1,9 +1,9 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import { FC, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddColumnButton from '../buttons/AddColumnButton';
-import { BoardReducerContext } from './GetBoard';
 import { ActionTypes } from '../reducers/BoardReducer';
+import { BoardReducerContext } from './GetBoard';
 
 
 interface AddColumnProps {
