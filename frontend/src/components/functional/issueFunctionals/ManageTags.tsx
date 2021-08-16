@@ -1,14 +1,9 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import axios from 'axios';
 import { INestedIssue, ITag} from '../../../types/ModelTypes';
-import { BoardReducerContext } from '../GetBoard';
-import { ActionTypes } from '../../reducers/BoardReducer';
-import TagsModal from '../../modals/TagsModal';
-import IssueTagsGallery from '../../IssueTagsGallery';
 import { TagTemplate } from '../../../types/ModelContentTemplate';
 import { useEffect } from 'react';
 import AllTagsList from '../../AllTagsList';
-import AddTagButton from '../../buttons/issueButtons/AddTagButton';
 
 
 interface ManageTagsProps {
@@ -19,9 +14,8 @@ interface ManageTagsProps {
 
 
 const ManageTags: FC<ManageTagsProps> = (props) => {
-    const [issueTags, setIssueTags] = useState<[any]>(props.issue.tags);
     const [allTags, setAllTags] = useState<[ITag]>([TagTemplate]);
-    const { dispatch } = useContext(BoardReducerContext);
+    
 
 
     useEffect(() => {
@@ -30,7 +24,7 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
 
 
     function updateIssueTags() {
-        const tagsToId = issueTags.map(tag => tag._id);
+        const tagsToId = props.issue.tags.map(tag => tag._id);
 
         const requestBody = {
                 tags: tagsToId,
@@ -43,15 +37,6 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
         }).catch((err) => {
                 console.log(err);
         })
-
-        const payload = {
-            columnId: props.issue.columnId,
-            issueId: props.issue._id,
-            modified: {
-                tags: issueTags,
-            },
-        }
-        dispatch({type: ActionTypes.UpdateIssue, payload: payload})
     }
 
 
@@ -90,8 +75,7 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
     return (
         <>
             <AllTagsList
-                issueTags={issueTags}
-                setIssueTags={setIssueTags}
+                issue={props.issue}
                 updateIssueTags={updateIssueTags}
                 allTags={allTags}
                 deleteTag={deleteTag}

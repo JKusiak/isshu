@@ -1,8 +1,10 @@
 import { Button, Card, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC, Fragment, useContext, useState } from 'react';
-import { ITag } from '../types/ModelTypes';
+import { INestedIssue, ITag } from '../types/ModelTypes';
 import AddTagButton from './buttons/issueButtons/AddTagButton';
 import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import { BoardReducerContext } from './functional/GetBoard';
+import { ActionTypes } from './reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,8 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface AllTagsListProps {
-    issueTags: [ITag],
-    setIssueTags: React.Dispatch<React.SetStateAction<any>>,
+    issue: INestedIssue,
     updateIssueTags: () => void,
     allTags: [ITag],
     deleteTag: (e: React.SyntheticEvent, tagId: string) => void,
@@ -79,11 +80,12 @@ interface AllTagsListProps {
 
 const AllTagsList: FC<AllTagsListProps> = (props) => {
     const classes = useStyles();
+    const { dispatch } = useContext(BoardReducerContext);
 
 
     function checkIfChosen(tag: ITag) {
         return (
-            props.issueTags.some(issueTag => issueTag._id == tag._id)? true : false
+            props.issue.tags.some((issueTag: ITag) => issueTag._id == tag._id)? true : false
         );
     }
 
@@ -101,10 +103,29 @@ const AllTagsList: FC<AllTagsListProps> = (props) => {
         e.preventDefault();
 
         if(isChosen) {
-            const tagsWithoutClicked = props.issueTags.filter(issueTag => issueTag._id !== clickedTag._id);
-            props.setIssueTags(tagsWithoutClicked);
+            const tagsWithoutClicked = props.issue.tags.filter((issueTag: ITag) => issueTag._id !== clickedTag._id);
+
+            const payload = {
+                columnId: props.issue.columnId,
+                issueId: props.issue._id,
+                modified: {
+                    tags: tagsWithoutClicked,
+                },
+            }
+
+            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
         } else {
-            props.setIssueTags([...props.issueTags, clickedTag]);
+            const tagsWithClicked = [...props.issue.tags, clickedTag];
+
+            const payload = {
+                columnId: props.issue.columnId,
+                issueId: props.issue._id,
+                modified: {
+                    tags: tagsWithClicked,
+                },
+            }
+
+            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
         }
 
         props.updateIssueTags();
