@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BoardTemplate } from "../../types/ModelContentTemplate";
 import { IBoard } from "../../types/ModelTypes";
-import BoardsGallery from "../BoardsGallery";
+import BoardsGallery from "../galleries/BoardsGallery";
 
 
 interface GetBoardsGalleryProps {

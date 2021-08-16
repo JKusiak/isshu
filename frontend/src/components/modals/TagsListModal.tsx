@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 ));
 
 
-interface IssueModalProps {
+interface TagsListModalProps {
       issue: INestedIssue,
       isTagsModalOpen: boolean,
       setTagsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -35,7 +35,7 @@ interface IssueModalProps {
 }
 
 
-const IssueModal: FC<IssueModalProps> = (props) => {
+const TagsListModal: FC<TagsListModalProps> = (props) => {
       const classes = useStyles();
 
 
@@ -65,4 +65,4 @@ const IssueModal: FC<IssueModalProps> = (props) => {
       );
 }
 
-export default IssueModal;
+export default TagsListModal;

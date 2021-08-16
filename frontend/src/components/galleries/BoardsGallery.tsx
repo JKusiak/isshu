@@ -1,11 +1,10 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
-import { createStyles, Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";      
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { IBoard } from "../types/ModelTypes";
-import AddBoard from "./functional/AddBoard";
-import GetProjectInfoBanner from "./functional/GetProjectInfoBanner";
+import { IBoard } from "../../types/ModelTypes";
+import AddBoard from "../functional/AddBoard";
+import GetProjectInfoBanner from "../functional/GetProjectInfoBanner";
 
 
 const useStyles = makeStyles((theme: Theme) =>

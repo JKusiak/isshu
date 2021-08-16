@@ -1,19 +1,18 @@
-import { forwardRef, Fragment} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles, Theme, createStyles, useTheme } from '@material-ui/core/styles';
-import { FC } from 'react';
-import Divider from '@material-ui/core/Divider';
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { FC, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { IUser } from '../types/ModelTypes';
+import { IUser } from '../../types/ModelTypes';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-interface UsersListProps {
+interface UsersGalleryProps {
       contributors: [IUser],
       otherUsers: [IUser],
       mobileOpen: boolean,
@@ -62,7 +61,7 @@ interface UsersListProps {
 }
 
 
-const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
+const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
       const classes = useStyles();
       const theme = useTheme();
       const {window} = props;
@@ -181,4 +180,4 @@ const UsersList: FC<UsersListProps> = forwardRef((props, ref) => {
       );
 });
 
-export default UsersList;
+export default UsersGallery;

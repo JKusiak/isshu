@@ -2,7 +2,7 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { ProjectTemplate } from "../../types/ModelContentTemplate";
 import { IProject } from "../../types/ModelTypes";
-import ProjectsGallery from "../ProjectsGallery";
+import ProjectsGallery from "../galleries/ProjectsGallery";
 
 
 interface GetProjectsGalleryProps {

@@ -1,10 +1,10 @@
 import { Button, Card, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import React, { FC, useContext } from 'react';
-import { INestedIssue, ITag } from '../types/ModelTypes';
-import AddTagButton from './buttons/issueButtons/AddTagButton';
-import { BoardReducerContext } from './functional/GetBoard';
-import { ActionTypes } from './reducers/BoardReducer';
+import { INestedIssue, ITag } from '../../types/ModelTypes';
+import AddTagButton from '../buttons/issueButtons/AddTagButton';
+import { BoardReducerContext } from '../functional/GetBoard';
+import { ActionTypes } from '../reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: '10px',
         transition: 'all .12s linear',
         boxShadow: theme.shadows[2],
-        border: '1px solid',
-        borderColor: theme.palette.secondary.main,
+        border: '0.5px solid',
+        borderColor: theme.palette.primary.dark,
         "&:hover": {
                 cursor: 'pointer',
                 boxShadow: theme.shadows[5],
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
         "& .MuiCardContent-root": {
                 padding: theme.spacing(1),
         },
+        "& *": {
+            fontWeight: 'bold',
+        }
     },
     tagNotIncludedCard: {
         width: '100%',
@@ -69,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-interface AllTagsListProps {
+interface AllTagsGalleryProps {
     issue: INestedIssue,
     updateIssueTags: () => void,
     allTags: [ITag],
@@ -78,7 +81,7 @@ interface AllTagsListProps {
 }
 
 
-const AllTagsList: FC<AllTagsListProps> = (props) => {
+const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
     const classes = useStyles();
     const { dispatch } = useContext(BoardReducerContext);
 
@@ -163,4 +166,4 @@ const AllTagsList: FC<AllTagsListProps> = (props) => {
     );
 }
 
-export default AllTagsList;
+export default AllTagsGallery;

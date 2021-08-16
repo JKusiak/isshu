@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import { TagTemplate } from '../../../types/ModelContentTemplate';
 import { INestedIssue, ITag } from '../../../types/ModelTypes';
-import AllTagsList from '../../AllTagsList';
+import AllTagsGallery from '../../galleries/AllTagsGallery';
+
 
 
 interface ManageTagsProps {
@@ -73,7 +74,7 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
     
     return (
         <>
-            <AllTagsList
+            <AllTagsGallery
                 issue={props.issue}
                 updateIssueTags={updateIssueTags}
                 allTags={allTags}

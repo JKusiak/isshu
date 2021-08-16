@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface UpdateColumnButtonProps {
+interface ColumnNameButtonProps {
       tempColumnName: string,
       setTempColumnName: React.Dispatch<React.SetStateAction<string>>,
       permColumnName: string,
@@ -34,7 +34,7 @@ interface UpdateColumnButtonProps {
 }
 
 
-const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
+const ColumnNameButton: FC<ColumnNameButtonProps> = (props) => {
       const classes = useStyles();
       const [updateMode, setUpdateMode] = useState<boolean>(false);
       
@@ -83,4 +83,4 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
 }
 
 
-export default UpdateColumnButton;
+export default ColumnNameButton;

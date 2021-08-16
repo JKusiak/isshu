@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FC, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import UpdateBoardButton from '../buttons/UpdateBoardButton';
+import BoardNameButton from '../buttons/BoardNameButton';
 import { ActionTypes } from '../reducers/BoardReducer';
 import { BoardReducerContext } from './GetBoard';
 
@@ -37,7 +37,7 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
 
       return (
       <> 
-            <UpdateBoardButton 
+            <BoardNameButton 
                   tempBoardName={tempBoardName}
                   setTempBoardName={setTempBoardName}
                   permBoardName={props.boardName}  

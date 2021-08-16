@@ -2,7 +2,7 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { IssueTemplate } from "../../types/ModelContentTemplate";
 import { IIssue } from "../../types/ModelTypes";
-import IssuesList from "../IssuesList";
+import IssuesList from "../galleries/UserIssuesGallery";
 
 interface GetIssuesGalleryProps {
 

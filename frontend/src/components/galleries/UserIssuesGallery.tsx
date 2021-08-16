@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { IIssue } from "../types/ModelTypes";
+import { IIssue } from "../../types/ModelTypes";
 
 
-interface IssuesListProps {
+interface UserIssuesGalleryProps {
       issuesTaken: [IIssue];
       issuesCreated: [IIssue];
 }
 
-const IssuesList: FC<IssuesListProps> = (props) => {
+const UserIssuesGallery: FC<UserIssuesGalleryProps> = (props) => {
       function displayIssues(type: 'issuesTaken' | 'issuesCreated') {
             if(props[type].length > 0 ) {
                   return(props[type].map((issue: IIssue, index: number) => {
@@ -36,4 +36,4 @@ const IssuesList: FC<IssuesListProps> = (props) => {
       );
 }
 
-export default IssuesList;
+export default UserIssuesGallery;

@@ -1,10 +1,11 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
+import UpdateAttachments from "../functional/issueFunctionals/UpdateAttachments";
 import UpdateDescription from "../functional/issueFunctionals/UpdateDescription";
 import UpdateName from "../functional/issueFunctionals/UpdateName";
-import IssueTagsGallery from "../IssueTagsGallery";
-import TagsModal from "./TagsModal";
+import IssueTagsGallery from "../galleries/IssueTagsGallery";
+import TagsListModal from "./TagsListModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,21 +47,20 @@ const useStyles = makeStyles((theme: Theme) =>
             tagContainer: {
                   display: 'flex',
                   flexDirection: 'row',
-                  marginBottom: theme.spacing(4),
             },
 
       }
 ));
 
 
-interface IssueModalProps {
+interface IssueContentModalProps {
       issue: INestedIssue,
       isIssueModalOpen: boolean,
       setIssueModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
-const IssueModal: FC<IssueModalProps> = (props) => {
+const IssueContentModal: FC<IssueContentModalProps> = (props) => {
       const classes = useStyles();
       const [isTagsModalOpen, setTagsModalOpen] = useState(false);
 
@@ -90,7 +90,7 @@ const IssueModal: FC<IssueModalProps> = (props) => {
                                                       setTagsModalOpen={setTagsModalOpen}
                                                 />
 
-                                                <TagsModal
+                                                <TagsListModal
                                                       issue={props.issue}
                                                       isTagsModalOpen={isTagsModalOpen} 
                                                       setTagsModalOpen={setTagsModalOpen}
@@ -99,7 +99,8 @@ const IssueModal: FC<IssueModalProps> = (props) => {
 
                                           <UpdateDescription issue={props.issue} />
 
-
+                                          <UpdateAttachments issue={props.issue} />
+                                          
                                     </div>
                               </div>
                               <div className={classes.rightColumn}>
@@ -114,4 +115,4 @@ const IssueModal: FC<IssueModalProps> = (props) => {
       );
 }
 
-export default IssueModal;
+export default IssueContentModal;

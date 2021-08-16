@@ -1,17 +1,16 @@
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
-import { createStyles, Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";      
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 // hardcoded now just for aesthetic purposes during development <3
-import ProjectCover1 from '../resources/covers/project_cover1.png';
-import ProjectCover2 from '../resources/covers/project_cover2.png';
-import ProjectCover3 from '../resources/covers/project_cover3.png';
-import ProjectCover4 from '../resources/covers/project_cover4.png';
-import ProjectCover5 from '../resources/covers/project_cover5.png';
-import ProjectCover6 from '../resources/covers/project_cover6.png';
-import ProjectCover7 from '../resources/covers/project_cover7.png';
-import { IProject } from "../types/ModelTypes";
+import ProjectCover1 from '../../resources/covers/project_cover1.png';
+import ProjectCover2 from '../../resources/covers/project_cover2.png';
+import ProjectCover3 from '../../resources/covers/project_cover3.png';
+import ProjectCover4 from '../../resources/covers/project_cover4.png';
+import ProjectCover5 from '../../resources/covers/project_cover5.png';
+import ProjectCover6 from '../../resources/covers/project_cover6.png';
+import ProjectCover7 from '../../resources/covers/project_cover7.png';
+import { IProject } from "../../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -2,16 +2,18 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { FC, Fragment } from "react";
-import { ITag } from "../types/ModelTypes";
+import { ITag } from "../../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
       tagsContainer: {
             display: 'flex',
+            marginBottom: theme.spacing(4),
       },
       tagCard: {
             display: 'flex',
+            flexShrink: 0,
             minWidth: '30px',
             marginRight: '5px',
             justifyContent: 'center',

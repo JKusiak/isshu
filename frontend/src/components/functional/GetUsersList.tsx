@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
-import UsersList from "../UsersList";
+import UsersGallery from "../galleries/UsersGallery";
 
 interface GetUsersListProps {
       mobileOpen: boolean,
@@ -98,7 +97,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
 
       return (
       <>
-            <UsersList 
+            <UsersGallery 
                   contributors={contributors} 
                   otherUsers={otherUsers} 
                   mobileOpen={props.mobileOpen} 

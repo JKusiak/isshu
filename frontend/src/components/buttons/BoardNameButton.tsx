@@ -1,6 +1,6 @@
-import React, { FC, useState} from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ClickAwayListener, TextField } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface UpdateBoardButtonProps {
+interface BoardNameButtonProps {
       tempBoardName: string,
       setTempBoardName: React.Dispatch<React.SetStateAction<string>>,
       permBoardName: string,
@@ -34,7 +34,7 @@ interface UpdateBoardButtonProps {
 }
 
 
-const UpdateBoardButton: FC<UpdateBoardButtonProps> = (props) => {
+const BoardNameButton: FC<BoardNameButtonProps> = (props) => {
       const classes = useStyles();
       const [updateMode, setUpdateMode] = useState<boolean>(false);
 
@@ -81,4 +81,4 @@ const UpdateBoardButton: FC<UpdateBoardButtonProps> = (props) => {
 }
 
 
-export default UpdateBoardButton;
+export default BoardNameButton;

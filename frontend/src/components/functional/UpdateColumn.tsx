@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FC, useContext, useState } from 'react';
 import { INestedColumn } from '../../types/ModelTypes';
-import UpdateColumnButton from '../buttons/UpdateColumnButton';
+import ColumnNameButton from '../buttons/ColumnNameButton';
 import { ActionTypes } from '../reducers/BoardReducer';
 import { BoardReducerContext } from './GetBoard';
 
@@ -40,7 +40,7 @@ const UpdateColumn: FC<UpdateColumnProps> = (props) => {
 
       return (
       <> 
-            <UpdateColumnButton
+            <ColumnNameButton
                   tempColumnName={tempColumnName}
                   setTempColumnName={setTempColumnName}
                   permColumnName={props.column.name}
