@@ -53,10 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   display: "flex", 
                   marginLeft: '3em',
             },
-            addColumnButton: {
-                  marginTop: '0.5em',
-                  marginLeft: '1em',
-            }  
       }
 ));
 
@@ -126,9 +122,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
                   <div className={classes.wrapper}>
                         {displayBoardContent()}
-                        <div className={classes.addColumnButton}>
-                              <AddColumn/>
-                        </div>
+                        <AddColumn/>
                   </div>
             </>
       );

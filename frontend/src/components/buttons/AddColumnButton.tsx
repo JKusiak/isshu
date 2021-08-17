@@ -6,8 +6,14 @@ import { FC, SetStateAction, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
+      buttonWrapper: {
+            flexShrink: 0,
+            marginTop: '0.5em',
+            marginLeft: '1em',
+      },
       iconButton: {
             display: 'flex',
+            flexShrink: 0,
             minHeight: '35px',
             minWidth: '35px',
             justifyContent: 'center',
@@ -41,7 +47,7 @@ const AddColumnButton: FC<AddColumnButtonProps> = (props) => {
 
       return (
             <>
-            <div onClick={() => setAddMode(true)}>
+            <div className={classes.buttonWrapper} onClick={() => setAddMode(true)}>
                   <ClickAwayListener onClickAway={() => setAddMode(false)}>
                         <Card>
                               {addMode &&

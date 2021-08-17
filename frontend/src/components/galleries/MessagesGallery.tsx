@@ -1,6 +1,5 @@
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import React, { FC, Fragment, useContext, useState } from "react";
 import { INestedIssue, INestedMessage } from "../../types/ModelTypes";
 import { BoardReducerContext } from "../functional/GetBoard";
@@ -41,15 +40,26 @@ const useStyles = makeStyles((theme: Theme) =>
                         alignItems: 'start',
                   },
             },
-            deleteButton: {
-                  maxWidth: '30px',
-                  maxHeight: '30px',
-                  minWidth: '30px',
-                  minHeight: '30px',
-                  
+            messageContainter: {
+                  marginBottom: theme.spacing(2),
             },
-            deleteIcon: {
-            color: theme.palette.secondary.main,
+            name: {
+                  fontWeight: 'bold',
+            },
+            date: {
+                  fontSize: '12px',
+            },
+            content: {
+                  marginBottom: theme.spacing(1),
+                  marginTop: theme.spacing(1),
+            },
+            deleteButton: {
+                  fontSize: '12px',
+                  color: theme.palette.secondary.main,
+                  "&:hover": {
+                        cursor: 'pointer',
+                        fontWeight: 'bold',
+                  },
             }
       })
 );
@@ -133,17 +143,23 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
                         
                         return(
                               <Fragment key={props.issue.messages.indexOf(message)}>
-                                    <div>
-                                          {message.content}
-                                          {message.sender.name}
-                                          {formattedTime}
+                                    <div className={classes.messageContainter}>
+                                          <div>
+                                                <span className={classes.name}>{message.sender.name}</span>
+                                                <span className={classes.date}> at {formattedTime}</span>
+                                          </div>
+                                          <div  className={classes.content}>
+                                                {message.content}
+                                          </div>
                                           {ownMessage && 
-                                                <Button className={classes.deleteButton} onClick={(e) => handleDelete(e, message)}>
-                                                      <DeleteIcon className={classes.deleteIcon}/>
-                                                </Button>
+                                                <div>
+                                                      <span className={classes.deleteButton} onClick={(e) => handleDelete(e, message)}>Delete</span>
+                                                </div>
                                           }
-                                          
                                     </div>
+                                    
+                                          
+                                    
                                     
                               </Fragment> 
                         );
