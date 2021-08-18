@@ -1,12 +1,13 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
+import ManageAttachments from "../functional/issueFunctionals/ManageAttachments";
+import ManageContributors from "../functional/issueFunctionals/ManageContributors";
 import ManageMessages from "../functional/issueFunctionals/ManageMessages";
-import UpdateAttachments from "../functional/issueFunctionals/UpdateAttachments";
+import ManageSteps from "../functional/issueFunctionals/ManageSteps";
 import UpdateDescription from "../functional/issueFunctionals/UpdateDescription";
 import UpdateName from "../functional/issueFunctionals/UpdateName";
 import IssueTagsGallery from "../galleries/IssueTagsGallery";
-import TagsListModal from "./TagsListModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
             leftColumn: {
                   display: 'flex',
                   flexDirection: 'column',
-                  overflow: 'auto',
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
                   gridColumn: 1,
                   minHeight: 0,
                   minWidth: 0,
@@ -41,14 +43,22 @@ const useStyles = makeStyles((theme: Theme) =>
             rightColumn: {
                   display: 'flex',
                   flexDirection: 'column',
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
                   gridColumn: 2,
                   minHeight: 0,
                   minWidth: 0,
             },
-            tagContainer: {
-                  display: 'flex',
-                  flexDirection: 'row',
+            creatorContainer:{
+                  fontSize: '16px',
+                  marginBottom: theme.spacing(4),
             },
+            creatorTitle: {
+                  fontWeight: 'bold',
+            },
+            creatorName: {
+                  marginLeft: theme.spacing(2),
+            }
 
       }
 ));
@@ -81,31 +91,27 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                   <Fade in={props.isIssueModalOpen}>
                         <div className={classes.paper}>
                               <div className={classes.leftColumn}>
-                                          <UpdateName issue={props.issue} />
+                                    <UpdateName issue={props.issue} />
 
-                                          <div className={classes.tagContainer}>
-                                                <IssueTagsGallery 
-                                                      tags={props.issue.tags}
-                                                      isTagsModalOpen={isTagsModalOpen} 
-                                                      setTagsModalOpen={setTagsModalOpen}
-                                                />
+                                    <IssueTagsGallery
+                                          issue={props.issue}
+                                          isTagsModalOpen={isTagsModalOpen} 
+                                          setTagsModalOpen={setTagsModalOpen}
+                                    />
 
-                                                <TagsListModal
-                                                      issue={props.issue}
-                                                      isTagsModalOpen={isTagsModalOpen} 
-                                                      setTagsModalOpen={setTagsModalOpen}
-                                                />
-                                          </div>
+                                    <UpdateDescription issue={props.issue} />
 
-                                          <UpdateDescription issue={props.issue} />
+                                    <ManageAttachments issue={props.issue} />
 
-                                          <UpdateAttachments issue={props.issue} />
-
-                                          <ManageMessages issue={props.issue} />
+                                    <ManageMessages issue={props.issue} />
                               </div>
                               <div className={classes.rightColumn}>
-   
-                                    
+                                    <div className={classes.creatorContainer}>
+                                         <span className={classes.creatorTitle}>Creator</span> 
+                                         <span className={classes.creatorName}>{`${props.issue.creator.name} ${props.issue.creator.surname}`}</span>
+                                    </div>
+                                    <ManageContributors issue={props.issue} />
+                                    <ManageSteps issue={props.issue} />
                               </div>
                         </div>
                   </Fade>

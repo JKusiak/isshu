@@ -17,7 +17,6 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
     const [allTags, setAllTags] = useState<[ITag]>([TagTemplate]);
     
 
-
     useEffect(() => {
         fetchAllTags();
     }, []);

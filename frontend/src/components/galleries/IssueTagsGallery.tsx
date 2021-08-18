@@ -2,20 +2,25 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { FC, Fragment } from "react";
-import { ITag } from "../../types/ModelTypes";
+import { INestedIssue, ITag } from "../../types/ModelTypes";
+import TagsListModal from "../modals/TagsListModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
       tagsContainer: {
             display: 'flex',
-            marginBottom: theme.spacing(4),
+            // not spacing(4) because tag cards need additional margin if the wrap
+            marginBottom: theme.spacing(3),
+            flexWrap: 'wrap',
       },
       tagCard: {
             display: 'flex',
             flexShrink: 0,
+            minHeight: '30px',
             minWidth: '30px',
-            marginRight: '5px',
+            marginRight: theme.spacing(1),
+            marginBottom: theme.spacing(1),
             justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
@@ -29,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
       },
       tagName: {
-            fontSize: '12px',
+            fontSize: '14px',
       },
       modalButtonIcon: {
             fontSize: '15px',
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface TagsGalleryProps {
-      tags: [ITag],
+      issue: INestedIssue,
       isTagsModalOpen: boolean,
       setTagsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
@@ -51,8 +56,8 @@ const TagsGallery: FC<TagsGalleryProps> = (props) => {
 
 
       function displayTags() {
-            if(props.tags.length > 0) {
-                  return(props.tags.map((tag: ITag) => {
+            if(props.issue.tags.length > 0) {
+                  return(props.issue.tags.map((tag: ITag) => {
                         return(
                               <Fragment key={tag._id}>
                                     <Card className={classes.tagCard} onClick={() => props.setTagsModalOpen(true)}>
@@ -77,6 +82,11 @@ const TagsGallery: FC<TagsGalleryProps> = (props) => {
                         <AddIcon className={classes.modalButtonIcon}/> 
                   </Card>
             </div>
+            <TagsListModal
+                  issue={props.issue}
+                  isTagsModalOpen={props.isTagsModalOpen} 
+                  setTagsModalOpen={props.setTagsModalOpen}
+            />
             </>
       );
 }

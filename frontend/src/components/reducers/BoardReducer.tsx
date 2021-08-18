@@ -1,5 +1,14 @@
 import { INestedBoard } from "../../types/ModelTypes";
 
+// helper function for ensuring the find function result never equals undefined
+export function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
+      if (argument === undefined || argument === null) {
+            throw new TypeError(message);
+      }
+    
+      return argument;
+}
+
 export enum ActionTypes {
       FetchData = 'FETCH DATA',
       UpdateBoard = 'UPDATE BOARD',
@@ -10,6 +19,7 @@ export enum ActionTypes {
       DeleteIssue = 'DELETE ISSUE',
       UpdateIssue = 'UPDATE ISSUE',
       ChangeColumns = 'REMOVE FROM COLUMN',
+      ReorderColumn = 'REORDER COLUMN'
 }
     
 export type Action = {
@@ -91,21 +101,38 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                         })  
                   }
             case ActionTypes.ChangeColumns:
+                  const issueColumn = ensure(state.columns.find(column => column._id === payload.oldColumnId));
+                  const movedIssue = issueColumn.issues.find(issue => issue._id === payload.issueId);
+
                   return { 
                         ...state, 
                         columns: state.columns.map(column => {
                               if(column._id === payload.oldColumnId) {
-                                    const newIssues = column.issues.filter(issue => issue._id !== payload.issueContent._id);
+                                    const newIssues = column.issues.filter(issue => issue._id !== payload.issueId);
                                     return {
                                           ...column,
                                           issues: newIssues,
                                     }
                               } else if(column._id === payload.newColumnId) {
-                                    column.issues.push(payload.issueContent)
+                                    if(movedIssue !== undefined) {
+                                          column.issues.push(movedIssue)
+                                    }
                               }
-
                               return column;
                         })  
+                  }
+            case ActionTypes.ReorderColumn:
+                  return { 
+                        ...state, 
+                        columns: state.columns.map(column => {
+                              if(column._id === payload.columnId) {
+                                    return {
+                                          ...column,
+                                          issues: payload.reorderedIssues
+                                    }
+                              }
+                              return column;
+                        })
                   }
             default:
                   return state

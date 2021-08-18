@@ -39,11 +39,11 @@ export interface IIssue {
       contributors: [string]; // ref id
       tags: [string];         // ref id
       messages: [{
-            content: string, 
-            sender: string    // ref id
-            addTime: Date,
+            content: string;
+            sender: string;   // ref id
+            addTime: Date;
       }];
-      steps: [string];
+      steps: [IStep];
       columnId: string;       // ref id
 }
 
@@ -55,10 +55,15 @@ export interface ITag {
 export interface IMessage {
       _id: string;
       content: string;
-      sender: string,
-      addTime: Date,
+      sender: string;
+      addTime: Date;
 }
 
+export interface IStep {
+      _id: string;
+      content: string;
+      isCompleted: boolean;
+}
 
 // types with nested subtypes for call on getNestedBoard
 // that fetches all data of board and its children based on
@@ -67,8 +72,8 @@ export interface IMessage {
 export interface INestedMessage {
       _id: string;
       content: string;
-      sender: INestedUser,
-      addTime: Date,
+      sender: INestedUser;
+      addTime: Date;
 }
 
 export interface INestedUser {
@@ -98,7 +103,7 @@ export interface INestedIssue {
       creator: INestedUser;
       columnId: string,
       messages: [INestedMessage];
-      steps: [string];
+      steps: [IStep];
       tags: [ITag];
       contributors: [INestedUser];
 }

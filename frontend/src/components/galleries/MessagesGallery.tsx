@@ -1,7 +1,7 @@
-import { TextField } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import React, { FC, Fragment, useContext, useState } from "react";
+import React, { FC, Fragment, useContext } from "react";
 import { INestedIssue, INestedMessage } from "../../types/ModelTypes";
+import AddMessageButton from "../buttons/issueButtons/AddMessageButton";
 import { BoardReducerContext } from "../functional/GetBoard";
 import { getLoggedInUser, getUserLanguage } from "../functional/GetLoggedInUser";
 import { ActionTypes } from "../reducers/BoardReducer";
@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
                   marginBottom: theme.spacing(2),
             },
             formContainer: {
+                  flexShrink: 0,
                   width: '100%',
-                  height: '3vh',
-                  minHeight: '30px',
+                  height: '40px',
                   marginBottom: theme.spacing(2),
             },
             inputField: {
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             messageContainter: {
                   marginBottom: theme.spacing(2),
+                  marginLeft: theme.spacing(2),
             },
             name: {
                   fontWeight: 'bold',
@@ -75,11 +76,10 @@ interface MessagesGalleryProps {
 const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
       const classes = useStyles();
       const { dispatch } = useContext(BoardReducerContext);
-      const [messageContent, setMessageContent] = useState('');
       const loggedInUser = getLoggedInUser();
       
 
-      function handleSubmit(e: React.SyntheticEvent) {
+      function handleSubmit(e: React.SyntheticEvent, messageContent: string) {
             e.preventDefault();
             
             if(messageContent !== '') {
@@ -93,7 +93,7 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
                         addTime: Date.now(),
                   };
       
-                  const updatedMessages = [...props.issue.messages, newMessage]
+                  const updatedMessages = [...props.issue.messages, newMessage];
       
                   const payload = {
                         columnId: props.issue.columnId,
@@ -104,7 +104,6 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
                   };
       
                   dispatch({type: ActionTypes.UpdateIssue, payload: payload});
-                  setMessageContent('');
                   props.addMessage();
             }
       }
@@ -157,10 +156,6 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
                                                 </div>
                                           }
                                     </div>
-                                    
-                                          
-                                    
-                                    
                               </Fragment> 
                         );
                   }));
@@ -171,24 +166,7 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
       return(
             <>
                   <div className={classes.messagesTitle}>Messages</div>
-                  <form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
-                        <TextField
-                              className={classes.inputField}
-                              required
-                              autoFocus
-                              size="small"
-                              variant='outlined'
-                              name="newComment"
-                              id="newComment"
-                              placeholder="Add message..."
-                              value={messageContent}
-                              autoComplete="new-comment"
-                              inputProps={{style: {fontSize: 15, padding:5}}}
-                              onChange={e => {
-                                    setMessageContent(e.target.value);
-                              }}                  
-                        />
-                  </form>     
+                  <AddMessageButton handleSubmit={handleSubmit}/>
                   {displayMessages()}
             </>
       );

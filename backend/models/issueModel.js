@@ -47,9 +47,16 @@ const issueSchema = mongoose.Schema({
             }
       }],
       steps: [{
-            type: String,
-            required: false,
-            default: null,
+            content: {
+                  type: String,
+                  required: false,
+                  default: null,
+            },
+            isCompleted: {
+                  type: Boolean,
+                  required: false,
+                  default: false,
+            },
       }],
       columnId: {
             type: mongoose.Schema.Types.ObjectId,

@@ -6,6 +6,7 @@ import { IBoard } from "../../types/ModelTypes";
 import BoardsGallery from "../galleries/BoardsGallery";
 
 
+
 interface GetBoardsGalleryProps {
 }
 

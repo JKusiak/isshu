@@ -96,7 +96,7 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
 
                         {!updateMode &&
                               <div className={classes.descriptionText}>
-                                    {props.permDescription}
+                                    {props.permDescription? props.permDescription : 'Add description...'}
                               </div>
                         }
                   </div>

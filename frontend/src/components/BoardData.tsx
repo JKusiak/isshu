@@ -1,14 +1,16 @@
 import Button from "@material-ui/core/Button";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
-import { FC, Fragment } from "react";
+import { FC, Fragment, useContext } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useHistory, useParams } from "react-router-dom";
 import { INestedBoard, INestedColumn } from "../types/ModelTypes";
 import ColumnData from "./ColumnData";
 import AddColumn from "./functional/AddColumn";
 import DeleteBoard from "./functional/DeleteBoard";
+import { BoardReducerContext } from "./functional/GetBoard";
 import UpdateBoard from "./functional/UpdateBoard";
+import { ActionTypes } from "./reducers/BoardReducer";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -59,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface BoardDataProps {
       board: INestedBoard,
-      changeColumn: (oldColumnId: string, newColumnId: string, issueId: string) => void,
+      changeColumn: (newColumnId: string, issueId: string) => void,
 }
 
 
@@ -67,8 +69,8 @@ const BoardData: FC<BoardDataProps> = (props) => {
       const classes = useStyles();
       const history = useHistory();
       const { projectId } = useParams<{projectId: string}>();
-
-
+      const { dispatch } = useContext(BoardReducerContext);
+      
       function handleGoBack() {
             history.push(`/projects/${projectId}`);
       }
@@ -76,13 +78,40 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
       const onDragEnd = (result: DropResult) => {
             const { source, destination, draggableId } = result;
-
             if (destination !== undefined && destination !== null && source.droppableId !== destination.droppableId) {
-                  props.changeColumn(source.droppableId, destination.droppableId, draggableId);
-            } else {
+                  const oldColumnId = source.droppableId;
+                  const newColumnId = destination.droppableId;
+                  const payload = {
+                        oldColumnId: oldColumnId,
+                        newColumnId: newColumnId,
+                        issueId: draggableId,
+                  }
+
+                  dispatch({type: ActionTypes.ChangeColumns, payload: payload});
+                  props.changeColumn(destination.droppableId, draggableId);
+            } 
+            // else if (destination !== undefined && destination !== null && source.droppableId === destination.droppableId){
+            //       const chosenColumn = ensure(props.board.columns.find(column => column._id === source.droppableId));
+            //       const reorderedIssues = reorderColumn(chosenColumn.issues, source.index, destination.index);
+            //       const payload = {
+            //             columnId: source.droppableId,
+            //             reorderedIssues: reorderedIssues,
+            //       }
+
+            //       dispatch({type: ActionTypes.ReorderColumn, payload: payload});
+            // } 
+            else {
                   return;
             }
       };
+
+
+      // function reorderColumn(issues: [INestedIssue], startIndex: number, endIndex: number) {
+      //       const [removed] = issues.splice(startIndex, 1);
+      //       issues.splice(endIndex, 0, removed);       
+      //       return issues;
+      // };
+      
 
 
       function displayBoardContent() {
@@ -129,3 +158,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
 }
 
 export default BoardData;
+
+function dispatch(arg0: { type: any; payload: { oldColumnId: string; newColumnId: string | undefined; issueId: string; }; }) {
+      throw new Error("Function not implemented.");
+}

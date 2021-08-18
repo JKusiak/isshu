@@ -39,7 +39,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       }
 
 
-      function changeColumn(oldColumnId: string, newColumnId: string, issueId: string) {
+      function changeColumn(newColumnId: string, issueId: string) {
             const issueChanges = {
                   columnId: newColumnId,
             }
@@ -48,16 +48,6 @@ const GetBoard: FC<GetBoardProps> = (props) => {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then((res) => {
-                  // moving this out of .then() would probably remove flickering, how to
-                  // move updated object between arrays in reducer?
-                  const payload = {
-                        oldColumnId: oldColumnId,
-                        newColumnId: newColumnId,
-                        issueContent: res.data,
-                  }
-
-                  dispatch({type: ActionTypes.ChangeColumns, payload: payload});
             }).catch((err) => {
                   console.log(err);
             });

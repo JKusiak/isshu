@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import { Button, Typography } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import React, { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

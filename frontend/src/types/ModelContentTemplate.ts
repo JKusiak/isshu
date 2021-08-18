@@ -12,6 +12,7 @@ import {
       INestedMessage,
       INestedUser,
       IProject,
+      IStep,
       ITag,
       IUser
 } from "./ModelTypes";
@@ -50,24 +51,6 @@ export const ColumnTemplate: IColumn = {
       boardId: '',
 };
 
-
-export const IssueTemplate: IIssue = {
-      _id: '',
-      name: '',
-      description: '',
-      creator: '',
-      contributors: [''],
-      tags: [''],
-      messages: [{
-            content: '',
-            sender: '',
-            addTime: new Date(),
-      }],
-      steps: [''],
-      columnId: '',
-};
-
-
 export const TagTemplate: ITag = {
       _id: '',
       name: '',
@@ -79,6 +62,24 @@ export const MessageTemplate: IMessage = {
       sender: '',
       addTime: new Date(),
 }
+
+export const StepTemplate: IStep = {
+      _id: '',
+      content: '',
+      isCompleted: false,
+}
+
+export const IssueTemplate: IIssue = {
+      _id: '',
+      name: '',
+      description: '',
+      creator: '',
+      contributors: [''],
+      tags: [''],
+      messages: [MessageTemplate],
+      steps: [StepTemplate],
+      columnId: '',
+};
 
 
 // needed for providing initial value for BoardReducer

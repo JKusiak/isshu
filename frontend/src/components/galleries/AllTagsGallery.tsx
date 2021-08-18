@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import React, { FC, useContext } from 'react';
 import { INestedIssue, ITag } from '../../types/ModelTypes';
 import AddTagButton from '../buttons/issueButtons/AddTagButton';
