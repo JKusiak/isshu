@@ -14,33 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   fontSize: '16px',
                   marginBottom: theme.spacing(2),
             },
-            formContainer: {
-                  flexShrink: 0,
-                  width: '100%',
-                  height: '40px',
-                  marginBottom: theme.spacing(2),
-            },
-            inputField: {
-                  width: '100%',
-                  height: '100%',
-                  "& .MuiOutlinedInput-root": {
-                        height: '100%',
-                        "& fieldset": {
-                              height: 'auto',
-                              borderColor: '#cfd2d4',
-                              borderRadius: '10px',
-                              borderWidth: "1px",
-                        },
-                        "&.Mui-focused fieldset": {
-                              height: 'auto',
-                              borderColor: theme.palette.secondary.light,
-                              borderRadius: '10px',
-                              borderWidth: "1px",
-                        },
-                        alignItems: 'start',
-                  },
-            },
-            messageContainter: {
+            messageContainer: {
                   marginBottom: theme.spacing(2),
                   marginLeft: theme.spacing(2),
             },
@@ -142,7 +116,7 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
                         
                         return(
                               <Fragment key={props.issue.messages.indexOf(message)}>
-                                    <div className={classes.messageContainter}>
+                                    <div className={classes.messageContainer}>
                                           <div>
                                                 <span className={classes.name}>{message.sender.name}</span>
                                                 <span className={classes.date}> at {formattedTime}</span>

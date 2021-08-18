@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/AddOutlined';
 import { Card, ClickAwayListener, TextField, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/AddOutlined';
+import { FC } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       buttonContainer: {
             display: 'grid',
-            padding: '0.5em',
+            padding: theme.spacing(1),
             gridTemplateColumns: '0.2fr 1fr',
             width: '100%',
             backgroundColor: theme.palette.primary.main,

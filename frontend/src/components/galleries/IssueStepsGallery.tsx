@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexGrow: 0,
+            marginBottom: theme.spacing(1),
+            marginTop: theme.spacing(1),
         },
         progressBar: {
             width: '100%',
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
         stepCard: {
             width: '100%',
             marginBottom: theme.spacing(1),
-            marginTop: theme.spacing(1),
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 boxShadow: theme.shadows[5],
             },
             "& .MuiCardContent-root": {
-                padding: theme.spacing(1),
+                padding: theme.spacing(0.5),
             },
         },
         cardContent: {

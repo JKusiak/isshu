@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             width: '150px',
             "& .MuiOutlinedInput-root": {
                   "& fieldset": { 
-                        borderRadius: '10px',
+                        borderRadius: '6px',
                         borderColor: theme.palette.secondary.light,
                   }, 
                   "&.Mui-focused fieldset": {

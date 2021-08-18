@@ -19,13 +19,14 @@ const useStyles = makeStyles((theme: Theme) =>
                   display: 'grid',
                   width: '100%',
                   gridTemplateColumns: '1fr 8fr 1fr',
-                  margin: '1em 0 2em 0'
+                  marginTop: theme.spacing(2),
+                  marginBottom: theme.spacing(4),
             },
             backButton: {
                   gridColumn: '1',
                   justifySelf: 'start',
                   alignSelf: 'center',
-                  marginLeft: '1em',
+                  marginLeft: theme.spacing(2),
                   color: theme.palette.secondary.dark,
                   textDecoration: 'none',
             },
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   gridColumn: '3',
                   justifySelf: 'end',
                   alignSelf: 'center',
-                  marginRight: '1em'
+                  marginRight: theme.spacing(2),
             },
             backIcon: {
                   fontSize: '50px',
@@ -52,8 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
                   justifyContent: 'center',
             },
             container: {
-                  display: "flex", 
-                  marginLeft: '3em',
+                  display: "flex",
+                  marginLeft: theme.spacing(8)
             },
       }
 ));

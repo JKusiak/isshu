@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             width: '75%',
             justifyContent: 'center',
-            gap: '2em',
+            gap: theme.spacing(4),
             gridTemplateColumns: 'repeat(auto-fill, minMax(450px, 1fr))',
-            margin: '3em 5em 3em 5em'
+            margin: theme.spacing(4),
       },
       boardCard: {
             display: 'flex',

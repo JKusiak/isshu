@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Link as RouterLink, useHistory} from 'react-router-dom';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -18,23 +18,26 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             width: '100%',
             marginTop: theme.spacing(5),
       },
-      submit: {
+      submitButton: {
             margin: theme.spacing(3, 0, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            "&:hover": {
-                  background: theme.palette.action.hover,
-      }
+		borderRadius: '10px',
+		background: 'white',
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+			background: 'white',
+		},
       },
       inputField: {
             "& .MuiOutlinedInput-root": {
                   "& fieldset": { 
-                  padding: '0.5em 4em',
-                  borderRadius: '10px',
+                        borderRadius: '10px',
                   }, 
                   "&.Mui-focused fieldset": {
-                  borderColor: theme.palette.secondary.light,
-                  borderWidth: "2px",
+                        borderColor: theme.palette.secondary.light,
+                        borderWidth: "2px",
                   }
             },
       },
@@ -222,7 +225,7 @@ function RegisterForm() {
                   {isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
                   {!isValid && <div className={classes.wrongInput}><p>{errorText}</p></div>}
                   <Button
-                        className={classes.submit}
+                        className={classes.submitButton}
                         type="submit"
                         fullWidth
                         variant="contained"

@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
       projectsGrid: {
             display: 'grid',
             justifyContent: 'center',
-            gap: '1.2em',
+            gap: theme.spacing(4),
             gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
-            marginRight: '5em',
-            marginLeft: '5em',
-            marginBottom: '3em',
+            marginRight: theme.spacing(8),
+            marginLeft: theme.spacing(8),
+            marginBottom: theme.spacing(4),
       },
       link: {
             textDecoration: 'none',
@@ -32,30 +32,34 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             height: 140,
             width: 400,
-            justifyContent: 'space-between',
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
                   boxShadow: theme.shadows[5],
             },
       },
-      image: {
-            flex: 'none',
-            height: 140,
-            width: 140,
-            filter: 'blur(0.5px)'
-      },
-      details: {
+      cardContent: {
             display: 'flex',
             flexDirection: 'column',
-            maxHeight: 120,
-            overflow: 'hidden',
-            minWidth: 0,
+            maxWidth: '260px',
       },
       // dirty trick to make content display in the center if text
       // is short, if long 'empty' will shrink to zero
       empty: {
             flexBasis: '20px',
+      },
+      name: {
+
+      },
+      description: {
+            overflow: 'hidden',
+      },
+      image: {
+            flex: 'none',
+            marginLeft: 'auto',
+            height: 140,
+            width: 140,
+            filter: 'blur(0.5px)'
       },
   })
 );
@@ -84,22 +88,20 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
                               <Fragment key={project._id}>
                                     <Link className={classes.link} to={`${url}/${project._id}`}>
                                           <Card className={classes.cardContainer}>
-                                                      <CardContent>
-                                                            <div className={classes.details}>
-                                                                  <div className={classes.empty} />
-                                                                  <Typography component="h5" variant="h5">
-                                                                        {project.name}
-                                                                  </Typography>
-                                                                  <Typography variant="subtitle1" color="textSecondary">
-                                                                        {project.description}
-                                                                  </Typography>
-                                                            </div>
-                                                      </CardContent>
-                                                      <CardMedia
-                                                            className={classes.image}
-                                                            image={shuffleProjectCover()}
-                                                            title="Project cover"
-                                                      />
+                                                <CardContent className={classes.cardContent}>
+                                                            <div className={classes.empty} />
+                                                            <Typography className={classes.name} component="h5" variant="h5">
+                                                                  {project.name}
+                                                            </Typography>
+                                                            <Typography className={classes.description} variant="subtitle1" color="textSecondary">
+                                                                  {project.description}
+                                                            </Typography>
+                                                </CardContent>
+                                                <CardMedia
+                                                      className={classes.image}
+                                                      image={shuffleProjectCover()}
+                                                      title="Project cover"
+                                                />
                                           </Card>
                                     </Link> 
                               </Fragment>

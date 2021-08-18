@@ -1,10 +1,9 @@
-import { FC, SetStateAction } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import AddIcon from '@material-ui/icons/AddOutlined';
-import Typography from '@material-ui/core/Typography';
 import { ClickAwayListener, IconButton, TextField } from '@material-ui/core';
-import React from 'react';
+import Card from '@material-ui/core/Card';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/AddOutlined';
+import React, { FC, SetStateAction } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       inputField: {
             "& .MuiOutlinedInput-root": {
                   "& fieldset": { 
-                        padding: '0.5em 4em',
                         borderRadius: '10px',
                         borderColor: theme.palette.secondary.main,
                   }, 

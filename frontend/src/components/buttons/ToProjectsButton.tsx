@@ -1,24 +1,33 @@
+import { Card } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      button: {
-            padding: '0.5em 4em',
-            borderRadius: '10px',
-            marginTop: '5em',
-            background: 'white',
-            "&:hover": {
-                  background: theme.palette.action.hover,
-            }
-      },
       buttonLink: {
             color: theme.palette.secondary.dark,
             textDecoration: 'none',
       },
+      toProjectsCard: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '200px',
+            height: '40px',
+            marginTop: theme.spacing(8),
+            borderRadius: '10px',
+            background: 'white',
+            fontSize: '14px',
+            color: theme.palette.secondary.main,
+            transition: 'all .12s linear',
+            boxShadow: theme.shadows[2],
+            "&:hover": {
+                  boxShadow: theme.shadows[5],
+            },
+      },
 }));
+
 
 function ButtonToProjects() {
   const classes = useStyles();
@@ -27,14 +36,9 @@ function ButtonToProjects() {
   return (
     <div>
       <Link className={classes.buttonLink} to='/projects'>
-            <Button
-                  className={classes.button}
-                  variant='contained'
-                  color='primary'
-                  size={'large'}
-            >
+            <Card className={classes.toProjectsCard}>
                   YOUR PROJECTS
-            </Button>
+            </Card>
       </Link>
       
     </div>

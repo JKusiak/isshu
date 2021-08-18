@@ -1,11 +1,11 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import IssueData from "./IssueData";
+import { INestedColumn, INestedIssue } from "../types/ModelTypes";
 import AddIssue from "./functional/AddIssue";
 import DeleteColumn from "./functional/DeleteColumn";
 import UpdateColumn from "./functional/UpdateColumn";
-import { INestedColumn, INestedIssue } from "../types/ModelTypes";
+import IssueData from "./IssueData";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
             columnName: {
                   gridColumn: '2',
                   justifySelf: 'center',
-                  paddingTop: '0.7em',
-                  paddingBottom: '0.7em',
+                  paddingTop: theme.spacing(2),
+                  paddingBottom: theme.spacing(2),
                   fontSize: '20px',
                   fontWeight: 400,
                   color: theme.palette.secondary.light,    

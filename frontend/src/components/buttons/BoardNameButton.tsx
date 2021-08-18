@@ -6,8 +6,7 @@ import React, { FC, useState } from 'react';
 const useStyles = makeStyles((theme: Theme) => createStyles({
       inputField: {
             "& .MuiOutlinedInput-root": {
-                  "& fieldset": { 
-                        padding: '0.5em 4em',
+                  "& fieldset": {    
                         borderRadius: '10px',
                         borderColor: theme.palette.secondary.main,
                   }, 

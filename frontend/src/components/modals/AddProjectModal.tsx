@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
-import Modal from '@material-ui/core/Modal';
+import DateFnsUtils from '@date-io/date-fns';
+import { Button, Grid, IconButton, TextField, Tooltip, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button, Grid, IconButton, TextField, Tooltip, Typography } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       modal: {
@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       inputField: {
       "& .MuiOutlinedInput-root": {
             "& fieldset": { 
-                  padding: '0.5em 4em',
                   borderRadius: '10px',
             }, 
             "&.Mui-focused fieldset": {

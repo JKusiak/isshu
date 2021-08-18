@@ -12,16 +12,17 @@ const useStyles = makeStyles((theme: Theme) =>
                   height: 'auto',
                   minHeight: '70px',
                   maxHeight: '250px',
-                  marginBottom: '1em',
+                  marginBottom: theme.spacing(2),
                   boxShadow: theme.shadows[2],
                   "&:hover": {
                         cursor: 'pointer',
                         boxShadow: theme.shadows[5],
                   }
             },
-            description: {
-                  margin: '0.5em 0 0 0.5em',
-                  fontSize: '15px',
+            name: {
+                  padding: theme.spacing(1),
+                  fontSize: '14px',
+                  color: theme.palette.secondary.main,
             }
       }
 ));
@@ -54,7 +55,7 @@ const IssueData: FC<IssueDataProps> = (props) => {
                                                       ...provided.draggableProps.style
                                                 }}
                                           >
-                                                <Typography className={classes.description} component='h6' variant='h6'>
+                                                <Typography className={classes.name} component='h6' variant='h6'>
                                                       {props.issue.name}
                                                 </Typography>
                                           </Card>

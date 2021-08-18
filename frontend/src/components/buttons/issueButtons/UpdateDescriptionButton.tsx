@@ -32,13 +32,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                         
                         height: 'auto',
                         borderColor: theme.palette.secondary.light,
-                        borderRadius: '10px',
+                        borderRadius: '6px',
                         borderWidth: "1px",
                   },
                   "&.Mui-focused fieldset": {
                         height: 'auto',
                         borderColor: theme.palette.secondary.light,
-                        borderRadius: '10px',
+                        borderRadius: '6px',
                         borderWidth: "1px",
                   },
                   alignItems: 'start',

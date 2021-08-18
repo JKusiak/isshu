@@ -18,10 +18,10 @@ import { IUser } from '../../types/ModelTypes';
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
             listSubtitle: {
-                  fontSize: '1.6em',
+                  fontSize: '24px',
                   textAlign: 'center',
-                  marginTop: '0.4em',
-                  marginBottom: '0.4em',
+                  marginTop: theme.spacing(2),
+                  marginBottom: theme.spacing(2),
                   fontWeight: 600,
                   color: theme.palette.secondary.dark,
             },
