@@ -1,11 +1,11 @@
-import { Card, CardContent, Checkbox, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { INestedIssue, IStep } from '../../types/ModelTypes';
 import AddStepButton from '../buttons/issueButtons/AddStepButton';
-import DeleteStepButton from '../buttons/issueButtons/DeleteStepButton';
 import { BoardReducerContext } from '../functional/GetBoard';
+import IssueStepData from '../IssueStepData';
 import { ActionTypes } from '../reducers/BoardReducer';
 
 
@@ -30,30 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
             minWidth: '35px',
             marginLeft: theme.spacing(1),
         },
-        stepCard: {
-            width: '100%',
-            flexShrink: 0,
-            marginBottom: theme.spacing(1),
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                cursor: 'pointer',
-                boxShadow: theme.shadows[5],
-            },
-            "& .MuiCardContent-root": {
-                padding: theme.spacing(0.5),
-            },
-        },
-        cardContent: {
-            display: 'flex',
-            alignItems: 'center',
-        },
-        checkbox: {
-            transform: 'scale(0.7)',
-        },
-        deleteStepButton: {
-            marginLeft: 'auto',
-        }
     })
 );
 
@@ -82,75 +58,18 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
         }
     }, [props.issue.steps]);
 
-
-    function handleCheck(checkedStep: IStep) {
-        const updatedSteps = props.issue.steps.map(step => {
-            if(props.issue.steps.indexOf(step) === props.issue.steps.indexOf(checkedStep)) {
-                step.isCompleted = !step.isCompleted;
-            }
-            return step;
-        });
-        
-        const payload = {
-            columnId: props.issue.columnId,
-            issueId: props.issue._id,
-            modified: {
-                steps: updatedSteps,
-            },
-        };
-
-        dispatch({type: ActionTypes.UpdateIssue, payload: payload});
-        props.updateSteps();
-    }
-
     
     function displaySteps() {
         return(props.issue.steps.map((step: IStep, index: number) => {
             return(
                 <Fragment key={index}>
-                    <Draggable draggableId={`${props.issue.steps.indexOf(step)}`} index={index}>
-                        {(provided) => {
-                            return (
-                                <Card 
-                                    className={classes.stepCard} 
-                                    onClick={() => handleCheck(step)}
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                            ...provided.draggableProps.style
-                                    }}
-                                >
-                                    <CardContent className={classes.cardContent}>
-                                        <Checkbox
-                                            className={classes.checkbox}
-                                            checked={step.isCompleted}
-                                        />
-
-                                        <Typography 
-                                            component="h5" 
-                                            variant="h5"
-                                            style={{
-                                                fontSize: '14px',
-                                                textDecoration: step.isCompleted? 'line-through' : 'none',
-                                                overflow: 'hidden',
-                                            }}
-                                        >
-                                            {step.content}
-                                        </Typography>
-                                        
-                                        <DeleteStepButton
-                                            updateSteps={props.updateSteps}
-                                            issue={props.issue}
-                                            clickedStep={step}
-                                        />
-                                    </CardContent>
-                                </Card>
-                            );
-                        }}
-                </Draggable>
+                    <IssueStepData
+                        issue={props.issue}
+                        step={step}
+                        index={index}
+                        updateSteps={props.updateSteps}
+                    />
                 </Fragment>
-                
             );
         }));
     }
@@ -171,7 +90,7 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
 
 
     function onDragEnd(result: DropResult) {
-        const { source, destination, draggableId } = result;
+        const { source, destination } = result;
         if(!destination) return;
 
         if (source.droppableId === destination.droppableId) {

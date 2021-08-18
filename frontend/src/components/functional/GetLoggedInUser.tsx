@@ -6,7 +6,7 @@ export function getLoggedInUser() {
 }
 
 export function getUserLanguage() {
-      if (navigator.languages != undefined) 
+      if (navigator.languages !== undefined) 
         return navigator.languages[0]; 
       return navigator.language;
 }
