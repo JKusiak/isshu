@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         alignItems: 'center',
     },
     icon: {
-        fontSize: '15px',
+        transform: 'scale(0.7)',
         color: theme.palette.secondary.main,
     },
     form: {

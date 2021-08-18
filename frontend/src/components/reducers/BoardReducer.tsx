@@ -102,7 +102,8 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                   }
             case ActionTypes.ChangeColumns:
                   const issueColumn = ensure(state.columns.find(column => column._id === payload.oldColumnId));
-                  const movedIssue = issueColumn.issues.find(issue => issue._id === payload.issueId);
+                  const movedIssue = ensure(issueColumn.issues.find(issue => issue._id === payload.issueId));
+                  movedIssue.columnId = payload.newColumnId;
 
                   return { 
                         ...state, 

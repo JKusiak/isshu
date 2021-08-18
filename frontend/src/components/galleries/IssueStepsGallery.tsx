@@ -17,15 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
         progressContainer: {
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             flexGrow: 0,
         },
         progressBar: {
             width: '100%',
-            flexGrow: 0,
         },
         progress: {
+            textAlign: 'center',
             minWidth: '35px',
-            flexGrow: 0,
+            marginLeft: theme.spacing(1),
         },
         stepCard: {
             width: '100%',
