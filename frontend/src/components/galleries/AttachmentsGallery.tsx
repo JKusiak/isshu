@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
         attachmentCard: {
             display: 'flex',
             flexShrink: 0,
-            height: '120px',
-            width: '214px',
+            height: '80px',
+            width: '142px',
             justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',

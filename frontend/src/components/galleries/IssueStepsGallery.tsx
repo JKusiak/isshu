@@ -1,6 +1,7 @@
 import { Card, CardContent, Checkbox, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { INestedIssue, IStep } from '../../types/ModelTypes';
 import AddStepButton from '../buttons/issueButtons/AddStepButton';
 import DeleteStepButton from '../buttons/issueButtons/DeleteStepButton';
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         stepCard: {
             width: '100%',
+            flexShrink: 0,
             marginBottom: theme.spacing(1),
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
@@ -44,7 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         cardContent: {
             display: 'flex',
-            maxWidth: '100%',
             alignItems: 'center',
         },
         checkbox: {
@@ -104,43 +105,54 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
 
     
     function displaySteps() {
-        if(props.issue.steps.length > 0) {
-            return(props.issue.steps.map((step: IStep) => {
-                return(
-                    <Fragment key={step._id}>
-                            <Card 
-                                className={classes.stepCard} 
-                                onClick={() => handleCheck(step)}
-                            >
-                                <CardContent className={classes.cardContent}>
-                                    <Checkbox
-                                        className={classes.checkbox}
-                                        checked={step.isCompleted}
-                                    />
+        return(props.issue.steps.map((step: IStep, index: number) => {
+            return(
+                <Fragment key={index}>
+                    <Draggable draggableId={`${props.issue.steps.indexOf(step)}`} index={index}>
+                        {(provided) => {
+                            return (
+                                <Card 
+                                    className={classes.stepCard} 
+                                    onClick={() => handleCheck(step)}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                            ...provided.draggableProps.style
+                                    }}
+                                >
+                                    <CardContent className={classes.cardContent}>
+                                        <Checkbox
+                                            className={classes.checkbox}
+                                            checked={step.isCompleted}
+                                        />
 
-                                    <Typography 
-                                        component="h5" 
-                                        variant="h5"
-                                        style={{
-                                            fontSize: '14px',
-                                            textDecoration: step.isCompleted? 'line-through' : 'none',
-                                            overflow: 'hidden',
-                                        }}
-                                    >
-                                        {step.content}
-                                    </Typography>
-                                    
-                                    <DeleteStepButton
-                                        updateSteps={props.updateSteps}
-                                        issue={props.issue}
-                                        clickedStep={step}
-                                    />
-                                </CardContent>
-                            </Card>
-                    </Fragment>
-                );
-            }));
-      }
+                                        <Typography 
+                                            component="h5" 
+                                            variant="h5"
+                                            style={{
+                                                fontSize: '14px',
+                                                textDecoration: step.isCompleted? 'line-through' : 'none',
+                                                overflow: 'hidden',
+                                            }}
+                                        >
+                                            {step.content}
+                                        </Typography>
+                                        
+                                        <DeleteStepButton
+                                            updateSteps={props.updateSteps}
+                                            issue={props.issue}
+                                            clickedStep={step}
+                                        />
+                                    </CardContent>
+                                </Card>
+                            );
+                        }}
+                </Draggable>
+                </Fragment>
+                
+            );
+        }));
     }
 
 
@@ -158,13 +170,56 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
     }
 
 
+    function onDragEnd(result: DropResult) {
+        const { source, destination, draggableId } = result;
+        if(!destination) return;
+
+        if (source.droppableId === destination.droppableId) {
+            const reorderedSteps = reorderSteps(props.issue.steps ,source.index, destination.index);
+            const payload = {
+                columnId: props.issue.columnId,
+                issueId: props.issue._id,
+                modified: {
+                    steps: reorderedSteps,
+                },
+            };
+    
+            dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+            props.updateSteps();
+        } else {
+            return;
+        }
+    }
+
+
+    function reorderSteps(steps: [IStep], startIndex: number, endIndex: number) {
+        const [removed] = steps.splice(startIndex, 1);
+        steps.splice(endIndex, 0, removed);       
+        return steps;
+    }
+
+
     return (
     <>
         <Typography className={classes.headline} component="h5" variant="h5">
             Steps
         </Typography>
         {displayProgress()}
-        {displaySteps()}
+
+            <DragDropContext onDragEnd={result => onDragEnd(result)}>
+                <Droppable droppableId={props.issue._id}>
+                {provided => {
+                    return (
+                        <div {...provided.droppableProps} ref={provided.innerRef}>
+                            {displaySteps()}
+                            {provided.placeholder}
+                        </div>
+                    );
+                }}   
+                </Droppable>
+            </DragDropContext>
+
+        
         <AddStepButton 
             updateSteps={props.updateSteps}
             issue={props.issue}

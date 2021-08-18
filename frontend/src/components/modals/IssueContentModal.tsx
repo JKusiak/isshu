@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   flexDirection: 'column',
                   overflowY: 'auto',
                   overflowX: 'hidden',
+                  paddingRight: theme.spacing(2),
                   gridColumn: 2,
                   minHeight: 0,
                   minWidth: 0,

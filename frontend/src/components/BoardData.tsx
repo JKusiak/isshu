@@ -79,7 +79,9 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
       const onDragEnd = (result: DropResult) => {
             const { source, destination, draggableId } = result;
-            if (destination !== undefined && destination !== null && source.droppableId !== destination.droppableId) {
+            if(!destination) return;
+
+            if(source.droppableId !== destination.droppableId) {
                   const oldColumnId = source.droppableId;
                   const newColumnId = destination.droppableId;
                   const payload = {
@@ -91,7 +93,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
                   dispatch({type: ActionTypes.ChangeColumns, payload: payload});
                   props.changeColumn(destination.droppableId, draggableId);
             } 
-            // else if (destination !== undefined && destination !== null && source.droppableId === destination.droppableId){
+            // else if (source.droppableId === destination.droppableId){
             //       const chosenColumn = ensure(props.board.columns.find(column => column._id === source.droppableId));
             //       const reorderedIssues = reorderColumn(chosenColumn.issues, source.index, destination.index);
             //       const payload = {

@@ -100,7 +100,6 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
-                                          <>
                                            <div 
                                                 className={classes.columnContentWrapper}
                                                 onMouseOver={() => setShowAddIssue(true)} 
@@ -108,16 +107,12 @@ const ColumnData: FC<ColumnDataProps> = (props) => {
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                           >
-                                                <div>
-                                                      {displayColumnContent()}
-                                                      {provided.placeholder}
-                                                      {showAddIssue &&
-                                                            <AddIssue column={props.column}/>
-                                                      }
-                                                </div>
+                                                {displayColumnContent()}
+                                                {provided.placeholder}
+                                                {showAddIssue &&
+                                                      <AddIssue column={props.column}/>
+                                                }
                                           </div>
-                                          </>
-                                          
                                     );
                               }}
                         </Droppable>

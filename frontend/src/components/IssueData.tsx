@@ -35,42 +35,42 @@ interface IssueDataProps {
 
 
 const IssueData: FC<IssueDataProps> = (props) => {
-      const classes = useStyles();
-      const [isModalOpen, setIsModalOpen] = useState(false);
+	const classes = useStyles();
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-      return (
-            <>
-                  <Draggable draggableId={props.issue._id} index={props.index}>
-                        {(provided) => {
-                              return (
-                                    <>
-                                          <Card
-                                                className={classes.issueCard}
-                                                onClick={() => setIsModalOpen(true)}
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                style={{
-                                                      ...provided.draggableProps.style
-                                                }}
-                                          >
-                                                <Typography className={classes.name} component='h6' variant='h6'>
-                                                      {props.issue.name}
-                                                </Typography>
-                                          </Card>
+	return(
+		<>
+		<Draggable draggableId={props.issue._id} index={props.index}>
+			{(provided) => {
+				return(
+					<>
+						<Card
+							className={classes.issueCard}
+							onClick={() => setIsModalOpen(true)}
+							ref={provided.innerRef}
+							{...provided.draggableProps}
+							{...provided.dragHandleProps}
+							style={{
+									...provided.draggableProps.style
+							}}
+						>
+							<Typography className={classes.name} component='h6' variant='h6'>
+									{props.issue.name}
+							</Typography>
+						</Card>
 
-                                          <IssueContentModal 
-                                                issue={props.issue} 
-                                                isIssueModalOpen={isModalOpen} 
-                                                setIssueModalOpen={setIsModalOpen}
-                                          />
-                                    </>
-                              );
-                        }}
-                  </Draggable>
-            </>
-      );
+						<IssueContentModal 
+							issue={props.issue} 
+							isIssueModalOpen={isModalOpen} 
+							setIssueModalOpen={setIsModalOpen}
+						/>
+					</>
+				);
+			}}
+		</Draggable>
+		</>
+	);
 }
 
 export default IssueData;
