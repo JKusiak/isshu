@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		inputField: {
 			width: '100%',
-			height: '100%',
+			height: 'auto',
 			"& .MuiOutlinedInput-root": {
 				height: '100%',
 				"& fieldset": {

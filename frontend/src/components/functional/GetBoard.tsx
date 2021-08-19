@@ -57,9 +57,9 @@ const GetBoard: FC<GetBoardProps> = (props) => {
       return (
             <>
             {isLoaded &&
-             <BoardReducerContext.Provider value={{boardState, dispatch}}>
+                  <BoardReducerContext.Provider value={{boardState, dispatch}}>
                   <BoardData board={boardState} changeColumn={changeColumn}/>
-             </BoardReducerContext.Provider> 
+                  </BoardReducerContext.Provider> 
             }
             </>
       );

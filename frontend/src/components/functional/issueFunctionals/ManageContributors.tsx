@@ -1,5 +1,8 @@
-import React, { FC } from 'react';
-import { INestedIssue } from '../../../types/ModelTypes';
+import axios from 'axios';
+import React, { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { UserTemplate } from '../../../types/ModelContentTemplate';
+import { INestedIssue, IUser } from '../../../types/ModelTypes';
 import ContributorsGallery from '../../galleries/IssueContributorsGallery';
 
 
@@ -9,58 +12,49 @@ interface ManageContributorsProps {
 
 
 const ManageContributors: FC<ManageContributorsProps> = (props) => {
+      const { projectId } = useParams<{projectId: string}>();
+      const [projectContributors, setProjectContributors] = useState<[IUser]>([UserTemplate]);
 
 
-      function addMessage() {
-            // const adjustedMessages = props.issue.messages.map(message => {
-            //       const changedMessage: IMessage = {
-            //             ...message,
-            //             sender: message.sender._id,
-            //       }
-                  
-            //       return changedMessage;
-            // });
+      useEffect(() => {
+            fetchContributors();
+      }, []);
 
-            // const requestBody = {
-            //       messages: adjustedMessages,
-            // }
-            // axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-            //       headers: {
-            //             'Authorization': `Bearer ${localStorage.getItem('token')}`
-            //       }
-            // }).catch((err) => {
-            //       console.log(err);
-            // })
+      function fetchContributors() {
+            axios.get(`http://localhost:5000/users/getUsersByProject/${projectId}`, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).then(resp => {
+                  setProjectContributors(resp.data);
+            }).catch((err) => {
+                  console.log(err);
+            });;
       } 
 
 
-      function deleteMessage() {
-            // const adjustedMessages = props.issue.messages.map(message => {
-            //       const changedMessage: IMessage = {
-            //             ...message,
-            //             sender: message.sender._id,
-            //       }
-                  
-            //       return changedMessage;
-            // });
+      function updateContributors() {
+            const contributorsToId = props.issue.contributors.map(contributor => contributor._id);
 
-            // const requestBody = {
-            //       messages: adjustedMessages,
-            // }
+            const requestBody = {
+                  contributors: contributorsToId,
+            }
 
-            // axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-            //       headers: {
-            //             'Authorization': `Bearer ${localStorage.getItem('token')}`
-            //       }
-            // }).catch((err) => {
-            //       console.log(err);
-            // })
+            axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).catch((err) => {
+                  console.log(err);
+            })
       } 
 
 
       return (
 		<ContributorsGallery 
-			
+                  projectContributors={projectContributors}
+                  issue={props.issue}
+                  updateContributors={updateContributors}
 		/>
       );
 }

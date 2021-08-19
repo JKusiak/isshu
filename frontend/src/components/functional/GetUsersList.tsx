@@ -10,6 +10,7 @@ interface GetUsersListProps {
       handleSidebarToggle: () => void,
 }
 
+
 const GetUsersList: FC<GetUsersListProps> = (props) => {
       const { projectId } = useParams<{projectId: string}>();
       const [otherUsers, setOtherUsers] = useState<[IUser]>([UserTemplate]);
