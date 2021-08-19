@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
         stepCard: {
             width: '100%',
             flexShrink: 0,
-            marginBottom: theme.spacing(1),
+            marginBottom: theme.spacing(1.5),
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 boxShadow: theme.shadows[5],
             },
             "& .MuiCardContent-root": {
-                padding: theme.spacing(0.5),
+                padding: theme.spacing(0.2),
             },
         },
         cardContent: {

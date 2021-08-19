@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
       tagCard: {
             display: 'flex',
             flexShrink: 0,
-            minHeight: '30px',
-            minWidth: '30px',
+            minHeight: '34px',
+            minWidth: '34px',
             marginRight: theme.spacing(1),
             marginBottom: theme.spacing(1),
             justifyContent: 'center',

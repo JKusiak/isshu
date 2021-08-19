@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         }
     },
     iconButton: {
-        // minHeight: '20px',
-        // minWidth: '20px',
+        padding: theme.spacing(1.2),
         justifyContent: 'center',
         alignItems: 'center',
     },

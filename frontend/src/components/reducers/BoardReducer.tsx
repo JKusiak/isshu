@@ -16,7 +16,7 @@ export enum ActionTypes {
       DeleteColumn = 'DELETE COLUMN',
       UpdateColumn = 'UPDATE COLUMN',
       AddIssue = 'ADD ISSUE',
-      DeleteIssue = 'DELETE ISSUE',
+      ArchivizeIssue = 'ARCHIVIZE ISSUE',
       UpdateIssue = 'UPDATE ISSUE',
       ChangeColumns = 'REMOVE FROM COLUMN',
       ReorderColumn = 'REORDER COLUMN'
@@ -69,12 +69,16 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                               return column;
                         })
                   }
-            case ActionTypes.DeleteIssue:
+            case ActionTypes.ArchivizeIssue:
                   return { 
                         ...state, 
                         columns: state.columns.map(column => {
                               if(column._id === payload.columnId) {
-                                    column.issues.filter(issue => issue._id !== payload.issueId)
+                                    const newIssues = column.issues.filter(issue => issue._id !== payload.issueId);
+                                    return {
+                                          ...column,
+                                          issues: newIssues,
+                                    }
                               }
                               return column;
                         })
@@ -93,6 +97,7 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                                                 if(payload.modified.messages) issue.messages = payload.modified.messages;
                                                 if(payload.modified.tags) issue.tags = payload.modified.tags;
                                                 if(payload.modified.contributors) issue.contributors = payload.modified.contributors;
+                                                if(typeof payload.modified.isFinished !== 'undefined') issue.isFinished = payload.modified.isFinished;
                                           }
                                           return issue;
                                     })
@@ -138,4 +143,4 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
             default:
                   return state
       }
-    }
+}

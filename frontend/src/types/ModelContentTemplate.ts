@@ -79,6 +79,7 @@ export const IssueTemplate: IIssue = {
       messages: [MessageTemplate],
       steps: [StepTemplate],
       columnId: '',
+      isFinished: false,
 };
 
 

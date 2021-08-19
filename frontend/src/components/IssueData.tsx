@@ -1,5 +1,6 @@
 import { Card, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import CheckIcon from '@material-ui/icons/Check';
 import { FC, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { INestedIssue } from "../types/ModelTypes";
@@ -7,24 +8,34 @@ import IssueContentModal from "./modals/IssueContentModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
-      createStyles({
-            issueCard: {
-                  height: 'auto',
-                  minHeight: '70px',
-                  maxHeight: '250px',
-                  marginBottom: theme.spacing(2),
-                  boxShadow: theme.shadows[2],
-                  "&:hover": {
-                        cursor: 'pointer',
-                        boxShadow: theme.shadows[5],
-                  }
-            },
-            name: {
-                  padding: theme.spacing(1),
-                  fontSize: '14px',
-                  color: theme.palette.secondary.main,
-            }
-      }
+	createStyles({
+		issueCard: {
+			display:'grid',
+			gridRows: '1fr, 1fr',
+			height: 'auto',
+			minHeight: '70px',
+			maxHeight: '250px',
+			marginBottom: theme.spacing(2),
+			boxShadow: theme.shadows[2],
+			"&:hover": {
+				cursor: 'pointer',
+				boxShadow: theme.shadows[5],
+			}
+		},
+		name: {
+			gridRow: 1,
+			margin: theme.spacing(1),
+			fontSize: '14px',
+			overflow: 'hidden',
+			color: theme.palette.secondary.main,
+		},
+		checkIcon: {
+			gridRow: 2,
+			justifySelf: 'end',
+			marginRight: theme.spacing(1),
+			color: 'green',
+		}
+	}
 ));
 
 
@@ -58,6 +69,7 @@ const IssueData: FC<IssueDataProps> = (props) => {
 							<Typography className={classes.name} component='h6' variant='h6'>
 									{props.issue.name}
 							</Typography>
+							{props.issue.isFinished && <CheckIcon className={classes.checkIcon}/>}
 						</Card>
 
 						<IssueContentModal 

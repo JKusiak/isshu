@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                         borderWidth: "1px",
                   }
             },
+            "& .MuiInputBase-input": {
+                  marginLeft: theme.spacing(0.5),
+            }
       },
       nameText: {
             textAlign: 'center',

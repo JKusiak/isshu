@@ -47,6 +47,7 @@ const UpdateName: FC<UpdateNameProps> = (props) => {
 
       return (
             <UpdateNameButton
+                  issue={props.issue}
                   tempName={tempName}
                   setTempName={setTempName}
                   permName={props.issue.name}

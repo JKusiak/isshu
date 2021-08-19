@@ -1,7 +1,9 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
+import ArchivizeIssue from "../functional/issueFunctionals/ArchivizeIssue";
 import ManageAttachments from "../functional/issueFunctionals/ManageAttachments";
+import ManageCompletion from "../functional/issueFunctionals/ManageCompletion";
 import ManageContributors from "../functional/issueFunctionals/ManageContributors";
 import ManageMessages from "../functional/issueFunctionals/ManageMessages";
 import ManageSteps from "../functional/issueFunctionals/ManageSteps";
@@ -20,7 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
             paper: {
                   display: 'grid',
                   gridTemplateColumns: '2fr 1fr',
-                  columnGap: theme.spacing(4),
+                  gridTemplateRows: 'auto 10fr',
+                  gridTemplateAreas:`
+                        "header header"
+                        "leftColumn rightColumn"`,
                   width: '75vw',
                   minWidth: '430px',
                   height: '75vh',
@@ -31,23 +36,36 @@ const useStyles = makeStyles((theme: Theme) =>
                   boxShadow: theme.shadows[2],
                   padding: theme.spacing(4, 4, 4),
             },
+            name: {
+                  gridArea: 'header',
+                  justifySelf: 'start',
+                  width: '67%',
+                  paddingRight: theme.spacing(2),
+            },
+            buttons: {
+                  gridArea: 'header',
+                  justifySelf: 'end',
+                  display: 'flex',
+                  overflowX: 'hidden',
+            },
             leftColumn: {
+                  gridArea: 'leftColumn',
                   display: 'flex',
                   flexDirection: 'column',
                   overflowY: 'auto',
                   overflowX: 'hidden',
                   paddingRight: theme.spacing(2),
-                  gridColumn: 1,
                   minHeight: 0,
                   minWidth: 0,
             },
             rightColumn: {
+                  gridArea: 'rightColumn',
                   display: 'flex',
                   flexDirection: 'column',
                   overflowY: 'auto',
                   overflowX: 'hidden',
                   paddingRight: theme.spacing(2),
-                  gridColumn: 2,
+                  paddingLeft: theme.spacing(2),
                   minHeight: 0,
                   minWidth: 0,
             },
@@ -61,7 +79,6 @@ const useStyles = makeStyles((theme: Theme) =>
             creatorName: {
                   marginLeft: theme.spacing(2),
             }
-
       }
 ));
 
@@ -92,9 +109,14 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
             >
                   <Fade in={props.isIssueModalOpen}>
                         <div className={classes.paper}>
-                              <div className={classes.leftColumn}>
+                              <div className={classes.name}>
                                     <UpdateName issue={props.issue} />
-
+                              </div>
+                              <div className={classes.buttons}>
+                                    <ManageCompletion issue={props.issue} />
+                                    <ArchivizeIssue issue={props.issue} setIssueModalOpen={props.setIssueModalOpen}/>
+                              </div>
+                              <div className={classes.leftColumn}>
                                     <IssueTagsGallery
                                           issue={props.issue}
                                           isTagsModalOpen={isTagsModalOpen} 

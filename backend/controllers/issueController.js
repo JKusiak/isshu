@@ -38,7 +38,13 @@ export const addIssue = asyncHandler(async(req, res) => {
 
       try {
             const savedIssue = await newIssue.save();
-            res.json(savedIssue);
+            const populatedIssue = await Issue.findById(savedIssue._id)
+                  .populate({
+                        path: 'creator',
+                        select: 'name surname',
+                        model: 'User',
+                  })
+            res.json(populatedIssue);
       } catch(err) {
             res.status(400).json({message: "Can not save the issue"});
             throw new Error('Can not save the issue');

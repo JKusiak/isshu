@@ -62,6 +62,11 @@ const issueSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Project',
             required: true,
+      },
+      isFinished: {
+            type: Boolean,
+            required: false,
+            default: false,
       }
 });
 

@@ -36,15 +36,12 @@ export interface IIssue {
       name: string;
       description: string;
       creator: string;        // ref id
-      contributors: [string]; // ref id
-      tags: [string];         // ref id
-      messages: [{
-            content: string;
-            sender: string;   // ref id
-            addTime: Date;
-      }];
-      steps: [IStep];
       columnId: string;       // ref id
+      isFinished: boolean;
+      messages: [IMessage];
+      steps: [IStep];
+      tags: [string];         // ref id
+      contributors: [string]; // ref id
 }
 
 export interface ITag {
@@ -101,7 +98,8 @@ export interface INestedIssue {
       name: string;
       description: string;
       creator: INestedUser;
-      columnId: string,
+      columnId: string;
+      isFinished: boolean;
       messages: [INestedMessage];
       steps: [IStep];
       tags: [ITag];

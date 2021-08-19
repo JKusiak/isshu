@@ -78,7 +78,7 @@ const AddStepButton: FC<AddStepButtonProps> = (props) => {
         <>
         <div className={classes.buttonWrapper} onClick={() => setAddMode(true)}>
             <ClickAwayListener onClickAway={() => setAddMode(false)}>
-                <Card >
+                <Card>
                     {addMode &&
                         <form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
                             <InputBase
