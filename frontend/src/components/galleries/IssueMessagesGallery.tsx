@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-interface MessagesGalleryProps {
+interface IssueMessagesGalleryProps {
       issue: INestedIssue,
       addMessage: () => void,
       deleteMessage: () => void,
 }
 
 
-const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
+const IssueMessagesGallery: FC<IssueMessagesGalleryProps> = (props) => {
       const classes = useStyles();
       const { dispatch } = useContext(BoardReducerContext);
       const loggedInUser = getLoggedInUser();
@@ -146,4 +146,4 @@ const MessagesGallery: FC<MessagesGalleryProps> = (props) => {
       );
 }
 
-export default MessagesGallery;
+export default IssueMessagesGallery;

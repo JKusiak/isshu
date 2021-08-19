@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserTemplate } from '../../../types/ModelContentTemplate';
 import { INestedIssue, IUser } from '../../../types/ModelTypes';
-import ContributorsGallery from '../../galleries/IssueContributorsGallery';
+import IssueContributorsGallery from '../../galleries/IssueContributorsGallery';
 
 
 interface ManageContributorsProps {
@@ -51,7 +51,7 @@ const ManageContributors: FC<ManageContributorsProps> = (props) => {
 
 
       return (
-		<ContributorsGallery 
+		<IssueContributorsGallery 
                   projectContributors={projectContributors}
                   issue={props.issue}
                   updateContributors={updateContributors}

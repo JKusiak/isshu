@@ -5,15 +5,17 @@ import { FC, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     nameContainer: {
+		display: 'flex',
         marginBottom: theme.spacing(2),
     },
     nameText: {
+		width: 'auto',
         fontWeight: 'bold',
         fontSize: '24px',
         textAlign: 'start',
         "&:hover": {
                 cursor: 'pointer'
-        }
+        },
     },
     inputField: {
         "& .MuiOutlinedInput-root": {
@@ -57,9 +59,8 @@ const UpdateNameButton: FC<UpdateNameButtonProps> = (props) => {
 
 
       return (
-        <div className={classes.nameContainer}>
             <ClickAwayListener onClickAway={handleSubmit}>
-                  <div onClick={() => setUpdateMode(true)}>
+                  <div className={classes.nameContainer} >
                         {updateMode &&
                               <form onSubmit={handleSubmit} autoComplete="off">
                                     <TextField
@@ -81,14 +82,14 @@ const UpdateNameButton: FC<UpdateNameButtonProps> = (props) => {
                         }
 
                         {!updateMode &&
-                              <div className={classes.nameText}>
+                              <div className={classes.nameText} onClick={() => setUpdateMode(true)}>
                                     {props.permName}
                               </div>
+							//   <MarkCompletedButton />
+							//   <DeleteIssueButton />
                         }
                   </div>
-            </ClickAwayListener>
-        </div>
-            
+            </ClickAwayListener>       
       );
 }
 

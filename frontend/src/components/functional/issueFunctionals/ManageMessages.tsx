@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { FC } from 'react';
 import { IMessage, INestedIssue } from '../../../types/ModelTypes';
-import MessagesGallery from '../../galleries/MessagesGallery';
+import IssueMessagesGallery from '../../galleries/IssueMessagesGallery';
 
 
 interface UpdateMessagesProps {
@@ -60,7 +60,7 @@ const UpdateMessages: FC<UpdateMessagesProps> = (props) => {
 
 
       return (
-            <MessagesGallery 
+            <IssueMessagesGallery 
                   addMessage={addMessage}
                   deleteMessage={deleteMessage}
                   issue={props.issue}

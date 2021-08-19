@@ -75,7 +75,7 @@ interface IssueContributorsGalleryProps {
 
 const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
     const classes = useStyles();
-	const [contributor, setContributor] = useState<INestedUser|null>(UserTemplate);
+	const [newContributor, setNewContributor] = useState<INestedUser|null>(UserTemplate);
 	const [resetAutocomplete, setResetAutocomplete] = useState<boolean>(false);
     const { dispatch } = useContext(BoardReducerContext);
 	const issueContributorsToId = props.issue.contributors.map(contributor => contributor._id);
@@ -103,18 +103,23 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 
 	function handleSubmit(e:React.SyntheticEvent) {
 		e.preventDefault();
-		const newContributors = [...props.issue.contributors, contributor];
+		let issueContributors:(INestedUser | null)[] = [...props.issue.contributors];
 
-		const payload = {
-			columnId: props.issue.columnId,
-			issueId: props.issue._id,
-			modified: {
-				contributors: newContributors,
-			},
+		if(issueContributors[issueContributors.length - 1] !== newContributor) {
+			issueContributors =  [...props.issue.contributors, newContributor];
+
+			const payload = {
+				columnId: props.issue.columnId,
+				issueId: props.issue._id,
+				modified: {
+					contributors: issueContributors,
+				},
+			}
+			
+			dispatch({type: ActionTypes.UpdateIssue, payload: payload})
+			props.updateContributors();
 		}
-		
-		dispatch({type: ActionTypes.UpdateIssue, payload: payload})
-		props.updateContributors();
+
 		setResetAutocomplete(!resetAutocomplete);
 	}
 
@@ -132,7 +137,7 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 				options={props.projectContributors}
 				getOptionLabel={option => `${option.name} ${option.surname}`}
 				getOptionDisabled={(option) => issueContributorsToId.includes(option._id)}
-				onChange={(e, value) => setContributor(value)}
+				onChange={(e, value) => setNewContributor(value)}
 				renderInput={(params) => 
 					<TextField
 						className={classes.inputField} 
