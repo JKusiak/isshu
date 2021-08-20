@@ -14,19 +14,20 @@ const useStyles = makeStyles((theme: Theme) =>
 		inputField: {
 			width: '100%',
 			height: 'auto',
+			
 			"& .MuiOutlinedInput-root": {
 				height: '100%',
+				color: theme.palette.secondary.dark,
 				"& fieldset": {
-						height: 'auto',
-						borderColor: '#cfd2d4',
-						borderRadius: '6px',
-						borderWidth: "1px",
+					height: 'auto',
+					borderColor: theme.palette.secondary.main,
+					borderRadius: '6px',
+					borderWidth: "1px",
 				},
 				"&.Mui-focused fieldset": {
-						height: 'auto',
-						borderColor: theme.palette.secondary.light,
-						borderRadius: '6px',
-						borderWidth: "1px",
+					height: 'auto',
+					borderColor: theme.palette.secondary.main,
+					borderWidth: "2px",
 				},
 				alignItems: 'start',
 			},
@@ -53,24 +54,24 @@ const AddMessageButton: FC<AddMessageButtonProps> = (props) => {
 
 	return(
 		<>
-				<form className={classes.formContainer} onSubmit={localSubmit} autoComplete="off">
-					<TextField
-							className={classes.inputField}
-							required
-							autoFocus
-							size="small"
-							variant='outlined'
-							name="newComment"
-							id="newComment"
-							placeholder="Add message..."
-							value={messageContent}
-							autoComplete="new-comment"
-							inputProps={{style: {fontSize: 14}}}
-							onChange={e => {
-								setMessageContent(e.target.value);
-							}}                  
-					/>
-				</form>
+			<form className={classes.formContainer} onSubmit={localSubmit} autoComplete="off">
+				<TextField
+						className={classes.inputField}
+						required
+						autoFocus
+						size="small"
+						variant='outlined'
+						name="newComment"
+						id="newComment"
+						placeholder="Add message..."
+						value={messageContent}
+						autoComplete="new-comment"
+						inputProps={{style: {fontSize: 14}}}
+						onChange={e => {
+							setMessageContent(e.target.value);
+						}}                  
+				/>
+			</form>
 		</>
 	);
 }

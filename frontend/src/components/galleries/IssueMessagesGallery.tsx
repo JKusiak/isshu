@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
             messagesTitle: {
                   fontWeight: 'bold',
                   fontSize: '16px',
+                  color: theme.palette.secondary.dark,
                   marginBottom: theme.spacing(2),
             },
             messageContainer: {
@@ -20,17 +21,20 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             name: {
                   fontWeight: 'bold',
+                  color: theme.palette.secondary.dark,
             },
             date: {
                   fontSize: '12px',
+                  color: theme.palette.secondary.dark,
             },
             content: {
                   marginBottom: theme.spacing(1),
                   marginTop: theme.spacing(1),
+                  color: theme.palette.secondary.dark,
             },
             deleteButton: {
                   fontSize: '12px',
-                  color: theme.palette.secondary.main,
+                  color: theme.palette.secondary.dark,
                   "&:hover": {
                         cursor: 'pointer',
                         fontWeight: 'bold',

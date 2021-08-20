@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
         headline: {
             fontSize: '16px',
             fontWeight: 'bold',
+            color: theme.palette.secondary.dark,
         },
         progressContainer: {
             display: 'flex',
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textAlign: 'center',
             minWidth: '35px',
             marginLeft: theme.spacing(1),
+            color: theme.palette.secondary.dark
         },
     })
 );

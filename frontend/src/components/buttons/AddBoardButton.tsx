@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             justifyContent: 'center',
             alignItems: 'center',
             transition: 'all .12s linear',
+            backgroundColor: theme.palette.primary.light,
             boxShadow: theme.shadows[2],
             "&:hover": {
                   boxShadow: theme.shadows[5],

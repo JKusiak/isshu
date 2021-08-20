@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
             flexShrink: 0,
             marginBottom: theme.spacing(1.5),
+            backgroundColor: theme.palette.primary.light,
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
@@ -27,9 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
         cardContent: {
             display: 'flex',
             alignItems: 'center',
+            color: theme.palette.secondary.dark,
         },
         checkbox: {
             transform: 'scale(0.7)',
+            color: theme.palette.secondary.main,
         },
     })
 );

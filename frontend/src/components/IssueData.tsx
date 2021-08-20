@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			gridRow: 2,
 			justifySelf: 'end',
 			marginRight: theme.spacing(1),
-			color: 'green',
+			color: theme.palette.success.dark,
 		}
 	}
 ));

@@ -1,36 +1,35 @@
-import { createMuiTheme } from "@material-ui/core";
-import { createContext, useState } from "react";
-
-export const DarkModeContext = createContext<{darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>>}>({} as any);
-
-export const [darkMode, setDarkMode] = useState<boolean>(false);
-
-const light = {
-	main: '#fafafa'
+const lightTheme = {
+	dark: 'f5f5f5',
+	main: '#fafafa',
+	light: '#ffffff',
 };
 
-const dark = {
-	main: '#424242'
+const darkTheme = {
+	light: '#676767',
+	main: '#424242',
+	dark: '#2e2e2e',
 };
 
-const lightPalette = {
+export const lightPalette = {
 	primary: {
-		main: light.main,
+		...lightTheme
 	},
 	secondary: {
-		main: dark.main,
+		...darkTheme
 	},
 }
 
-const darkPalette = {
+// this swap is necessary to make borders be darker on hover in
+// light mode and lighter on hover in dark mode at the same time
+export const darkPalette = {
 	primary: {
-		main: light.main,
+		...darkTheme
 	},
 	secondary: {
-		main: dark.main,
+		... lightTheme,
+		light: lightTheme.dark,
+		dark: lightTheme.light,
 	},
 }
 
-export const theme = createMuiTheme({
-	palette: darkMode? lightPalette : darkPalette
-});
+

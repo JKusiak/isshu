@@ -1,15 +1,18 @@
-import React, { FC, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
-import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import Logo from '../../resources/logo/isshu_logo.svg';
-import Icon from '../../resources/logo/isshu_icon.svg';
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
+import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
+import DarkModeOn from '@material-ui/icons/Brightness2';
+import DarkModeOff from '@material-ui/icons/Brightness2Outlined';
+import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
+import React, { FC, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { DarkModeContext } from '../../App';
+import Icon from '../../resources/logo/isshu_icon.svg';
+import Logo from '../../resources/logo/isshu_logo.svg';
 import AddProject from '../functional/AddProject';
 
 
@@ -23,10 +26,6 @@ const useStyles = makeStyles((theme) => ({
       toolbar: {
             position: "sticky",
             top: 0,
-            
-      },
-      sectionDesktop: {
-            marginRight: "2em"
       },
       image: {
             marginLeft: "2em",
@@ -54,6 +53,17 @@ const useStyles = makeStyles((theme) => ({
                   fontWeight: 600
             }
       },
+      darkModeButton: {
+            transform: 'rotate(20deg) scale(0.9)',
+            color: theme.palette.secondary.main,
+      },
+      darkModeMenu: {
+            transform: 'rotate(20deg) scale(0.9)',
+            display: 'flex',
+            marginLeft: theme.spacing(1),
+            alignItems: 'center',
+            color: theme.palette.secondary.main,
+      },
       offset: theme.mixins.toolbar,
       
 }));
@@ -68,6 +78,7 @@ const Navbar: FC<NavbarProps> = (props) => {
       const classes = useStyles();
       const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
       const open = Boolean(anchorEl);
+      const {darkMode, setDarkMode} = useContext(DarkModeContext);
         
       const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
             setAnchorEl(event.currentTarget);
@@ -81,9 +92,13 @@ const Navbar: FC<NavbarProps> = (props) => {
             handleClose();
             localStorage.setItem('token', '');
             props.setLoggedIn(false);
-            // setAuthenticated(false);
       };
 
+      const handleDarkMode = () => {
+            setDarkMode(!darkMode);
+            const boolToString = darkMode? 'false': 'true';
+            localStorage.setItem('darkMode', boolToString);
+      }
 
       return (
       <div className={classes.root}>
@@ -97,7 +112,6 @@ const Navbar: FC<NavbarProps> = (props) => {
                   </Link>
                   
                   <div className={classes.root}/>
-                  <div className={classes.sectionDesktop}>
                   {!props.loggedIn && (
                         <>
                         <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/">
@@ -109,6 +123,9 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/register"> 
                               Register
                         </Button>
+                        <IconButton className={classes.darkModeButton} onClick={handleDarkMode}> 
+                              {darkMode? <DarkModeOn/> : <DarkModeOff/>}
+                        </IconButton>
                         </>
                   )}
                         
@@ -145,12 +162,16 @@ const Navbar: FC<NavbarProps> = (props) => {
                               onClose={handleClose}
                         >
                               <MenuItem onClick={handleClose} component={Link} to="/user/profile" >Profile</MenuItem>
-                              <MenuItem onClick={handleClose} component={Link} to="/user/settings" >My account</MenuItem>
+                              <MenuItem onClick={handleDarkMode}>
+                                    Dark mode  
+                                    <div className={classes.darkModeMenu}>
+                                          {darkMode? <DarkModeOn/> : <DarkModeOff/>}
+                                    </div>
+                              </MenuItem>
                               <MenuItem onClick={handleLogout} component={Link} to="/" >Logout</MenuItem>
                         </Menu>
                         </>
                   )}   
-                  </div>
             </Toolbar>
             </AppBar>
       </div>
