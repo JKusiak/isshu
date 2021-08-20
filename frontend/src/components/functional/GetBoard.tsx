@@ -11,7 +11,10 @@ interface GetBoardProps {
 
 // context for avoiding propagating function fetchBoard() for refreshing 
 // the board content to child components
-export const BoardReducerContext = createContext<{boardState: any, dispatch: Dispatch<Action>}>({boardState: null, dispatch: () => null});
+export const BoardReducerContext = createContext<{boardState: any, dispatch: Dispatch<Action>}>({
+      boardState: null, 
+      dispatch: () => null,
+});
 
 
 const GetBoard: FC<GetBoardProps> = (props) => {
@@ -58,7 +61,7 @@ const GetBoard: FC<GetBoardProps> = (props) => {
             <>
             {isLoaded &&
                   <BoardReducerContext.Provider value={{boardState, dispatch}}>
-                  <BoardData board={boardState} changeColumn={changeColumn}/>
+                        <BoardData board={boardState} changeColumn={changeColumn}/>
                   </BoardReducerContext.Provider> 
             }
             </>
