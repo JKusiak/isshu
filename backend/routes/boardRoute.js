@@ -1,13 +1,13 @@
 import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
+      addBoard,
+      deleteBoard,
       getAllBoards,
       getBoardById,
       getColumnsOfBoard,
       getNestedBoard,
-      addBoard,
-      updateBoard,
-      deleteBoard,
+      updateBoard
 } from '../controllers/boardController.js';
 
 

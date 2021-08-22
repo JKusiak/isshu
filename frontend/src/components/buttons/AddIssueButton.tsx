@@ -1,4 +1,4 @@
-import { Card, ClickAwayListener, InputBase, Typography } from '@material-ui/core';
+import { Button, Card, ClickAwayListener, InputBase, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import { FC } from 'react';
@@ -26,29 +26,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		color: theme.palette.secondary.main,
 	},
 	buttonContainer: {
-		display: 'grid',
-		padding: theme.spacing(1),
-		gridTemplateColumns: '0.2fr 1fr',
 		width: '100%',
 		backgroundColor: theme.palette.primary.main,
-		"&:hover": {
-			cursor: 'pointer',
-			backgroundColor: theme.palette.action.hover,
-		}
+		justifyContent: 'flex-start',
+		paddingLeft: 0,
+		textTransform: 'none',
+		
 	},
 	icon: {
-		gridColumn: '1',
-		justifySelf: 'start',
-		alignSelf: 'center',
 		fontSize: '25px',
-		color: theme.palette.secondary.light,
+		color: theme.palette.secondary.main,
 	},
 	text: {
-		gridColumn: '2',
-		justifySelf: 'start',
-		alignSelf: 'center',
 		fontSize: '15px',
-		color: theme.palette.secondary.light,
+		color: theme.palette.secondary.main,
 	},
 }));
 
@@ -85,22 +76,22 @@ const AddIssueButton: FC<AddIssueButtonProps> = (props) => {
 										props.setIssueName(e.target.value);
 									}}
 								/>
-								<div className={classes.buttonContainer} onClick={props.onSubmit}>
+								<Button className={classes.buttonContainer} onClick={props.onSubmit}>
 									<AddIcon className={classes.icon} />
 									<Typography className={classes.text} component='h6' variant='h6'>
 										Create issue
 									</Typography>
-								</div>
+								</Button>
 							</form>
 						</Card>
 					}
 					{!props.addMode &&
-						<div className={classes.buttonContainer} onClick={(() => props.setAddMode(true))}>
+						<Button className={classes.buttonContainer} onClick={(() => props.setAddMode(true))}>
 							<AddIcon className={classes.icon} />
 							<Typography className={classes.text} component='h6' variant='h6'>
 								Create issue
 							</Typography>
-						</div>
+						</Button>
 					}
 				</div>
 			</ClickAwayListener>

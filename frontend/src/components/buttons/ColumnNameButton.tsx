@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	},
 	nameText: {
 		textAlign: 'center',
+		color: theme.palette.secondary.main,
 		"&:hover": {
 			cursor: 'pointer'
 		}

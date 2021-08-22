@@ -61,6 +61,26 @@ projectSchema.post('findOneAndDelete', async function(res) {
 });
 
 
+/**
+ * Virtual property based on id reference stored in column
+ *
+ * @key ref           Model refered in the property.
+ * @key localField    Field from local model.
+ * @key foreignField  Field from referenced model.
+ */
+ projectSchema.virtual('boards', {
+      ref: 'Board',
+      localField: '_id',
+      foreignField: 'projectId',
+});
+
+
+// necessary for getting the result on populate query,
+// both default to false
+projectSchema.set('toObject', { virtuals: true });
+projectSchema.set('toJSON', { virtuals: true });
+
+
 const Project = mongoose.model('Project', projectSchema);
 
 export default Project;

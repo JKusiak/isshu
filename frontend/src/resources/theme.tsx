@@ -27,7 +27,7 @@ export const darkPalette = {
 		...darkTheme
 	},
 	secondary: {
-		light: lightTheme.light,
+		light: lightTheme.main,
 		main: lightTheme.dark,
 		dark: lightTheme.dark,
 	},

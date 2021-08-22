@@ -1,6 +1,6 @@
-import Project from '../models/projectModel.js';
-import Board from '../models/boardModel.js';
 import asyncHandler from 'express-async-handler';
+import Board from '../models/boardModel.js';
+import Project from '../models/projectModel.js';
 
 
 export const getAllProjects = asyncHandler(async(req, res) => {
@@ -39,6 +39,34 @@ export const getBoardsOfProject = asyncHandler(async(req, res) => {
         throw new Error('Project not found');
     }
 }); 
+
+
+export const getIssuesProgress = asyncHandler(async(req, res) => {
+    const projectId = req.params.projectId;
+
+	try {
+		const project = await Project.findById(projectId).select('_id').populate({ 
+			path: 'boards',
+            select: 'name',
+			model: 'Board',
+			populate: {
+                path: 'columns',
+                select: '_id',
+                model: 'Column',
+                populate: {
+                    path: 'issues',
+                    select: 'isFinished',
+                    model: 'Issue',
+                }
+            }
+		})
+		
+		res.json(project);
+	} catch(err) {
+		res.status(404).json({message: "Project not found"});
+		throw new Error('Project not found');
+	}
+});
 
 
 export const addProject = asyncHandler(async(req, res) => {

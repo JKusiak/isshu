@@ -1,12 +1,7 @@
 import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
-import { 
-      getAllProjects, 
-      getProjectById,
-      addProject,
-      updateProject,
-      deleteProject,
-      getBoardsOfProject,
+import {
+      addProject, deleteProject, getAllProjects, getBoardsOfProject, getIssuesProgress, getProjectById, updateProject
 } from '../controllers/projectController.js';
 
 
@@ -17,6 +12,8 @@ protectedProjectRouter.use(authenticateJWT);
 protectedProjectRouter.route('/').get(getAllProjects);
 
 protectedProjectRouter.route('/:projectId').get(getProjectById);
+
+protectedProjectRouter.route('/getProgress/:projectId').get(getIssuesProgress);
 
 protectedProjectRouter.route('/add').post(addProject);
 

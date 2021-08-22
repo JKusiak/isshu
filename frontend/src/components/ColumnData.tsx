@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   minHeight: 500,
                   alignItems: "center",
                   "&:not(:last-child)": {
-                        borderRight: '0.1px solid',
+                        borderRight: '1px solid',
                         borderRightColor: theme.palette.secondary.light,
                   },
             },

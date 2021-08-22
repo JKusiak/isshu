@@ -19,20 +19,20 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
             fetchBoards();
       }, []);
 
-
+        
       function fetchBoards() {
-            axios.get(`http://localhost:5000/projects/getBoards/${projectId}`, {
+            axios.get(`http://localhost:5000/projects/getProgress/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then(resp => {
-                  setBoards(resp.data);
+            }).then((res) => {
+                  setBoards(res.data.boards);
             }).catch((err) => {
                   console.log(err);
             });
       }
 
-        
+
       return (
       <>
             <BoardsGallery boards={boards} fetchBoards={fetchBoards}/>
