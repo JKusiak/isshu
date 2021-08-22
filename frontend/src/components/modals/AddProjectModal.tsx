@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       icon: {
             fontSize: 25,
+            color: theme.palette.secondary.main,
       },
       header: {
 		display: 'grid',
@@ -109,7 +110,6 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
             <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
                   <IconButton
                         aria-label="add project" 
-                        color="secondary"
                         onClick={() => props.setIsOpen(true)}
                   >
                         <AddProjectIcon className={classes.icon}/>

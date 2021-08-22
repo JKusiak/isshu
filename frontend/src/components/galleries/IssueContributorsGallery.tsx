@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
     headline: {
         fontSize: '16px',
         fontWeight: 'bold',
+		color: theme.palette.secondary.main,
 		marginBottom: theme.spacing(1),
     },
 	autocomplete: {
@@ -25,43 +26,42 @@ const useStyles = makeStyles((theme: Theme) =>
 		"& .MuiAutocomplete-input": {
 			fontSize: '14px',
 		},
-		"& .MuiAutocomplete-option": {
+		"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
+			// "& *": {
+				backgroundColor: theme.palette.primary.light,
+			// }
+	  	},
+		"& .MuiAutocomplete-endAdornment": {
 			"& *": {
-				color: 'red',
-				fontSize: '14px',
+				color: theme.palette.secondary.main,
 			}
 		}
-		
 	},
 	formContainer: {
 		marginBottom: theme.spacing(2),
 	},
 	inputField: {
-		width: '100%',
-		height: 'auto',
 		"& .MuiOutlinedInput-root": {
-			height: '100%',
-			"& fieldset": {
-					height: 'auto',
-					borderColor: '#cfd2d4',
-					borderRadius: '6px',
-					borderWidth: "1px",
-			},
-			"&.Mui-focused fieldset": {
-					height: 'auto',
-					borderColor: theme.palette.secondary.light,
-					borderRadius: '6px',
-					borderWidth: "1px",
-			},
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": { 
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			}, 
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
 		},
+	},
+	dropdownPaper: {
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.secondary.main,
 	},
 	contributor: {
 		display: 'flex',
 		alignItems: 'center',
+		color: theme.palette.secondary.main,
 	},
-	credentials: {
-		
-	}
   })
 );
 
@@ -85,9 +85,6 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
             return(
                 <Fragment key={index}>
 					<div className={classes.contributor}>
-						<div className={classes.credentials}>
-
-						</div>
 						{`${contributor.name} ${contributor.surname}`}
 						<DeleteContributorButton 
 							issue={props.issue}
@@ -133,6 +130,7 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 			<Autocomplete
 				key={resetAutocomplete.toString()}
 				className={classes.autocomplete}
+				classes={{ paper: classes.dropdownPaper }}
 				id="contributors-to-ticket"
 				options={props.projectContributors}
 				getOptionLabel={option => `${option.name} ${option.surname}`}

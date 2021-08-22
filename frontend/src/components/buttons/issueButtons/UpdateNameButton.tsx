@@ -7,10 +7,8 @@ import { INestedIssue } from '../../../types/ModelTypes';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	nameContainer: {
-		display: 'flex',
 		marginBottom: theme.spacing(2),
 		width: '100%',
-		overflow: 'hidden',
 	},
 	nameText: {
 		display: 'flex',
@@ -18,21 +16,24 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		alignItems: 'center',
 		fontWeight: 'bold',
 		fontSize: '24px',
+		color: theme.palette.secondary.main,
 		"&:hover": {
 				cursor: 'pointer'
 		},
+		overflow: 'hidden',
 	},
 	form: {
 		width: '100%',
 	},
 	inputField: {
 		width: '100%',
-		color: theme.palette.secondary.main,
+		height: '100%',
 		"& .MuiOutlinedInput-root": {
+			height: '100%',
 			color: theme.palette.secondary.main,
 			"& .MuiOutlinedInput-notchedOutline": {
 				height: 'auto',
-				borderRadius: '10px',
+				borderRadius: '6px',
 				borderColor: theme.palette.secondary.light,
 			},
 			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {

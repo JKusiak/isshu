@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             maxWidth: '45%',
         }
     },
+    card: {
+        backgroundColor: theme.palette.primary.light,
+    },
     iconButton: {
         padding: theme.spacing(1.2),
         justifyContent: 'center',
@@ -31,6 +34,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     inputField: {
         width: 'auto',
+        color: theme.palette.secondary.main,
+        "& .MuiInputBase-input": {
+            marginLeft: theme.spacing(0.5),
+			fontSize: 15,
+            padding: 5,
+		},
     }
 }));
 
@@ -60,7 +69,7 @@ const AddTagButton: FC<AddTagButtonProps> = (props) => {
         <>
         <div className={classes.addTagButtonWrapper} onClick={() => setAddMode(true)}>
                 <ClickAwayListener onClickAway={() => setAddMode(false)}>
-                    <Card>
+                    <Card className={classes.card}>
                         {addMode &&
                             <form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
                                 <InputBase
@@ -71,7 +80,7 @@ const AddTagButton: FC<AddTagButtonProps> = (props) => {
                                         id="tagName"
                                         placeholder= "Tag name"
                                         autoComplete="tag-name"
-                                        inputProps={{style: {fontSize: 15, padding:5}}}
+                                        inputProps={{style: {}}}
                                         onChange={e => {
                                             setNewTagName(e.target.value);
                                         }}

@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
             fontSize: '16px',
             marginBottom: theme.spacing(1),
+            color: theme.palette.secondary.main,
         },
         attachmentCard: {
             display: 'flex',
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '142px',
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundColor: theme.palette.primary.light,
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {

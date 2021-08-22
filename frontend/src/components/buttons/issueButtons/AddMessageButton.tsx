@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		formContainer: {
 			flexShrink: 0,
 			width: '100%',
-			height: '40px',
+			height: 'auto',
 			marginBottom: theme.spacing(2),
 		},
 		inputField: {
@@ -16,20 +16,19 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 'auto',
 			
 			"& .MuiOutlinedInput-root": {
-				height: '100%',
-				color: theme.palette.secondary.dark,
-				"& fieldset": {
-					height: 'auto',
-					borderColor: theme.palette.secondary.main,
+				color: theme.palette.secondary.main,
+				height: 'auto',
+				"& .MuiOutlinedInput-notchedOutline": { 
 					borderRadius: '6px',
-					borderWidth: "1px",
-				},
-				"&.Mui-focused fieldset": {
-					height: 'auto',
-					borderColor: theme.palette.secondary.main,
+					borderColor: theme.palette.secondary.light,
+				}, 
+				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.secondary.light,
 					borderWidth: "2px",
-				},
-				alignItems: 'start',
+				}
+			},
+			"& .MuiOutlinedInput-input": {
+				fontSize: 14,
 			},
 		},
 	})
@@ -66,7 +65,6 @@ const AddMessageButton: FC<AddMessageButtonProps> = (props) => {
 						placeholder="Add message..."
 						value={messageContent}
 						autoComplete="new-comment"
-						inputProps={{style: {fontSize: 14}}}
 						onChange={e => {
 							setMessageContent(e.target.value);
 						}}                  

@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Card, CardContent, createStyles, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import React, { FC, useContext } from 'react';
 import { INestedIssue, ITag } from '../../types/ModelTypes';
@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
     headline: {
         fontSize: '20px',
         fontWeight: 'bold',
+        color: theme.palette.secondary.main,
         alignSelf: 'center',
-        marginBottom: '10px',
+        marginBottom: theme.spacing(2),
     },
     tagItem: {
         display: 'flex',
@@ -26,10 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '100%',
         marginBottom: '10px',
         marginRight: '10px',
+        backgroundColor: theme.palette.primary.light,
         transition: 'all .12s linear',
         boxShadow: theme.shadows[2],
-        border: '0.5px solid',
-        borderColor: theme.palette.primary.dark,
         "&:hover": {
                 cursor: 'pointer',
                 boxShadow: theme.shadows[5],
@@ -39,12 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         "& *": {
             fontWeight: 'bold',
+            color: theme.palette.secondary.main
         }
     },
     tagNotIncludedCard: {
         width: '100%',
         marginBottom: '10px',
         marginRight: '10px',
+        backgroundColor: theme.palette.primary.light,
         transition: 'all .12s linear',
         boxShadow: theme.shadows[2],
         "&:hover": {
@@ -54,16 +56,16 @@ const useStyles = makeStyles((theme: Theme) =>
         "& .MuiCardContent-root": {
                 padding: theme.spacing(1),
         },
+        "& *": {
+            color: theme.palette.secondary.main
+        }
     },
     tagName: {
         fontSize: '12px',
     },
     deleteButton: {
-        maxWidth: '30px',
-        maxHeight: '30px',
-        minWidth: '30px',
-        minHeight: '30px',
-        
+        width: '30px',
+        height: '30px',
     },
     deleteIcon: {
         color: theme.palette.secondary.main,
@@ -152,9 +154,9 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            <Button className={classes.deleteButton} onClick={(e) => props.deleteTag(e, tag._id)}>
+                            <IconButton className={classes.deleteButton} onClick={(e) => props.deleteTag(e, tag._id)}>
                                 <DeleteIcon className={classes.deleteIcon}/>
-                            </Button>  
+                            </IconButton>  
                         </div>
                               
                     )

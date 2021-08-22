@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: 360,
       minWidth: 360,
-      color: theme.palette.secondary.dark,
+      color: theme.palette.secondary.main,
       backgroundColor: theme.palette.primary.light
     },
     nested: {
-      color: theme.palette.secondary.dark
+      color: theme.palette.secondary.main
     }
   })
 );

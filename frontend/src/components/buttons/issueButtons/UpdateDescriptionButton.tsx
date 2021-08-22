@@ -11,10 +11,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       descriptionTitle: {
             fontWeight: 'bold',
             fontSize: '16px',
+            color: theme.palette.secondary.main,
             marginBottom: theme.spacing(1),
       },
       descriptionText: {
             textAlign: 'start',
+            color: theme.palette.secondary.main,
             "&:hover": {
                   cursor: 'pointer'
             }
@@ -28,26 +30,28 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             "& .MuiOutlinedInput-root": {
                   height: '100%',
                   minHeight: '10vh',
-                  "& fieldset": {
-                        
+                  color: theme.palette.secondary.main,
+                  "& .MuiOutlinedInput-notchedOutline": {
                         height: 'auto',
                         borderColor: theme.palette.secondary.light,
                         borderRadius: '6px',
-                        borderWidth: "1px",
                   },
-                  "&.Mui-focused fieldset": {
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                         height: 'auto',
                         borderColor: theme.palette.secondary.light,
-                        borderRadius: '6px',
-                        borderWidth: "1px",
+                        borderWidth: "2px",
                   },
                   alignItems: 'start',
             },
+            "& .MuiOutlinedInput-input": {
+			fontSize: 15, 
+                  padding: theme.spacing(0.5),
+		},
       },
 }));
 
 
-interface UpdateColumnButtonProps {
+interface UpdateDescriptionButtonProps {
       tempDescription: string,
       setTempDescription: React.Dispatch<React.SetStateAction<string>>,
       permDescription: string,
@@ -55,7 +59,7 @@ interface UpdateColumnButtonProps {
 }
 
 
-const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
+const UpdateDescriptionButton: FC<UpdateDescriptionButtonProps> = (props) => {
       const classes = useStyles();
       const [updateMode, setUpdateMode] = useState<boolean>(false);  
 
@@ -86,7 +90,7 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
                                           id="issueDescription"
                                           value={props.tempDescription}
                                           autoComplete="issue-description"
-                                          inputProps={{style: {fontSize: 15, padding:5}}}
+                                          inputProps={{style: {}}}
                                           onChange={e => {
                                                 props.setTempDescription(e.target.value);
                                           }}
@@ -106,4 +110,4 @@ const UpdateColumnButton: FC<UpdateColumnButtonProps> = (props) => {
 }
 
 
-export default UpdateColumnButton;
+export default UpdateDescriptionButton;

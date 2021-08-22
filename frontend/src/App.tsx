@@ -11,7 +11,7 @@ import Navbar from './components/pages/Navbar';
 import ProjectPage from './components/pages/ProjectPage';
 import RegisterPage from './components/pages/RegisterPage';
 import UserPage from './components/pages/UserPage';
-import { darkPalette, lightPalette } from './resources/theme';
+import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
 export const DarkModeContext = createContext<{darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>>}>({} as any);
 
@@ -23,8 +23,12 @@ const App = () => {
     localStorage.getItem('darkMode') === 'true'? true : false
   );
   
+  const defaultTheme = createMuiTheme();
+
   const theme = createMuiTheme({
-    palette: darkMode? darkPalette : lightPalette
+    palette: darkMode? darkPalette : lightPalette,
+    shadows: darkMode? getAntiShadows() : defaultTheme.shadows,
+    overrides: darkMode? overrides : undefined
   });
 
 

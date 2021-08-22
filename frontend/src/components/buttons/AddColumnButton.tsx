@@ -23,11 +23,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		color: theme.palette.secondary.main,
 	},
 	iconButton: {
-		justifyContent: 'center',
-		alignItems: 'center',
+		
 	},
 	icon: {
-		transform: 'scale(0.7)',
+		transform: 'scale(1)',
 		color: theme.palette.secondary.main,
 	},
 }));

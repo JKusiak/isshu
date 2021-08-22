@@ -17,19 +17,23 @@ import { IUser } from '../../types/ModelTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
       createStyles({
+            container: {
+                  marginTop: theme.spacing(8.5),
+                  padding: 0,
+            },
             listSubtitle: {
                   fontSize: '24px',
                   textAlign: 'center',
-                  marginTop: theme.spacing(2),
-                  marginBottom: theme.spacing(2),
+                  padding: theme.spacing(2),
+                  // marginBottom: theme.spacing(2),
                   fontWeight: 600,
-                  color: theme.palette.secondary.dark,
+                  color: theme.palette.secondary.main,
             },
             drawerPaper: {
-                  marginTop: 70,
+                  zIndex: 0,
                   width: 270,
                   backgroundColor: theme.palette.primary.main,
-                  boxShadow: theme.shadows[2],
+                  boxShadow: theme.shadows[5],
             },
             listItem: {  
                   '&:hover': {
@@ -38,17 +42,20 @@ const useStyles = makeStyles((theme: Theme) =>
                   }
             },
             nameLink: {
-                  color: theme.palette.secondary.dark,
+                  color: theme.palette.secondary.main,
                   textDecoration: 'none',
                   '&:hover': {
                         '& *': {
-                              // color: theme.palette.secondary.dark,
                               fontWeight: 600
                         }
                   }
             },
             listButton: {
-                  color: theme.palette.secondary.dark,
+                  color: theme.palette.secondary.main,
+            },
+            divider: {
+                  backgroundColor: theme.palette.secondary.light,
+                  opacity: 0.2,
             }
       }),
 );
@@ -138,11 +145,11 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 
       const sidebar = (
             <div>
-                  <List>
+                  <List className={classes.container}>
                         <div className={classes.listSubtitle}>Contributors</div>
                         {displayUsers(props.contributors)}
                         <br/>
-                        <Divider />
+                        <Divider className={classes.divider}/>
                         <div className={classes.listSubtitle}>Others</div>
                         {displayUsers(props.otherUsers)}
                   </List>
@@ -162,7 +169,6 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
                               variant="permanent"
                               open
                         >
-
                               {sidebar}
                         </Drawer>
                   </Hidden>

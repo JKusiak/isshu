@@ -75,9 +75,11 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             creatorTitle: {
                   fontWeight: 'bold',
+                  color: theme.palette.secondary.main,
             },
             creatorName: {
                   marginLeft: theme.spacing(2),
+                  color: theme.palette.secondary.main,
             }
       }
 ));

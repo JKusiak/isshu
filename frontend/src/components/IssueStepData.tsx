@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
         cardContent: {
             display: 'flex',
             alignItems: 'center',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
         },
         checkbox: {
             transform: 'scale(0.7)',

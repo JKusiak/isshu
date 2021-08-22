@@ -15,9 +15,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    card: {
+        backgroundColor: theme.palette.primary.light,
+    },
     iconButton: {
         justifyContent: 'center',
         alignItems: 'center',
+        
     },
     icon: {
         transform: 'scale(0.7)',
@@ -31,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     inputField: {
         width: 'auto',
         marginLeft: theme.spacing(1),
+        color: theme.palette.secondary.main,
     }
 }));
 
@@ -78,7 +83,7 @@ const AddStepButton: FC<AddStepButtonProps> = (props) => {
         <>
         <div className={classes.buttonWrapper} onClick={() => setAddMode(true)}>
             <ClickAwayListener onClickAway={() => setAddMode(false)}>
-                <Card>
+                <Card className={classes.card}>
                     {addMode &&
                         <form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
                             <InputBase

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       link: {
             textDecoration: 'none',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
       },
       cardContainer: {
             display: 'flex',

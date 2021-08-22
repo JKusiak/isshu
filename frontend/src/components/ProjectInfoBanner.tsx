@@ -89,13 +89,13 @@ createStyles({
 	},
 	fontColor: {
 		"& .MuiInputBase-root.Mui-disabled": {
-			color: 'white',
+			color: '#fafafa',
 		},
 		"& .MuiInputBase-root": {
 			color: 'rgba(255, 255, 255, 0.6)',
 		},
 		"& .MuiButtonBase-root.MuiIconButton-root.Mui-disabled": {
-			color: 'white',
+			color: '#fafafa',
 		},
 		"& .MuiButtonBase-root.MuiIconButton-root": {
 			color: 'rgba(255, 255, 255, 0.6)',

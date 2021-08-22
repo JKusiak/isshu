@@ -23,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
             flexGrow: 1,
       },
       appbar: {
-            height: 68,
+            height: theme.spacing(8.5),
+            boxShadow: theme.shadows[5],
+            zIndex: 1,
+            backgroundColor: theme.palette.primary.light,
       },
       toolbar: {
             position: "sticky",
@@ -35,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(1.5),
       },
       logoIcon: {
-            
             height: 75,
             width: 75
       },
@@ -46,9 +48,11 @@ const useStyles = makeStyles((theme) => ({
       },
       buttonIcon: {
             fontSize: 24,
+            color: theme.palette.secondary.main,
       },
       navbarTextButton: {
             fontSize: '16px',
+            color: theme.palette.secondary.main,
             '&:hover': {
                   fontWeight: 600
             }
@@ -57,12 +61,19 @@ const useStyles = makeStyles((theme) => ({
             transform: 'rotate(20deg) scale(0.9)',
             color: theme.palette.secondary.main,
       },
+      menu: {
+            "& .MuiMenu-paper": {
+                  backgroundColor: theme.palette.primary.light,
+            },
+      },
+      menuItem: {
+            color: theme.palette.secondary.main,
+      },
       darkModeMenu: {
             transform: 'rotate(20deg) scale(0.9)',
             display: 'flex',
             marginLeft: theme.spacing(1),
             alignItems: 'center',
-            color: theme.palette.secondary.main,
       },
       offset: theme.mixins.toolbar,
       
@@ -104,7 +115,7 @@ const Navbar: FC<NavbarProps> = (props) => {
       return (
       <div className={classes.root}>
             <div className={classes.offset}/>
-            <AppBar className={classes.appbar} >
+            <AppBar elevation={0} className={classes.appbar} >
             <Toolbar className={classes.toolbar}>
                   <Link className={classes.linkWrapper} to={props.loggedIn? '/projects' : '/'}>
                         <img className={classes.logoIcon} src={darkMode? DarkIcon : Icon} alt='site icon'/>
@@ -114,13 +125,13 @@ const Navbar: FC<NavbarProps> = (props) => {
                   <div className={classes.root}/>
                   {!props.loggedIn && (
                         <>
-                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/">
+                        <Button className={classes.navbarTextButton} component={Link} to="/">
                               Home
                         </Button>
-                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/login">
+                        <Button className={classes.navbarTextButton}component={Link} to="/login">
                               Login
                         </Button>
-                        <Button className={classes.navbarTextButton} color="secondary" component={Link} to="/register"> 
+                        <Button className={classes.navbarTextButton} component={Link} to="/register"> 
                               Register
                         </Button>
                         <IconButton className={classes.darkModeButton} onClick={handleDarkMode}> 
@@ -133,7 +144,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                   {props.loggedIn && (
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
+                              <IconButton aria-label="projects" component={Link} to="/projects">
                                     <ProjectsIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
@@ -141,11 +152,12 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <AddProject/>
                         
                         <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton aria-label="user profile" onClick={handleMenu} color="secondary">
+                              <IconButton aria-label="user profile" onClick={handleMenu}>
                                     <ProfileIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
                         <Menu
+                              className={classes.menu}
                               id="menu-appbar"
                               anchorEl={anchorEl}
                               anchorOrigin={{
@@ -161,14 +173,29 @@ const Navbar: FC<NavbarProps> = (props) => {
                               open={open}
                               onClose={handleClose}
                         >
-                              <MenuItem onClick={handleClose} component={Link} to="/user/profile" >Profile</MenuItem>
-                              <MenuItem onClick={handleDarkMode}>
+                              <MenuItem 
+                                    className={classes.menuItem} 
+                                    onClick={handleClose} 
+                                    component={Link} to="/user/profile" 
+                              >
+                                    Profile
+                              </MenuItem>
+                              <MenuItem 
+                                    className={classes.menuItem} 
+                                    onClick={handleDarkMode}
+                              >
                                     Dark mode  
                                     <div className={classes.darkModeMenu}>
                                           {darkMode? <DarkModeOn/> : <DarkModeOff/>}
                                     </div>
                               </MenuItem>
-                              <MenuItem onClick={handleLogout} component={Link} to="/" >Logout</MenuItem>
+                              <MenuItem
+                                    className={classes.menuItem} 
+                                    onClick={handleLogout} 
+                                    component={Link} to="/" 
+                              >
+                                    Logout
+                              </MenuItem>
                         </Menu>
                         </>
                   )}   

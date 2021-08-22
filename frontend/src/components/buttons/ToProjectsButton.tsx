@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       buttonLink: {
-            color: theme.palette.secondary.dark,
+            // color: theme.palette.secondary.main,
             textDecoration: 'none',
       },
       toProjectsCard: {
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             borderRadius: '10px',
             background: 'white',
             fontSize: '14px',
+            backgroundColor: theme.palette.primary.light,
             color: theme.palette.secondary.main,
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],

@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         display: 'flex',
 		minWidth: '100px',
 		height: '33px',
+		backgroundColor: theme.palette.primary.light,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     text: {
 		fontSize: '14px',
-        color: theme.palette.secondary.dark,
+        color: theme.palette.secondary.main,
     },
 }));
 

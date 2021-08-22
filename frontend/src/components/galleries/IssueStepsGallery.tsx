@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
         headline: {
             fontSize: '16px',
             fontWeight: 'bold',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
         },
         progressContainer: {
             display: 'flex',
@@ -25,12 +25,16 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         progressBar: {
             width: '100%',
+            backgroundColor: theme.palette.primary.main,
+            "& .MuiLinearProgress-barColorPrimary": {
+                backgroundColor: theme.palette.secondary.main,
+            }
         },
         progress: {
             textAlign: 'center',
             minWidth: '35px',
             marginLeft: theme.spacing(1),
-            color: theme.palette.secondary.dark
+            color: theme.palette.secondary.main
         },
     })
 );
@@ -80,10 +84,10 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
     function displayProgress() {
         return(
             <div className={classes.progressContainer}>
-            <div className={classes.progressBar}>
-                <LinearProgress color="secondary" variant="determinate" value={progress}/>
-            </div>
-            <Typography className={classes.progress} variant="body2" color="textSecondary">
+
+                <LinearProgress className={classes.progressBar} variant="determinate" value={progress}/>
+
+            <Typography className={classes.progress} variant="body2">
                 {`${progress}%`}
             </Typography>
             </div>
