@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button, Typography } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       header: {
             display: 'grid',
             justifyContent: 'center',
+            color: theme.palette.secondary.main,
       },
       form: {
             display: 'flex',
@@ -33,12 +34,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       button: {
             margin: theme.spacing(3, 2, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            background: theme.palette.primary.main,
-            "&:hover": {
-                  background: theme.palette.action.hover,
-            }
+		borderRadius: '10px',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+			backgroundColor: theme.palette.primary.light,
+		},
       },
 }));
 

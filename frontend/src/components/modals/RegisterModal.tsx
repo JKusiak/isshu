@@ -8,6 +8,24 @@ import RegisterForm from '../functional/RegisterForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
+	registerButton: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '200px',
+		height: '40px',
+		marginTop: theme.spacing(8),
+		borderRadius: '10px',
+		fontSize: '14px',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+		},
+	},
 	modal: {
 		display: 'flex',
 		alignItems: 'center',
@@ -24,24 +42,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		boxShadow: theme.shadows[2],
 		padding: theme.spacing(2, 4, 3),
 	},
-	registerButton: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: '200px',
-		height: '40px',
-		marginTop: theme.spacing(8),
-		borderRadius: '10px',
-		background: 'white',
-		fontSize: '14px',
-		color: theme.palette.secondary.main,
-		transition: 'all .12s linear',
-		boxShadow: theme.shadows[2],
-		"&:hover": {
-			cursor: 'pointer',
-			boxShadow: theme.shadows[5],
-		},
-	},
+	
 }));
 
 function RegisterModal() {
@@ -63,8 +64,6 @@ function RegisterModal() {
 		</Card>
 		
 		<Modal
-			aria-labelledby="transition-modal-title"
-			aria-describedby="transition-modal-description"
 			className={classes.modal}
 			open={open}
 			onClose={handleClose}

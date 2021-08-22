@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
             minHeight: '300px',
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundColor: theme.palette.primary.light,
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
             "&:hover": {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       link: {
             textDecoration: 'none',
-            color: theme.palette.secondary.dark,
+            color: theme.palette.secondary.main,
       },
   })
 );

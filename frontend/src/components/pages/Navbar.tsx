@@ -11,8 +11,10 @@ import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
 import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../../App';
-import Icon from '../../resources/logo/isshu_icon.svg';
-import Logo from '../../resources/logo/isshu_logo.svg';
+import Icon from '../../resources/logo/icon.svg';
+import DarkIcon from '../../resources/logo/icon_darkmode.svg';
+import Logo from '../../resources/logo/logo.svg';
+import DarkLogo from '../../resources/logo/logo_darkmode.svg';
 import AddProject from '../functional/AddProject';
 
 
@@ -27,24 +29,22 @@ const useStyles = makeStyles((theme) => ({
             position: "sticky",
             top: 0,
       },
-      image: {
-            marginLeft: "2em",
+      linkWrapper: {
+            padding: 0,
+            // added to compensate for padding of buttons on the right
+            marginLeft: theme.spacing(1.5),
+      },
+      logoIcon: {
+            
             height: 75,
             width: 75
       },
       logo: {
             height: 75,
+            padding: theme.spacing(2),
+            marginLeft: theme.spacing(2),
       },
-      linkWrapper: {
-
-      },
-      navbarIconButton: {
-            "&:hover": {
-                  stroke: 'black',
-                  strokeWidth: 0.2,
-            }
-      },
-      icon: {
+      buttonIcon: {
             fontSize: 24,
       },
       navbarTextButton: {
@@ -100,15 +100,15 @@ const Navbar: FC<NavbarProps> = (props) => {
             localStorage.setItem('darkMode', boolToString);
       }
 
+      
       return (
       <div className={classes.root}>
             <div className={classes.offset}/>
             <AppBar className={classes.appbar} >
             <Toolbar className={classes.toolbar}>
                   <Link className={classes.linkWrapper} to={props.loggedIn? '/projects' : '/'}>
-                        <img className={classes.image} src={Icon} alt='site icon'/>
-
-                        <img className={classes.logo} src={Logo} alt='site logo'/>
+                        <img className={classes.logoIcon} src={darkMode? DarkIcon : Icon} alt='site icon'/>
+                        <img className={classes.logo} src={darkMode? DarkLogo : Logo} alt='site logo'/>
                   </Link>
                   
                   <div className={classes.root}/>
@@ -133,16 +133,16 @@ const Navbar: FC<NavbarProps> = (props) => {
                   {props.loggedIn && (
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton className={classes.navbarIconButton} aria-label="projects" color="secondary" component={Link} to="/projects">
-                                    <ProjectsIcon className={classes.icon}/>
+                              <IconButton aria-label="projects" color="secondary" component={Link} to="/projects">
+                                    <ProjectsIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
                         
                         <AddProject/>
                         
                         <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton className={classes.navbarIconButton}  aria-label="user profile" onClick={handleMenu} color="secondary">
-                                    <ProfileIcon className={classes.icon}/>
+                              <IconButton aria-label="user profile" onClick={handleMenu} color="secondary">
+                                    <ProfileIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
                         <Menu

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   alignItems: "center",
                   "&:not(:last-child)": {
                         borderRight: '0.1px solid',
-                        borderRightColor: theme.palette.primary.dark,
+                        borderRightColor: theme.palette.secondary.light,
                   },
             },
             columnHeader: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   gridTemplateColumns: '0.5fr 1fr 0.5fr',
                   minWidth: '100%',
                   borderBottom: '0.1px solid',
-                  borderBottomColor: theme.palette.primary.dark,
+                  borderBottomColor: theme.palette.secondary.light,
             },
             columnName: {
                   gridColumn: '2',
@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
                   minHeight: '50vh',
                   height: 'auto',
                   margin: '15px',
-                  backgroundColor: theme.palette.primary.main,
             },
       }
 ));

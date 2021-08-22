@@ -27,19 +27,24 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	},
 	inputField: {
 		width: '100%',
+		color: theme.palette.secondary.main,
 		"& .MuiOutlinedInput-root": {
-			"& fieldset": {
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": {
+				height: 'auto',
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			},
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 				height: 'auto',
 				borderColor: theme.palette.secondary.light,
-				borderRadius: '10px',
-				borderWidth: "1px",
+				borderWidth: "2px",
 			},
-			"&.Mui-focused fieldset": {
-				height: 'auto',
-				borderColor: theme.palette.secondary.light,
-				borderRadius: '10px',
-				borderWidth: "1px",
-			},
+		},
+		"& .MuiOutlinedInput-input": {
+			fontSize: 24, 
+			padding: 10, 
+			fontWeight: 'bold',
 		},
 	},
 }));
@@ -82,7 +87,6 @@ return (
 						id="issueName"
 						value={props.tempName}
 						autoComplete="issue-name"
-						inputProps={{style: {fontSize: 24, padding: 10, fontWeight: 'bold',}}}
 						onChange={e => {
 							props.setTempName(e.target.value);
 						}}
@@ -100,7 +104,6 @@ return (
 						{props.permName}
 						{props.issue.isFinished && <CheckIcon />}
 				</div>
-				
 			}
 		</div>
 	</ClickAwayListener>       

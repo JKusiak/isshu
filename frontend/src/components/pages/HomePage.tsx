@@ -1,10 +1,12 @@
-import { FC } from "react";
-import logoText from '../../resources/logo/isshu_logo_text.svg';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import RegisterModal from "../modals/RegisterModal";
+import Grid from '@material-ui/core/Grid';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { FC, useContext } from "react";
+import { DarkModeContext } from '../../App';
+import TextLogo from '../../resources/logo/logo_text.svg';
+import DarkTextLogo from '../../resources/logo/logo_text_darkmode.svg';
 import ToProjectsButton from "../buttons/ToProjectsButton";
+import RegisterModal from "../modals/RegisterModal";
 
 
 interface HomePageProps {
@@ -13,7 +15,7 @@ interface HomePageProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-      bigLogo: {
+      textLogo: {
             width: '35%',
             height: '35%'
       },
@@ -21,13 +23,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 const HomePage: FC<HomePageProps> = (props) => {
       const classes = useStyles();
+      const {darkMode} = useContext(DarkModeContext);
 
+      
       return (
       <Box mt={"6em"}>
             <Grid container direction="column" justify="center" alignItems="center">
                   <img 
-                        className={classes.bigLogo} 
-                        src={logoText} 
+                        className={classes.textLogo} 
+                        src={darkMode? DarkTextLogo : TextLogo} 
                         alt='logo of the website saying "Isshu - minimalistic bug tracker"'>
                   </img>
                   {!props.loggedIn &&

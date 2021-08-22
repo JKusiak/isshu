@@ -13,34 +13,38 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	header: {
 		display: 'grid',
 		justifyContent: 'center',
+		marginBottom: theme.spacing(5),
+		color: theme.palette.secondary.main,
 	},
 	form: {
 		width: '100%',
-		marginTop: theme.spacing(5),
 	},
 	submitButton: {
 		margin: theme.spacing(3, 0, 3),
 		borderRadius: '10px',
-		background: 'white',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
 		transition: 'all .12s linear',
 		boxShadow: theme.shadows[2],
 		"&:hover": {
 			cursor: 'pointer',
 			boxShadow: theme.shadows[5],
-			background: 'white',
+			backgroundColor: theme.palette.primary.light,
 		},
 	},
 	inputField: {
 		"& .MuiOutlinedInput-root": {
-		"& fieldset": { 
-			borderRadius: '10px',
-		}, 
-		"&.Mui-focused fieldset": {
-			borderColor: theme.palette.secondary.light,
-			borderWidth: "2px",
-		}
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": { 
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			}, 
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
 		},
-	},
+  },
 	wrongInput: {
 		color: "#C62828",
 		textAlign: "center",

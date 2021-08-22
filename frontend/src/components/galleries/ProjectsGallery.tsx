@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: 400,
             transition: 'all .12s linear',
             boxShadow: theme.shadows[2],
+            backgroundColor: theme.palette.primary.light,
             "&:hover": {
                   boxShadow: theme.shadows[5],
             },
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       cardContent: {
             display: 'flex',
             flexDirection: 'column',
+            width: '100%',
             maxWidth: '260px',
       },
       // dirty trick to make content display in the center if text
@@ -49,10 +51,11 @@ const useStyles = makeStyles((theme: Theme) =>
             flexBasis: '20px',
       },
       name: {
-
+            color: theme.palette.secondary.main,
       },
       description: {
             overflow: 'hidden',
+            color: theme.palette.secondary.main,
       },
       image: {
             flex: 'none',

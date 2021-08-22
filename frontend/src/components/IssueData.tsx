@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			minHeight: '70px',
 			maxHeight: '250px',
 			marginBottom: theme.spacing(2),
+			backgroundColor: theme.palette.primary.light,
 			boxShadow: theme.shadows[2],
 			"&:hover": {
 				cursor: 'pointer',

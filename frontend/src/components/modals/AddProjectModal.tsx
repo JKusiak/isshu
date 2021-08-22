@@ -28,39 +28,52 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       icon: {
             fontSize: 25,
       },
-      addProjectButton: {
-            "&:hover": {
-                  stroke: 'black',
-                  strokeWidth: 0.2,
-            }
-      },
       header: {
-            display: 'grid',
-            justifyContent: 'center',
-      },
+		display: 'grid',
+		justifyContent: 'center',
+		marginBottom: theme.spacing(5),
+		color: theme.palette.secondary.main,
+	},
       form: {
             width: '100%',
-            marginTop: theme.spacing(5),
       },
       submit: {
             margin: theme.spacing(3, 0, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            "&:hover": {
-                  background: theme.palette.action.hover,
-            }
+		borderRadius: '10px',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+			backgroundColor: theme.palette.primary.light,
+		},
       },
       inputField: {
-      "& .MuiOutlinedInput-root": {
-            "& fieldset": { 
-                  borderRadius: '10px',
-            }, 
-            "&.Mui-focused fieldset": {
-                  borderColor: theme.palette.secondary.light,
-                  borderWidth: "2px",
-            }
-      },
-      },
+		"& .MuiOutlinedInput-root": {
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": { 
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			}, 
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
+		},
+            // necessary for styling date picker color
+            "& .MuiInputBase-root": {
+			color: theme.palette.secondary.main,
+                  "& .MuiIconButton-root": {
+                        color: theme.palette.secondary.main,
+                  },
+		},
+            "& .MuiFormHelperText-root": {
+			color: theme.palette.secondary.main,
+		},
+            
+	},
       wrongInput: {
             color: "#C62828",   
             textAlign: "center",
@@ -95,7 +108,6 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
             <>
             <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
                   <IconButton
-                        className={classes.addProjectButton}
                         aria-label="add project" 
                         color="secondary"
                         onClick={() => props.setIsOpen(true)}

@@ -21,17 +21,18 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             },
       },
       inputField: {
-            "& .MuiOutlinedInput-root": {
-                  "& fieldset": { 
-                        borderRadius: '10px',
-                        borderColor: theme.palette.secondary.main,
-                  }, 
-                  "&.Mui-focused fieldset": {
-                        borderColor: theme.palette.secondary.light,
-                        borderWidth: "2px",
-                  }
-            },
-      },
+		"& .MuiOutlinedInput-root": {
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": { 
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			}, 
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
+		},
+	},
       icon: {
             fontSize: '35px',
             color: theme.palette.secondary.main,

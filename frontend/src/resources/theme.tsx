@@ -1,13 +1,13 @@
 const lightTheme = {
-	dark: 'f5f5f5',
-	main: '#fafafa',
 	light: '#ffffff',
+	main: '#fafafa',
+	dark: '#c7c7c7',
 };
 
 const darkTheme = {
-	light: '#676767',
-	main: '#424242',
-	dark: '#2e2e2e',
+	light: '#424242',
+	main: '#212121',
+	dark: '#171717',
 };
 
 export const lightPalette = {

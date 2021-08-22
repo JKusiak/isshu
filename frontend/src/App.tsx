@@ -1,6 +1,7 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import React, { createContext, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AllProjectsPage from './components/pages/AllProjectsPage';
 import HomePage from './components/pages/HomePage';
@@ -31,6 +32,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <DarkModeContext.Provider value={{darkMode, setDarkMode}}>
         <CssBaseline>
+          <Helmet>
+            <title>Isshu.</title>
+            <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
+            <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
+          </Helmet>
           <Router>
             <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
             <Switch>

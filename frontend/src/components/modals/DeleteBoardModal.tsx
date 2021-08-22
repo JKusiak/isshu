@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, IconButton, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
@@ -23,13 +23,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             boxShadow: theme.shadows[2],
             padding: theme.spacing(2, 4, 3),
       },
+      iconWrapper: {
+            padding: theme.spacing(2),
+      },
       deleteIcon: {
-            fontSize: '40px',
+            transform: 'scale(2)',
             color: theme.palette.secondary.main,
       },
       header: {
             display: 'grid',
             justifyContent: 'center',
+            color: theme.palette.secondary.main,
       },
       form: {
             display: 'flex',
@@ -38,12 +42,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       button: {
             margin: theme.spacing(3, 2, 3),
-            borderRadius: '10px',
-            fontWeight: 600,
-            background: theme.palette.primary.main,
-            "&:hover": {
-                  background: theme.palette.action.hover,
-            }
+		borderRadius: '10px',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+			backgroundColor: theme.palette.primary.light,
+		},
       },
 }));
 
@@ -75,9 +83,9 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
 
       return (
             <>
-            <Button onClick={handleOpen}>
+            <IconButton className={classes.iconWrapper} onClick={handleOpen}>
                   <DeleteIcon className={classes.deleteIcon} />
-            </Button>
+            </IconButton>
 
             
             <Modal
