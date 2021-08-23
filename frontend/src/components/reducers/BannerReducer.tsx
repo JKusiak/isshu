@@ -1,13 +1,5 @@
 import { IProject } from "../../types/ModelTypes";
 
-// helper function for ensuring the find function result never equals undefined
-export function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
-      if (argument === undefined || argument === null) {
-            throw new TypeError(message);
-      }
-    
-      return argument;
-}
 
 export enum ActionTypes {
       FetchData = 'FETCH DATA',

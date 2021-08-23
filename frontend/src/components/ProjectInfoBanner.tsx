@@ -33,58 +33,79 @@ createStyles({
 		display: 'grid',
 		width: '100%',
 		height: '100%',
+		padding: theme.spacing(2),
 		gridTemplateColumns: '1fr 0.5fr 2fr 0.5fr 1fr',
-		gridTemplateRows: '1fr 0.5fr 1.5fr 0.5fr 0.5fr 0.5fr 0.5fr',
+		gridTemplateRows: '0.5fr 1fr 1.5fr 0.5fr 0.5fr 0.5fr',
 		gridTemplateAreas:`
 			". . . . settings"
 			". . projectName . ."
 			". description description description ."
 			". description description description creator"
 			". description description description dateStart"
-			". . . . dateEnd"
-			". . . . ."`
+			". . . . dateEnd"`
+	},
+	settings: {
+		gridArea: 'settings',
+		justifySelf: 'end',
+		alignSelf: 'start',
+		maxHeight: '100%',
+		"& .MuiIconButton-root": {
+			padding: 0,
+		},
+		"&:hover": {
+			cursor: 'pointer',
+		}
+	},
+	settingsIcon: {
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '18px',
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: '24px',
+		},
+		color: '#fafafa',
 	},
 	nameForm: {
 		gridArea: 'projectName',
 		justifySelf: 'stretch',
 		alignSelf: 'stretch',
 	},
-	settings: {
-		gridArea: 'settings',
-		justifySelf: 'end',
-		alignSelf: 'center',
-		marginRight: '1em',
-	},
-	description: {
+	descriptionForm: {
 		gridArea: 'description',
 		justifySelf: 'stretch',
-		alignSelf: 'center',
-		margin: '0 3em 0 3em'
+		alignSelf: 'stretch',
+		marginTop: theme.spacing(2),
+		marginLeft: theme.spacing(4),
+		marginRight: theme.spacing(4),
+		overflow: 'hidden',
 	},
 	creator: {
 		gridArea: 'creator',
 		justifySelf: 'end',
 		alignSelf: 'center',
-		marginRight: '1em',
+		color: '#fafafa',
+		fontWeight: 600,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '12px',
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: '16px',
+		},
 	},
-	dateStart: {
+	dateStartForm: {
 		gridArea: 'dateStart',
 		justifySelf: 'end',
 		alignSelf: 'center',
-		marginRight: '1em',
+		"& .MuiButtonBase-root": {
+			padding: 0,
+		}
 	},
-	dateEnd: {
+	dateEndForm: {
 		gridArea: 'dateEnd',
 		justifySelf: 'end',
 		alignSelf: 'center',
-		marginRight: '1em',
-	},
-	settingsIcon: {
-		fontSize: 25,
-		marginRight: '0.5em',
-		color: 'white',
-		"&:hover": {
-			cursor: 'pointer',
+		"& .MuiButtonBase-root": {
+			padding: 0,
 		}
 	},
 	fontColor: {
@@ -102,20 +123,29 @@ createStyles({
 		},
 	},
 	nameStyle: {
-		fontSize: '48px',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '30px',
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: '48px',
+		},
 		fontWeight: 600,
 	},
 	descriptionStyle: {
-		fontSize: '24px',
-		fontWeight: 500,
-	},
-	creatorStyle: {
-		fontSize: '0.9vw',
-		fontWeight: 600,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '18px',
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: '24px',
+		},
 	},
 	dateStyle: {
-		fontSize: '0.9vw',
-		fontWeight: 500,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '12px',
+		},
+		[theme.breakpoints.up('sm')]: {
+			fontSize: '16px',
+		},
 	}
 }
 ));
@@ -147,7 +177,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 	function displayCreator() {
 		const creator = props.projectBannerState.creator;
 		return(
-			<Typography className={classes.fontColor}>
+			<Typography className={`${classes.creator} ${classes.fontColor}`}>
 				Creator: {creator.name} {creator.surname}
 			</Typography>
 		)
@@ -193,13 +223,13 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 			<div className={classes.gridWrapper}>
 				<form className={classes.nameForm} noValidate autoComplete="off" onSubmit={onSubmit}>
 					<TextField
-						className={classes.fontColor}
+						className={`${classes.fontColor}`}
 						id="project-name" 
 						disabled={!isEditing}
 						InputProps={{
 							disableUnderline: true,
 							classes: {
-							input: classes.nameStyle,
+								input: classes.nameStyle,
 							},
 						}}
 						inputProps={{min: 0, style: { textAlign: 'center' }}}
@@ -239,7 +269,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 					</Menu>
 				</div>
 
-				<form className={classes.description} noValidate autoComplete="off" onSubmit={onSubmit}>
+				<form className={classes.descriptionForm} noValidate autoComplete="off" onSubmit={onSubmit}>
 					<TextField
 						className={classes.fontColor}
 						id="project-description"
@@ -261,7 +291,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
 				{displayCreator()}
 
-				<form className={classes.dateStart}>
+				<form className={classes.dateStartForm}>
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						<KeyboardDatePicker
 							className={classes.fontColor}
@@ -282,7 +312,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 					</MuiPickersUtilsProvider>
 				</form>
 
-				<form className={classes.dateEnd}>
+				<form className={classes.dateEndForm}>
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						<KeyboardDatePicker
 							className={classes.fontColor}
