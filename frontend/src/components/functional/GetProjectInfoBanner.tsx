@@ -1,43 +1,40 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { ProjectTemplate } from "../../types/ModelContentTemplate";
-import { IProject } from "../../types/ModelTypes";
+import { INestedProject } from "../../types/ModelTypes";
 import ProjectInfoBanner from "../ProjectInfoBanner";
+import { ActionTypes, bannerReducer } from "../reducers/BannerReducer";
 
 
 interface GetProjectInfoBannerProps {
+      project: INestedProject,
 }
 
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
       const { projectId } = useParams<{ projectId: string }>();
-      const [project, setProject] = useState<IProject>(ProjectTemplate);
+      const [projectBannerState, dispatch] = useReducer(bannerReducer, ProjectTemplate)
+      
 
       useEffect(() => {
-            fetchProject();
-      }, [projectId]);
-
-      
-      function fetchProject() {
-            axios.get(`http://localhost:5000/projects/${projectId}`, {
-            headers: {
-                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+            const initialReducerData = {
+                  _id: props.project._id,
+                  name: props.project.name,
+                  description: props.project.description,
+                  dateStart: props.project.dateStart,
+                  dateEnd: props.project.dateEnd,
+                  creator: props.project.creator,
             }
-            }).then(resp => {
-                  setProject(resp.data);
-            }).catch((err) => {
-                  console.log(err);
-            });  
-      }
+
+            dispatch({type: ActionTypes.FetchData, payload: initialReducerData});
+      }, [props.project])
 
 
-      function changeData(newProjectData: IProject) {
-            axios.post(`http://localhost:5000/projects/update/${projectId}`, newProjectData, {
+      function updateProject() {
+            axios.post(`http://localhost:5000/projects/update/${projectId}`, projectBannerState, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-            }).then(resp => {
-                  fetchProject();
             }).catch((err) => {
                   console.log(err);
             });
@@ -46,7 +43,7 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 
       return (
       <>
-            <ProjectInfoBanner project={project} changeData={changeData}/>
+            <ProjectInfoBanner projectBannerState={projectBannerState} dispatch={dispatch} updateProject={updateProject}/>
       </>
       );
 }

@@ -45,21 +45,52 @@ export const getIssuesProgress = asyncHandler(async(req, res) => {
     const projectId = req.params.projectId;
 
 	try {
-		const project = await Project.findById(projectId).select('_id').populate({ 
-			path: 'boards',
-            select: 'name',
-			model: 'Board',
-			populate: {
-                path: 'columns',
-                select: '_id',
-                model: 'Column',
+		const project = await Project.findById(projectId)
+            .lean()
+            .populate({
+                path: 'creator',
+                select: 'name surname',
+                model: 'User',
+            })
+            .populate({
+                path: 'boards',
+                select: 'name',
+                model: 'Board',
                 populate: {
-                    path: 'issues',
-                    select: 'isFinished',
-                    model: 'Issue',
+                    path: 'columns',
+                    select: '_id',
+                    model: 'Column',
+                    populate: {
+                        path: 'issues',
+                        select: 'isFinished',
+                        model: 'Issue',
+                    }
                 }
-            }
-		})
+            })
+
+            
+        if(project) {
+            project.boards.map(board => {
+                let totalIssues = 0;
+                let totalCompleted = 0;
+
+                if(board.columns) {
+                    board.columns.forEach(column => {
+                        if(column.issues) {
+                            column.issues.forEach(issue => {
+                                if(issue.isFinished === true) totalCompleted++;
+                                totalIssues++;
+                            })
+                        }
+                    })
+                }
+                board.totalIssues = totalIssues;
+                board.totalCompleted = totalCompleted;
+                delete board.columns;
+                return board;
+            })
+        }
+                        
 		
 		res.json(project);
 	} catch(err) {
@@ -98,13 +129,7 @@ export const updateProject = asyncHandler(async(req, res) => {
     const projectId = req.params.projectId;
     
     const update = { 
-        $set: {
-            name: req.body.name,
-            description: req.body.description,
-            dateStart: req.body.dateStart,
-            dateEnd: req.body.dateEnd,
-            creator: req.body.creator,
-        } 
+        $set: req.body
     };
     
     const options =  {

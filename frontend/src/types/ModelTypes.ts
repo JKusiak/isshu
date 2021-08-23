@@ -105,3 +105,20 @@ export interface INestedIssue {
       tags: [ITag];
       contributors: [INestedUser];
 }
+
+// types with nested subtypes for GetBoardsGallery and ProjectInfoBanner
+export interface INestedProject {
+      _id: string;
+      name: string;
+      description: string;
+      dateStart: Date;
+      dateEnd: Date;
+      creator: INestedUser;
+      boards: [{
+            _id: string;
+            name: string;
+            projectId: string;
+            totalIssues: number;
+            totalCompleted: number;
+      }]
+}

@@ -33,7 +33,6 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
       switch (type) {
             case ActionTypes.FetchData:
                   return payload
-                  
             case ActionTypes.UpdateBoard:
                   return {
                         ...state,

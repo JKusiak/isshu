@@ -10,6 +10,7 @@ import {
       INestedColumn,
       INestedIssue,
       INestedMessage,
+      INestedProject,
       INestedUser,
       IProject,
       IStep,
@@ -114,4 +115,21 @@ export const NestedColumnTemplate: INestedColumn = {
 export const NestedBoardTemplate: INestedBoard = {
       ...BoardTemplate,
       columns: [NestedColumnTemplate],
+}
+
+// needed for GetBoardsGallery and ProjectInfoBanner
+export const NestedProjectTemplate: INestedProject = {
+      _id: '',
+      name: '',
+      description: '',
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      creator: NestedUserTemplate,
+      boards: [{
+            _id: '',
+            name: '',
+            projectId: '',
+            totalIssues: 0,
+            totalCompleted: 0,
+      }]
 }

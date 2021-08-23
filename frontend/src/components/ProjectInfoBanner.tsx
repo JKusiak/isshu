@@ -1,13 +1,13 @@
 import DateFnsUtils from '@date-io/date-fns';
-import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField } from "@material-ui/core";
+import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import Banner from '../resources/banners/banner.jpg';
-import { UserTemplate } from "../types/ModelContentTemplate";
-import { IProject, IUser } from "../types/ModelTypes";
+import { IProject } from "../types/ModelTypes";
 import DeleteProject from "./functional/DeleteProject";
+import { Action, ActionTypes } from './reducers/BannerReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -122,8 +122,9 @@ createStyles({
 
 
 interface ProjectDataProps {
-	project: IProject, 
-	changeData: (newProjectData: any) => void,
+	projectBannerState: IProject,
+	dispatch: React.Dispatch<Action>,
+	updateProject: () => void,
 }
 
 
@@ -131,63 +132,25 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
-	const [projectName, setProjectName] = useState<string>('');
-	const [projectDescription, setProjectDescription] = useState<string>('');
-	const [creator, setCreator] = useState<IUser>(UserTemplate);
-	const [dateStart, setDateStart] = useState<Date | null>(new Date());
-	const [dateEnd, setDateEnd] = useState<Date | null>(new Date());
 	const [isEditing, setIsEditing] = useState(false);
 
-
-	useEffect(() => {
-		setProjectName(props.project.name);
-		setProjectDescription(props.project.description);
-		setCreator(props.project.creator);
-		setDateStart(props.project.dateStart);
-		setDateEnd(props.project.dateEnd);
-	}, [props.project.name, 
-		props.project.description,
-		props.project.creator,
-		props.project.dateStart,
-		props.project.dateEnd]
-	);
 
 
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
-		let updatedProject = {
-			name: projectName,
-			description: projectDescription,
-			creator: creator._id,
-			dateStart: dateStart,
-			dateEnd: dateEnd,
-		}
 
 		setIsEditing(false);
-		props.changeData(updatedProject);
+		props.updateProject();
 	}
 
 
 	function displayCreator() {
-		if(creator !== undefined && creator !== null) {
-			return(
-				<form className={classes.creator}>
-					<TextField
-						className={classes.fontColor}
-						id="project-creator" 
-						disabled={true}
-						InputProps={{
-							disableUnderline: true,
-							classes: {
-								input: classes.creatorStyle,
-							},
-						}}
-						inputProps={{min: 0, style: { textAlign: 'end' }}}
-						value={`Creator: ${creator.name} ${creator.surname}`  || ''}
-					/>
-				</form>
-			)
-		}
+		const creator = props.projectBannerState.creator;
+		return(
+			<Typography className={classes.fontColor}>
+				Creator: {creator.name} {creator.surname}
+			</Typography>
+		)
 	}
 
 
@@ -208,7 +171,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 
 
 	function handleEnterMultiline(e: React.KeyboardEvent) {
-		if(e.which === 13) {
+		if(e.key === "Enter") {
 			onSubmit(e);
 		}
 	}
@@ -240,8 +203,8 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 							},
 						}}
 						inputProps={{min: 0, style: { textAlign: 'center' }}}
-						value={projectName || ''}
-						onChange={e => {setProjectName(e.target.value)}}
+						value={props.projectBannerState.name || ''}
+						onChange={e => {props.dispatch({type: ActionTypes.UpdateName, payload: e.target.value})}}
 					/>
 				</form>
 
@@ -291,8 +254,8 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 							},
 						}}
 						inputProps={{min: 0, style: { textAlign: 'center' }}}
-						value={projectDescription || ''}
-						onChange={e => {setProjectDescription(e.target.value)}}
+						value={props.projectBannerState.description || ''}
+						onChange={e => {props.dispatch({type: ActionTypes.UpdateDescription, payload: e.target.value})}}
 					/>
 				</form>
 
@@ -313,8 +276,8 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								},
 							}}
 							inputProps={{min: 0, style: { textAlign: 'end' }}}
-							value={dateStart}
-							onChange={newDate => setDateStart(newDate)}
+							value={props.projectBannerState.dateStart || ''}
+							onChange={newDate => {props.dispatch({type: ActionTypes.UpdateDateStart, payload: newDate})}}
 						/>
 					</MuiPickersUtilsProvider>
 				</form>
@@ -334,9 +297,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								},
 							}}
 							inputProps={{min: 0, style: { textAlign: 'end' }}}
-							minDate={dateStart}
-							value={dateEnd}
-							onChange={newDate => setDateEnd(newDate)}
+							minDate={props.projectBannerState.dateStart}
+							value={props.projectBannerState.dateEnd || ''}
+							onChange={newDate => {props.dispatch({type: ActionTypes.UpdateDateEnd, payload: newDate})}}
 						/>
 					</MuiPickersUtilsProvider>
 				</form>

@@ -103,7 +103,6 @@ export const updateBoard = asyncHandler(async(req, res) => {
                   name: req.body.name,
             } 
       };
-
       const options =  {
             new: true, 
             useFindAndModify: false,

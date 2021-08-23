@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IssueIcon from '@material-ui/icons/BeenhereOutlined';
 import { FC, Fragment } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import { INestedProject } from "../../types/ModelTypes";
 import AddBoard from "../functional/AddBoard";
 import GetProjectInfoBanner from "../functional/GetProjectInfoBanner";
 
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface BoardsGalleryProps {
-      boards: any;
+      project: INestedProject;
       fetchBoards: () => void;
 }
 
@@ -72,20 +73,8 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
 
 
       function displayBoards() {
-            if(props.boards) {
-                  return(props.boards.map((board: any) => {
-                        let totalIssues = 0;
-                        let totalCompleted = 0;
-                        if(board.columns) {
-                              board.columns.map((column: any) => {
-                                    if(column.issues) {
-                                          column.issues.map((issue: any) => {
-                                                if(issue.isFinished === true) totalCompleted++;
-                                                totalIssues++;
-                                          })
-                                    }
-                              })
-                        }
+            if(props.project.boards) {
+                  return(props.project.boards.map((board: any) => {
                         
                         return(
                               <Fragment key={board._id}>
@@ -95,7 +84,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
                                                       {board.name}
                                                 </Typography>
                                                 <Typography className={classes.progressCount} component="h5" variant="h5">
-                                                     {`${totalCompleted} / ${totalIssues}`} <IssueIcon className={classes.issueIcon}/>
+                                                     {`${board.totalCompleted} / ${board.totalIssues}`} <IssueIcon className={classes.issueIcon}/>
                                                 </Typography>
                                           </Card>
                                     </Link> 
@@ -107,7 +96,7 @@ const BoardsGallery: FC<BoardsGalleryProps> = (props) => {
      
       return(
             <>
-            <GetProjectInfoBanner/>
+            <GetProjectInfoBanner project={props.project}/>
 
             <div className={classes.gridContainer}>
                   <AddBoard fetchBoards={props.fetchBoards}/>

@@ -1,32 +1,27 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BoardTemplate } from "../../types/ModelContentTemplate";
-import { IBoard } from "../../types/ModelTypes";
+import { NestedProjectTemplate } from "../../types/ModelContentTemplate";
+import { INestedProject } from "../../types/ModelTypes";
 import BoardsGallery from "../galleries/BoardsGallery";
 
 
-
-interface GetBoardsGalleryProps {
-}
-
-const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
+const GetBoardsGallery = () => {
       const { projectId } = useParams<{ projectId: string }>();
-      const [boards, setBoards] = useState<[IBoard]>([BoardTemplate]);
-
+      const [project, setProject] = useState<INestedProject>(NestedProjectTemplate);
 
       useEffect(() => {
-            fetchBoards();
+            fetchProject();
       }, []);
 
         
-      function fetchBoards() {
+      function fetchProject() {
             axios.get(`http://localhost:5000/projects/getProgress/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((res) => {
-                  setBoards(res.data.boards);
+                  setProject(res.data);
             }).catch((err) => {
                   console.log(err);
             });
@@ -35,7 +30,7 @@ const GetBoardsGallery: FC<GetBoardsGalleryProps> = (props) => {
 
       return (
       <>
-            <BoardsGallery boards={boards} fetchBoards={fetchBoards}/>
+            <BoardsGallery project={project} fetchBoards={fetchProject}/>
       </>
       );
 }
