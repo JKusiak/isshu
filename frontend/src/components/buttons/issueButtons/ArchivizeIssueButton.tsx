@@ -45,7 +45,6 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 		const payload = {
 			columnId: props.issue.columnId,
 			issueId: props.issue._id,
-
 		};
 
 		dispatch({type: ActionTypes.ArchivizeIssue, payload: payload});

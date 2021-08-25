@@ -78,6 +78,30 @@ export const addOrganization = asyncHandler(async(req, res) => {
 });
 
 
+export const addIssueToArchive = asyncHandler(async(req, res) => {
+    const organizationId = req.params.organizationId;
+    const issueId = req.body.issueId;
+
+    const update = {
+         $push: {
+            archivedIssues: issueId,
+        } 
+    };
+    const options = {
+        new: true, 
+        useFindAndModify: false,
+    };
+
+    try {
+        await Organization.findByIdAndUpdate(organizationId, update, options);
+        res.json();
+    } catch(err) {
+        res.status(400).json({message: "Could not add issue to archive"});
+        throw new Error('Update unsuccessful');
+    }
+});
+
+
 export const updateOrganization = asyncHandler(async(req, res) => {
     const organizationId = req.params.organizationId;
     

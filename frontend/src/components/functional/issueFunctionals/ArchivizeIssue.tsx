@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { FC } from 'react';
 import { INestedIssue } from '../../../types/ModelTypes';
 import ArchivizeIssueButton from '../../buttons/issueButtons/ArchivizeIssueButton';
+import { getLoggedInUser } from '../GetLoggedInUser';
 
 
 interface ArchivizeIssueProps {
@@ -14,7 +15,8 @@ interface ArchivizeIssueProps {
 // in the organization archive of all issues
 const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 	
-	function archivizeIssue() {
+
+	function updateIssue() {
 		const requestBody = {
 			columnId: null,
 			contributors: [],
@@ -27,7 +29,27 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 		}).catch((err) => {
 				console.log(err);
 		})
+	}
 
+
+	function addToArchive() {
+		const requestBody = {
+			issueId: props.issue._id,
+		}
+
+		axios.post(`http://localhost:5000/organization/addToArchive/${getLoggedInUser().organizationId}`, requestBody, {
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
+				}
+		}).catch((err) => {
+				console.log(err);
+		})
+	}
+
+
+	function archivizeIssue() {
+		updateIssue();
+		addToArchive();
 		props.setIssueModalOpen(false);
 	}
 

@@ -1,5 +1,16 @@
 // types for basic database models
 
+export interface IOrganization {
+      _id: string;
+      name: string;
+      archivedIssues: [{
+            _id: string,
+            name: string, 
+            description: string
+      }];
+}
+
+
 export interface IUser {
       _id: string;
       name: string;

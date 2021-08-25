@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		color: theme.palette.secondary.main,
 		marginBottom: theme.spacing(1),
     },
+	formContainer: {
+		marginBottom: theme.spacing(2),
+	},
 	autocomplete: {
 		width: '100%',
 		height: '100%',
@@ -36,9 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				color: theme.palette.secondary.main,
 			}
 		}
-	},
-	formContainer: {
-		marginBottom: theme.spacing(2),
 	},
 	inputField: {
 		"& .MuiOutlinedInput-root": {

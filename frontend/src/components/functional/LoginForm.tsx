@@ -75,7 +75,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 		.then((res) => {
 			localStorage.setItem('token', res.data.token);
 			props.setLoggedIn(true);
-			history.push("/home");
+			history.push("/home/projects");
 		}).catch((err) => {
 			console.log(err);
 			setIsValid(false);
@@ -127,9 +127,9 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 			</Grid>
 			{!isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
 			<Button
-			className={classes.submitButton}
-			fullWidth
-			type="submit"
+				className={classes.submitButton}
+				fullWidth
+				type="submit"
 			>
 			Sign in
 			</Button>

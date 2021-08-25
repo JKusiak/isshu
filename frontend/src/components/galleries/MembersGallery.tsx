@@ -10,7 +10,7 @@ import ProjectCover4 from '../../resources/covers/project_cover4.png';
 import ProjectCover5 from '../../resources/covers/project_cover5.png';
 import ProjectCover6 from '../../resources/covers/project_cover6.png';
 import ProjectCover7 from '../../resources/covers/project_cover7.png';
-import { IProject } from "../../types/ModelTypes";
+import { INestedUser } from "../../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'grid',
 			justifyContent: 'center',
 			gap: theme.spacing(4),
-			gridTemplateColumns: 'repeat(auto-fill, 400px)',
+			gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
 			marginRight: theme.spacing(8),
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),
@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			height: 140,
 			width: 400,
-			justifySelf: 'center',
 			transition: 'all .12s linear',
 			boxShadow: theme.shadows[2],
 			backgroundColor: theme.palette.primary.light,
@@ -52,15 +51,13 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		cardContent: {
 			display: 'flex',
-			flexDirection: 'column',
+			justifyContent: 'center',
+			alignItems: 'center',
 			width: '100%',
 			maxWidth: '260px',
 		},
 		// dirty trick to make content display in the center if text
 		// is short, if long 'empty' will shrink to zero
-		empty: {
-			flexBasis: '20px',
-		},
 		name: {
 			color: theme.palette.secondary.main,
 		},
@@ -70,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		image: {
 			flex: 'none',
-			marginLeft: 'auto',
+			marginRight: 'auto',
 			height: 140,
 			width: 140,
 			filter: 'blur(0.5px)'
@@ -87,7 +84,7 @@ function shuffleProjectCover() {
 
 
 interface ProjectListProps {
-	projects: [IProject];
+	members: [INestedUser];
 }
 
 
@@ -96,30 +93,25 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 	const { url } = useRouteMatch();
 
 	function displayProjects() {
-		if (props.projects.length > 0) {
-			return (props.projects.map((project: IProject) => {
+		if (props.members.length > 0) {
+			return (props.members.map((member: INestedUser) => {
 				return (
-					<Fragment key={project._id}>
-						<Link className={classes.link} to={`/project/${project._id}`}>
+					<Fragment key={member._id}>
+						<Link className={classes.link} to={`/user/${member._id}`}>
 							<Card className={classes.cardContainer}>
-								<CardContent className={classes.cardContent}>
-									<div className={classes.empty} />
-									<Typography className={classes.name} component="h5" variant="h5">
-										{project.name}
-									</Typography>
-									<Typography className={classes.description} variant="subtitle1" color="textSecondary">
-										{project.description}
-									</Typography>
-								</CardContent>
 								<CardMedia
 									className={classes.image}
 									image={shuffleProjectCover()}
-									title="Project cover"
+									title="Member profile photo"
 								/>
+								<CardContent className={classes.cardContent}>
+									<Typography className={classes.name} component="h5" variant="h5">
+										{member.name} {member.surname}
+									</Typography>
+								</CardContent>
 							</Card>
 						</Link>
 					</Fragment>
-
 				);
 			}));
 		}
@@ -128,7 +120,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 	return (
 		<>
 			<Typography className={classes.header} component="h1" variant="h4">
-				Your projects
+				Members
 			</Typography>
 			<div className={classes.projectsGrid}>
 				{displayProjects()}

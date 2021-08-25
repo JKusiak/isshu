@@ -12,6 +12,7 @@ export const loginUser = asyncHandler(async(req, res) => {
             email: userData.email,
             name: userData.name,
             surname: userData.surname,
+            organizationId: userData.organizationId,
       }
 
       if (bcrypt.compareSync(req.body.password, userData.password)) {

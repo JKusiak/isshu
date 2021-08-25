@@ -12,12 +12,12 @@ import {
       INestedMessage,
       INestedProject,
       INestedUser,
+      IOrganization,
       IProject,
       IStep,
       ITag,
       IUser
 } from "./ModelTypes";
-
 
 export const UserTemplate: IUser = {
       _id: '',
@@ -133,4 +133,14 @@ export const NestedProjectTemplate: INestedProject = {
             totalIssues: 0,
             totalCompleted: 0,
       }]
+}
+
+export const OrganizationTemplate: IOrganization = {
+      _id: '',
+      name: '',
+      archivedIssues: [{
+            _id: '',
+            name: '', 
+            description: '',
+      }],
 }

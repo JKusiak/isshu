@@ -7,7 +7,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
 import DarkModeOn from '@material-ui/icons/Brightness2';
 import DarkModeOff from '@material-ui/icons/Brightness2Outlined';
-import ProjectsIcon from '@material-ui/icons/FilterNoneOutlined';
+import HomeIcon from '@material-ui/icons/HomeOutlined';
 import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../../App';
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(2),
       },
       buttonIcon: {
-            fontSize: 24,
+            transform: 'scale(1.1)',
             color: theme.palette.secondary.main,
       },
       navbarTextButton: {
@@ -144,8 +144,8 @@ const Navbar: FC<NavbarProps> = (props) => {
                   {props.loggedIn && (
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton aria-label="projects" component={Link} to="/home">
-                                    <ProjectsIcon className={classes.buttonIcon}/>
+                              <IconButton aria-label="projects" component={Link} to="/home/projects">
+                                    <HomeIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
                         

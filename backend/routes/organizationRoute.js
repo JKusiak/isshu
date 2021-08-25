@@ -1,6 +1,7 @@
 import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
+	addIssueToArchive,
 	addOrganization, deleteOrganization, getAllOrganizations, getMembersOfOrganization, getOrganizationById,
 	getProjectsOfOrganization, updateOrganization
 } from '../controllers/organizationController.js';
@@ -19,6 +20,8 @@ protectedOrganizationRouter.route('/projects/:organizationId').get(getProjectsOf
 protectedOrganizationRouter.route('/members/:organizationId').get(getMembersOfOrganization);
 
 protectedOrganizationRouter.route('/add').post(addOrganization);
+
+protectedOrganizationRouter.route('/addToArchive/:organizationId').post(addIssueToArchive);
 
 protectedOrganizationRouter.route('/update/:organizationId').post(updateOrganization);
 
