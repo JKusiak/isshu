@@ -7,6 +7,7 @@ export interface IUser {
       email: string;
       password: string;
       isAdmin: boolean;
+      organizationId: string; // ref id
       projects: [string];     // ref id
 }
 

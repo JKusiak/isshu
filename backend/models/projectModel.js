@@ -27,6 +27,12 @@ const projectSchema = mongoose.Schema({
             ref: 'User',           
             required: true,
       },
+      organizationId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Organization',
+            required: false,
+            default: null,
+      },
 });
 
 

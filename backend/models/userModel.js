@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 
 function setPassword(value) {
       return bcrypt.hashSync(value, 10);
@@ -31,6 +31,12 @@ const userSchema = mongoose.Schema({
             type: Boolean,
             required: true,
             default: false,
+      },
+      organizationId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Organization',
+            required: false,
+            default: null,
       },
       projects: [{
             type: mongoose.Schema.Types.ObjectId,

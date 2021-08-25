@@ -1,50 +1,74 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { FC, useContext } from "react";
-import { DarkModeContext } from '../../App';
-import TextLogo from '../../resources/logo/logo_text.svg';
-import DarkTextLogo from '../../resources/logo/logo_text_darkmode.svg';
-import ToProjectsButton from "../buttons/ToProjectsButton";
-import RegisterModal from "../modals/RegisterModal";
+import { Button, Typography } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { FC } from "react";
+import { Link, Route, Switch } from 'react-router-dom';
+import { IProject } from "../../types/ModelTypes";
+import ProjectsGallery from "../galleries/ProjectsGallery";
+
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		header: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			minWidth: 680,
+			marginTop: theme.spacing(5),
+			marginBottom: theme.spacing(5),
+			fontWeight: 'bold',
+			color: theme.palette.secondary.main,
+		},
+		buttonsContainer: {
+
+		},
+		button: {
+
+		},
+	}
+));
 
 
 interface HomePageProps {
-      loggedIn: boolean,
-      setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
+	projects: [IProject],
 }
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-      textLogo: {
-            width: '35%',
-            height: '35%'
-      },
-}));
 
 const HomePage: FC<HomePageProps> = (props) => {
-      const classes = useStyles();
-      const {darkMode} = useContext(DarkModeContext);
+	const classes = useStyles();
+	
+	return (
+	<>
+			<Typography className={classes.header} component="h1" variant="h4">
+					Home Page
+			</Typography>
+			<div className={classes.buttonsContainer}>
+				<Button className={classes.button} component={Link} to='/home/members'>
+					Members
+				</Button >
+				<Button className={classes.button} component={Link} to='/home/projects'>
+					Projects
+				</Button>
+				<Button className={classes.button} component={Link} to='/home/archive'>
+					Archive
+				</Button>
+			</div>
 
-      
-      return (
-      <Box mt={"6em"}>
-            <Grid container direction="column" justify="center" alignItems="center">
-                  <img 
-                        className={classes.textLogo} 
-                        src={darkMode? DarkTextLogo : TextLogo} 
-                        alt='logo of the website saying "Isshu - minimalistic bug tracker"'>
-                  </img>
-                  {!props.loggedIn &&
-                        <> 
-                        <RegisterModal/>
-                        </>
-                  }
-                  {props.loggedIn &&
-                        <ToProjectsButton/>
-                  }
-            </Grid>
-      </Box>
-      );
+			
+			<Switch>
+				<Route path="/home/projects">
+					<ProjectsGallery projects={props.projects}/>
+				</Route>
+				<Route path="/home/archive">
+					{/* <ArchiveGallery/> */}
+					Archive
+				</Route>
+				<Route path="/home/members">
+					{/* <MembersGallery/> */}
+					Members
+				</Route>
+			</Switch>
+	</>
+	);
 }
 
 export default HomePage;

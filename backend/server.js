@@ -1,17 +1,18 @@
-import connectDB from './config/db.js';
-import dotenv  from 'dotenv';
-import express from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import issueRouter from './routes/issueRoute.js';
-import tagRouter from './routes/tagRoute.js';
-import { router, protectedRouter } from './routes/authenticationRoute.js';
-import { userRouter, protectedUserRouter } from './routes/userRoute.js';
-import { protectedProjectRouter } from './routes/projectRoute.js';
-import { protectedBoardRouter } from './routes/boardRoute.js';
-import { protectedColumnRouter } from './routes/columnRoute.js';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import connectDB from './config/db.js';
+import { protectedRouter, router } from './routes/authenticationRoute.js';
+import { protectedBoardRouter } from './routes/boardRoute.js';
+import { protectedColumnRouter } from './routes/columnRoute.js';
+import { protectedIssueRouter } from './routes/issueRoute.js';
+import { protectedOrganizationRouter } from './routes/organizationRoute.js';
+import { protectedProjectRouter } from './routes/projectRoute.js';
+import tagRouter from './routes/tagRoute.js';
+import { protectedUserRouter, userRouter } from './routes/userRoute.js';
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -27,12 +28,12 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-
+app.use('/organization', protectedOrganizationRouter);
 app.use('/users', userRouter, protectedUserRouter);
 app.use('/projects', protectedProjectRouter);
 app.use('/boards', protectedBoardRouter);
 app.use('/columns', protectedColumnRouter);
-app.use('/issues', issueRouter);
+app.use('/issues', protectedIssueRouter);
 app.use('/tags', tagRouter);
 app.use('/login', router, protectedRouter);
 

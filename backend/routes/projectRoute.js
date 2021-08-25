@@ -15,10 +15,10 @@ protectedProjectRouter.route('/:projectId').get(getProjectById);
 
 protectedProjectRouter.route('/getProgress/:projectId').get(getIssuesProgress);
 
+protectedProjectRouter.route('/getBoards/:projectId').get(getBoardsOfProject);
+
 protectedProjectRouter.route('/add').post(addProject);
 
 protectedProjectRouter.route('/update/:projectId').post(updateProject);
 
 protectedProjectRouter.route('/delete/:projectId').delete(deleteProject);
-
-protectedProjectRouter.route('/getBoards/:projectId').get(getBoardsOfProject);

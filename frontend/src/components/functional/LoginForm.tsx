@@ -75,7 +75,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 		.then((res) => {
 			localStorage.setItem('token', res.data.token);
 			props.setLoggedIn(true);
-			history.push("/projects");
+			history.push("/home");
 		}).catch((err) => {
 			console.log(err);
 			setIsValid(false);

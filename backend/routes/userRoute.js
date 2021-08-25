@@ -1,17 +1,8 @@
 import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
-import { 
-      getAllUsers,
-      getUserById,
-      getLoggedUser, 
-      addUser,
-      updateUser, 
-      deleteUser,
-      addProjectToUser,
-      getProjectsOfUser,
-      deleteProjectFromUser,
-      getUsersByProject,
-      getUsersWithoutProject
+import {
+      addProjectToUser, addUser, deleteProjectFromUser, deleteUser, getAllUsers, getLoggedUser, getProjectsOfUser, getUserById, getUsersByProject,
+      getUsersWithoutProject, updateUser
 } from "../controllers/userController.js";
 
 
@@ -23,22 +14,22 @@ protectedUserRouter.use(authenticateJWT);
 
 protectedUserRouter.route('/').get(getAllUsers);
 
-protectedUserRouter.route('/:id').get(getUserById);
+protectedUserRouter.route('/:userId').get(getUserById);
 
 protectedUserRouter.route('/profile/token').get(getLoggedUser);
 
 userRouter.route('/add').post(addUser);
 
-protectedUserRouter.route('/update/:id').post(updateUser);
+protectedUserRouter.route('/update/:userId').post(updateUser);
 
-protectedUserRouter.route('/delete/:id').delete(deleteUser);
+protectedUserRouter.route('/delete/:userId').delete(deleteUser);
 
-protectedUserRouter.route('/getProjects/:id').get(getProjectsOfUser);
+protectedUserRouter.route('/getProjects/:userId').get(getProjectsOfUser);
 
-protectedUserRouter.route('/addProject/:id').post(addProjectToUser);
+protectedUserRouter.route('/addProject/:userId').post(addProjectToUser);
 
-protectedUserRouter.route('/deleteProject/:id').delete(deleteProjectFromUser);
+protectedUserRouter.route('/deleteProject/:userId').delete(deleteProjectFromUser);
 
-protectedUserRouter.route('/getUsersByProject/:id').get(getUsersByProject);
+protectedUserRouter.route('/getUsersByProject/:userId').get(getUsersByProject);
 
-protectedUserRouter.route('/getUsersWithoutProject/:id').get(getUsersWithoutProject);
+protectedUserRouter.route('/getUsersWithoutProject/:userId').get(getUsersWithoutProject);

@@ -138,7 +138,8 @@ export const updateProject = asyncHandler(async(req, res) => {
     };
 
     try {
-        await Project.findByIdAndUpdate(projectId, update, options);
+        const project = await Project.findByIdAndUpdate(projectId, update, options);
+        res.json(project);
     }
     catch(err) {
         res.status(400).json({message: "Update of project unsuccessful"});
@@ -150,8 +151,8 @@ export const updateProject = asyncHandler(async(req, res) => {
 export const deleteProject = asyncHandler(async(req, res) => {
     try {
         const projectId = req.params.projectId;
-        const deletedProject = await Project.findByIdAndDelete(projectId);
-        return res.status(204).json(deletedProject);
+        await Project.findByIdAndDelete(projectId);
+        return res.status(204);
     } catch(err) {
        console.log(err);
     }

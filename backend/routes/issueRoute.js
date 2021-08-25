@@ -1,36 +1,30 @@
 
-import express from 'express'
-import { 
-      getAllIssues, 
-      getIssueById,
-      addIssue,
-      updateIssue,
-      deleteIssue,
-      getTagsOfIssue,
-      addTagToIssue,
-      getIssuesByCreator,
-      getIssuesByContributor
+import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
+import {
+      addIssue, addTagToIssue, deleteIssue, getAllIssues,
+      getIssueById, getIssuesByContributor, getIssuesByCreator, getTagsOfIssue, updateIssue
 } from '../controllers/issueController.js';
 
 
-const router = express.Router();
+export const protectedIssueRouter = express.Router();
 
-router.route('/').get(getAllIssues);
+protectedIssueRouter.use(authenticateJWT);
 
-router.route('/:id').get(getIssueById);
+protectedIssueRouter.route('/').get(getAllIssues);
 
-router.route('/add').post(addIssue);
+protectedIssueRouter.route('/:id').get(getIssueById);
 
-router.route('/update/:id').post(updateIssue);
+protectedIssueRouter.route('/add').post(addIssue);
 
-router.route('/delete/:id').delete(deleteIssue);
+protectedIssueRouter.route('/update/:id').post(updateIssue);
 
-router.route('/getTags/:id').get(getTagsOfIssue);
+protectedIssueRouter.route('/delete/:id').delete(deleteIssue);
 
-router.route('/addTag/:id').post(addTagToIssue);
+protectedIssueRouter.route('/getTags/:id').get(getTagsOfIssue);
 
-router.route('/getIssueCreator/:id').get(getIssuesByCreator)
+protectedIssueRouter.route('/addTag/:id').post(addTagToIssue);
 
-router.route('/getIssueContributor/:id').get(getIssuesByContributor);
+protectedIssueRouter.route('/getIssueCreator/:id').get(getIssuesByCreator)
 
-export default router;
+protectedIssueRouter.route('/getIssueContributor/:id').get(getIssuesByContributor);

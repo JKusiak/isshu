@@ -49,7 +49,6 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 		};
 
 		dispatch({type: ActionTypes.ArchivizeIssue, payload: payload});
-		// dispatch({type: ActionTypes.UpdateIssue, payload: payload});
 		props.archivizeIssue();
 	}
 

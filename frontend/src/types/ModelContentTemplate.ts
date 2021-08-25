@@ -26,6 +26,7 @@ export const UserTemplate: IUser = {
       email: '',
       password: '',
       isAdmin: false,
+      organizationId: '',
       projects: [''],
 };
 

@@ -1,5 +1,5 @@
-import User from '../models/userModel.js';
 import asyncHandler from 'express-async-handler';
+import User from '../models/userModel.js';
 
 
 // TODO simplify to get rid of boilerplate code for all API endpoints
@@ -16,7 +16,7 @@ export const getAllUsers = asyncHandler(async(req, res) => {
 
 export const getUserById = asyncHandler(async(req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.userId);
         res.json(user);
     } catch(err) {
         res.status(404).json({message: "User not found"});
@@ -64,7 +64,7 @@ export const addUser = asyncHandler(async(req, res) => {
 
  
 export const updateUser = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const id = req.params.userId;
     const update = { 
         $set: {
             name: req.body.name,
@@ -89,7 +89,7 @@ export const updateUser = asyncHandler(async(req, res) => {
 
 export const deleteUser = asyncHandler(async(req, res) => {
     try {
-        await User.findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.userId);
     } catch(err) {
         res.status(404).json({message: "User not found"});
         throw new Error('User not found');
@@ -99,7 +99,7 @@ export const deleteUser = asyncHandler(async(req, res) => {
 
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
     try {
-        const projects = await User.findOne({email: req.user.email})
+        const projects = await User.findOne({_id: req.params.userId})
             .populate('projects');
         res.json(projects);  
     } catch(err) {
@@ -110,7 +110,7 @@ export const getProjectsOfUser = asyncHandler(async(req, res) => {
 
 
 export const addProjectToUser = asyncHandler(async(req, res) => {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const projectId = req.body.projectId;
 
     const update = {
@@ -134,7 +134,7 @@ export const addProjectToUser = asyncHandler(async(req, res) => {
 
 
 export const deleteProjectFromUser = asyncHandler(async(req, res) => {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const update = { 
         $pullAll: {
             projects: [req.body.projectId],
@@ -156,7 +156,7 @@ export const deleteProjectFromUser = asyncHandler(async(req, res) => {
 
 
 export const getUsersByProject = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const id = req.params.userId;
     
     try {
         const users = await User.find({projects: id});
@@ -169,7 +169,7 @@ export const getUsersByProject = asyncHandler(async(req, res) => {
 
 
 export const getUsersWithoutProject = asyncHandler(async(req, res) => {
-    const id = req.params.id;
+    const id = req.params.userId;
     
     try {
         const users = await User.find({projects: {"$ne": id}});

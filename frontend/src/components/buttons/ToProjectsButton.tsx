@@ -36,7 +36,7 @@ function ButtonToProjects() {
 
   return (
     <div>
-      <Link className={classes.buttonLink} to='/projects'>
+      <Link className={classes.buttonLink} to='/home/projects'>
             <Card className={classes.toProjectsCard}>
                   YOUR PROJECTS
             </Card>

@@ -25,7 +25,6 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
                   dateEnd: props.project.dateEnd,
                   creator: props.project.creator,
             }
-
             dispatch({type: ActionTypes.FetchData, payload: initialReducerData});
       }, [props.project])
 

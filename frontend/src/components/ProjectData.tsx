@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { useRouteMatch } from "react-router-dom";
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import GetBoard from "./functional/GetBoard";
 import GetBoardsGallery from "./functional/GetBoardsGallery";
 

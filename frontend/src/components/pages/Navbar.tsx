@@ -117,7 +117,7 @@ const Navbar: FC<NavbarProps> = (props) => {
             <div className={classes.offset}/>
             <AppBar elevation={0} className={classes.appbar} >
             <Toolbar className={classes.toolbar}>
-                  <Link className={classes.linkWrapper} to={props.loggedIn? '/projects' : '/'}>
+                  <Link className={classes.linkWrapper} to={props.loggedIn? '/home/projects' : '/'}>
                         <img className={classes.logoIcon} src={darkMode? DarkIcon : Icon} alt='site icon'/>
                         <img className={classes.logo} src={darkMode? DarkLogo : Logo} alt='site logo'/>
                   </Link>
@@ -144,7 +144,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                   {props.loggedIn && (
                         <>
                         <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
-                              <IconButton aria-label="projects" component={Link} to="/projects">
+                              <IconButton aria-label="projects" component={Link} to="/home">
                                     <ProjectsIcon className={classes.buttonIcon}/>
                               </IconButton>
                         </Tooltip>
@@ -176,7 +176,8 @@ const Navbar: FC<NavbarProps> = (props) => {
                               <MenuItem 
                                     className={classes.menuItem} 
                                     onClick={handleClose} 
-                                    component={Link} to="/user/profile" 
+                                    component={Link} 
+                                    to="/user/profile" 
                               >
                                     Profile
                               </MenuItem>
@@ -192,7 +193,8 @@ const Navbar: FC<NavbarProps> = (props) => {
                               <MenuItem
                                     className={classes.menuItem} 
                                     onClick={handleLogout} 
-                                    component={Link} to="/" 
+                                    component={Link} 
+                                    to="/" 
                               >
                                     Logout
                               </MenuItem>

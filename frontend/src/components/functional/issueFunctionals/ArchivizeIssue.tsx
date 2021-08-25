@@ -17,6 +17,7 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 	function archivizeIssue() {
 		const requestBody = {
 			columnId: null,
+			contributors: [],
 		}
 
 		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {

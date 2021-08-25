@@ -3,13 +3,13 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import React, { createContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AllProjectsPage from './components/pages/AllProjectsPage';
-import HomePage from './components/pages/HomePage';
+import GetHomePage from './components/functional/GetHomePage';
 import LoggedUserPage from './components/pages/LoggedUserPage';
 import LoginPage from './components/pages/LoginPage';
 import Navbar from './components/pages/Navbar';
 import ProjectPage from './components/pages/ProjectPage';
 import RegisterPage from './components/pages/RegisterPage';
+import TitlePage from './components/pages/TitlePage';
 import UserPage from './components/pages/UserPage';
 import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
@@ -41,14 +41,15 @@ const App = () => {
             <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
             <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
           </Helmet>
+          
           <Router>
             <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
             <Switch>
-              <Route path="/projects/:projectId">
-                  <ProjectPage/>
+              <Route path="/home">
+                  <GetHomePage/>
               </Route>
-              <Route path="/projects">
-                  <AllProjectsPage/>
+              <Route path="/project/:projectId">
+                  <ProjectPage/>
               </Route>
               <Route path="/login">
                   <LoginPage setLoggedIn={setLoggedIn}/>
@@ -63,7 +64,7 @@ const App = () => {
                   <UserPage/>
               </Route>
               <Route path="/">
-                  <HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                  <TitlePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
               </Route>
             </Switch>
           </Router>

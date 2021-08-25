@@ -73,7 +73,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
 	const { dispatch } = useContext(BoardReducerContext);
 	
 	function handleGoBack() {
-		history.push(`/projects/${projectId}`);
+		history.push(`/project/${projectId}`);
 	}
 
 
