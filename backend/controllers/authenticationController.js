@@ -25,13 +25,17 @@ export const loginUser = asyncHandler(async(req, res) => {
 })
 
 
-export const getUserByToken = asyncHandler(async(req, res) => {
-      if(req.user) {
-            res.send(req.user);
-      } else {
-            res.status(401).json({ message: 'Invalid token' });
+export const newOrganizationToken = asyncHandler(async(req, res) => {
+      const user = req.body;
+
+      try {
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            res.json({ token: accessToken});
+      } catch(err) {
+            res.status(401).json({message: 'Authentication failed. Invalid user or password.'});
       }
-});
+
+})
 
 
 // middleware for JWT token authentication

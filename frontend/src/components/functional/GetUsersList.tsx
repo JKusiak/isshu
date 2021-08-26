@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
 import UsersGallery from "../galleries/UsersGallery";
+import { getLoggedInUser } from "./GetLoggedInUser";
 
 interface GetUsersListProps {
       mobileOpen: boolean,
@@ -12,24 +13,20 @@ interface GetUsersListProps {
 
 
 const GetUsersList: FC<GetUsersListProps> = (props) => {
-      const { projectId } = useParams<{projectId: string}>();
+      const { projectId } = useParams<{ projectId: string }>();
       const [otherUsers, setOtherUsers] = useState<[IUser]>([UserTemplate]);
       const [contributors, setContributors] = useState<[IUser]>([UserTemplate]);
+      const organizationId = getLoggedInUser().organizationId;
 
-      
       useEffect(() => {
             fetchOtherUsers();
-        }, [projectId]);
-
-      
-      useEffect(() => {
             fetchContributors();
-      }, [projectId]); 
+      }, [projectId]);
 
-      
+
       // fetching users that do not belong to currently displayed project
       function fetchOtherUsers() {
-            axios.get(`http://localhost:5000/users/getUsersWithoutProject/${projectId}`, {
+            axios.get(`http://localhost:5000/users/getUsersWithoutProject/${organizationId}/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
@@ -42,7 +39,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
 
 
       // fetching users that belong to currently displayed project
-        function fetchContributors() {
+      function fetchContributors() {
             axios.get(`http://localhost:5000/users/getUsersByProject/${projectId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -52,11 +49,11 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             });;
-        }
+      }
 
 
-        // add currently displayed project to clicked user
-        function addProjectToUser(userId: string) {
+      // add currently displayed project to clicked user
+      function addProjectToUser(userId: string) {
             const projectIdData = {
                   projectId: projectId
             }
@@ -66,18 +63,18 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
             }).then((resp) => {
-                  
+
             }).catch((err) => {
                   console.log(err);
             });
 
             fetchContributors();
             fetchOtherUsers();
-        }
+      }
 
 
       // remove currently displayed project from clicked user
-        function removeProjectFromUser(userId: string) {
+      function removeProjectFromUser(userId: string) {
             axios.delete(`http://localhost:5000/users/deleteProject/${userId}`, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -85,7 +82,7 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
                   data: {
                         projectId: projectId
                   }
-            }).then(() => { 
+            }).then(() => {
 
             }).catch((err) => {
                   console.log(err);
@@ -93,20 +90,20 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
 
             fetchContributors();
             fetchOtherUsers();
-        }
+      }
 
 
       return (
-      <>
-            <UsersGallery 
-                  contributors={contributors} 
-                  otherUsers={otherUsers} 
-                  mobileOpen={props.mobileOpen} 
-                  handleSidebarToggle={props.handleSidebarToggle}
-                  addProjectToUser={addProjectToUser}
-                  removeProjectFromUser={removeProjectFromUser}
-            />
-      </>
+            <>
+                  <UsersGallery
+                        contributors={contributors}
+                        otherUsers={otherUsers}
+                        mobileOpen={props.mobileOpen}
+                        handleSidebarToggle={props.handleSidebarToggle}
+                        addProjectToUser={addProjectToUser}
+                        removeProjectFromUser={removeProjectFromUser}
+                  />
+            </>
       );
 }
 

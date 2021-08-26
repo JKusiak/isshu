@@ -102,9 +102,7 @@ function onSubmit(e: React.SyntheticEvent) {
 				setIsValid(false);
 				setErrorText('Email already taken');
 			});
-	} else (
-			console.log("Error")
-	);
+	}
 }
 
 

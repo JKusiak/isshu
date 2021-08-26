@@ -41,7 +41,7 @@ export const addIssue = asyncHandler(async(req, res) => {
             const populatedIssue = await Issue.findById(savedIssue._id)
                   .populate({
                         path: 'creator',
-                        select: 'name surname',
+                        select: 'name surname organizationId',
                         model: 'User',
                   })
             res.json(populatedIssue);

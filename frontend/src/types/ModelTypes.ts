@@ -3,11 +3,7 @@
 export interface IOrganization {
       _id: string;
       name: string;
-      archivedIssues: [{
-            _id: string,
-            name: string, 
-            description: string
-      }];
+      archivedIssues: [];
 }
 
 
@@ -89,6 +85,7 @@ export interface INestedUser {
       _id: string;
       name: string;
       surname: string;
+      organizationId: string;
 }
 
 export interface INestedBoard {

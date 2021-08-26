@@ -6,12 +6,12 @@ const organizationSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	archivedIssues: {
+	archivedIssues: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Issue',           
 		required: false,
-		default: null,
-	}
+		default: [],
+	}]
 });
 
 

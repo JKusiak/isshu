@@ -46,8 +46,12 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(2.3),
             marginLeft: theme.spacing(2),
       },
-      buttonIcon: {
-            transform: 'scale(1.1)',
+      homeIcon: {
+            fontSize: '28px',
+            color: theme.palette.secondary.main,
+      },
+      profileIcon: {
+            fontSize: '24px',
             color: theme.palette.secondary.main,
       },
       navbarTextButton: {
@@ -143,17 +147,17 @@ const Navbar: FC<NavbarProps> = (props) => {
 
                   {props.loggedIn && (
                         <>
-                        <Tooltip title="Your projects" aria-label="projects" placement="bottom" enterDelay={300} leaveDelay={100}>
+                        <Tooltip title="Home" aria-label="projects" placement="bottom" enterDelay={500} leaveDelay={200}>
                               <IconButton aria-label="projects" component={Link} to="/home/projects">
-                                    <HomeIcon className={classes.buttonIcon}/>
+                                    <HomeIcon className={classes.homeIcon}/>
                               </IconButton>
                         </Tooltip>
                         
                         <AddProject/>
                         
-                        <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={300} leaveDelay={100}>
+                        <Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={500} leaveDelay={200}>
                               <IconButton aria-label="user profile" onClick={handleMenu}>
-                                    <ProfileIcon className={classes.buttonIcon}/>
+                                    <ProfileIcon className={classes.profileIcon}/>
                               </IconButton>
                         </Tooltip>
                         <Menu

@@ -7,6 +7,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import React, { FC } from 'react';
+import { getLoggedInUser } from '../functional/GetLoggedInUser';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       modal: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             padding: theme.spacing(2, 4, 3),
       },
       icon: {
-            fontSize: 25,
+            fontSize: 26,
             color: theme.palette.secondary.main,
       },
       header: {
@@ -101,15 +102,16 @@ interface AddProjectModalProps {
 
 const AddProjectModal: FC<AddProjectModalProps> = (props) => {
       const classes = useStyles();
-      
       const projectNameRegex = /^$|^[A-Za-z][a-z\s]*$/;
+      const isInOrganization = getLoggedInUser().organizationId === null;
 
 
       return (
             <>
-            <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={300} leaveDelay={100}>
+            <Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={500} leaveDelay={200}>
                   <IconButton
                         aria-label="add project" 
+                        disabled={isInOrganization}
                         onClick={() => props.setIsOpen(true)}
                   >
                         <AddProjectIcon className={classes.icon}/>

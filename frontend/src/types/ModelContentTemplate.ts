@@ -91,6 +91,7 @@ export const NestedUserTemplate: INestedUser = {
       _id: '',
       name: '',
       surname: '',
+      organizationId: '',
 }
 
 export const NestedMessageTemplate: INestedMessage = {
@@ -138,9 +139,5 @@ export const NestedProjectTemplate: INestedProject = {
 export const OrganizationTemplate: IOrganization = {
       _id: '',
       name: '',
-      archivedIssues: [{
-            _id: '',
-            name: '', 
-            description: '',
-      }],
+      archivedIssues: [],
 }

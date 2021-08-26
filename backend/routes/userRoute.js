@@ -32,4 +32,4 @@ protectedUserRouter.route('/deleteProject/:userId').delete(deleteProjectFromUser
 
 protectedUserRouter.route('/getUsersByProject/:userId').get(getUsersByProject);
 
-protectedUserRouter.route('/getUsersWithoutProject/:userId').get(getUsersWithoutProject);
+protectedUserRouter.route('/getUsersWithoutProject/:organizationId/:projectId').get(getUsersWithoutProject);

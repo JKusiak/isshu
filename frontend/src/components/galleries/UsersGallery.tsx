@@ -81,11 +81,6 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
       const container = window !== undefined ? () => window().document.body : undefined;
    
 
-      function handleButtonHover() {
-           
-      }
-
-
       function displayUsers(userType: [IUser]) {
             if(userType.length > 0) {
                   return(userType.map((user: IUser) => {
@@ -127,7 +122,6 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
                                                                   edge="end" 
                                                                   aria-label="add-user" 
                                                                   onClick={() => props.addProjectToUser(user._id)}
-                                                                  onMouseOver={handleButtonHover}
                                                             >
                                                                   <AddIcon/>
                                                             </IconButton>

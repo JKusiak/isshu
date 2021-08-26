@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			minWidth: 680,
-			marginTop: theme.spacing(5),
-			marginBottom: theme.spacing(5),
+			fontSize: '28px',
 			fontWeight: 'bold',
 			color: theme.palette.secondary.main,
+			marginTop: theme.spacing(4),
+			marginBottom: theme.spacing(5),
 		},
 		projectsGrid: {
 			display: 'grid',
@@ -127,7 +127,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 
 	return (
 		<>
-			<Typography className={classes.header} component="h1" variant="h4">
+			<Typography className={classes.header}>
 				Your projects
 			</Typography>
 			<div className={classes.projectsGrid}>

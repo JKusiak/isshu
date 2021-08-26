@@ -14,7 +14,7 @@ interface ArchivizeIssueProps {
 // this does not work as delete because issues remain after deleting
 // in the organization archive of all issues
 const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
-	
+	const loggedInUser = getLoggedInUser();
 
 	function updateIssue() {
 		const requestBody = {
@@ -36,8 +36,7 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 		const requestBody = {
 			issueId: props.issue._id,
 		}
-
-		axios.post(`http://localhost:5000/organization/addToArchive/${getLoggedInUser().organizationId}`, requestBody, {
+		axios.post(`http://localhost:5000/organization/addToArchive/${loggedInUser.organizationId}`, requestBody, {
 				headers: {
 					'Authorization': `Bearer ${localStorage.getItem('token')}`
 				}
@@ -48,8 +47,8 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 
 
 	function archivizeIssue() {
-		updateIssue();
 		addToArchive();
+		updateIssue();
 		props.setIssueModalOpen(false);
 	}
 

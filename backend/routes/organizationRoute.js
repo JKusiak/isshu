@@ -2,7 +2,7 @@ import express from 'express';
 import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
 	addIssueToArchive,
-	addOrganization, deleteOrganization, getAllOrganizations, getMembersOfOrganization, getOrganizationById,
+	addOrganization, deleteOrganization, getAllOrganizations, getArchivedIssues, getMembersOfOrganization, getOrganizationById,
 	getProjectsOfOrganization, updateOrganization
 } from '../controllers/organizationController.js';
 
@@ -18,6 +18,8 @@ protectedOrganizationRouter.route('/:organizationId').get(getOrganizationById);
 protectedOrganizationRouter.route('/projects/:organizationId').get(getProjectsOfOrganization);
 
 protectedOrganizationRouter.route('/members/:organizationId').get(getMembersOfOrganization);
+
+protectedOrganizationRouter.route('/archive/:organizationId').get(getArchivedIssues);
 
 protectedOrganizationRouter.route('/add').post(addOrganization);
 

@@ -1,7 +1,8 @@
-import { Card, CardContent, InputAdornment, TextField, Typography } from "@material-ui/core";
+import { InputAdornment, TextField, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SearchIcon from '@material-ui/icons/SearchOutlined';
 import { FC, Fragment, useState } from "react";
+import ArchivedIssueCard from "../modals/ArchivedIssueCard";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -10,10 +11,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			marginTop: theme.spacing(5),
-			marginBottom: theme.spacing(5),
 			fontWeight: 'bold',
+			fontSize: '28px',
 			color: theme.palette.secondary.main,
+			marginTop: theme.spacing(4),
+			marginBottom: theme.spacing(2),
 		},
 		searchWrapper: {
 			display: 'flex',
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginBottom: theme.spacing(5),
 		},
 		searchField: {
+			width: '350px',
 			"& .MuiOutlinedInput-root": {
 				color: theme.palette.secondary.main,
 				"& .MuiOutlinedInput-notchedOutline": { 
@@ -43,32 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),
 		},
-		link: {
-			textDecoration: 'none',
-			color: theme.palette.secondary.main,
-		},
-		cardContainer: {
-			height: 140,
-			width: 400,
-			transition: 'all .12s linear',
-			boxShadow: theme.shadows[2],
-			backgroundColor: theme.palette.primary.light,
-			"&:hover": {
-				boxShadow: theme.shadows[5],
-			},
-		},
-		cardContent: {
-			display: 'flex',
-			flexDirection: 'column',
-			width: '100%',
-			maxWidth: '260px',
-		},
-		name: {
-			color: theme.palette.secondary.main,
-		},
-		issue: {
-			color: theme.palette.secondary.main,
-		}
+		
 	})
 );
 
@@ -94,6 +72,18 @@ const ArchiveGallery: FC<ArchiveGalleryProps> = (props) => {
 	}
 
 
+	function displayIssues() {
+		return(
+			search(props.archivedIssues).map((issue: any) => {
+				return (
+					<Fragment key={issue._id}>
+						<ArchivedIssueCard issue={issue}/>
+					</Fragment>	
+				);
+			})
+		)
+	}
+
 	return (
 		<>
 			<Typography className={classes.header} component="h1" variant="h4">
@@ -114,25 +104,7 @@ const ArchiveGallery: FC<ArchiveGalleryProps> = (props) => {
 				/>
 			</div>
 			<div className={classes.issuesGrid}>
-				{search(props.archivedIssues).map((issue: any) => {
-				return (
-					<Fragment key={issue._id}>
-						{/* <Link className={classes.link} to={`/project/${project._id}`}> */}
-							<Card className={classes.cardContainer}>
-								<CardContent className={classes.cardContent}>
-									<Typography className={classes.name} component="h5" variant="h5">
-										{issue.name}
-									</Typography>
-									<Typography className={classes.issue} variant="subtitle1" color="textSecondary">
-										{issue.description}
-									</Typography>
-								</CardContent>
-								
-							</Card>
-						{/* </Link> */}
-					</Fragment>
-				);
-			})}
+				{displayIssues()}
 			</div>
 		</>
 	);

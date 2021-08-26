@@ -19,12 +19,7 @@ export const getOrganizationById = asyncHandler(async(req, res) => {
     const organizationId = req.params.organizationId;
 
     try {
-        const organization = await Organization.findOne({_id: organizationId})
-			.populate({
-				path: 'archivedIssues',
-				select: 'name description',
-				model: 'Issue',
-			})
+        const organization = await Organization.findOne({_id: organizationId});    
         res.json(organization);
     } catch(err) {
         res.status(404).json({message: "Organization not found"});
@@ -57,6 +52,43 @@ export const getMembersOfOrganization = asyncHandler(async(req, res) => {
     } catch(err) {
         res.status(404).json({message: "Projects not found"});
         throw new Error('Projects not found');
+    }
+});
+
+
+export const getArchivedIssues = asyncHandler(async(req, res) => {
+    const organizationId = req.params.organizationId;
+
+    try {
+        const organization = await Organization.findOne({_id: organizationId})
+            .select('archivedIssues')
+            .populate({
+                path: 'archivedIssues',
+                model: 'Issue',
+                populate: [{
+                    path: 'tags',
+                    model: 'Tag',
+                },{
+                    path: 'creator',
+                    select: 'name surname',
+                    model: 'User',
+                },{
+                    path: 'contributors',
+                    select: 'name surname',
+                    model: 'User',
+                },{
+                    path: 'messages',
+                    populate: {
+                        path: 'sender',
+                        select: 'name surname',
+                        model: 'User',
+                    },
+                }]
+            })
+        res.json(organization);
+    } catch(err) {
+        res.status(404).json({message: "Organization not found"});
+        throw new Error('Organization not found');
     }
 });
 

@@ -24,7 +24,6 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
                   name: tempBoardName,
             }
 
-            console.log('here')
             axios.post(`http://localhost:5000/boards/update/${boardId}`, board, {
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`

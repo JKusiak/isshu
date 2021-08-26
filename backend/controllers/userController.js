@@ -5,7 +5,8 @@ import User from '../models/userModel.js';
 // TODO simplify to get rid of boilerplate code for all API endpoints
 export const getAllUsers = asyncHandler(async(req, res) => {
     try {
-        const users = await User.find({});
+        const users = await User.find({organizationId: null})
+            .select('name surname email organizationId');
         res.json(users) ;
     } catch(err) {
         res.status(500).json({message: "Server error on fetching users"});
@@ -66,12 +67,7 @@ export const addUser = asyncHandler(async(req, res) => {
 export const updateUser = asyncHandler(async(req, res) => {
     const id = req.params.userId;
     const update = { 
-        $set: {
-            name: req.body.name,
-            surname: req.body.surname,
-            email: req.body.email,
-            isAdmin: req.body.isAdmin,
-        } 
+        $set: req.body
     };
     const options =  {
         new: true, 
@@ -79,7 +75,8 @@ export const updateUser = asyncHandler(async(req, res) => {
     };
 
     try {
-        await User.findByIdAndUpdate(id, update, options);
+        const updatedUser = await User.findByIdAndUpdate(id, update, options);
+        res.json(updatedUser);
     } catch(err) {
         res.status(400).json({message: "Update of user unsuccessful"});
             throw new Error('Update of user unsuccessful');
@@ -169,10 +166,11 @@ export const getUsersByProject = asyncHandler(async(req, res) => {
 
 
 export const getUsersWithoutProject = asyncHandler(async(req, res) => {
-    const id = req.params.userId;
+    const projectId = req.params.projectId;
+    const organizationId = req.params.organizationId;
     
     try {
-        const users = await User.find({projects: {"$ne": id}});
+        const users = await User.find({organizationId: organizationId, projects: {"$ne": projectId}});
         res.json(users);  
     } catch(err) {
         res.status(404).json({message: "No users without this project"});

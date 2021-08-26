@@ -1,7 +1,7 @@
-import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, Fragment } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Fragment, useContext } from "react";
+import { Link } from "react-router-dom";
 // hardcoded now just for aesthetic purposes during development <3
 import ProjectCover1 from '../../resources/covers/project_cover1.png';
 import ProjectCover2 from '../../resources/covers/project_cover2.png';
@@ -11,6 +11,9 @@ import ProjectCover5 from '../../resources/covers/project_cover5.png';
 import ProjectCover6 from '../../resources/covers/project_cover6.png';
 import ProjectCover7 from '../../resources/covers/project_cover7.png';
 import { INestedUser } from "../../types/ModelTypes";
+import DeleteMember from "../functional/DeleteMember";
+import GetAllUsers from "../functional/GetAllUsers";
+import { FetchMembersContext } from "../functional/GetHomePage";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			minWidth: 680,
-			marginTop: theme.spacing(5),
-			marginBottom: theme.spacing(5),
 			fontWeight: 'bold',
+			fontSize: '28px',
 			color: theme.palette.secondary.main,
+			marginTop: theme.spacing(4),
+			marginBottom: theme.spacing(2),
 		},
 		projectsGrid: {
 			display: 'grid',
@@ -53,11 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
+			textDecoration: 'none',
+			color: theme.palette.secondary.main,
 			width: '100%',
 			maxWidth: '260px',
 		},
-		// dirty trick to make content display in the center if text
-		// is short, if long 'empty' will shrink to zero
 		name: {
 			color: theme.palette.secondary.main,
 		},
@@ -83,34 +86,32 @@ function shuffleProjectCover() {
 }
 
 
-interface ProjectListProps {
-	members: [INestedUser];
-}
-
-
-const ProjectsGallery: FC<ProjectListProps> = (props) => {
+const ProjectsGallery = () => {
 	const classes = useStyles();
-	const { url } = useRouteMatch();
+	const { members } = useContext(FetchMembersContext);
 
 	function displayProjects() {
-		if (props.members.length > 0) {
-			return (props.members.map((member: INestedUser) => {
+		if (members.length > 0) {
+			return (members.map((member: INestedUser) => {
 				return (
 					<Fragment key={member._id}>
-						<Link className={classes.link} to={`/user/${member._id}`}>
-							<Card className={classes.cardContainer}>
-								<CardMedia
-									className={classes.image}
-									image={shuffleProjectCover()}
-									title="Member profile photo"
-								/>
-								<CardContent className={classes.cardContent}>
-									<Typography className={classes.name} component="h5" variant="h5">
-										{member.name} {member.surname}
-									</Typography>
-								</CardContent>
-							</Card>
-						</Link>
+						<Card className={classes.cardContainer}>
+							<CardMedia
+								className={classes.image}
+								component={Link} to={`/user/${member._id}`}
+								image={shuffleProjectCover()}
+								title="Member profile photo"
+							/>
+							<CardContent className={classes.cardContent} component={Link} to={`/user/${member._id}`}>
+								<Typography className={classes.name} component="h5" variant="h5">
+									{member.name} {member.surname}
+								</Typography>
+							</CardContent>
+							<CardActions>
+								<DeleteMember member={member} />
+							</CardActions>
+						</Card>
+
 					</Fragment>
 				);
 			}));
@@ -122,6 +123,9 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 			<Typography className={classes.header} component="h1" variant="h4">
 				Members
 			</Typography>
+
+			<GetAllUsers />
+
 			<div className={classes.projectsGrid}>
 				{displayProjects()}
 			</div>

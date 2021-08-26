@@ -53,7 +53,7 @@ export const getNestedBoard = asyncHandler(async(req, res) => {
                               model: 'Tag',
                         },{
                               path: 'creator',
-                              select: 'name surname',
+                              select: 'name surname organizationId',
                               model: 'User',
                         },{
                               path: 'contributors',

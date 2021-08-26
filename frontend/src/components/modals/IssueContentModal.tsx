@@ -102,7 +102,7 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
                   open={props.isIssueModalOpen}
-                  onClose={() => props.setIssueModalOpen(false)}
+                  onClose={() => {{props.setIssueModalOpen(false)}}}
                   closeAfterTransition
                   BackdropComponent={Backdrop}
                   BackdropProps={{
@@ -134,7 +134,9 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                               <div className={classes.rightColumn}>
                                     <div className={classes.creatorContainer}>
                                          <span className={classes.creatorTitle}>Creator</span> 
-                                         <span className={classes.creatorName}>{`${props.issue.creator.name} ${props.issue.creator.surname}`}</span>
+                                         <span className={classes.creatorName}>
+                                               {`${props.issue.creator.name} ${props.issue.creator.surname}`}
+                                          </span>
                                     </div>
                                     <ManageContributors issue={props.issue} />
                                     <ManageSteps issue={props.issue} />
