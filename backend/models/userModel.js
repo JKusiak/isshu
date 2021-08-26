@@ -43,6 +43,12 @@ const userSchema = mongoose.Schema({
             ref: 'Project',
             required: false,
             default: null,
+      }],
+      invitations: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Organization',
+            required: false,
+            default: [],
       }]
 });
 

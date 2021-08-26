@@ -51,11 +51,20 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			color: theme.palette.secondary.main,
 		},
+		invitePrompt: {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			color: 'green',
+			fontSize: '16px',
+			fontWeight: 'bold',
+			marginTop: theme.spacing(5),
+		}
 	})
 );
 
 
-interface IssueContributorsGalleryProps {
+interface AddMemberButtonProps {
 	allUsers: any,
 	query: string,
 	setQuery: React.Dispatch<SetStateAction<string>>,
@@ -65,29 +74,35 @@ interface IssueContributorsGalleryProps {
 }
 
 
-const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
+const AddMemberButton: FC<AddMemberButtonProps> = (props) => {
 	const classes = useStyles();
 	const [resetAutocomplete, setResetAutocomplete] = useState<boolean>(false);
-	
+	const [inviteSent, setInviteSent] = useState(false);
 	
 
 	function handleSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 		if(props.user._id !== '') {
 			props.sendMemberInvite();
+			setInviteSent(true);
 		}
 		setResetAutocomplete(!resetAutocomplete);
 	}
 
 
 	return (
+		<>
+		
 		<div className={classes.searchWrapper}>
 			<form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
 				<Autocomplete
 					key={resetAutocomplete.toString()}
 					className={classes.autocomplete}
 					classes={{ paper: classes.dropdownPaper }}
-					onInputChange={((e, value) => props.setQuery(value))}
+					onInputChange={((e, value) => {
+						props.setQuery(value); 
+						setInviteSent(false);
+					})}
 					open={props.query.length >= 3}
 					onChange={((e, value) => {props.setUser(value); props.setQuery('')})}
 					options={props.allUsers}
@@ -100,9 +115,14 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 							variant='outlined'
 						/>}
 				/>
+				{inviteSent &&
+					<div className={classes.invitePrompt}>Invite sent</div>
+				}
 			</form>
 		</div>
+		
+		</>
 	);
 }
 
-export default IssueContributorsGallery;
+export default AddMemberButton;

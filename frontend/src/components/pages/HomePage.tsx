@@ -7,6 +7,7 @@ import { IOrganization } from "../../types/ModelTypes";
 import AddOrganization from "../functional/AddOrganization";
 import GetArchiveGallery from "../functional/GetArchiveGallery";
 import UpdateOrganization from "../functional/UpdateOrganization";
+import InvitationsGallery from "../galleries/InvitationsGallery";
 import MembersGallery from "../galleries/MembersGallery";
 import ProjectsGallery from "../galleries/ProjectsGallery";
 
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		emptyContainer: {
 			display: 'flex',
+			flexDirection: 'column',
 			height: '90vh',
 			width: '100%',
 			justifyContent: 'center',
@@ -139,9 +141,12 @@ const HomePage: FC<HomePageProps> = (props) => {
 	function displayWithoutOrganization() {
 		console.log(props.user);
 		return (
+			<>
 			<div className={classes.emptyContainer}>
 				<AddOrganization/>
+				<InvitationsGallery user={props.user}/>
 			</div>
+			</>
 		)
 	}
 

@@ -6,7 +6,7 @@ import User from '../models/userModel.js';
 export const getAllUsers = asyncHandler(async(req, res) => {
     try {
         const users = await User.find({organizationId: null})
-            .select('name surname email organizationId');
+            .select('name surname email organizationId invitations');
         res.json(users) ;
     } catch(err) {
         res.status(500).json({message: "Server error on fetching users"});
@@ -97,7 +97,9 @@ export const deleteUser = asyncHandler(async(req, res) => {
 export const getProjectsOfUser = asyncHandler(async(req, res) => {
     try {
         const projects = await User.findOne({_id: req.params.userId})
-            .populate('projects');
+            .populate('projects')
+            .populate('invitations')
+            
         res.json(projects);  
     } catch(err) {
         res.status(404).json({message: "User not found"});

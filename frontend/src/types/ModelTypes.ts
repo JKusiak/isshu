@@ -16,6 +16,7 @@ export interface IUser {
       isAdmin: boolean;
       organizationId: string; // ref id
       projects: [string];     // ref id
+      invitations: [string]   // ref id
 }
 
 export interface IProject {

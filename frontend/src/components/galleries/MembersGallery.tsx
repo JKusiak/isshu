@@ -12,8 +12,8 @@ import ProjectCover6 from '../../resources/covers/project_cover6.png';
 import ProjectCover7 from '../../resources/covers/project_cover7.png';
 import { INestedUser } from "../../types/ModelTypes";
 import DeleteMember from "../functional/DeleteMember";
-import GetAllUsers from "../functional/GetAllUsers";
 import { FetchMembersContext } from "../functional/GetHomePage";
+import ManageMembers from "../functional/ManageMembers";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -86,11 +86,11 @@ function shuffleProjectCover() {
 }
 
 
-const ProjectsGallery = () => {
+const MembersGallery = () => {
 	const classes = useStyles();
 	const { members } = useContext(FetchMembersContext);
 
-	function displayProjects() {
+	function displayMembers() {
 		if (members.length > 0) {
 			return (members.map((member: INestedUser) => {
 				return (
@@ -111,7 +111,6 @@ const ProjectsGallery = () => {
 								<DeleteMember member={member} />
 							</CardActions>
 						</Card>
-
 					</Fragment>
 				);
 			}));
@@ -124,13 +123,13 @@ const ProjectsGallery = () => {
 				Members
 			</Typography>
 
-			<GetAllUsers />
+			<ManageMembers />
 
 			<div className={classes.projectsGrid}>
-				{displayProjects()}
+				{displayMembers()}
 			</div>
 		</>
 	);
 }
 
-export default ProjectsGallery;
+export default MembersGallery;

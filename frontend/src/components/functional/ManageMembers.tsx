@@ -37,9 +37,13 @@ const GetAllUsers: FC<GetUsersListProps> = (props) => {
 
 
 	function sendMemberInvite() {
+		// check to see if already got invite to avoid sending twice
+		if(addedUser.invitations.some(invite => invite === loggedInUser.organizationId)) return;
+
 		const requestBody = {
-			organizationId: loggedInUser.organizationId
+			invitations: [...addedUser.invitations, loggedInUser.organizationId]
 		}
+		
 		axios.post(`http://localhost:5000/users/update/${addedUser._id}`, requestBody, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`

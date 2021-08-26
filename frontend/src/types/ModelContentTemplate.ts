@@ -28,6 +28,7 @@ export const UserTemplate: IUser = {
       isAdmin: false,
       organizationId: '',
       projects: [''],
+      invitations: [''],
 };
 
 export const ProjectTemplate: IProject = {

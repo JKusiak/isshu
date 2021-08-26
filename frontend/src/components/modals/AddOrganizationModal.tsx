@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				boxShadow: theme.shadows[5],
 				cursor: 'pointer',
 			},
+			marginBottom: theme.spacing(4),
 		},
 		cardText: {
 			color: theme.palette.secondary.main,
