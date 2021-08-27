@@ -58,6 +58,13 @@ export const overrides = {
           }
         }
     },
+	MuiMenuItem: {
+		root: {
+			'&:hover': {
+			  backgroundColor: '#575757',
+			}
+		  }
+	}
 }
 
 

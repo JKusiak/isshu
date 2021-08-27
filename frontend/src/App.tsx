@@ -13,58 +13,58 @@ import TitlePage from './components/pages/TitlePage';
 import UserPage from './components/pages/UserPage';
 import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
-export const DarkModeContext = createContext<{darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>>}>({} as any);
+export const DarkModeContext = createContext<{ darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState<boolean>(
     localStorage.getItem('token') === '' ? false : true
   );
   const [darkMode, setDarkMode] = useState<boolean>(
-    localStorage.getItem('darkMode') === 'true'? true : false
+    localStorage.getItem('darkMode') === 'true' ? true : false
   );
-  
+
   const defaultTheme = createMuiTheme();
 
   const theme = createMuiTheme({
-    palette: darkMode? darkPalette : lightPalette,
-    shadows: darkMode? getAntiShadows() : defaultTheme.shadows,
-    overrides: darkMode? overrides : undefined
+    palette: darkMode ? darkPalette : lightPalette,
+    shadows: darkMode ? getAntiShadows() : defaultTheme.shadows,
+    overrides: darkMode ? overrides : undefined
   });
 
 
   return (
     <ThemeProvider theme={theme}>
-      <DarkModeContext.Provider value={{darkMode, setDarkMode}}>
+      <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
         <CssBaseline>
           <Helmet>
             <title>Isshu.</title>
             <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
             <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
           </Helmet>
-          
+
           <Router>
-            <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+            <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
             <Switch>
               <Route path="/home">
-                  <GetHomePage/>
+                <GetHomePage />
               </Route>
               <Route path="/project/:projectId">
-                  <ProjectPage/>
+                <ProjectPage />
               </Route>
               <Route path="/login">
-                  <LoginPage setLoggedIn={setLoggedIn}/>
+                <LoginPage setLoggedIn={setLoggedIn} />
               </Route>
               <Route path="/register">
-                  <RegisterPage/>
+                <RegisterPage />
               </Route>
               <Route path="/user/profile">
-                  <LoggedUserPage/>
+                <LoggedUserPage />
               </Route>
               <Route path="/user/:userId">
-                  <UserPage/>
+                <UserPage />
               </Route>
               <Route path="/">
-                  <TitlePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                <TitlePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
               </Route>
             </Switch>
           </Router>

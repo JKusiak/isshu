@@ -19,9 +19,6 @@ import AddProject from '../functional/AddProject';
 
 
 const useStyles = makeStyles((theme) => ({
-      root: {
-            flexGrow: 1,
-      },
       appbar: {
             height: theme.spacing(8.5),
             boxShadow: theme.shadows[5],
@@ -45,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
             height: 75,
             padding: theme.spacing(2.3),
             marginLeft: theme.spacing(2),
+      },
+      buttonsContainer: {
+            marginLeft: 'auto',
       },
       homeIcon: {
             fontSize: '28px',
@@ -117,7 +117,7 @@ const Navbar: FC<NavbarProps> = (props) => {
 
       
       return (
-      <div className={classes.root}>
+      <>
             <div className={classes.offset}/>
             <AppBar elevation={0} className={classes.appbar} >
             <Toolbar className={classes.toolbar}>
@@ -126,7 +126,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                         <img className={classes.logo} src={darkMode? DarkLogo : Logo} alt='site logo'/>
                   </Link>
                   
-                  <div className={classes.root}/>
+                  <div className={classes.buttonsContainer}/>
                   {!props.loggedIn && (
                         <>
                         <Button className={classes.navbarTextButton} component={Link} to="/">
@@ -207,7 +207,7 @@ const Navbar: FC<NavbarProps> = (props) => {
                   )}   
             </Toolbar>
             </AppBar>
-      </div>
+      </>
       );
 }
 

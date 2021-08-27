@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
       buttonLink: {
-            // color: theme.palette.secondary.main,
             textDecoration: 'none',
       },
       toProjectsCard: {
@@ -15,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             alignItems: 'center',
             width: '200px',
             height: '40px',
-            marginTop: theme.spacing(8),
             borderRadius: '10px',
             background: 'white',
             fontSize: '14px',
