@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import { FC, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { IUser } from '../../types/ModelTypes';
+import { getLoggedInUser } from '../functional/GetLoggedInUser';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,9 +77,8 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 	const classes = useStyles();
 	const theme = useTheme();
 	const { window } = props;
-
-
 	const container = window !== undefined ? () => window().document.body : undefined;
+	const loggedInUser = getLoggedInUser();
 
 
 	function displayUsers(userType: [IUser]) {
@@ -95,6 +95,7 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 										<ListItemText primary={fullName} />
 									</Link>
 									<ListItemSecondaryAction>
+									{loggedInUser._id !== user._id &&
 										<IconButton
 											className={classes.listButton}
 											edge="end"
@@ -103,6 +104,7 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 										>
 											<DeleteIcon />
 										</IconButton>
+									}
 									</ListItemSecondaryAction>
 								</div>
 							</ListItem>

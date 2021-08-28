@@ -5,8 +5,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { LoggedInContext } from '../../App';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -35,16 +36,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	inputField: {
 		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
-			"& .MuiOutlinedInput-notchedOutline": { 
+			"& .MuiOutlinedInput-notchedOutline": {
 				borderRadius: '10px',
 				borderColor: theme.palette.secondary.light,
-			}, 
+			},
 			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 				borderColor: theme.palette.secondary.light,
 				borderWidth: "2px",
 			}
 		},
-  },
+	},
 	wrongInput: {
 		color: "#C62828",
 		textAlign: "center",
@@ -52,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface LoginFormProps {
-  	setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const LoginForm: FC<LoginFormProps> = (props) => {
@@ -60,91 +60,91 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [isValid, setIsValid] = useState<boolean>(true);
-
+	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
 	let history = useHistory();
-
 	const credentials = {
 		email: email,
 		password: password,
 	}
 
+
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
 		axios.post('http://localhost:5000/login/', credentials)
-		.then((res) => {
-			localStorage.setItem('token', res.data.token);
-			props.setLoggedIn(true);
-			history.push("/home/projects");
-		}).catch((err) => {
-			console.log(err);
-			setIsValid(false);
-		});
-	} 
+			.then((res) => {
+				localStorage.setItem('token', res.data.token);
+				setLoggedIn(true);
+				history.push("/home/projects");
+			}).catch((err) => {
+				console.log(err);
+				setIsValid(false);
+			});
+	}
 
 
 	return (
 		<>
-		<Typography className={classes.header} component="h1" variant="h4">
-			Sign in
-		</Typography>
-		<form className={classes.form} onSubmit={onSubmit} autoComplete="off">
-			<Grid container spacing={3}>
-			<Grid item xs={12}>
-				<TextField
-				className={classes.inputField}
-				required
-				fullWidth
-				autoFocus
-				variant="outlined"
-				name="email"
-				id="email"
-				placeholder="Email Address"
-				autoComplete="email-address"
-				onChange={e => {
-					setEmail(e.target.value);
-					setIsValid(true);
-				}}
-				/>
-			</Grid>
-			<Grid item xs={12}>
-				<TextField
-				className={classes.inputField}
-				required
-				fullWidth
-				variant="outlined"
-				name="password"
-				id="password"
-				placeholder="Password"
-				autoComplete="password"
-				type="password"
-				onChange={e => {
-					setPassword(e.target.value);
-					setIsValid(true);
-				}}
-				/>
-			</Grid>
-			</Grid>
-			{!isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
-			<Button
-				className={classes.submitButton}
-				fullWidth
-				type="submit"
-			>
-			Sign in
-			</Button>
-			<Grid container justify="flex-end">
-				<Grid item>
-					<Link component={RouterLink} to='/register' color='secondary'>
-					{"Don't have an account? Register here"}
-					</Link>
+			<Typography className={classes.header} component="h1" variant="h4">
+				Sign in
+			</Typography>
+			<form className={classes.form} onSubmit={onSubmit} autoComplete="off">
+				<Grid container spacing={3}>
+					<Grid item xs={12}>
+						<TextField
+							className={classes.inputField}
+							required
+							fullWidth
+							autoFocus
+							variant="outlined"
+							name="email"
+							id="email"
+							placeholder="Email Address"
+							autoComplete="email-address"
+							onChange={e => {
+								setEmail(e.target.value);
+								setIsValid(true);
+							}}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							className={classes.inputField}
+							required
+							fullWidth
+							variant="outlined"
+							name="password"
+							id="password"
+							placeholder="Password"
+							autoComplete="password"
+							type="password"
+							onChange={e => {
+								setPassword(e.target.value);
+								setIsValid(true);
+							}}
+						/>
+					</Grid>
 				</Grid>
-			</Grid>
-		</form>
+				{!isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
+				<Button
+					className={classes.submitButton}
+					fullWidth
+					type="submit"
+				>
+					Sign in
+				</Button>
+				<Grid container justify="flex-end">
+					<Grid item>
+						<Link component={RouterLink} to='/register' color='secondary'>
+							{"Don't have an account? Register here"}
+						</Link>
+					</Grid>
+				</Grid>
+			</form>
 		</>
 	);
 }
 
-    
+
 
 export default LoginForm;

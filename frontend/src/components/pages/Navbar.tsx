@@ -10,7 +10,7 @@ import DarkModeOff from '@material-ui/icons/Brightness2Outlined';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DarkModeContext } from '../../App';
+import { DarkModeContext, LoggedInContext } from '../../App';
 import Icon from '../../resources/logo/icon.svg';
 import DarkIcon from '../../resources/logo/icon_darkmode.svg';
 import Logo from '../../resources/logo/logo.svg';
@@ -96,8 +96,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface NavbarProps {
-	loggedIn: boolean,
-	setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
@@ -106,6 +104,7 @@ const Navbar: FC<NavbarProps> = (props) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
+	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -118,7 +117,7 @@ const Navbar: FC<NavbarProps> = (props) => {
 	const handleLogout = () => {
 		handleClose();
 		localStorage.setItem('token', '');
-		props.setLoggedIn(false);
+		setLoggedIn(false);
 	};
 
 	const handleDarkMode = () => {
@@ -133,13 +132,13 @@ const Navbar: FC<NavbarProps> = (props) => {
 			<div className={classes.offset} />
 			<AppBar elevation={0} className={classes.appbar} >
 				<Toolbar className={classes.toolbar}>
-					<Link className={classes.linkWrapper} to={props.loggedIn ? '/home/projects' : '/'}>
+					<Link className={classes.linkWrapper} to={isLoggedIn ? '/home/projects' : '/'}>
 						<img className={classes.logoIcon} src={darkMode ? DarkIcon : Icon} alt='site icon' />
 						<img className={classes.logo} src={darkMode ? DarkLogo : Logo} alt='site logo' />
 					</Link>
 
 					<div className={classes.buttonsContainer}>
-						{!props.loggedIn && (
+						{!isLoggedIn && (
 							<>
 								<Button className={classes.navbarTextButton} component={Link} to="/">
 									Home
@@ -157,7 +156,7 @@ const Navbar: FC<NavbarProps> = (props) => {
 						)}
 
 
-						{props.loggedIn && (
+						{isLoggedIn && (
 							<>
 								<Tooltip title="Home" aria-label="projects" placement="bottom" enterDelay={500} leaveDelay={200}>
 									<IconButton aria-label="projects" component={Link} to="/home/projects">

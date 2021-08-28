@@ -57,6 +57,7 @@ export const ColumnTemplate: IColumn = {
 export const TagTemplate: ITag = {
       _id: '',
       name: '',
+      organizationId: '',
 };
 
 export const MessageTemplate: IMessage = {

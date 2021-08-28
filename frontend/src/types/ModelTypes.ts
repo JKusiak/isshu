@@ -56,6 +56,7 @@ export interface IIssue {
 export interface ITag {
       _id: string;
       name: string;
+      organizationId: string;
 }
 
 export interface IMessage {

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             padding: theme.spacing(2, 4, 3),
       },
       icon: {
-            fontSize: 26,
+            fontSize: '26px',
             color: theme.palette.secondary.main,
       },
       header: {

@@ -1,7 +1,7 @@
 import { CardMedia, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useContext } from "react";
-import { DarkModeContext } from '../../App';
+import { DarkModeContext, LoggedInContext } from '../../App';
 import Cover from '../../resources/covers/project_cover1.png';
 import TextLogo from '../../resources/logo/logo_text.svg';
 import DarkTextLogo from '../../resources/logo/logo_text_darkmode.svg';
@@ -9,10 +9,6 @@ import ToProjectsButton from "../buttons/ToProjectsButton";
 import RegisterModal from "../modals/RegisterModal";
 import Footer from './Footer';
 
-interface TitlePageProps {
-	loggedIn: boolean,
-	setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
-}
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	container: {
@@ -103,18 +99,25 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	}
 }));
 
+
+interface TitlePageProps {
+
+}
+
+
 const TitlePage: FC<TitlePageProps> = (props) => {
 	const classes = useStyles();
 	const { darkMode } = useContext(DarkModeContext);
+	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
 
 
 	function buttonToCall() {
 		return (
 			<div className={classes.buttons}>
-				{!props.loggedIn &&
+				{!isLoggedIn &&
 					<RegisterModal />
 				}
-				{props.loggedIn &&
+				{isLoggedIn &&
 					<ToProjectsButton />
 				}
 			</div>

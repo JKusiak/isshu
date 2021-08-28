@@ -1,16 +1,13 @@
-import express from 'express'
-import { 
-      getAllTags,
-      getTagById,
-      addTag,
-      updateTag,
-      deleteTag,
+import express from 'express';
+import {
+      addTag, deleteTag, getAllTags,
+      getTagById, updateTag
 } from '../controllers/tagController.js';
 
 
 const router = express.Router();
 
-router.route('/').get(getAllTags);
+router.route('/:organizationId').get(getAllTags);
 
 router.route('/:id').get(getTagById);
 

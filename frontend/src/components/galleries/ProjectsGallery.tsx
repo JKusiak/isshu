@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		header: {
 			display: 'flex',
+			width: '100%',
 			alignItems: 'center',
 			justifyContent: 'center',
 			fontSize: '28px',
 			fontWeight: 'bold',
 			color: theme.palette.secondary.main,
-			marginTop: theme.spacing(4),
-			marginBottom: theme.spacing(5),
+			paddingBottom: theme.spacing(5),
 		},
 		projectsGrid: {
 			display: 'grid',

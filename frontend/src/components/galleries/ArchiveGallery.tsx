@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			fontWeight: 'bold',
 			fontSize: '28px',
 			color: theme.palette.secondary.main,
-			marginTop: theme.spacing(4),
 			marginBottom: theme.spacing(2),
 		},
 		searchWrapper: {

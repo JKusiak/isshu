@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { TagTemplate } from '../../../types/ModelContentTemplate';
 import { INestedIssue, ITag } from '../../../types/ModelTypes';
 import AllTagsGallery from '../../galleries/AllTagsGallery';
+import { getLoggedInUser } from '../GetLoggedInUser';
 
 
 
@@ -15,7 +16,8 @@ interface ManageTagsProps {
 
 const ManageTags: FC<ManageTagsProps> = (props) => {
     const [allTags, setAllTags] = useState<[ITag]>([TagTemplate]);
-    
+    const loggedInUser = getLoggedInUser();
+
 
     useEffect(() => {
         fetchAllTags();
@@ -26,38 +28,39 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
         const tagsToId = props.issue.tags.map(tag => tag._id);
 
         const requestBody = {
-                tags: tagsToId,
+            tags: tagsToId,
         }
 
         axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         }).catch((err) => {
-                console.log(err);
+            console.log(err);
         })
     }
 
 
     function fetchAllTags() {
-        axios.get('http://localhost:5000/tags/')
-        .then((res) => {
-            setAllTags(res.data);
-        })
+        axios.get(`http://localhost:5000/tags/${loggedInUser.organizationId}`)
+            .then((res) => {
+                setAllTags(res.data);
+            })
     }
 
 
     function addTag(e: React.SyntheticEvent, newTagName: string) {
         e.preventDefault();
-
+        
         const requestBody = {
-            name: newTagName
+            name: newTagName,
+            organizationId: loggedInUser.organizationId,
         }
 
         axios.post('http://localhost:5000/tags/add', requestBody)
-        .then(() => {
-            fetchAllTags();
-        })
+            .then(() => {
+                fetchAllTags();
+            })
     }
 
 
@@ -65,12 +68,12 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
         e.preventDefault();
 
         axios.delete(`http://localhost:5000/tags/delete/${tagId}`)
-        .then(() => {
-            fetchAllTags();
-        })
+            .then(() => {
+                fetchAllTags();
+            })
     }
 
-    
+
     return (
         <>
             <AllTagsGallery

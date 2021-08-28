@@ -1,10 +1,12 @@
-import Tag from '../models/tagModel.js';
 import asyncHandler from 'express-async-handler';
+import Tag from '../models/tagModel.js';
 
 
 export const getAllTags = asyncHandler(async(req, res) => {
+      const organizationId = req.params.organizationId;
+
       try {
-            const tags = await Tag.find({});
+            const tags = await Tag.find({organizationId: organizationId});
             res.json(tags);
       } catch(err) {
             res.status(500).json({message: "Server error on fetching tags"});
@@ -26,9 +28,11 @@ export const getTagById = asyncHandler(async(req, res) => {
 
 export const addTag = asyncHandler(async(req, res) => {
       const name = req.body.name;
+      const organizationId = req.body.organizationId;
       
       const newTag = new Tag ({
             name,
+            organizationId,
       });
 
       try {

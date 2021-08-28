@@ -13,6 +13,7 @@ import ProjectCover7 from '../../resources/covers/project_cover7.png';
 import { INestedUser } from "../../types/ModelTypes";
 import DeleteMember from "../functional/DeleteMember";
 import { FetchMembersContext } from "../functional/GetHomePage";
+import { getLoggedInUser } from "../functional/GetLoggedInUser";
 import ManageMembers from "../functional/ManageMembers";
 
 
@@ -25,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			fontWeight: 'bold',
 			fontSize: '28px',
 			color: theme.palette.secondary.main,
-			marginTop: theme.spacing(4),
 			marginBottom: theme.spacing(2),
 		},
 		projectsGrid: {
@@ -89,6 +89,7 @@ function shuffleProjectCover() {
 const MembersGallery = () => {
 	const classes = useStyles();
 	const { members } = useContext(FetchMembersContext);
+	const loggedInUser = getLoggedInUser();
 
 	function displayMembers() {
 		if (members.length > 0) {
@@ -108,7 +109,9 @@ const MembersGallery = () => {
 								</Typography>
 							</CardContent>
 							<CardActions>
-								<DeleteMember member={member} />
+								{loggedInUser._id !== member._id &&
+									<DeleteMember member={member} />
+								}
 							</CardActions>
 						</Card>
 					</Fragment>

@@ -1,11 +1,11 @@
-import { ClickAwayListener, TextField, Typography } from '@material-ui/core';
+import { ClickAwayListener, TextField } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useState } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	inputField: {
-		width: '250px',
+		width: 'auto',
 		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
 			"& .MuiOutlinedInput-notchedOutline": { 
@@ -15,20 +15,38 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 				borderColor: theme.palette.secondary.light,
 				borderWidth: "2px",
-			}
+			},
+			
 		},
 		"& .MuiOutlinedInput-input": {
 			marginLeft: theme.spacing(0.5),
-			fontSize: 30, 
-			padding: 5 
+			fontSize: '28px',
+			padding: 8,
+			[theme.breakpoints.down('xs')]: {
+				fontSize: '20px',
+			},
 		},
+		
+		marginLeft: theme.spacing(4),
+		marginRight: theme.spacing(4),
 	},
 	headerText: {
+		maxWidth: '250px',
+		height: '40px',
+		overflow: 'hidden',
+		fontSize: '32px',
 		fontWeight: 'bold',
 		color: theme.palette.secondary.main,
+		textAlign: 'center',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '26px',
+			maxWidth: '120px',
+		},
 		"&:hover": {
 			cursor: 'pointer',
-		}
+		},
+		marginLeft: theme.spacing(4),
+		marginRight: theme.spacing(4),
 	},
 }));
 
@@ -80,9 +98,9 @@ const OrganizationNameButton: FC<OrganizationNameButtonProps> = (props) => {
 				}
 
 				{!updateMode &&
-					<Typography className={classes.headerText} component="h1" variant="h4">
+					<div className={classes.headerText}>
 						{props.tempOrgName}
-					</Typography>
+					</div>
 				}
 			</div>
 		</ClickAwayListener>

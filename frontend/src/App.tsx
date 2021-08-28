@@ -14,9 +14,10 @@ import UserPage from './components/pages/UserPage';
 import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
 export const DarkModeContext = createContext<{ darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
+export const LoggedInContext = createContext<{ isLoggedIn: boolean, setLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(
     localStorage.getItem('token') === '' ? false : true
   );
   const [darkMode, setDarkMode] = useState<boolean>(
@@ -35,40 +36,42 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-        <CssBaseline>
-          <Helmet>
-            <title>Isshu.</title>
-            <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
-            <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
-          </Helmet>
+        <LoggedInContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+          <CssBaseline>
+            <Helmet>
+              <title>Isshu.</title>
+              <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
+              <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
+            </Helmet>
 
-          <Router>
-            <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-            <Switch>
-              <Route path="/home">
-                <GetHomePage />
-              </Route>
-              <Route path="/project/:projectId">
-                <ProjectPage />
-              </Route>
-              <Route path="/login">
-                <LoginPage setLoggedIn={setLoggedIn} />
-              </Route>
-              <Route path="/register">
-                <RegisterPage />
-              </Route>
-              <Route path="/user/profile">
-                <LoggedUserPage />
-              </Route>
-              <Route path="/user/:userId">
-                <UserPage />
-              </Route>
-              <Route path="/">
-                <TitlePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-              </Route>
-            </Switch>
-          </Router>
-        </CssBaseline>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route path="/home">
+                  <GetHomePage />
+                </Route>
+                <Route path="/project/:projectId">
+                  <ProjectPage />
+                </Route>
+                <Route path="/login">
+                  <LoginPage />
+                </Route>
+                <Route path="/register">
+                  <RegisterPage />
+                </Route>
+                <Route path="/user/profile">
+                  <LoggedUserPage />
+                </Route>
+                <Route path="/user/:userId">
+                  <UserPage />
+                </Route>
+                <Route path="/">
+                  <TitlePage />
+                </Route>
+              </Switch>
+            </Router>
+          </CssBaseline>
+        </LoggedInContext.Provider>
       </DarkModeContext.Provider>
     </ThemeProvider>
   );

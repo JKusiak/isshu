@@ -1,4 +1,4 @@
-import { Button, Card, Divider } from "@material-ui/core";
+import { Button, Card } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
 import { Link, Route, Switch } from 'react-router-dom';
@@ -24,11 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		headerWrapper: {
 			display: 'flex',
-			flexDirection: 'column',
 			alignItems: 'center',
 			justifyContent: 'center',
 			marginTop: theme.spacing(2),
-			marginBottom: theme.spacing(2),
 		},
 		image: {
 			display: 'flex',
@@ -36,17 +34,19 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: '150px',
 			justifyContent: 'center',
 			alignItems: 'center',
-			marginBottom: theme.spacing(2),
+			marginLeft: theme.spacing(4),
 		},
 		buttonsContainer: {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
+			paddingTop: theme.spacing(6),
+			paddingBottom: theme.spacing(6),
+
 		},
 		cardWrapper: {
 			display: 'flex',
-			width: '100px',
-			height: '33px',
+			minWidth: '100px',
 			backgroundColor: theme.palette.primary.light,
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -56,9 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: '100%',
 			textTransform: 'none',
 			fontWeight: 'bold',
-			"&:hover": {
-				fontWeight: 'bold',
-			}
+			borderRadius: 0,
 		},
 		text: {
 			fontSize: '14px',
@@ -69,11 +67,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 'auto',
 			color: theme.palette.secondary.main,
 		},
-		divider: {
-			backgroundColor: theme.palette.secondary.main,
-			opacity: 0.2,
-			marginTop: theme.spacing(4),
-		}
 	}
 	));
 
@@ -119,9 +112,6 @@ const HomePage: FC<HomePageProps> = (props) => {
 						</Button>
 					</Card>
 				</div>
-
-				<Divider className={classes.divider}/>
-
 
 				<Switch>
 					<Route path="/home/projects">
