@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Issue from '../models/issueModel.js';
 
 
 const columnSchema = mongoose.Schema({
@@ -16,17 +17,18 @@ const columnSchema = mongoose.Schema({
 
 // middleware for deleting in a cascade all children upon
 // removing parent column document using findOneAndDelete
-// columnSchema.post('findOneAndDelete', async function(res) {
-//       const columnId = res._id;
-//       const childIssues = await Issue.find({columnId: columnId});
-
-//       // array of promises is passed to Promise.all to resolve concurrently
-//       Promise.all(
-//             childIssues.map(async column => {
-//                   await Issue.findByIdAndDelete(column._id)
-//             })
-//       );
-// });
+columnSchema.post('findOneAndDelete', async function(res) {
+      const columnId = res._id;
+      const childIssues = await Issue.find({columnId: columnId});
+      
+      
+      // array of promises is passed to Promise.all to resolve concurrently
+      Promise.all(
+            childIssues.map(async issue => {
+                  await Issue.findByIdAndDelete(issue._id);
+            })
+      );
+});
 
 
 /**

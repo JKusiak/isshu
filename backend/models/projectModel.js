@@ -40,8 +40,7 @@ const projectSchema = mongoose.Schema({
 // reference stored in User upon Project removal
 projectSchema.post('findOneAndDelete', async function(res) {
       const projectId = res._id;
-
-      const userId = await User.findOne({ projects: res._id }).select('_id');
+      const user = await User.findOne({ projects: projectId});
       const update = { 
             $pullAll: {
                   projects: [projectId],
@@ -49,11 +48,11 @@ projectSchema.post('findOneAndDelete', async function(res) {
       };
 
       const options =  {
-            safe: true, 
-            upsert: true
+            new: true, 
+            useFindAndModify: false,
       };
 
-      await User.findByIdAndUpdate(userId, update, options);
+      await User.findByIdAndUpdate(user._id, update, options);
 
       
       const childBoards = await Board.find({projectId: projectId});
@@ -61,7 +60,7 @@ projectSchema.post('findOneAndDelete', async function(res) {
       // array of promises is passed to Promise.all to resolve concurrently
       Promise.all(
             childBoards.map(async board => {
-                  await Board.findByIdAndDelete(board._id)
+                  await Board.findByIdAndDelete(board._id);
             })
       );
 });

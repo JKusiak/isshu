@@ -106,6 +106,7 @@ export const addProject = asyncHandler(async(req, res) => {
     const dateStart = req.body.dateStart;
     const dateEnd = req.body.dateEnd;
     const creator = req.body.creator;
+    const organizationId = req.body.organizationId;
     
     const newProject = new Project ({
         name,
@@ -113,6 +114,7 @@ export const addProject = asyncHandler(async(req, res) => {
         dateStart,
         dateEnd,
         creator,
+        organizationId,
     });
 
     try {

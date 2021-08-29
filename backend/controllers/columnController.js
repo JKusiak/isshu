@@ -1,6 +1,6 @@
+import asyncHandler from 'express-async-handler';
 import Column from '../models/columnModel.js';
 import Issue from '../models/issueModel.js';
-import asyncHandler from 'express-async-handler';
 
 
 export const getAllColumns = asyncHandler(async(req, res) => {

@@ -17,18 +17,18 @@ const boardSchema = mongoose.Schema({
 
 // middleware for deleting in a cascade all children upon
 // removing parent board document using findOneAndDelete
-// boardSchema.post('findOneAndDelete', async function(res) {
-//       const boardId = res._id;
+boardSchema.post('findOneAndDelete', async function(res) {
+      const boardId = res._id;
       
-//       const childColumns = await Column.find({boardId: boardId});
+      const childColumns = await Column.find({boardId: boardId});
 
-//       // array of promises is passed to Promise.all to resolve concurrently
-//       Promise.all(
-//             childColumns.map(async column => {
-//                   await Column.findByIdAndDelete(column._id)
-//             })
-//       );
-// });
+      // array of promises is passed to Promise.all to resolve concurrently
+      Promise.all(
+            childColumns.map(async column => {
+                  await Column.findByIdAndDelete(column._id);
+            })
+      );
+});
 
 
 /**

@@ -1,32 +1,45 @@
 import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { IColumn } from "../../types/ModelTypes";
+import { BoardReducerContext } from "../functional/GetBoard";
+import { ActionTypes } from "../reducers/BoardReducer";
 
 
-interface DeleteColumnButtonProps {
-	deleteColumn: () => void,
-}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-	button: {
-		padding: theme.spacing(1),
-	},
-	icon: {
-		color: theme.palette.secondary.light,
-	},
-}))
+		button: {
+			padding: theme.spacing(1),
+		},
+		icon: {
+			color: theme.palette.secondary.light,
+		},
+	}))
+
+
+interface DeleteColumnButtonProps {
+	column: IColumn,
+	deleteColumn: () => void,
+}
 
 
 const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
 	const classes = useStyles();
+	const { dispatch } = useContext(BoardReducerContext);
 
-	
+
+	function handleDelete() {
+		dispatch({type: ActionTypes.DeleteColumn, payload: props.column._id});
+		props.deleteColumn();
+	}
+
+
 	return (
 		<>
-		<IconButton className={classes.button} onClick={props.deleteColumn}>
-			<DeleteIcon className={classes.icon}/>
-		</IconButton>
+			<IconButton className={classes.button} onClick={handleDelete}>
+				<DeleteIcon className={classes.icon} />
+			</IconButton>
 		</>
 	);
 }

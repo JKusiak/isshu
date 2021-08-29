@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import React, { FC, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -57,13 +58,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface DeleteBoardModalProps {
-      deleteBoard: (e: React.MouseEvent) => void,
+      deleteBoard: () => void,
 }
 
 
 const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
       const classes = useStyles();
       const [open, setOpen] = useState<boolean>(false);
+      const { projectId } = useParams<{projectId: string}>();
+      let history = useHistory();
 
 
       function handleOpen(e: React.MouseEvent) {
@@ -79,6 +82,13 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
             setOpen(false);
       }
 
+
+      function handleDelete(e: React.MouseEvent) {
+            e.preventDefault();
+
+            props.deleteBoard();
+            history.push(`/project/${projectId}`);  
+      }
 
 
       return (
@@ -108,7 +118,7 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
                               <div className={classes.form}>
                                     <Button
                                           className={classes.button}
-                                          onClick={props.deleteBoard}
+                                          onClick={handleDelete}
                                           fullWidth
                                           type="submit"
                                           variant="contained"

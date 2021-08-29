@@ -1,9 +1,8 @@
 import axios from "axios";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { IColumn } from "../../types/ModelTypes";
 import DeleteColumnButton from "../buttons/DeleteColumnButton";
-import { ActionTypes } from "../reducers/BoardReducer";
-import { BoardReducerContext } from "./GetBoard";
+
 
 
 interface DeleteColumnProps {
@@ -12,17 +11,12 @@ interface DeleteColumnProps {
 
 
 const DeleteColumn: FC<DeleteColumnProps> = (props) => {
-      const columnId = props.column._id;
-      const { dispatch } = useContext(BoardReducerContext);
-
 
       function deleteColumn() {
-            axios.delete(`http://localhost:5000/columns/delete/${columnId}`, {   
+            axios.delete(`http://localhost:5000/columns/delete/${props.column._id}`, {   
                   headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                   }
-            }).then(() => {
-                  dispatch({type: ActionTypes.DeleteColumn, payload: columnId})
             }).catch((err) => {
                   console.log(err);
             });
@@ -31,7 +25,7 @@ const DeleteColumn: FC<DeleteColumnProps> = (props) => {
 
       return (
             <>
-                  <DeleteColumnButton deleteColumn={deleteColumn}/>
+                  <DeleteColumnButton column={props.column} deleteColumn={deleteColumn}/>
             </>
       );
 }

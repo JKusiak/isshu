@@ -4,6 +4,7 @@ import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -49,14 +50,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface DeleteProjectModalProps {
       handleSettingsClose: () => void,
-      deleteProject: (e: React.MouseEvent) => void,
+      deleteProject: () => void,
 }
 
 
 const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
       const classes = useStyles();
       const [open, setOpen] = useState<boolean>(false);
-
+      let history = useHistory();
 
       const handleOpen = (e: React.SyntheticEvent) => {
             e.preventDefault();
@@ -77,7 +78,8 @@ const DeleteProjectModal: FC<DeleteProjectModalProps> = (props) => {
       const handleDelete = (e: any) => {
             e.preventDefault();
 
-            props.deleteProject(e);
+            history.push(`/home/projects`);
+            props.deleteProject();
       };
 
 

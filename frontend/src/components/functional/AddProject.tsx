@@ -20,7 +20,7 @@ const AddProject: FC<AddProjectProps> = (props) => {
 	const [endDate, setEndDate] = useState<Date | null>(formattedDate);
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorText, setErrorText] = useState<string>('');
-	const creator = getLoggedInUser();
+	const loggedInUser = getLoggedInUser();
 
 	useEffect(() => {
 		if (endDate! >= startDate!) {
@@ -37,7 +37,7 @@ const AddProject: FC<AddProjectProps> = (props) => {
 			projectId: res.data._id,
 		};
 
-		axios.post(`http://localhost:5000/users/addProject/${creator._id}`, newProjectId, {
+		axios.post(`http://localhost:5000/users/addProject/${loggedInUser._id}`, newProjectId, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
@@ -58,7 +58,8 @@ const AddProject: FC<AddProjectProps> = (props) => {
 			description: description,
 			dateStart: startDate,
 			dateEnd: endDate,
-			creator: creator._id,
+			creator: loggedInUser._id,
+			organizationId: loggedInUser.organizationId,
 		}
 
 		axios.post('http://localhost:5000/projects/add', project, {
