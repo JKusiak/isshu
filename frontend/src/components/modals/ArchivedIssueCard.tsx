@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			justifyContent: 'center',
 			height: 140,
-			width: 400,
+			[theme.breakpoints.down('xs')]: {
+				height: 100,
+			},
+			width: 'auto',
 			transition: 'all .12s linear',
 			boxShadow: theme.shadows[2],
 			backgroundColor: theme.palette.primary.light,

@@ -6,13 +6,13 @@ import { IUser } from "../../types/ModelTypes";
 import UsersGallery from "../galleries/UsersGallery";
 import { getLoggedInUser } from "./GetLoggedInUser";
 
-interface GetUsersListProps {
+interface GetUsersGalleryProps {
       mobileOpen: boolean,
       handleSidebarToggle: () => void,
 }
 
 
-const GetUsersList: FC<GetUsersListProps> = (props) => {
+const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
       const { projectId } = useParams<{ projectId: string }>();
       const [otherUsers, setOtherUsers] = useState<[IUser]>([UserTemplate]);
       const [contributors, setContributors] = useState<[IUser]>([UserTemplate]);
@@ -107,4 +107,4 @@ const GetUsersList: FC<GetUsersListProps> = (props) => {
       );
 }
 
-export default GetUsersList;
+export default GetUsersGallery;

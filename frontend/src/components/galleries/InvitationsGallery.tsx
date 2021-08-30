@@ -30,9 +30,9 @@ const InvitationsGallery: FC<InvitationsGalleryProps> = (props) => {
 	
 	function displayInvitations() {
 		if (props.user.invitations.length > 0) {
-			return (props.user.invitations.map((invite: any) => {
+			return (props.user.invitations.map((invite: any, index: number) => {
 				return (
-					<Fragment key={invite._id}>
+					<Fragment key={index}>
 						<ManageInvitation invite={invite} user={props.user}/>
 					</Fragment>
 				);

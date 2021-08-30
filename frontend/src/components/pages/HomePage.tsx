@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			justifyContent: 'center',
 			marginTop: theme.spacing(2),
+			[theme.breakpoints.down('xs')]: {
+				marginTop: theme.spacing(4),
+			}
 		},
 		image: {
 			display: 'flex',
@@ -38,15 +41,18 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		buttonsContainer: {
 			display: 'flex',
+			width: '100%',
 			alignItems: 'center',
 			justifyContent: 'center',
 			paddingTop: theme.spacing(6),
 			paddingBottom: theme.spacing(6),
-
 		},
 		cardWrapper: {
 			display: 'flex',
 			minWidth: '100px',
+			[theme.breakpoints.down('xs')]: {
+				minWidth: '70px',
+			},
 			backgroundColor: theme.palette.primary.light,
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -129,7 +135,6 @@ const HomePage: FC<HomePageProps> = (props) => {
 	}
 
 	function displayWithoutOrganization() {
-		console.log(props.user);
 		return (
 			<>
 			<div className={classes.emptyContainer}>

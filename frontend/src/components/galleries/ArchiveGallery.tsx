@@ -40,7 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'grid',
 			justifyContent: 'center',
 			gap: theme.spacing(4),
-			gridTemplateColumns: 'repeat(auto-fill, minMax(400px, 400px))',
+			gridTemplateColumns: 'repeat(auto-fill, 400px)',
+			[theme.breakpoints.down('xs')]: {
+				gridTemplateColumns: 'repeat(auto-fill, 250px)',
+			},
 			marginRight: theme.spacing(8),
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),

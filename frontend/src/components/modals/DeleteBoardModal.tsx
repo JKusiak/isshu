@@ -24,11 +24,18 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             boxShadow: theme.shadows[2],
             padding: theme.spacing(2, 4, 3),
       },
-      iconWrapper: {
+      iconButton: {
             padding: theme.spacing(2),
+            [theme.breakpoints.down('xs')]: {
+                  paddingRight: 0,
+                  paddingLeft: 0,
+            },
       },
       deleteIcon: {
             transform: 'scale(2)',
+            [theme.breakpoints.down('xs')]: {
+                  transform: 'scale(1.4)',
+            },
             color: theme.palette.secondary.main,
       },
       header: {
@@ -93,7 +100,7 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
 
       return (
             <>
-            <IconButton className={classes.iconWrapper} onClick={handleOpen}>
+            <IconButton className={classes.iconButton} onClick={handleOpen}>
                   <DeleteIcon className={classes.deleteIcon} />
             </IconButton>
 

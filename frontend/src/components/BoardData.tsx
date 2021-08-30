@@ -16,45 +16,56 @@ import { ActionTypes } from "./reducers/BoardReducer";
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		navigation: {
-			display: 'grid',
+			display: 'flex',
+			justifyContent: 'space-between',
 			width: '100%',
-			gridTemplateColumns: '1fr 8fr 1fr',
-			marginTop: theme.spacing(2),
-			marginBottom: theme.spacing(4),
+			padding: theme.spacing(2),
+			[theme.breakpoints.down('xs')]: {
+				width: '90%',
+				padding: 0,
+			},
+			marginBottom: theme.spacing(8),
 		},
 		backButton: {
-			gridColumn: '1',
-			justifySelf: 'start',
-			alignSelf: 'center',
-			marginLeft: theme.spacing(2),
 			padding: theme.spacing(2),
+			[theme.breakpoints.down('xs')]: {
+				paddingRight: 0,
+				paddingLeft: 0,
+		  },
 		},
 		boardTitle: {
-			gridColumn: '2',
-			justifySelf: 'center',
-			alignSelf: 'center',
 			fontSize: '36px',
+			[theme.breakpoints.down('xs')]: {
+				fontSize: '28px',
+			},
 			color: theme.palette.secondary.main,
 			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
 			width: '30%',
-		},
-		deleteButton: {
-			gridColumn: '3',
-			justifySelf: 'end',
-			alignSelf: 'center',
-			marginRight: theme.spacing(2),
+			overflow: 'hidden',
 		},
 		backIcon: {
 			transform: 'scale(2.5)',
-			color: theme.palette.secondary.main
+			color: theme.palette.secondary.main,
+			[theme.breakpoints.down('xs')]: {
+				transform: 'scale(1.8)',
+			},
 		},
 		wrapper: {
 			display: 'flex',
+			[theme.breakpoints.down('xs')]: {
+				flexDirection: 'column',
+			},
 			justifyContent: 'center',
 		},
 		container: {
 			display: "flex",
-			marginLeft: theme.spacing(8)
+			marginLeft: theme.spacing(8),
+			[theme.breakpoints.down('xs')]: {
+				flexDirection: 'column',
+				marginLeft: 0,
+			},
 		},
 	}
 ));
@@ -147,7 +158,7 @@ const BoardData: FC<BoardDataProps> = (props) => {
 					<UpdateBoard boardName={props.board.name}/>
 				</div>
 
-				<div className={classes.deleteButton}>
+				<div>
 					<DeleteBoard />
 				</div>          
 			</div>

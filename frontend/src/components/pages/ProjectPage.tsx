@@ -1,11 +1,9 @@
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC, useState } from "react";
-import GetUsersList from "../functional/GetUsersList";
 import MenuIcon from '@material-ui/icons/Menu';
+import { FC, useState } from "react";
+import GetUsersGallery from "../functional/GetUsersGallery";
 import ProjectData from "../ProjectData";
-
-
 
 
 const sidebarWidth = 270;
@@ -29,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   flexGrow: 1,
             },
             menuButton: {
+                  color: theme.palette.secondary.main,
                   [theme.breakpoints.up("sm")]: {
                         display: "none"
                   },
@@ -54,14 +53,13 @@ const ProjectPage: FC<ProjectPageProps> = (props) => {
       return (
             <div className={classes.root}>
                   <div className={classes.sidebar}>
-                        <GetUsersList mobileOpen={mobileOpen} handleSidebarToggle={handleSidebarToggle}/>
+                        <GetUsersGallery mobileOpen={mobileOpen} handleSidebarToggle={handleSidebarToggle}/>
                   </div>
                   <div className={classes.pageContent}>
                         <IconButton
                               className={classes.menuButton}
                               color="inherit"
                               aria-label="open drawer"
-                              edge="start"
                               onClick={() => {handleSidebarToggle()}}
                         >
                               <MenuIcon/>

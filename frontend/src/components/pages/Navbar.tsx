@@ -22,18 +22,20 @@ const useStyles = makeStyles((theme) => ({
 	appbar: {
 		height: theme.spacing(8.5),
 		boxShadow: theme.shadows[5],
-		zIndex: 1,
+		zIndex: 100,
 		backgroundColor: theme.palette.primary.light,
 	},
 	toolbar: {
 		position: "sticky",
 		top: 0,
+		[theme.breakpoints.down('xs')]: {
+			padding: 0,
+		},
 	},
 	linkWrapper: {
 		padding: 0,
 		// added to compensate for padding of buttons on the right
 		marginLeft: theme.spacing(1.5),
-
 	},
 	logoIcon: {
 		height: 75,
@@ -49,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	buttonsContainer: {
 		marginLeft: 'auto',
+		[theme.breakpoints.down('xs')]: {
+			marginRight: theme.spacing(1),
+		},
 	},
 	homeIcon: {
 		fontSize: '28px',

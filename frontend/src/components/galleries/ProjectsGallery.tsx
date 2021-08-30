@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			justifyContent: 'center',
 			fontSize: '28px',
+			[theme.breakpoints.down('xs')]: {
+				fontSize: '22px',
+			},
 			fontWeight: 'bold',
 			color: theme.palette.secondary.main,
 			paddingBottom: theme.spacing(5),
@@ -30,6 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			gap: theme.spacing(4),
 			gridTemplateColumns: 'repeat(auto-fill, 400px)',
+			[theme.breakpoints.down('xs')]: {
+				gridTemplateColumns: 'repeat(auto-fill, 250px)',
+			},
 			marginRight: theme.spacing(8),
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),
@@ -41,8 +47,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		cardContainer: {
 			display: 'flex',
 			height: 140,
-			width: 400,
-			justifySelf: 'center',
+			[theme.breakpoints.down('xs')]: {
+				height: 100,
+			},
+			width: 'auto',
 			transition: 'all .12s linear',
 			boxShadow: theme.shadows[2],
 			backgroundColor: theme.palette.primary.light,
@@ -55,11 +63,17 @@ const useStyles = makeStyles((theme: Theme) =>
 			flexDirection: 'column',
 			width: '100%',
 			maxWidth: '260px',
+			[theme.breakpoints.down('xs')]: {
+				maxWidth: '150px',
+			},
 		},
 		// dirty trick to make content display in the center if text
 		// is short, if long 'empty' will shrink to zero
 		empty: {
 			flexBasis: '20px',
+			[theme.breakpoints.down('xs')]: {
+				flexBasis: 0,
+			},
 		},
 		name: {
 			color: theme.palette.secondary.main,
@@ -73,6 +87,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginLeft: 'auto',
 			height: 140,
 			width: 140,
+			[theme.breakpoints.down('xs')]: {
+				height: 100,
+				width: 100,
+			},
 			filter: 'blur(0.5px)'
 		},
 	})

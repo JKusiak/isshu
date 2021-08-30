@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	paper: {
 		width: '430px',
 		height: 'auto',
+		[theme.breakpoints.down('xs')]: {
+			width: '95vw',
+		},
 		backgroundColor: theme.palette.primary.main,
 		border: '2px solid',
 		borderColor: theme.palette.secondary.main,
@@ -27,11 +30,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		display: 'grid',
 		justifyContent: 'center',
 		color: theme.palette.secondary.main,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '26px',
+		},
 	},
 	buttonContainer: {
 		display: 'flex',
 		width: '100%',
 		marginTop: theme.spacing(5),
+		[theme.breakpoints.down('xs')]: {
+			marginTop: theme.spacing(2),
+		},
 	},
 	button: {
 		margin: theme.spacing(3, 2, 3),
@@ -52,6 +61,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		justifyContent: 'center',
 		height: 70,
 		width: 500,
+		[theme.breakpoints.down('xs')]: {
+			minHeight: 70,
+			width: 200,
+		},
 		borderRadius: '6px',
 		transition: 'all .12s linear',
 		boxShadow: theme.shadows[2],
@@ -71,6 +84,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		color: theme.palette.secondary.main,
 		overflow: 'hidden',
 		whiteSpace: 'nowrap',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '16px',
+			whiteSpace: 'normal',
+		},
 	},
 	org: {
 		fontWeight: 'bold',

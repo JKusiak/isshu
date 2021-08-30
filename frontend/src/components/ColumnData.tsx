@@ -16,9 +16,16 @@ const useStyles = makeStyles((theme: Theme) =>
                   minHeight: 500,
                   alignItems: "center",
                   "&:not(:last-child)": {
-                        borderRight: '1px solid',
-                        borderRightColor: theme.palette.secondary.light,
+                        [theme.breakpoints.up('sm')]: {
+                              borderRight: '1px solid',
+                              borderRightColor: theme.palette.secondary.light,
+                        },
+                        [theme.breakpoints.down('xs')]: {
+                              borderRight: 'none',
+                              marginBottom: theme.spacing(4),
+                        },
                   },
+
             },
             columnHeader: {
                   display: 'grid',
@@ -34,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   paddingBottom: theme.spacing(2),
                   fontSize: '20px',
                   fontWeight: 400,
-                  color: theme.palette.secondary.light,    
+                  color: theme.palette.secondary.light,
             },
             deleteColumnButton: {
                   gridColumn: '3',
@@ -50,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
                   margin: '15px',
             },
       }
-));
+      ));
 
 
 interface ColumnDataProps {
@@ -60,62 +67,62 @@ interface ColumnDataProps {
 
 const ColumnData: FC<ColumnDataProps> = (props) => {
       const classes = useStyles();
-      const [showDeleteColumn, setShowDeleteColumn] = useState<boolean>(false);
-      const [showAddIssue, setShowAddIssue] = useState<boolean>(false);
+      const [showDeleteColumn, setShowDeleteColumn] = useState<boolean>(window.innerWidth < 600 ? true : false);
+      const [showAddIssue, setShowAddIssue] = useState<boolean>(window.innerWidth < 600 ? true : false);
 
-      
+
       function displayColumnContent() {
-            return(
+            return (
                   props.column.issues.map((issue: INestedIssue, index: number) => {
                         return (
                               <Fragment key={index}>
-                                    <IssueData issue={issue} index={index}/>
+                                    <IssueData issue={issue} index={index} />
                               </Fragment>
                         );
                   })
             )
       }
-      
+
 
       return (
             <>
                   <div className={classes.columnWrapper}>
-                        <div 
-                              className={classes.columnHeader} 
-                              onMouseOver={() => setShowDeleteColumn(true)} 
-                              onMouseLeave={() => setShowDeleteColumn(false)}        
+                        <div
+                              className={classes.columnHeader}
+                              onMouseOver={() => setShowDeleteColumn(true)}
+                              onMouseLeave={() => setShowDeleteColumn(false)}
                         >
                               <div className={classes.columnName}>
-                                    <UpdateColumn column={props.column}/>
+                                    <UpdateColumn column={props.column} />
                               </div>
-                              
+
                               {showDeleteColumn &&
                                     <div className={classes.deleteColumnButton}>
-                                          <DeleteColumn column={props.column}/>
+                                          <DeleteColumn column={props.column} />
                                     </div>
                               }
                         </div>
-                              
+
                         <Droppable droppableId={props.column._id}>
                               {provided => {
                                     return (
-                                           <div 
+                                          <div
                                                 className={classes.columnContentWrapper}
-                                                onMouseOver={() => setShowAddIssue(true)} 
-                                                onMouseLeave={() => setShowAddIssue(false)}        
+                                                onMouseOver={() => setShowAddIssue(true)}
+                                                onMouseLeave={() => setShowAddIssue(false)}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                           >
                                                 {displayColumnContent()}
                                                 {provided.placeholder}
                                                 {showAddIssue &&
-                                                      <AddIssue column={props.column}/>
+                                                      <AddIssue column={props.column} />
                                                 }
                                           </div>
                                     );
                               }}
                         </Droppable>
-                  </div>      
+                  </div>
             </>
       );
 }

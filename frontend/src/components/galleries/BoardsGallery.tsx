@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'center',
             gap: theme.spacing(4),
             gridTemplateColumns: 'repeat(auto-fill, minMax(450px, 1fr))',
+            [theme.breakpoints.down('xs')]: {
+                  gridTemplateColumns: 'repeat(auto-fill)',
+            },
             margin: theme.spacing(4),
       },
       link: {

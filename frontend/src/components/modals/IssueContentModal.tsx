@@ -20,21 +20,31 @@ const useStyles = makeStyles((theme: Theme) =>
                   justifyContent: 'center',
             },
             paper: {
-                  display: 'grid',
-                  gridTemplateColumns: '2fr 1fr',
-                  gridTemplateRows: 'auto 10fr',
-                  gridTemplateAreas:`
-                        "header header"
-                        "leftColumn rightColumn"`,
-                  width: '75vw',
-                  minWidth: '430px',
-                  height: '75vh',
+                  [theme.breakpoints.up('sm')]: {
+                        display: 'grid',
+                        gridTemplateColumns: '2fr 1fr',
+                        gridTemplateRows: 'auto 10fr',
+                        gridTemplateAreas: `
+                              "header header"
+                              "leftColumn rightColumn"`,
+                        width: '75vw',
+                        minWidth: '430px',
+                        height: '75vh',
+                        padding: theme.spacing(4, 4, 4),
+                  },
+                  [theme.breakpoints.down('xs')]: {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '75vw',
+                        height: '75vh',
+                        overflow: 'scroll',
+                        padding: theme.spacing(2),
+                  },
                   backgroundColor: theme.palette.primary.main,
                   border: '2px solid',
                   borderColor: theme.palette.secondary.main,
                   borderRadius: '10px',
                   boxShadow: theme.shadows[2],
-                  padding: theme.spacing(4, 4, 4),
             },
             name: {
                   gridArea: 'header',
@@ -43,33 +53,51 @@ const useStyles = makeStyles((theme: Theme) =>
                   paddingRight: theme.spacing(2),
             },
             buttons: {
-                  gridArea: 'header',
-                  justifySelf: 'end',
                   display: 'flex',
-                  overflowX: 'hidden',
+                  [theme.breakpoints.up('sm')]: {
+                        gridArea: 'header',
+                        justifySelf: 'end',
+                        display: 'flex',
+                        overflowX: 'hidden',
+                  },
+                  [theme.breakpoints.down('sm')]: {
+                        height: '100%',
+                        marginBottom: theme.spacing(4),
+                  },
             },
             leftColumn: {
                   gridArea: 'leftColumn',
                   display: 'flex',
                   flexDirection: 'column',
-                  overflowY: 'auto',
-                  overflowX: 'hidden',
-                  paddingRight: theme.spacing(2),
-                  minHeight: 0,
-                  minWidth: 0,
+                  [theme.breakpoints.up('sm')]: {
+                        paddingRight: theme.spacing(2),
+                        minHeight: 0,
+                        minWidth: 0,
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                  },
+                  [theme.breakpoints.down('sm')]: {
+                        height: 'auto',
+                  },
             },
             rightColumn: {
                   gridArea: 'rightColumn',
                   display: 'flex',
                   flexDirection: 'column',
-                  overflowY: 'auto',
-                  overflowX: 'hidden',
-                  paddingRight: theme.spacing(2),
-                  paddingLeft: theme.spacing(2),
-                  minHeight: 0,
-                  minWidth: 0,
+
+                  [theme.breakpoints.up('sm')]: {
+                        paddingRight: theme.spacing(2),
+                        paddingLeft: theme.spacing(2),
+                        minHeight: 0,
+                        minWidth: 0,
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                  },
+                  [theme.breakpoints.down('sm')]: {
+                        height: 'auto',
+                  },
             },
-            creatorContainer:{
+            creatorContainer: {
                   fontSize: '16px',
                   marginBottom: theme.spacing(4),
             },
@@ -81,8 +109,8 @@ const useStyles = makeStyles((theme: Theme) =>
                   marginLeft: theme.spacing(2),
                   color: theme.palette.secondary.main,
             }
-      }
-));
+      })
+);
 
 
 interface IssueContentModalProps {
@@ -96,13 +124,13 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
       const classes = useStyles();
       const [isTagsModalOpen, setTagsModalOpen] = useState(false);
 
-      return(
+      return (
             <Modal
                   className={classes.modal}
                   aria-labelledby="transition-modal-title"
                   aria-describedby="transition-modal-description"
                   open={props.isIssueModalOpen}
-                  onClose={() => {{props.setIssueModalOpen(false)}}}
+                  onClose={() => { { props.setIssueModalOpen(false) } }}
                   closeAfterTransition
                   BackdropComponent={Backdrop}
                   BackdropProps={{
@@ -116,12 +144,12 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                               </div>
                               <div className={classes.buttons}>
                                     <ManageCompletion issue={props.issue} />
-                                    <ArchivizeIssue issue={props.issue} setIssueModalOpen={props.setIssueModalOpen}/>
+                                    <ArchivizeIssue issue={props.issue} setIssueModalOpen={props.setIssueModalOpen} />
                               </div>
                               <div className={classes.leftColumn}>
                                     <IssueTagsGallery
                                           issue={props.issue}
-                                          isTagsModalOpen={isTagsModalOpen} 
+                                          isTagsModalOpen={isTagsModalOpen}
                                           setTagsModalOpen={setTagsModalOpen}
                                     />
 
@@ -133,9 +161,9 @@ const IssueContentModal: FC<IssueContentModalProps> = (props) => {
                               </div>
                               <div className={classes.rightColumn}>
                                     <div className={classes.creatorContainer}>
-                                         <span className={classes.creatorTitle}>Creator</span> 
-                                         <span className={classes.creatorName}>
-                                               {`${props.issue.creator.name} ${props.issue.creator.surname}`}
+                                          <span className={classes.creatorTitle}>Creator</span>
+                                          <span className={classes.creatorName}>
+                                                {`${props.issue.creator.name} ${props.issue.creator.surname}`}
                                           </span>
                                     </div>
                                     <ManageContributors issue={props.issue} />

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			overflow: 'hidden',
 			width: '100%',
 			height: '30vh',
+			[theme.breakpoints.down('xs')]: {
+				height: '50vh',
+			},
 			'&::before': {
 				content: '""',    // why for the love of god...
 				display: 'block',
@@ -57,12 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		settingsIcon: {
-			[theme.breakpoints.down('xs')]: {
-				fontSize: '18px',
-			},
-			[theme.breakpoints.up('sm')]: {
-				fontSize: '24px',
-			},
+			fontSize: '24px',
 			color: '#fafafa',
 		},
 		menuPaper: {
@@ -132,7 +130,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		nameStyle: {
 			[theme.breakpoints.down('xs')]: {
-				fontSize: '30px',
+				fontSize: '36px',
 			},
 			[theme.breakpoints.up('sm')]: {
 				fontSize: '48px',
@@ -149,7 +147,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		dateStyle: {
 			[theme.breakpoints.down('xs')]: {
-				fontSize: '12px',
+				fontSize: '14px',
 			},
 			[theme.breakpoints.up('sm')]: {
 				fontSize: '16px',

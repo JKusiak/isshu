@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		width: '40vw',
 		minWidth: '430px',
 		height: 'auto',
+		[theme.breakpoints.down('xs')]: {
+			minWidth: '90vw',
+			height: '75vh',
+			overflow: 'scroll',
+		},
 		backgroundColor: theme.palette.primary.main,
 		border: '2px solid',
 		borderColor: theme.palette.secondary.main,

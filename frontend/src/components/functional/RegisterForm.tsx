@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	wrongInput: {
 		color: "#C62828",
 		textAlign: "center",
+	},
+	toLogin: {
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: theme.spacing(4),
+		},	
 	}
 }));
 
@@ -235,7 +240,7 @@ return (
 			Sign Up
 		</Button>
 		<Grid container justify="flex-end">
-			<Grid item>
+			<Grid className={classes.toLogin} item>
 				<Link component={RouterLink} to='/login' color='secondary'>
 				{"Already have an account? Log in here"}
 				</Link>

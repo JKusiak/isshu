@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.secondary.main,
 		},
 		drawerPaper: {
-			zIndex: 0,
-			width: 270,
+			zIndex: 1,
+			width: '270px',
 			backgroundColor: theme.palette.primary.main,
 			boxShadow: theme.shadows[5],
 		},
@@ -171,6 +171,9 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 
 				<Hidden smUp implementation="css">
 					<Drawer
+						classes={{
+							paper: classes.drawerPaper,
+						}}
 						container={container}
 						variant="temporary"
 						anchor={theme.direction === "rtl" ? "right" : "left"}

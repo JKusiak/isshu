@@ -27,8 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 		},
 		paper: {
-			width: '35vw',
-			minWidth: '430px',
+			[theme.breakpoints.up('sm')]: {
+				width: '35vw',
+				minWidth: '430px',
+			},
+			[theme.breakpoints.down('xs')]: {
+				width: '95vw',
+				minWidth: 0,
+			},
 			height: 'auto',
 			backgroundColor: theme.palette.primary.main,
 			border: '2px solid',
@@ -41,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'grid',
 			justifyContent: 'center',
 			color: theme.palette.secondary.main,
+			textAlign: 'center',
 		},
 		imagePlaceholder: {
 			display: 'flex',

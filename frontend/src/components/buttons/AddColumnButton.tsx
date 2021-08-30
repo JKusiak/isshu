@@ -8,8 +8,8 @@ import { FC, SetStateAction, useState } from 'react';
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	card: {
 		flexShrink: 0,
-		marginTop: theme.spacing(1),
-		marginLeft: theme.spacing(1),
+		width: 'auto',
+		margin: theme.spacing(1),
 		backgroundColor: theme.palette.primary.light,
 	},
 	form: {

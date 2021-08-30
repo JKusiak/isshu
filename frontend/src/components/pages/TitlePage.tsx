@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		flexShrink: 0,
 		[theme.breakpoints.down('xs')]: {
 			flexDirection: 'column',
+			height: 'auto',
 		},
 		alignItems: 'center',
 		height: '90vh',
@@ -90,6 +91,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	cardImage: {
 		width: '250px',
 		height: '250px',
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: theme.spacing(12),
+		},
 	},
 	actionCall: {
 		fontSize: '42px',
@@ -139,10 +143,10 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 				<div className={classes.advertBox}>
 					<div className={classes.advertTextWrapper}>
 						<div className={classes.actionCall}>
-							For teams searching simplicity
+						For teams searching simplicity
 						</div>
 						<div className={classes.advertText}>
-							Isshu offers only tools essential for project management, reducing unnecessary noise.
+						Isshu offers only tools essential for project management, reducing unnecessary noise.
 						</div>
 					</div>
 					<CardMedia
