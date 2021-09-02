@@ -5,13 +5,14 @@ import express from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
-import { protectedRouter, router } from './routes/authenticationRoute.js';
+import { authRouter, protectedAuthRouter } from './routes/authenticationRoute.js';
 import { protectedBoardRouter } from './routes/boardRoute.js';
 import { protectedColumnRouter } from './routes/columnRoute.js';
 import { protectedIssueRouter } from './routes/issueRoute.js';
 import { protectedOrganizationRouter } from './routes/organizationRoute.js';
 import { protectedProjectRouter } from './routes/projectRoute.js';
-import tagRouter from './routes/tagRoute.js';
+import { protectedTagRouter } from './routes/tagRoute.js';
+import { protectedImageRouter } from './routes/uploadRoute.js';
 import { protectedUserRouter, userRouter } from './routes/userRoute.js';
 
 
@@ -34,8 +35,9 @@ app.use('/projects', protectedProjectRouter);
 app.use('/boards', protectedBoardRouter);
 app.use('/columns', protectedColumnRouter);
 app.use('/issues', protectedIssueRouter);
-app.use('/tags', tagRouter);
-app.use('/login', router, protectedRouter);
+app.use('/tags', protectedTagRouter);
+app.use('/login', authRouter, protectedAuthRouter);
+app.use('/uploads', protectedImageRouter, express.static('uploads'));
 
 // universal route for handling 404 response if route not existing
 app.use((req, res, next) => {
@@ -47,8 +49,8 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
       res.status(error.status || 500).send({
             error: {
-            status: error.status || 500,
-            message: error.message || 'Internal Server Error',
+            	status: error.status || 500,
+            	message: error.message || 'Internal Server Error',
             },
       });
 });
@@ -56,22 +58,3 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
       console.log(`App is running in ${MODE} mode on port ${PORT}`)
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

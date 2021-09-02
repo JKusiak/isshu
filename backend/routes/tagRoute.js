@@ -1,20 +1,21 @@
 import express from 'express';
+import { authenticateJWT } from '../controllers/authenticationController.js';
 import {
       addTag, deleteTag, getAllTags,
       getTagById, updateTag
 } from '../controllers/tagController.js';
 
 
-const router = express.Router();
+export const protectedTagRouter = express.Router();
 
-router.route('/:organizationId').get(getAllTags);
+protectedTagRouter.use(authenticateJWT);
 
-router.route('/:id').get(getTagById);
+protectedTagRouter.route('/:organizationId').get(getAllTags);
 
-router.route('/add').post(addTag);
+protectedTagRouter.route('/:id').get(getTagById);
 
-router.route('/update/:id').post(updateTag);
+protectedTagRouter.route('/add').post(addTag);
 
-router.route('/delete/:id').delete(deleteTag);
+protectedTagRouter.route('/update/:id').post(updateTag);
 
-export default router;
+protectedTagRouter.route('/delete/:id').delete(deleteTag);

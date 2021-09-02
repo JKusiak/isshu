@@ -1,11 +1,11 @@
 import express from 'express';
 import { authenticateJWT, loginUser, newOrganizationToken } from '../controllers/authenticationController.js';
 
-export const router = express.Router();
-export const protectedRouter = express.Router();
+export const authRouter = express.Router();
+export const protectedAuthRouter = express.Router();
 
-protectedRouter.use(authenticateJWT);
+protectedAuthRouter.use(authenticateJWT);
 
-router.route('/').post(loginUser);
+authRouter.route('/').post(loginUser);
 
-protectedRouter.route('/newOrganization/').post(newOrganizationToken);
+protectedAuthRouter.route('/newOrganization/').post(newOrganizationToken);
