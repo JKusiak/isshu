@@ -12,7 +12,8 @@ const UpdateAttachments: FC<UpdateAttachmentsProps> = (props) => {
 
 
       return (
-            <AttachmentsGallery                  
+            <AttachmentsGallery
+                            
             />
       );
 }

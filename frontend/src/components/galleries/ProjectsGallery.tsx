@@ -1,16 +1,9 @@
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, Fragment } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-// hardcoded now just for aesthetic purposes during development <3
-import ProjectCover1 from '../../resources/covers/project_cover1.png';
-import ProjectCover2 from '../../resources/covers/project_cover2.png';
-import ProjectCover3 from '../../resources/covers/project_cover3.png';
-import ProjectCover4 from '../../resources/covers/project_cover4.png';
-import ProjectCover5 from '../../resources/covers/project_cover5.png';
-import ProjectCover6 from '../../resources/covers/project_cover6.png';
-import ProjectCover7 from '../../resources/covers/project_cover7.png';
+import { Link } from "react-router-dom";
 import { IProject } from "../../types/ModelTypes";
+import { getLoggedInUser } from "../functional/GetLoggedInUser";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -97,13 +90,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-function shuffleProjectCover() {
-	const coversArr = [ProjectCover1, ProjectCover2, ProjectCover3, ProjectCover4, ProjectCover5, ProjectCover6, ProjectCover7];
-
-	return coversArr[Math.floor(Math.random() * coversArr.length)];
-}
-
-
 interface ProjectListProps {
 	projects: [IProject];
 }
@@ -111,7 +97,8 @@ interface ProjectListProps {
 
 const ProjectsGallery: FC<ProjectListProps> = (props) => {
 	const classes = useStyles();
-	const { url } = useRouteMatch();
+	const loggedInUser = getLoggedInUser();
+
 
 	function displayProjects() {
 		if (props.projects.length > 0) {
@@ -131,7 +118,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 								</CardContent>
 								<CardMedia
 									className={classes.image}
-									image={shuffleProjectCover()}
+									image={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/projects-covers/${project._id}.jpg`}
 									title="Project cover"
 								/>
 							</Card>

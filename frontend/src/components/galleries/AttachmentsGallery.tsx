@@ -6,11 +6,19 @@ import { FC } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        attachmentsTitle: {
+        wrapper: {
+            marginBottom: theme.spacing(4),
+        },
+        title: {
             fontWeight: 'bold',
             fontSize: '16px',
             marginBottom: theme.spacing(1),
             color: theme.palette.secondary.main,
+        },
+        gallery: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '100%',
         },
         attachmentCard: {
             display: 'flex',
@@ -26,7 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
                   boxShadow: theme.shadows[5],
                   cursor: 'pointer',
             },
-            marginBottom: theme.spacing(4),
+           marginBottom: theme.spacing(4),
+           marginRight: theme.spacing(2),
       },
         addAttachmentIcon: {
             fontSize: '35px',
@@ -46,12 +55,23 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
 
      
     return(
-        <>
-            <div className={classes.attachmentsTitle}>Attachments</div>
+        <div className={classes.wrapper}>
+            <div className={classes.title}>Attachments</div>
+            <div className={classes.gallery}>
             <Card className={classes.attachmentCard}>
                 <AddIcon className={classes.addAttachmentIcon}/>
+            </Card><Card className={classes.attachmentCard}>
+                <AddIcon className={classes.addAttachmentIcon}/>
+            </Card><Card className={classes.attachmentCard}>
+                <AddIcon className={classes.addAttachmentIcon}/>
+            </Card><Card className={classes.attachmentCard}>
+                <AddIcon className={classes.addAttachmentIcon}/>
+            </Card><Card className={classes.attachmentCard}>
+                <AddIcon className={classes.addAttachmentIcon}/>
             </Card>
-        </>
+            </div>
+            
+        </div>
     );
 }
 

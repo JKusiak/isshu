@@ -110,7 +110,7 @@ const MembersGallery = () => {
 							<CardMedia
 								className={classes.image}
 								component={Link} to={`/user/${member._id}`}
-								image={shuffleProjectCover()}
+								image={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/user-profile/${member._id}.jpg`}
 								title="Member profile photo"
 							/>
 							<CardContent className={classes.cardContent} component={Link} to={`/user/${member._id}`}>

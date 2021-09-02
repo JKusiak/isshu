@@ -61,7 +61,7 @@ export function setupDiskStorage() {
 	const upload = multer({
 		storage: storage,
 		limits: {
-			fileSize: 1024 * 1024,
+			fileSize: 1024 * 1024 * 5,
 		},
 		fileFilter: (req, file, cb) => {
 			if (!file.originalname.match(/\.(jpg|jpeg)$/)) {

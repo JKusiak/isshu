@@ -3,14 +3,22 @@ import { Box, ClickAwayListener, IconButton, Menu, MenuItem, TextField, Typograp
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import React, { FC, useState } from "react";
-import Banner from '../resources/banners/banner.jpg';
+import React, { FC, useRef, useState } from "react";
 import { IProject } from "../types/ModelTypes";
 import DeleteProject from "./functional/DeleteProject";
 import { Action, ActionTypes } from './reducers/BannerReducer';
 
 
-const useStyles = makeStyles((theme: Theme) =>
+interface ProjectDataProps {
+	projectBannerState: IProject,
+	dispatch: React.Dispatch<Action>,
+	updateProject: () => void,
+	bannerPath: string | undefined,
+	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
+}
+
+
+const useStyles = makeStyles<Theme, ProjectDataProps>(theme =>
 	createStyles({
 		projectInfoBanner: {
 			position: 'relative',
@@ -27,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: '100%',
 				height: '100%',
 				zIndex: -1,
-				background: `url(${Banner})`,
+				background: ({ bannerPath }) => bannerPath? `url(${bannerPath})` : theme.palette.secondary.light,
 				backgroundSize: 'cover',
 				filter: 'blur(3px) brightness(75%)',
 			},
@@ -157,19 +165,12 @@ const useStyles = makeStyles((theme: Theme) =>
 	));
 
 
-interface ProjectDataProps {
-	projectBannerState: IProject,
-	dispatch: React.Dispatch<Action>,
-	updateProject: () => void,
-}
-
-
 const ProjectData: FC<ProjectDataProps> = (props) => {
-	const classes = useStyles();
+	const classes = useStyles(props);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const [isEditing, setIsEditing] = useState(false);
-
+	const imageInputRef = useRef<HTMLInputElement>(null);
 
 
 	function onSubmit(e: React.SyntheticEvent) {
@@ -222,6 +223,16 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 	}
 
 
+	function handleImageClick() {
+		imageInputRef.current?.click();
+	}
+
+
+	function handleChooseFile(e: any) {
+		props.setFile(e.target.files[0]);
+	}
+
+
 	return (
 		<>
 			<ClickAwayListener onClickAway={handleClickAway}>
@@ -267,11 +278,20 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								onClose={handleSettingsClose}
 							>
 								<MenuItem className={classes.menuItem} onClick={handleEdit}>
-									Edit project
+									Edit information
+								</MenuItem>
+								<MenuItem className={classes.menuItem} onClick={handleImageClick}>
+									Change background
 								</MenuItem>
 								<MenuItem className={classes.menuItem}>
 									<DeleteProject handleSettingsClose={handleSettingsClose} />
 								</MenuItem>
+								<input
+									style={{ display: 'none' }}
+									type="file"
+									onChange={handleChooseFile}
+									ref={imageInputRef}
+								/>
 							</Menu>
 						</div>
 

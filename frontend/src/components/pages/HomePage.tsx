@@ -12,7 +12,6 @@ import MembersGallery from "../galleries/MembersGallery";
 import ProjectsGallery from "../galleries/ProjectsGallery";
 
 
-
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		emptyContainer: {
