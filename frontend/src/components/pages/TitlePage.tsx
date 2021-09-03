@@ -1,6 +1,6 @@
 import { CardMedia, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { DarkModeContext, LoggedInContext } from '../../App';
 import TextLogo from '../../resources/logo/logo_text.svg';
 import DarkTextLogo from '../../resources/logo/logo_text_darkmode.svg';
@@ -103,12 +103,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface TitlePageProps {
-
-}
-
-
-const TitlePage: FC<TitlePageProps> = (props) => {
+const TitlePage = () => {
 	const classes = useStyles();
 	const { darkMode } = useContext(DarkModeContext);
 	const { isLoggedIn } = useContext(LoggedInContext);

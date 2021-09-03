@@ -1,14 +1,11 @@
 import axios from "axios";
-import { createContext, Dispatch, FC, useReducer, useState } from "react";
+import { createContext, Dispatch, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import { NestedBoardTemplate } from "../../types/ModelContentTemplate";
 import BoardData from "../BoardData";
 import { useMountEffect } from "../hooks/useMountEffect";
 import { Action, ActionTypes, boardContentReducer } from "../reducers/BoardReducer";
 
-
-interface GetBoardProps {
-}
 
 // context for avoiding propagating function fetchBoard() for refreshing 
 // the board content to child components
@@ -18,7 +15,7 @@ export const BoardReducerContext = createContext<{ boardState: any, dispatch: Di
 });
 
 
-const GetBoard: FC<GetBoardProps> = (props) => {
+const GetBoard = () => {
 	const { boardId } = useParams<{ boardId: string }>();
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [boardState, dispatch] = useReducer(boardContentReducer, NestedBoardTemplate)

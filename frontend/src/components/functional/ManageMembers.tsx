@@ -1,17 +1,12 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
 import AddMemberButton from "../buttons/AddMemberButton";
 import { getLoggedInUser } from "./GetLoggedInUser";
 
 
-interface GetUsersListProps {
-
-}
-
-
-const GetAllUsers: FC<GetUsersListProps> = (props) => {
+const GetAllUsers = () => {
 	const [allUsers, setAllUsers] = useState([]);
 	const [query, setQuery] = useState('');
 	const [addedUser, setAddedUser] = useState<IUser>(UserTemplate);

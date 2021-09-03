@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC } from "react";
 import GetLoggedUserData from "../functional/GetLoggedUserData";
 
 
@@ -11,11 +10,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface LoggedUserPageProps {
-
-}
-
-const UserPage: FC<LoggedUserPageProps> = (props) => {
+const UserPage = () => {
 	const classes = useStyles();
 
 	return (

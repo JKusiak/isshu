@@ -1,15 +1,9 @@
 import axios from 'axios';
-import { FC } from 'react';
 import { useParams } from "react-router-dom";
 import DeleteBoardModal from '../modals/DeleteBoardModal';
 
 
-interface DeleteBoardProps {
-
-}
-
-
-const DeleteBoard: FC<DeleteBoardProps> = (props) => {
+const DeleteBoard = () => {
 	const { boardId } = useParams<{ boardId: string }>();
 
 

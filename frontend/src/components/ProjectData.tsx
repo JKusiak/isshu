@@ -1,15 +1,9 @@
-import { FC } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import GetBoard from "./functional/GetBoard";
 import GetBoardsGallery from "./functional/GetBoardsGallery";
 
 
-interface ProjectDataProps {
-
-}
-
-
-const ProjectData: FC<ProjectDataProps> = (props) => {
+const ProjectData = () => {
 	const { path } = useRouteMatch();
 
 	return (

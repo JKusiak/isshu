@@ -8,7 +8,7 @@ import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
 import DarkModeOn from '@material-ui/icons/Brightness2';
 import DarkModeOff from '@material-ui/icons/Brightness2Outlined';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
-import React, { FC, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext, LoggedInContext } from '../../App';
 import Icon from '../../resources/logo/icon.svg';
@@ -101,11 +101,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-interface NavbarProps {
-}
-
-
-const Navbar: FC<NavbarProps> = (props) => {
+const Navbar = () => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);

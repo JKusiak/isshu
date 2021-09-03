@@ -1,16 +1,12 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
 import PersonalData from "../PersonalData";
 import { getLoggedInUser } from "./GetLoggedInUser";
 
 
-interface GetLoggedUserDataProps {
-
-}
-
-const GetLoggedUserData: FC<GetLoggedUserDataProps> = (props) => {
+const GetLoggedUserData = () => {
 	const [user, setUser] = useState<IUser>(UserTemplate);
 
 	useEffect(() => {

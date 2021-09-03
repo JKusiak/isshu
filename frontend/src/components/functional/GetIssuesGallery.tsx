@@ -1,14 +1,11 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IssueTemplate } from "../../types/ModelContentTemplate";
 import { IIssue } from "../../types/ModelTypes";
 import IssuesList from "../galleries/UserIssuesGallery";
 
-interface GetIssuesGalleryProps {
 
-}
-
-const GetIssuesGallery: FC<GetIssuesGalleryProps> = (props) => {
+const GetIssuesGallery = () => {
 	const [issuesCreated, setIssuesCreated] = useState<[IIssue]>([IssueTemplate]);
 	const [issuesTaken, setIssuesTaken] = useState<[IIssue]>([IssueTemplate]);
 

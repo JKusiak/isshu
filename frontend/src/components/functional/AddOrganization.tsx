@@ -1,16 +1,11 @@
 import axios from 'axios';
-import React, { FC } from 'react';
+import React from 'react';
 import { IUser } from '../../types/ModelTypes';
 import AddOrganizationModal from '../modals/AddOrganizationModal';
 import { getLoggedInUser } from './GetLoggedInUser';
 
 
-interface AddOrganizationProps {
-
-}
-
-
-const AddOrganization: FC<AddOrganizationProps> = (props) => {
+const AddOrganization = () => {
 	const currentUser = getLoggedInUser();
 
 	function onSubmit(orgName: string) {

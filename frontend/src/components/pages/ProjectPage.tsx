@@ -1,7 +1,7 @@
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import MenuIcon from '@material-ui/icons/Menu';
-import { FC, useState } from "react";
+import { useState } from "react";
 import GetUsersGallery from "../functional/GetUsersGallery";
 import ProjectData from "../ProjectData";
 
@@ -35,14 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginBottom: '1em',
 		},
 	}
-	));
+));
 
 
-interface ProjectPageProps {
-}
-
-
-const ProjectPage: FC<ProjectPageProps> = (props) => {
+const ProjectPage = () => {
 	const classes = useStyles();
 	const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 

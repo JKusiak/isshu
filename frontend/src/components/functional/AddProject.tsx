@@ -1,16 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import AddProjectModal from '../modals/AddProjectModal';
 import { getLoggedInUser } from './GetLoggedInUser';
 
 
-interface AddProjectProps {
-
-}
-
-
-const AddProject: FC<AddProjectProps> = (props) => {
+const AddProject = () => {
 	let history = useHistory();
 	const formattedDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 	const [isOpen, setIsOpen] = useState<boolean>(false);

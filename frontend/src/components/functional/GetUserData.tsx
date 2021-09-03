@@ -1,16 +1,12 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
 import PersonalData from "../PersonalData";
 
 
-interface GetUserDataProps {
-
-}
-
-const GetUserData: FC<GetUserDataProps> = (props) => {
+const GetUserData = () => {
 	const { userId } = useParams<{ userId: string }>();
 	const [user, setUser] = useState<IUser>(UserTemplate);
 

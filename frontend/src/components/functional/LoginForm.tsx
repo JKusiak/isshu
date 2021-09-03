@@ -5,7 +5,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import React, { FC, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { LoggedInContext } from '../../App';
 
@@ -52,10 +52,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	}
 }));
 
-interface LoginFormProps {
-}
 
-const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm = () => {
 	const classes = useStyles();
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
