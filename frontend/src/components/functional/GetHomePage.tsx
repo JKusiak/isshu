@@ -21,7 +21,6 @@ const GetHomePage = () => {
 			fetchOrganization();
 			fetchMembers();
 		}
-		setIsLoaded(true);
 	}, [user.organizationId]);
 
 
@@ -46,6 +45,7 @@ const GetHomePage = () => {
 				}
 			}).then(resp => {
 				setOrganization(resp.data);
+				setIsLoaded(true);
 			}).catch((err) => {
 				console.log(err);
 			});;

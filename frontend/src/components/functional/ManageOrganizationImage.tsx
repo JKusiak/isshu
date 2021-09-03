@@ -14,15 +14,13 @@ interface ManageOrganizationImageProps {
 
 const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 	const [file, setFile] = useState<string | Blob>('');
-	const [url, setUrl] = useState<string | undefined>();
-
+	const [imageExists, setImageExists] = useState<boolean>(false);
+	const [imageUrl, setImageUrl] = useState<string>('');
 
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
-		if (props.user._id) {
-			fetchImage(`uploads/organization-${props.organization._id}/logo/${props.organization._id}.jpg`);
-		}
-	}, [props.organization._id]);
+		checkIfExists();
+	}, [file, imageExists]);
 
 
 	// executes uploading image to server when user chooses picture without submit button
@@ -44,33 +42,40 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then((resp) => {
-			const adjustedPath = resp.data.replaceAll('\\', '/');
-			fetchImage(adjustedPath);
 			props.setErrorText('');
+			setImageExists(false);
 		}).catch((err) => {
 			props.setErrorText('Please upload in .jpg format and under 1MB file size');
 		})
 	}
 
 
-	function fetchImage(path: string) {
-		axios.get(`http://localhost:5000/${path}`, {
+	function checkIfExists() {
+		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
+		const path = `uploads%2forganization-${props.organization._id}%2flogo%2f${props.organization._id}.jpg`;
+
+		axios.get(`http://localhost:5000/uploads/get/${path}`, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`,
 			}
-		}).then(() => {
-			setUrl('');
-			setUrl(`http://localhost:5000/${path}`);
+		}).then((resp) => {
+			setImageExists(resp.data);
+			if(resp.data) {
+				const adjustedPath = path.replaceAll('%2f', '/');
+				setImageUrl(`http://localhost:5000/${adjustedPath}`);
+			}
 		}).catch((err) => {
-			setUrl(undefined);
+			console.log(err);
 		})
 	}
+
 
 	return (
 		<>
 			<OrganizationImage
-				url={url}
+				imageExists={imageExists}
 				setFile={setFile}
+				imageUrl={imageUrl}
 			/>
 		</>
 	);

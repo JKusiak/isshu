@@ -6,11 +6,9 @@ import multer from 'multer';
 export const checkIfExsists = asyncHandler(async (req, res) => {
 	fs.access(req.params.path, function (error) {
 		if(error) {
-			res.json(null);
-			console.log("Directory does not exist.")
+			res.json(false);
 		} else {
-			res.json('Exists');
-			console.log("Directory exists.")
+			res.json(true);
 		}
 	})
 });

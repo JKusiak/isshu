@@ -23,14 +23,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface OrganizationImageProps {
-	url: string | undefined,
+	imageExists: boolean,
 	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
+	imageUrl: string,
 }
 
 
 const OrganizationImage: FC<OrganizationImageProps> = (props) => {
 	const imageInputRef = useRef<HTMLInputElement>(null);
 	const classes = useStyles();
+
 
 	// ref that allows to treat an image like an upload button
 	function handleImageClick() {
@@ -51,8 +53,19 @@ const OrganizationImage: FC<OrganizationImageProps> = (props) => {
 				ref={imageInputRef}
 			/>
 
-			{props.url ?
-				<img className={classes.image} src={props.url} onClick={handleImageClick} /> :
+			{props.imageExists &&
+				<div key={props.imageExists.toString()}>
+					<img
+						className={classes.image}
+						src={props.imageUrl}
+						onClick={handleImageClick}
+					/>
+				</div>
+
+
+			}
+
+			{!props.imageExists &&
 				<ImagePlaceholder className={classes.image} onClick={handleImageClick} />
 			}
 		</>
