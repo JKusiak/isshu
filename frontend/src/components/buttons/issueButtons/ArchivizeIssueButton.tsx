@@ -8,26 +8,26 @@ import { ActionTypes } from '../../reducers/BoardReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	cardWrapper: {
-        display: 'flex',
+		display: 'flex',
 		width: '100px',
 		height: '33px',
 		backgroundColor: theme.palette.primary.light,
-        justifyContent: 'center',
-        alignItems: 'center',
+		justifyContent: 'center',
+		alignItems: 'center',
 		marginLeft: theme.spacing(1),
-    },
-    button: {
+	},
+	button: {
 		width: '100%',
 		textTransform: 'none',
 		fontWeight: 'bold',
 		"&:hover": {
 			fontWeight: 'bold',
 		}
-    },
-    text: {
+	},
+	text: {
 		fontSize: '14px',
-        color: theme.palette.secondary.main,
-    },
+		color: theme.palette.secondary.main,
+	},
 }));
 
 
@@ -47,20 +47,20 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 			issueId: props.issue._id,
 		};
 
-		dispatch({type: ActionTypes.ArchivizeIssue, payload: payload});
+		dispatch({ type: ActionTypes.ArchivizeIssue, payload: payload });
 		props.archivizeIssue();
 	}
 
 
 	return (
 		<>
-		<Card className={classes.cardWrapper}>
-			<Button className={classes.button} onClick={handleSubmit}>
-				<div className={classes.text}>
-					Archivize
-				</div>
-			</Button>  
-		</Card>
+			<Card className={classes.cardWrapper}>
+				<Button className={classes.button} onClick={handleSubmit}>
+					<div className={classes.text}>
+						Archivize
+					</div>
+				</Button>
+			</Card>
 		</>
 	);
 }

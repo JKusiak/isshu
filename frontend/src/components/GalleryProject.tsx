@@ -73,23 +73,23 @@ const GalleryProject: FC<GalleryProjectProps> = (props) => {
 
 	return (
 		<>
-				<Card className={classes.cardContainer}>
-					<CardContent className={classes.cardContent} component={Link} to={`/project/${props.project._id}`}>
-						<div className={classes.empty} />
-						<Typography className={classes.name} component="h5" variant="h5">
-							{props.project.name}
-						</Typography>
-						<Typography className={classes.description} variant="subtitle1" color="textSecondary">
-							{props.project.description}
-						</Typography>
-					</CardContent>
-					<CardMedia
-						className={classes.image}
-						image={props.imageUrl}
-						component={Link} to={`/project/${props.project._id}`}
-						title="Project cover"
-					/>
-				</Card>
+			<Card className={classes.cardContainer}>
+				<CardContent className={classes.cardContent} component={Link} to={`/project/${props.project._id}`}>
+					<div className={classes.empty} />
+					<Typography className={classes.name} component="h5" variant="h5">
+						{props.project.name}
+					</Typography>
+					<Typography className={classes.description} variant="subtitle1" color="textSecondary">
+						{props.project.description}
+					</Typography>
+				</CardContent>
+				<CardMedia
+					className={classes.image}
+					image={props.imageUrl}
+					component={Link} to={`/project/${props.project._id}`}
+					title="Project cover"
+				/>
+			</Card>
 		</>
 	);
 }

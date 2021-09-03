@@ -42,7 +42,7 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 
 	// executes uploading image to server when user chooses picture without submit button
 	useEffect(() => {
-		if (file != '') uploadImage();
+		if (file !== '') uploadImage();
 	}, [file]);
 
 

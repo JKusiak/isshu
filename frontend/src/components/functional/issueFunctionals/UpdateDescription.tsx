@@ -19,7 +19,7 @@ const UpdateDescription: FC<UpdateDescriptionProps> = (props) => {
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
 
-            if(tempDescription === '') return;
+            if (tempDescription === '') return;
 
             const requestBody = {
                   description: tempDescription,
@@ -32,7 +32,7 @@ const UpdateDescription: FC<UpdateDescriptionProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             })
-            
+
             const payload = {
                   columnId: props.issue.columnId,
                   issueId: props.issue._id,
@@ -40,8 +40,8 @@ const UpdateDescription: FC<UpdateDescriptionProps> = (props) => {
                         description: tempDescription,
                   },
             }
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
-      } 
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload })
+      }
 
 
       return (

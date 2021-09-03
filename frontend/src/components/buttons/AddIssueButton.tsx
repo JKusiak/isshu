@@ -6,7 +6,7 @@ import { FC } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	container: {
-		width: '100%',	
+		width: '100%',
 	},
 	card: {
 		width: '100%',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		justifyContent: 'flex-start',
 		paddingLeft: 0,
 		textTransform: 'none',
-		
+
 	},
 	icon: {
 		fontSize: '25px',

@@ -6,7 +6,7 @@ import { IUser } from '../../types/ModelTypes';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		searchWrapper:{
+		searchWrapper: {
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				backgroundColor: theme.palette.primary.light,
 			},
 			"& .MuiAutocomplete-endAdornment": {
-				display:'none',
+				display: 'none',
 			}
 		},
 		inputField: {
@@ -78,11 +78,11 @@ const AddMemberButton: FC<AddMemberButtonProps> = (props) => {
 	const classes = useStyles();
 	const [resetAutocomplete, setResetAutocomplete] = useState<boolean>(false);
 	const [inviteSent, setInviteSent] = useState(false);
-	
+
 
 	function handleSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
-		if(props.user._id !== '') {
+		if (props.user._id !== '') {
 			props.sendMemberInvite();
 			setInviteSent(true);
 		}
@@ -92,35 +92,35 @@ const AddMemberButton: FC<AddMemberButtonProps> = (props) => {
 
 	return (
 		<>
-		
-		<div className={classes.searchWrapper}>
-			<form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
-				<Autocomplete
-					key={resetAutocomplete.toString()}
-					className={classes.autocomplete}
-					classes={{ paper: classes.dropdownPaper }}
-					onInputChange={((e, value) => {
-						props.setQuery(value); 
-						setInviteSent(false);
-					})}
-					open={props.query.length >= 3}
-					onChange={((e, value) => {props.setUser(value); props.setQuery('')})}
-					options={props.allUsers}
-					getOptionLabel={(option: any) => `${option.name} ${option.surname} ${option.email} `}
-					renderInput={(params) =>
-						<TextField
-							className={classes.inputField}
-							{...params}
-							placeholder="Search all users..."
-							variant='outlined'
-						/>}
-				/>
-				{inviteSent &&
-					<div className={classes.invitePrompt}>Invite sent</div>
-				}
-			</form>
-		</div>
-		
+
+			<div className={classes.searchWrapper}>
+				<form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
+					<Autocomplete
+						key={resetAutocomplete.toString()}
+						className={classes.autocomplete}
+						classes={{ paper: classes.dropdownPaper }}
+						onInputChange={((e, value) => {
+							props.setQuery(value);
+							setInviteSent(false);
+						})}
+						open={props.query.length >= 3}
+						onChange={((e, value) => { props.setUser(value); props.setQuery('') })}
+						options={props.allUsers}
+						getOptionLabel={(option: any) => `${option.name} ${option.surname} ${option.email} `}
+						renderInput={(params) =>
+							<TextField
+								className={classes.inputField}
+								{...params}
+								placeholder="Search all users..."
+								variant='outlined'
+							/>}
+					/>
+					{inviteSent &&
+						<div className={classes.invitePrompt}>Invite sent</div>
+					}
+				</form>
+			</div>
+
 		</>
 	);
 }

@@ -2,20 +2,20 @@ import { IProject } from "../../types/ModelTypes";
 
 
 export enum ActionTypes {
-      FetchData = 'FETCH DATA',
-      UpdateName = 'UPDATE NAME',
-      UpdateDescription = 'UPDATE DESCRIPTION',
-      UpdateDateStart = 'UPDATE DATE START',
-      UpdateDateEnd = 'UPDATE DATE END',
+	FetchData = 'FETCH DATA',
+	UpdateName = 'UPDATE NAME',
+	UpdateDescription = 'UPDATE DESCRIPTION',
+	UpdateDateStart = 'UPDATE DATE START',
+	UpdateDateEnd = 'UPDATE DATE END',
 }
-    
+
 export type Action = {
-      type: ActionTypes,
-      payload: any,
+	type: ActionTypes,
+	payload: any,
 }
 
 export const bannerReducer = (state: IProject, action: Action) => {
-	const {type, payload} = action;
+	const { type, payload } = action;
 
 	switch (type) {
 		case ActionTypes.FetchData:

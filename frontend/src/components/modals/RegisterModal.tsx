@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 }));
 
-function RegisterModal() {
+
+const RegisterModal = () => {
 	const classes = useStyles();
 	const [open, setOpen] = useState<boolean>(false);
 

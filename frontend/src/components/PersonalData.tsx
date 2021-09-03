@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			"&:not(:last-child)": {
 				marginBottom: theme.spacing(2),
 			}
-			
+
 		}
 	})
 );
@@ -54,7 +54,7 @@ const PersonalData: FC<PersonalDataProps> = (props) => {
 			</div>
 			{errorText}
 		</div>
-		
+
 	);
 }
 

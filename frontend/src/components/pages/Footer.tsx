@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		padding: theme.spacing(2),
 	},
 	link: {
-		color:theme.palette.secondary.main,
+		color: theme.palette.secondary.main,
 		"&:hover": {
 			textDecoration: 'none',
 			fontWeight: 'bold',
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const Footer = () => {
 	const classes = useStyles();
 	const { darkMode } = useContext(DarkModeContext);
-	
+
 	return (
 		<>
 			<footer className={classes.footerContainer}>

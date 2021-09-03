@@ -1,7 +1,8 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { IUser } from "../../types/ModelTypes";
 import ArchiveGallery from "../galleries/ArchiveGallery";
+import { useMountEffect } from "../hooks/useMountEffect";
 
 
 interface GetArchiveGalleryProps {
@@ -12,9 +13,8 @@ interface GetArchiveGalleryProps {
 const GetArchiveGallery: FC<GetArchiveGalleryProps> = (props) => {
 	const [archivedIssues, setArchivedIssues] = useState<[]>([]);
 
-	useEffect(() => {
-		fetchArchive();
-	}, []);
+
+	useMountEffect(fetchArchive);
 
 
 	function fetchArchive() {
@@ -23,7 +23,7 @@ const GetArchiveGallery: FC<GetArchiveGalleryProps> = (props) => {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
 		}).then((res) => {
-			if(res.data.archivedIssues){
+			if (res.data.archivedIssues) {
 				setArchivedIssues(res.data.archivedIssues);
 			}
 		}).catch((err) => {
@@ -34,7 +34,7 @@ const GetArchiveGallery: FC<GetArchiveGalleryProps> = (props) => {
 
 	return (
 		<>
-			<ArchiveGallery archivedIssues={archivedIssues}/>
+			<ArchiveGallery archivedIssues={archivedIssues} />
 		</>
 	);
 }

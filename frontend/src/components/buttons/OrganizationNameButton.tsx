@@ -8,15 +8,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		width: 'auto',
 		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
-			"& .MuiOutlinedInput-notchedOutline": { 
+			"& .MuiOutlinedInput-notchedOutline": {
 				borderRadius: '6px',
 				borderColor: theme.palette.secondary.light,
-			}, 
+			},
 			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 				borderColor: theme.palette.secondary.light,
 				borderWidth: "2px",
 			},
-			
+
 		},
 		"& .MuiOutlinedInput-input": {
 			marginLeft: theme.spacing(0.5),
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 				minWidth: '100px',
 			},
 		},
-		
+
 		marginLeft: theme.spacing(4),
 		marginRight: theme.spacing(4),
 	},

@@ -8,49 +8,49 @@ import { getLoggedInUser } from './GetLoggedInUser';
 
 
 interface AddIssueProps {
-      column: IColumn,
+	column: IColumn,
 }
 
 
 const AddIssue: FC<AddIssueProps> = (props) => {
-      const [issueName, setIssueName] = useState<string>('');
-      const [addMode, setAddMode] = useState<boolean>(false);
-      const { dispatch } = useContext(BoardReducerContext);
+	const [issueName, setIssueName] = useState<string>('');
+	const [addMode, setAddMode] = useState<boolean>(false);
+	const { dispatch } = useContext(BoardReducerContext);
 
 
-      function onSubmit(e: React.SyntheticEvent) {
-            e.preventDefault();
-            
-            if(issueName === '') {
-                  setAddMode(false);
-                  return;
-            }
+	function onSubmit(e: React.SyntheticEvent) {
+		e.preventDefault();
 
-            const requestBody = {
-                  name: issueName,
-                  creator: getLoggedInUser()._id,
-                  columnId: props.column._id,
-            }
+		if (issueName === '') {
+			setAddMode(false);
+			return;
+		}
 
-            axios.post('http://localhost:5000/issues/add', requestBody, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then((res) => {
-                  setAddMode(false);
-                  dispatch({type: ActionTypes.AddIssue, payload: res.data})
-            })
-      } 
+		const requestBody = {
+			name: issueName,
+			creator: getLoggedInUser()._id,
+			columnId: props.column._id,
+		}
+
+		axios.post('http://localhost:5000/issues/add', requestBody, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).then((res) => {
+			setAddMode(false);
+			dispatch({ type: ActionTypes.AddIssue, payload: res.data })
+		})
+	}
 
 
-      return (
-            <AddIssueButton
-                  onSubmit={onSubmit}
-                  addMode={addMode}
-                  setAddMode={setAddMode}
-                  setIssueName={setIssueName}
-            />
-      );
+	return (
+		<AddIssueButton
+			onSubmit={onSubmit}
+			addMode={addMode}
+			setAddMode={setAddMode}
+			setIssueName={setIssueName}
+		/>
+	);
 }
 
 export default AddIssue;

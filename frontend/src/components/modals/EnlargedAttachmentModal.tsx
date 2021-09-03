@@ -108,18 +108,18 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 
 
 	function deleteAttachment() {
-		const updatedAttachments = props.issue.attachments.filter(attachment => 
+		const updatedAttachments = props.issue.attachments.filter(attachment =>
 			props.issue.attachments.indexOf(attachment) !== props.issue.attachments.indexOf(props.clickedAttachment));
 
 		const payload = {
 			columnId: props.issue.columnId,
 			issueId: props.issue._id,
 			modified: {
-					attachments: updatedAttachments,
+				attachments: updatedAttachments,
 			},
 		};
 
-		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+		dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
 		props.deleteAttachment();
 		props.deleteImage(props.clickedAttachment);
 	}
@@ -132,7 +132,7 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 					<CardMedia
 						className={classes.image}
 						image={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`}
-						title="Attachment picture"
+						title="Attachment miniature picture"
 						onClick={() => setOpen(true)}
 					/>
 				</Card>
@@ -157,7 +157,11 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 			>
 				<Fade in={open}>
 					<div className={classes.paper}>
-						<img className={classes.modalImage} src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`} />
+						<img
+							className={classes.modalImage}
+							src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`}
+							alt='Attachment enlarged'
+						/>
 					</div>
 				</Fade>
 			</Modal>

@@ -49,7 +49,7 @@ const ProjectsGallery: FC<ProjectListProps> = (props) => {
 			return (props.projects.map((project: IProject) => {
 				return (
 					<Fragment key={project._id}>
-						<ManageGalleryProject project={project}/>
+						<ManageGalleryProject project={project} />
 					</Fragment>
 				);
 			}));

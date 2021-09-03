@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme: Theme) =>
 		inputField: {
 			width: '100%',
 			height: 'auto',
-			
+
 			"& .MuiOutlinedInput-root": {
 				color: theme.palette.secondary.main,
 				height: 'auto',
-				"& .MuiOutlinedInput-notchedOutline": { 
+				"& .MuiOutlinedInput-notchedOutline": {
 					borderRadius: '6px',
 					borderColor: theme.palette.secondary.light,
-				}, 
+				},
 				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 					borderColor: theme.palette.secondary.light,
 					borderWidth: "2px",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface AddMessageButtonProps {
-      handleSubmit: (e: React.SyntheticEvent, messageContent: string) => void,
+	handleSubmit: (e: React.SyntheticEvent, messageContent: string) => void,
 }
 
 
@@ -51,23 +51,23 @@ const AddMessageButton: FC<AddMessageButtonProps> = (props) => {
 	}
 
 
-	return(
+	return (
 		<>
 			<form className={classes.formContainer} onSubmit={localSubmit} autoComplete="off">
 				<TextField
-						className={classes.inputField}
-						required
-						autoFocus
-						size="small"
-						variant='outlined'
-						name="newComment"
-						id="newComment"
-						placeholder="Add message..."
-						value={messageContent}
-						autoComplete="new-comment"
-						onChange={e => {
-							setMessageContent(e.target.value);
-						}}                  
+					className={classes.inputField}
+					required
+					autoFocus
+					size="small"
+					variant='outlined'
+					name="newComment"
+					id="newComment"
+					placeholder="Add message..."
+					value={messageContent}
+					autoComplete="new-comment"
+					onChange={e => {
+						setMessageContent(e.target.value);
+					}}
 				/>
 			</form>
 		</>

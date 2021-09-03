@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     iconButton: {
         justifyContent: 'center',
         alignItems: 'center',
-        
+
     },
     icon: {
         transform: 'scale(0.7)',
@@ -55,7 +55,7 @@ const AddStepButton: FC<AddStepButtonProps> = (props) => {
     function handleSubmit(e: any) {
         e.preventDefault();
 
-        if(stepContent !== '') {
+        if (stepContent !== '') {
             const newStep = {
                 content: stepContent,
                 isCompleted: false,
@@ -67,11 +67,11 @@ const AddStepButton: FC<AddStepButtonProps> = (props) => {
                 columnId: props.issue.columnId,
                 issueId: props.issue._id,
                 modified: {
-                        steps: updatedSteps,
+                    steps: updatedSteps,
                 },
             };
 
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
             props.updateSteps();
             setStepContent('');
         }
@@ -81,36 +81,36 @@ const AddStepButton: FC<AddStepButtonProps> = (props) => {
 
     return (
         <>
-        <div className={classes.buttonWrapper} onClick={() => setAddMode(true)}>
-            <ClickAwayListener onClickAway={() => setAddMode(false)}>
-                <Card className={classes.card}>
-                    {addMode &&
-                        <form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
-                            <InputBase
-                                className={classes.inputField}
-                                required
-                                autoFocus
-                                name="setContent"
-                                id="stepContent"
-                                placeholder="Step content"
-                                autoComplete="step-content"
-                                onChange={e => {
-                                    setStepContent(e.target.value);
-                                }}
-                            />
-                            <IconButton type="submit">
-                                    <AddIcon className={classes.icon}/>
+            <div className={classes.buttonWrapper} onClick={() => setAddMode(true)}>
+                <ClickAwayListener onClickAway={() => setAddMode(false)}>
+                    <Card className={classes.card}>
+                        {addMode &&
+                            <form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
+                                <InputBase
+                                    className={classes.inputField}
+                                    required
+                                    autoFocus
+                                    name="setContent"
+                                    id="stepContent"
+                                    placeholder="Step content"
+                                    autoComplete="step-content"
+                                    onChange={e => {
+                                        setStepContent(e.target.value);
+                                    }}
+                                />
+                                <IconButton type="submit">
+                                    <AddIcon className={classes.icon} />
+                                </IconButton>
+                            </form>
+                        }
+                        {!addMode &&
+                            <IconButton className={classes.iconButton}>
+                                <AddIcon className={classes.icon} />
                             </IconButton>
-                        </form>     
-                    }
-                    {!addMode &&
-                        <IconButton className={classes.iconButton}>
-                            <AddIcon className={classes.icon}/> 
-                        </IconButton>  
-                    }
-                </Card>
-            </ClickAwayListener>
-        </div>
+                        }
+                    </Card>
+                </ClickAwayListener>
+            </div>
         </>
     );
 }

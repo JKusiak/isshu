@@ -1,30 +1,30 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React from 'react';
 import RegisterForm from '../functional/RegisterForm';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  paper: {
-    marginTop: theme.spacing(9),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
+	paper: {
+		marginTop: theme.spacing(9),
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
 }));
 
 
-function RegisterPage() {
-  const classes = useStyles();
+const RegisterPage = () => {
+	const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <RegisterForm/>
-      </div>
-    </Container>
-  );
+	return (
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<div className={classes.paper}>
+				<RegisterForm />
+			</div>
+		</Container>
+	);
 }
 export default RegisterPage;

@@ -105,6 +105,7 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
                     </Fragment>
                 );
             }
+            return null;
         }));
     }
 

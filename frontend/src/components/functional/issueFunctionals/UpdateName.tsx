@@ -6,7 +6,6 @@ import { ActionTypes } from '../../reducers/BoardReducer';
 import { BoardReducerContext } from '../GetBoard';
 
 
-
 interface UpdateNameProps {
       issue: INestedIssue,
 }
@@ -20,7 +19,7 @@ const UpdateName: FC<UpdateNameProps> = (props) => {
       function onSubmit(e: React.SyntheticEvent) {
             e.preventDefault();
 
-            if(tempName === '') return;
+            if (tempName === '') return;
 
             const requestBody = {
                   name: tempName,
@@ -33,7 +32,7 @@ const UpdateName: FC<UpdateNameProps> = (props) => {
             }).catch((err) => {
                   console.log(err);
             })
-            
+
             const payload = {
                   columnId: props.issue.columnId,
                   issueId: props.issue._id,
@@ -41,8 +40,8 @@ const UpdateName: FC<UpdateNameProps> = (props) => {
                         name: tempName,
                   },
             }
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
-      } 
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload })
+      }
 
 
       return (

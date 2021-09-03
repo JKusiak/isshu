@@ -8,69 +8,69 @@ import { ActionTypes } from '../reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    tagsContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    headline: {
-        fontSize: '20px',
-        fontWeight: 'bold',
-        color: theme.palette.secondary.main,
-        alignSelf: 'center',
-        marginBottom: theme.spacing(2),
-    },
-    tagItem: {
-        display: 'flex',
-    },
-    tagIncludedCard: {
-        width: '100%',
-        marginBottom: '10px',
-        marginRight: '10px',
-        backgroundColor: theme.palette.primary.light,
-        transition: 'all .12s linear',
-        boxShadow: theme.shadows[2],
-        "&:hover": {
-                cursor: 'pointer',
-                boxShadow: theme.shadows[5],
+    createStyles({
+        tagsContainer: {
+            display: 'flex',
+            flexDirection: 'column',
         },
-        "& .MuiCardContent-root": {
-                padding: theme.spacing(1),
-        },
-        "& *": {
+        headline: {
+            fontSize: '20px',
             fontWeight: 'bold',
-            color: theme.palette.secondary.main
-        }
-    },
-    tagNotIncludedCard: {
-        width: '100%',
-        marginBottom: '10px',
-        marginRight: '10px',
-        backgroundColor: theme.palette.primary.light,
-        transition: 'all .12s linear',
-        boxShadow: theme.shadows[2],
-        "&:hover": {
+            color: theme.palette.secondary.main,
+            alignSelf: 'center',
+            marginBottom: theme.spacing(2),
+        },
+        tagItem: {
+            display: 'flex',
+        },
+        tagIncludedCard: {
+            width: '100%',
+            marginBottom: '10px',
+            marginRight: '10px',
+            backgroundColor: theme.palette.primary.light,
+            transition: 'all .12s linear',
+            boxShadow: theme.shadows[2],
+            "&:hover": {
                 cursor: 'pointer',
                 boxShadow: theme.shadows[5],
-        },
-        "& .MuiCardContent-root": {
+            },
+            "& .MuiCardContent-root": {
                 padding: theme.spacing(1),
+            },
+            "& *": {
+                fontWeight: 'bold',
+                color: theme.palette.secondary.main
+            }
         },
-        "& *": {
-            color: theme.palette.secondary.main
+        tagNotIncludedCard: {
+            width: '100%',
+            marginBottom: '10px',
+            marginRight: '10px',
+            backgroundColor: theme.palette.primary.light,
+            transition: 'all .12s linear',
+            boxShadow: theme.shadows[2],
+            "&:hover": {
+                cursor: 'pointer',
+                boxShadow: theme.shadows[5],
+            },
+            "& .MuiCardContent-root": {
+                padding: theme.spacing(1),
+            },
+            "& *": {
+                color: theme.palette.secondary.main
+            }
+        },
+        tagName: {
+            fontSize: '12px',
+        },
+        deleteButton: {
+            width: '30px',
+            height: '30px',
+        },
+        deleteIcon: {
+            color: theme.palette.secondary.main,
         }
-    },
-    tagName: {
-        fontSize: '12px',
-    },
-    deleteButton: {
-        width: '30px',
-        height: '30px',
-    },
-    deleteIcon: {
-        color: theme.palette.secondary.main,
-    }
-  })
+    })
 );
 
 
@@ -90,16 +90,16 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
 
     function checkIfChosen(tag: ITag) {
         return (
-            props.issue.tags.some((issueTag: ITag) => issueTag._id === tag._id)? true : false
+            props.issue.tags.some((issueTag: ITag) => issueTag._id === tag._id) ? true : false
         );
     }
 
 
     function displayType(isChosen: boolean) {
-        return(
-            isChosen? 
-            classes.tagIncludedCard : 
-            classes.tagNotIncludedCard
+        return (
+            isChosen ?
+                classes.tagIncludedCard :
+                classes.tagNotIncludedCard
         );
     }
 
@@ -107,7 +107,7 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
     function manageClicked(e: React.SyntheticEvent, isChosen: boolean, clickedTag: ITag) {
         e.preventDefault();
 
-        if(isChosen) {
+        if (isChosen) {
             const tagsWithoutClicked = props.issue.tags.filter((issueTag: ITag) => issueTag._id !== clickedTag._id);
 
             const payload = {
@@ -118,7 +118,7 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
                 },
             }
 
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload })
         } else {
             const tagsWithClicked = [...props.issue.tags, clickedTag];
 
@@ -130,7 +130,7 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
                 },
             }
 
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload})
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload })
         }
 
         props.updateIssueTags();
@@ -143,23 +143,23 @@ const AllTagsGallery: FC<AllTagsGalleryProps> = (props) => {
                 All tags
             </Typography>
             {props.allTags.map((tag: ITag, index: number) => {
-                    const isChosen = checkIfChosen(tag);
+                const isChosen = checkIfChosen(tag);
 
-                    return(
-                        <div className={classes.tagItem} key={index}>
-                            <Card className={displayType(isChosen)} onClick={(e) => manageClicked(e, isChosen, tag)}>
-                                <CardContent>
-                                    <Typography className={classes.tagName} component="h5" variant="h5">
-                                            {tag.name}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                            <IconButton className={classes.deleteButton} onClick={(e) => props.deleteTag(e, tag._id)}>
-                                <DeleteIcon className={classes.deleteIcon}/>
-                            </IconButton>  
-                        </div>
-                              
-                    )
+                return (
+                    <div className={classes.tagItem} key={index}>
+                        <Card className={displayType(isChosen)} onClick={(e) => manageClicked(e, isChosen, tag)}>
+                            <CardContent>
+                                <Typography className={classes.tagName} component="h5" variant="h5">
+                                    {tag.name}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                        <IconButton className={classes.deleteButton} onClick={(e) => props.deleteTag(e, tag._id)}>
+                            <DeleteIcon className={classes.deleteIcon} />
+                        </IconButton>
+                    </div>
+
+                )
             })}
             <AddTagButton
                 addTag={props.addTag}

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		fontSize: '24px',
 		color: theme.palette.secondary.main,
 		"&:hover": {
-				cursor: 'pointer'
+			cursor: 'pointer'
 		},
 		overflow: 'hidden',
 	},
@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 			},
 		},
 		"& .MuiOutlinedInput-input": {
-			fontSize: 24, 
-			padding: 10, 
+			fontSize: 24,
+			padding: 10,
 			fontWeight: 'bold',
 		},
 	},
@@ -52,63 +52,63 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface UpdateNameButtonProps {
-issue: INestedIssue,
-tempName: string,
-setTempName: React.Dispatch<React.SetStateAction<string>>,
-permName: string,
-onSubmit: (e: any) => void,
+	issue: INestedIssue,
+	tempName: string,
+	setTempName: React.Dispatch<React.SetStateAction<string>>,
+	permName: string,
+	onSubmit: (e: any) => void,
 }
 
 
 const UpdateNameButton: FC<UpdateNameButtonProps> = (props) => {
-const classes = useStyles();
-const [updateMode, setUpdateMode] = useState<boolean>(false);  
+	const classes = useStyles();
+	const [updateMode, setUpdateMode] = useState<boolean>(false);
 
 
-function handleSubmit(e: any) {
-	if(updateMode) {
-		props.onSubmit(e);
-	}  
-	setUpdateMode(false);
-}
+	function handleSubmit(e: any) {
+		if (updateMode) {
+			props.onSubmit(e);
+		}
+		setUpdateMode(false);
+	}
 
 
-return (
-	<ClickAwayListener onClickAway={handleSubmit}>
-		<div className={classes.nameContainer}>
-			{updateMode &&
-				<form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
-					<TextField
-						className={classes.inputField}
-						required
-						autoFocus
-						size="small"
-						variant='outlined'
-						name="issueName"
-						id="issueName"
-						value={props.tempName}
-						autoComplete="issue-name"
-						onChange={e => {
-							props.setTempName(e.target.value);
-						}}
-					/>
-				</form>     
-			}
+	return (
+		<ClickAwayListener onClickAway={handleSubmit}>
+			<div className={classes.nameContainer}>
+				{updateMode &&
+					<form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
+						<TextField
+							className={classes.inputField}
+							required
+							autoFocus
+							size="small"
+							variant='outlined'
+							name="issueName"
+							id="issueName"
+							value={props.tempName}
+							autoComplete="issue-name"
+							onChange={e => {
+								props.setTempName(e.target.value);
+							}}
+						/>
+					</form>
+				}
 
-			{!updateMode &&
-				<div 
-					className={classes.nameText} 
-					onClick={() => setUpdateMode(true)} 
-					style={{
-							textDecoration: props.issue.isFinished? 'line-through' : 'none',
-					}}>
+				{!updateMode &&
+					<div
+						className={classes.nameText}
+						onClick={() => setUpdateMode(true)}
+						style={{
+							textDecoration: props.issue.isFinished ? 'line-through' : 'none',
+						}}>
 						{props.permName}
 						{props.issue.isFinished && <CheckIcon />}
-				</div>
-			}
-		</div>
-	</ClickAwayListener>       
-);
+					</div>
+				}
+			</div>
+		</ClickAwayListener>
+	);
 }
 
 

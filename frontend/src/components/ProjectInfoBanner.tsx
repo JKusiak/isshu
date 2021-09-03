@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme, ProjectDataProps>(theme =>
 				width: '100%',
 				height: '100%',
 				zIndex: -1,
-				background: ({ bannerPath, imageExists }) => imageExists? `url(${bannerPath})` : theme.palette.secondary.light,
+				background: ({ bannerPath, imageExists }) => imageExists ? `url(${bannerPath})` : theme.palette.secondary.light,
 				backgroundSize: 'cover',
 				filter: 'blur(3px) brightness(75%)',
 			},

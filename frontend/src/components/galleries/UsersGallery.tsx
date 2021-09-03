@@ -95,16 +95,16 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 										<ListItemText primary={fullName} />
 									</Link>
 									<ListItemSecondaryAction>
-									{loggedInUser._id !== user._id &&
-										<IconButton
-											className={classes.listButton}
-											edge="end"
-											aria-label="remove-user"
-											onClick={() => props.removeProjectFromUser(user._id)}
-										>
-											<DeleteIcon />
-										</IconButton>
-									}
+										{loggedInUser._id !== user._id &&
+											<IconButton
+												className={classes.listButton}
+												edge="end"
+												aria-label="remove-user"
+												onClick={() => props.removeProjectFromUser(user._id)}
+											>
+												<DeleteIcon />
+											</IconButton>
+										}
 									</ListItemSecondaryAction>
 								</div>
 							</ListItem>

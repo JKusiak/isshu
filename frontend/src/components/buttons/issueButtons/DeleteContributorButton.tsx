@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		buttonWrapper: {
 			marginLeft: 'auto',
-		},	
+		},
 		iconButton: {
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -35,31 +35,31 @@ const DeleteContributorButton: FC<DeleteContributorButtonProps> = (props) => {
 	const classes = useStyles();
 	const { dispatch } = useContext(BoardReducerContext);
 
-	
+
 	function handleDelete(e: React.SyntheticEvent) {
-		const updatedContributors = props.issue.contributors.filter(contributor => 
+		const updatedContributors = props.issue.contributors.filter(contributor =>
 			props.issue.contributors.indexOf(contributor) !== props.issue.contributors.indexOf(props.clickedContributor));
 
 		const payload = {
 			columnId: props.issue.columnId,
 			issueId: props.issue._id,
 			modified: {
-					contributors: updatedContributors,
+				contributors: updatedContributors,
 			},
 		};
 
-		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+		dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
 		props.updateContributors();
 	}
 
 
-	return(
+	return (
 		<>
-		<div className={classes.buttonWrapper}>
-			<IconButton className={classes.iconButton} onClick={handleDelete}>
-				<DeleteIcon className={classes.icon}/> 
-			</IconButton>  
-        </div>
+			<div className={classes.buttonWrapper}>
+				<IconButton className={classes.iconButton} onClick={handleDelete}>
+					<DeleteIcon className={classes.icon} />
+				</IconButton>
+			</div>
 		</>
 	);
 }

@@ -10,11 +10,11 @@ interface ManageGalleryImageProps {
 }
 
 
-const ManageGalleryImage:FC<ManageGalleryImageProps> = (props) => {
+const ManageGalleryImage: FC<ManageGalleryImageProps> = (props) => {
 	const [imageExists, setImageExists] = useState<boolean>(false);
 	const [imageUrl, setImageUrl] = useState<string>('');
 	const loggedInUser = getLoggedInUser();
-	
+
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
 		checkIfExists();
@@ -30,7 +30,7 @@ const ManageGalleryImage:FC<ManageGalleryImageProps> = (props) => {
 			}
 		}).then((resp) => {
 			setImageExists(resp.data);
-			if(resp.data) {
+			if (resp.data) {
 				const adjustedPath = path.replaceAll('%2f', '/');
 				setImageUrl(`http://localhost:5000/${adjustedPath}`);
 			}

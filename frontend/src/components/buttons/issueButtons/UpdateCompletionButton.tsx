@@ -8,25 +8,25 @@ import { ActionTypes } from '../../reducers/BoardReducer';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	cardWrapper: {
-        display: 'flex',
+		display: 'flex',
 		minWidth: '100px',
 		height: '33px',
 		backgroundColor: theme.palette.primary.light,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    button: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	button: {
 		width: '100%',
 		textTransform: 'none',
 		fontWeight: 'bold',
 		"&:hover": {
 			fontWeight: 'bold',
 		}
-    },
-    text: {
+	},
+	text: {
 		fontSize: '14px',
-        color: theme.palette.secondary.main,
-    },
+		color: theme.palette.secondary.main,
+	},
 }));
 
 
@@ -49,21 +49,21 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 				isFinished: isFinished,
 			},
 		};
-		
-		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+
+		dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
 		props.updateCompletion();
 	}
 
 
 	return (
 		<>
-		<Card className={classes.cardWrapper}>
-			<Button className={classes.button} onClick={handleSubmit}>
-				<div className={classes.text}>
-					{props.issue.isFinished? 'Not finished' : 'Finished'}
-				</div>
-			</Button>  
-		</Card>
+			<Card className={classes.cardWrapper}>
+				<Button className={classes.button} onClick={handleSubmit}>
+					<div className={classes.text}>
+						{props.issue.isFinished ? 'Not finished' : 'Finished'}
+					</div>
+				</Button>
+			</Card>
 		</>
 	);
 }

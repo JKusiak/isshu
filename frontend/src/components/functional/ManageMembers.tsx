@@ -16,10 +16,12 @@ const GetAllUsers: FC<GetUsersListProps> = (props) => {
 	const [query, setQuery] = useState('');
 	const [addedUser, setAddedUser] = useState<IUser>(UserTemplate);
 	const loggedInUser = getLoggedInUser();
+	const queryTreshold = query.length >= 3;
+
 
 	useEffect(() => {
 		fetchAllUsers();
-	}, [query.length >= 3])
+	}, [queryTreshold])
 
 
 	// fetching users that do not belong to any organization
@@ -38,12 +40,12 @@ const GetAllUsers: FC<GetUsersListProps> = (props) => {
 
 	function sendMemberInvite() {
 		// check to see if already got invite to avoid sending twice
-		if(addedUser.invitations.some(invite => invite === loggedInUser.organizationId)) return;
+		if (addedUser.invitations.some(invite => invite === loggedInUser.organizationId)) return;
 
 		const requestBody = {
 			invitations: [...addedUser.invitations, loggedInUser.organizationId]
 		}
-		
+
 		axios.post(`http://localhost:5000/users/update/${addedUser._id}`, requestBody, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -55,9 +57,9 @@ const GetAllUsers: FC<GetUsersListProps> = (props) => {
 
 	return (
 		<>
-			<AddMemberButton 
-				allUsers={allUsers} 
-				user={addedUser} 
+			<AddMemberButton
+				allUsers={allUsers}
+				user={addedUser}
 				setUser={setAddedUser}
 				query={query}
 				setQuery={setQuery}

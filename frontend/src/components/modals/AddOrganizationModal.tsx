@@ -111,7 +111,7 @@ const AddOrganizationModal: FC<AddOrganizationModalProps> = (props) => {
 		setModalOpen(false);
 	}
 
-	
+
 	return (
 		<>
 			<Card className={classes.cardContainer} onClick={() => setModalOpen(true)}>
@@ -142,7 +142,7 @@ const AddOrganizationModal: FC<AddOrganizationModalProps> = (props) => {
 						<div className={classes.imagePlaceholder}>
 							<InsertPhotoIcon className={classes.placeholderIcon} />
 						</div>
-						
+
 						<form className={classes.form} onSubmit={handleSubmit}>
 							<TextField
 								className={classes.inputField}
@@ -158,7 +158,7 @@ const AddOrganizationModal: FC<AddOrganizationModalProps> = (props) => {
 									setOrgName(e.target.value);
 								}}
 							/>
-							
+
 							<Button
 								className={classes.submit}
 								fullWidth

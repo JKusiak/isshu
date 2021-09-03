@@ -5,33 +5,33 @@ import DeleteProjectModal from '../modals/DeleteProjectModal';
 
 
 interface DeleteProjectProps {
-      handleSettingsClose: () => void,
+	handleSettingsClose: () => void,
 }
 
 
 const DeleteProject: FC<DeleteProjectProps> = (props) => {
-      const { projectId } = useParams<{projectId: string}>();
-      
+	const { projectId } = useParams<{ projectId: string }>();
 
-      async function deleteProject() {
-            await axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }
-      
 
-  return (
-      <>
-            <DeleteProjectModal
-                  deleteProject={deleteProject}
-                  handleSettingsClose={props.handleSettingsClose}
-            />
-      </>
-  );
+	async function deleteProject() {
+		await axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
+
+
+	return (
+		<>
+			<DeleteProjectModal
+				deleteProject={deleteProject}
+				handleSettingsClose={props.handleSettingsClose}
+			/>
+		</>
+	);
 }
 
 export default DeleteProject;

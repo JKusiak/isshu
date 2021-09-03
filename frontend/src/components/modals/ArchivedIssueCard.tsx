@@ -63,9 +63,9 @@ const ArchivedIssueCard: FC<ArchivedIssueCardProps> = (props) => {
 				</CardContent>
 			</Card>
 
-			<IssueContentModal 
-				issue={props.issue} 
-				isIssueModalOpen={isModalOpen} 
+			<IssueContentModal
+				issue={props.issue}
+				isIssueModalOpen={isModalOpen}
 				setIssueModalOpen={setModalOpen}
 			/>
 		</>

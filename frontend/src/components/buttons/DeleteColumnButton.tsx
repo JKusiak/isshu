@@ -30,7 +30,7 @@ const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
 
 
 	function handleDelete() {
-		dispatch({type: ActionTypes.DeleteColumn, payload: props.column._id});
+		dispatch({ type: ActionTypes.DeleteColumn, payload: props.column._id });
 		props.deleteColumn();
 	}
 

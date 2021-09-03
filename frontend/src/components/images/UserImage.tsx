@@ -56,6 +56,7 @@ const UserImage: FC<UserImageProps> = (props) => {
 					className={classes.image}
 					src={props.imageUrl}
 					onClick={handleImageClick}
+					alt='user profile'
 				/>
 			}
 

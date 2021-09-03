@@ -111,7 +111,7 @@ interface TitlePageProps {
 const TitlePage: FC<TitlePageProps> = (props) => {
 	const classes = useStyles();
 	const { darkMode } = useContext(DarkModeContext);
-	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
+	const { isLoggedIn } = useContext(LoggedInContext);
 
 
 	function buttonToCall() {
@@ -142,10 +142,10 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 				<div className={classes.advertBox}>
 					<div className={classes.advertTextWrapper}>
 						<div className={classes.actionCall}>
-						For teams searching simplicity
+							For teams searching simplicity
 						</div>
 						<div className={classes.advertText}>
-						Isshu offers only tools essential for project management, reducing unnecessary noise.
+							Isshu offers only tools essential for project management, reducing unnecessary noise.
 						</div>
 					</div>
 					<CardMedia

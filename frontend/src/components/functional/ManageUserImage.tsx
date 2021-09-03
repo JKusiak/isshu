@@ -24,13 +24,13 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 
 	// executes uploading image to server when user chooses picture without submit button
 	useEffect(() => {
-		if (file != '') uploadImage();
+		if (file !== '') uploadImage();
 	}, [file]);
 
 
 	function uploadImage() {
 		const formData = new FormData();
-
+		console.log('done');
 		formData.append('organizationId', props.user.organizationId);
 		formData.append('directory', 'user-profile');
 		formData.append('imageUpload', file);
@@ -59,7 +59,7 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 			}
 		}).then((resp) => {
 			setImageExists(resp.data);
-			if(resp.data) {
+			if (resp.data) {
 				// ?t= and timestamp added to trick cache into re-downloading image under same path
 				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
 				setImageUrl(`http://localhost:5000/${adjustedPath}`);

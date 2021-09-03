@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		color: theme.palette.secondary.main,
 	},
 	iconButton: {
-		
+
 	},
 	icon: {
 		transform: 'scale(1)',

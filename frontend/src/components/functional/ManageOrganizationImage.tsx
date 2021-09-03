@@ -17,7 +17,7 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 	const [imageExists, setImageExists] = useState<boolean>(false);
 	const [imageUrl, setImageUrl] = useState<string>('');
 
-	
+
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
 		checkIfExists();
@@ -26,7 +26,7 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 
 	// executes uploading image to server when user chooses picture without submit button
 	useEffect(() => {
-		if (file != '') uploadImage();
+		if (file !== '') uploadImage();
 	}, [file]);
 
 
@@ -61,7 +61,7 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 			}
 		}).then((resp) => {
 			setImageExists(resp.data);
-			if(resp.data) {
+			if (resp.data) {
 				// ?t= and timestamp added to trick cache into re-downloading image under same path
 				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
 				setImageUrl(`http://localhost:5000/${adjustedPath}`);

@@ -44,9 +44,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
                   alignItems: 'start',
             },
             "& .MuiOutlinedInput-input": {
-			fontSize: 15, 
+                  fontSize: 15,
                   padding: theme.spacing(0.5),
-		},
+            },
       },
 }));
 
@@ -61,49 +61,49 @@ interface UpdateDescriptionButtonProps {
 
 const UpdateDescriptionButton: FC<UpdateDescriptionButtonProps> = (props) => {
       const classes = useStyles();
-      const [updateMode, setUpdateMode] = useState<boolean>(false);  
+      const [updateMode, setUpdateMode] = useState<boolean>(false);
 
 
       function handleSubmit(e: any) {
-            if(updateMode) {
+            if (updateMode) {
                   props.onSubmit(e);
-            }  
+            }
             setUpdateMode(false);
       }
 
 
       return (
             <>
-            <div className={classes.descriptionTitle}>Description</div>
-            <ClickAwayListener onClickAway={handleSubmit}>
-                  <div className={classes.descriptionContainer} onClick={() => setUpdateMode(true)}>
-                        {updateMode &&
-                              <form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
-                                    <TextField
-                                          className={classes.inputField}
-                                          required
-                                          autoFocus
-                                          size="small"
-                                          multiline={true}
-                                          variant='outlined'
-                                          name="issueDescription"
-                                          id="issueDescription"
-                                          value={props.tempDescription}
-                                          autoComplete="issue-description"
-                                          inputProps={{style: {}}}
-                                          onChange={e => {
-                                                props.setTempDescription(e.target.value);
-                                          }}
-                                    />
-                              </form>     
-                        }
+                  <div className={classes.descriptionTitle}>Description</div>
+                  <ClickAwayListener onClickAway={handleSubmit}>
+                        <div className={classes.descriptionContainer} onClick={() => setUpdateMode(true)}>
+                              {updateMode &&
+                                    <form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
+                                          <TextField
+                                                className={classes.inputField}
+                                                required
+                                                autoFocus
+                                                size="small"
+                                                multiline={true}
+                                                variant='outlined'
+                                                name="issueDescription"
+                                                id="issueDescription"
+                                                value={props.tempDescription}
+                                                autoComplete="issue-description"
+                                                inputProps={{ style: {} }}
+                                                onChange={e => {
+                                                      props.setTempDescription(e.target.value);
+                                                }}
+                                          />
+                                    </form>
+                              }
 
-                        {!updateMode &&
-                              <div className={classes.descriptionText}>
-                                    {props.permDescription? props.permDescription : 'Add description...'}
-                              </div>
-                        }
-                  </div>
+                              {!updateMode &&
+                                    <div className={classes.descriptionText}>
+                                          {props.permDescription ? props.permDescription : 'Add description...'}
+                                    </div>
+                              }
+                        </div>
                   </ClickAwayListener>
             </>
       );

@@ -10,7 +10,7 @@ import IssueContentModal from "./modals/IssueContentModal";
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		issueCard: {
-			display:'grid',
+			display: 'grid',
 			gridRows: '1fr, 1fr',
 			height: 'auto',
 			minHeight: '70px',
@@ -37,12 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: theme.palette.success.dark,
 		}
 	}
-));
+	));
 
 
 interface IssueDataProps {
-      issue: INestedIssue,
-      index: number,
+	issue: INestedIssue,
+	index: number,
 }
 
 
@@ -51,37 +51,37 @@ const IssueData: FC<IssueDataProps> = (props) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-	return(
+	return (
 		<>
-		<Draggable draggableId={props.issue._id} index={props.index}>
-			{(provided) => {
-				return(
-					<>
-						<Card
-							className={classes.issueCard}
-							onClick={() => setIsModalOpen(true)}
-							ref={provided.innerRef}
-							{...provided.draggableProps}
-							{...provided.dragHandleProps}
-							style={{
+			<Draggable draggableId={props.issue._id} index={props.index}>
+				{(provided) => {
+					return (
+						<>
+							<Card
+								className={classes.issueCard}
+								onClick={() => setIsModalOpen(true)}
+								ref={provided.innerRef}
+								{...provided.draggableProps}
+								{...provided.dragHandleProps}
+								style={{
 									...provided.draggableProps.style
-							}}
-						>
-							<Typography className={classes.name} component='h6' variant='h6'>
+								}}
+							>
+								<Typography className={classes.name} component='h6' variant='h6'>
 									{props.issue.name}
-							</Typography>
-							{props.issue.isFinished && <CheckIcon className={classes.checkIcon}/>}
-						</Card>
+								</Typography>
+								{props.issue.isFinished && <CheckIcon className={classes.checkIcon} />}
+							</Card>
 
-						<IssueContentModal 
-							issue={props.issue} 
-							isIssueModalOpen={isModalOpen} 
-							setIssueModalOpen={setIsModalOpen}
-						/>
-					</>
-				);
-			}}
-		</Draggable>
+							<IssueContentModal
+								issue={props.issue}
+								isIssueModalOpen={isModalOpen}
+								setIssueModalOpen={setIsModalOpen}
+							/>
+						</>
+					);
+				}}
+			</Draggable>
 		</>
 	);
 }

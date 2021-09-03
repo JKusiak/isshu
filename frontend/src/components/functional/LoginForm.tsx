@@ -60,7 +60,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [isValid, setIsValid] = useState<boolean>(true);
-	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
+	const { setLoggedIn } = useContext(LoggedInContext);
 	let history = useHistory();
 	const credentials = {
 		email: email,

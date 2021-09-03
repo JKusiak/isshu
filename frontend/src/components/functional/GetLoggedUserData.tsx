@@ -11,26 +11,26 @@ interface GetLoggedUserDataProps {
 }
 
 const GetLoggedUserData: FC<GetLoggedUserDataProps> = (props) => {
-      const [user, setUser] = useState<IUser>(UserTemplate);
+	const [user, setUser] = useState<IUser>(UserTemplate);
 
-      useEffect(() => {
-            axios.get(`http://localhost:5000/users/${getLoggedInUser()._id}`, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).then(resp => {
-                  setUser(resp.data);
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }, []);
+	useEffect(() => {
+		axios.get(`http://localhost:5000/users/${getLoggedInUser()._id}`, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).then(resp => {
+			setUser(resp.data);
+		}).catch((err) => {
+			console.log(err);
+		});
+	}, []);
 
 
-      return (
-      <>
-            <PersonalData user={user}/>
-      </>
-      );
+	return (
+		<>
+			<PersonalData user={user} />
+		</>
+	);
 }
 
 export default GetLoggedUserData;

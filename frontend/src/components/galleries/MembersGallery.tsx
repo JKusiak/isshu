@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),
 		},
-		
+
 
 	})
 );
@@ -47,7 +47,7 @@ const MembersGallery = () => {
 			return (members.map((member: INestedUser) => {
 				return (
 					<Fragment key={member._id}>
-						<ManageGalleryMember member={member}/>
+						<ManageGalleryMember member={member} />
 					</Fragment>
 				);
 			}));

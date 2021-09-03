@@ -14,9 +14,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	},
 }));
 
+
 interface LoginPageProps {
 
 }
+
 
 const LoginPage: FC<LoginPageProps> = (props) => {
 	const classes = useStyles();

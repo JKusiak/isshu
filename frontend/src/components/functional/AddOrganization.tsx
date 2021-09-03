@@ -12,7 +12,7 @@ interface AddOrganizationProps {
 
 const AddOrganization: FC<AddOrganizationProps> = (props) => {
 	const currentUser = getLoggedInUser();
-	
+
 	function onSubmit(orgName: string) {
 		const requestBody = {
 			name: orgName,
@@ -48,10 +48,10 @@ const AddOrganization: FC<AddOrganizationProps> = (props) => {
 	function updateToken(user: IUser) {
 		const requestBody = {
 			_id: user._id,
-            email: user.email,
-            name: user.name,
-            surname: user.surname,
-            organizationId: user.organizationId,
+			email: user.email,
+			name: user.name,
+			surname: user.surname,
+			organizationId: user.organizationId,
 		}
 
 		axios.post(`http://localhost:5000/login/newOrganization/`, requestBody, {

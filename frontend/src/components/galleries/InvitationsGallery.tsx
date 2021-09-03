@@ -13,27 +13,29 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginTop: theme.spacing(4),
 			marginBottom: theme.spacing(2),
 		},
-		
+
 		buttons: {
 			marginLeft: 'auto',
 		}
 	})
 );
 
+
 interface InvitationsGalleryProps {
 	user: any,
 }
 
+
 const InvitationsGallery: FC<InvitationsGalleryProps> = (props) => {
 	const classes = useStyles();
 
-	
+
 	function displayInvitations() {
 		if (props.user.invitations.length > 0) {
 			return (props.user.invitations.map((invite: any, index: number) => {
 				return (
 					<Fragment key={index}>
-						<ManageInvitation invite={invite} user={props.user}/>
+						<ManageInvitation invite={invite} user={props.user} />
 					</Fragment>
 				);
 			}));
@@ -45,7 +47,7 @@ const InvitationsGallery: FC<InvitationsGalleryProps> = (props) => {
 			)
 		}
 	}
-	
+
 
 	return (
 		<>

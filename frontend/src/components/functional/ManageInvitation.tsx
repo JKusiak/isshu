@@ -17,12 +17,12 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 			organizationId: props.invite._id,
 			invitations: []
 		}
-		
+
 		axios.post(`http://localhost:5000/users/update/${props.user._id}`, requestBody, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
-		}).then(() =>{
+		}).then(() => {
 			window.location.reload();
 		}).catch((err) => {
 			console.log(err);
@@ -32,7 +32,7 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 
 	return (
 		<>
-			<InvitationModal invite={props.invite} accept={accept}/>
+			<InvitationModal invite={props.invite} accept={accept} />
 		</>
 	);
 }

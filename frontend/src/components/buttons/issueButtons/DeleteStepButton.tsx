@@ -11,53 +11,53 @@ import { ActionTypes } from '../../reducers/BoardReducer';
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	buttonWrapper: {
 		marginLeft: 'auto',
-	},	
-    iconButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    icon: {
-        transform: 'scale(0.7)',
-        color: theme.palette.secondary.main,
-    },
+	},
+	iconButton: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	icon: {
+		transform: 'scale(0.7)',
+		color: theme.palette.secondary.main,
+	},
 }));
 
 interface DeleteStepButtonProps {
 	issue: INestedIssue,
-    clickedStep: IStep,
-    updateSteps: () => void,
+	clickedStep: IStep,
+	updateSteps: () => void,
 }
 
 
 const DeleteStepButton: FC<DeleteStepButtonProps> = (props) => {
-    const classes = useStyles();
-    const { dispatch } = useContext(BoardReducerContext);
+	const classes = useStyles();
+	const { dispatch } = useContext(BoardReducerContext);
 
 
-    function handleDelete() {
-		const updatedSteps = props.issue.steps.filter(step => 
+	function handleDelete() {
+		const updatedSteps = props.issue.steps.filter(step =>
 			props.issue.steps.indexOf(step) !== props.issue.steps.indexOf(props.clickedStep));
 
 		const payload = {
 			columnId: props.issue.columnId,
 			issueId: props.issue._id,
 			modified: {
-					steps: updatedSteps,
+				steps: updatedSteps,
 			},
 		};
 
-		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+		dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
 		props.updateSteps();
-    }
+	}
 
 
-    return (
-        <div className={classes.buttonWrapper}>
+	return (
+		<div className={classes.buttonWrapper}>
 			<IconButton className={classes.iconButton} onClick={handleDelete}>
-				<DeleteIcon className={classes.icon}/> 
-			</IconButton>  
-        </div>
-    );
+				<DeleteIcon className={classes.icon} />
+			</IconButton>
+		</div>
+	);
 }
 
 export default DeleteStepButton;

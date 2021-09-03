@@ -5,33 +5,33 @@ import IssueStepsGallery from '../../galleries/IssueStepsGallery';
 
 
 interface ManageStepsProps {
-      issue: INestedIssue,
+	issue: INestedIssue,
 }
 
 
 const ManageSteps: FC<ManageStepsProps> = (props) => {
 
-      function updateSteps() {
-            const requestBody = {
-                  steps: props.issue.steps,
-            };
-            
-            axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).catch((err) => {
-                  console.log(err);
-            })
-      } 
+	function updateSteps() {
+		const requestBody = {
+			steps: props.issue.steps,
+		};
+
+		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
 
 
-      return (
+	return (
 		<IssueStepsGallery
 			issue={props.issue}
-                  updateSteps={updateSteps}
+			updateSteps={updateSteps}
 		/>
-      );
+	);
 }
 
 export default ManageSteps;

@@ -23,11 +23,11 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 		}
 
 		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
 		}).catch((err) => {
-				console.log(err);
+			console.log(err);
 		})
 	}
 
@@ -37,11 +37,11 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 			issueId: props.issue._id,
 		}
 		axios.post(`http://localhost:5000/organization/addToArchive/${loggedInUser.organizationId}`, requestBody, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
 		}).catch((err) => {
-				console.log(err);
+			console.log(err);
 		})
 	}
 
@@ -53,14 +53,14 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 	}
 
 
-  return (
-	<>
-		<ArchivizeIssueButton
-			issue={props.issue}
-			archivizeIssue={archivizeIssue}
-		/>
-	</>
-  );
+	return (
+		<>
+			<ArchivizeIssueButton
+				issue={props.issue}
+				archivizeIssue={archivizeIssue}
+			/>
+		</>
+	);
 }
 
 export default ArchivizeIssue;

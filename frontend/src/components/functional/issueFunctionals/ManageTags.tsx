@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { TagTemplate } from '../../../types/ModelContentTemplate';
 import { INestedIssue, ITag } from '../../../types/ModelTypes';
 import AllTagsGallery from '../../galleries/AllTagsGallery';
+import { useMountEffect } from '../../hooks/useMountEffect';
 import { getLoggedInUser } from '../GetLoggedInUser';
 
 
@@ -19,9 +20,7 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
     const loggedInUser = getLoggedInUser();
 
 
-    useEffect(() => {
-        fetchAllTags();
-    }, []);
+    useMountEffect(fetchAllTags);
 
 
     function updateIssueTags() {
@@ -42,35 +41,45 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
 
 
     function fetchAllTags() {
-        axios.get(`http://localhost:5000/tags/${loggedInUser.organizationId}`)
-            .then((res) => {
-                setAllTags(res.data);
-            })
+        axios.get(`http://localhost:5000/tags/${loggedInUser.organizationId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then((res) => {
+            setAllTags(res.data);
+        })
+        console.log('fetched');
     }
 
 
     function addTag(e: React.SyntheticEvent, newTagName: string) {
         e.preventDefault();
-        
+
         const requestBody = {
             name: newTagName,
             organizationId: loggedInUser.organizationId,
         }
 
-        axios.post('http://localhost:5000/tags/add', requestBody)
-            .then(() => {
-                fetchAllTags();
-            })
+        axios.post('http://localhost:5000/tags/add', requestBody, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(() => {
+            fetchAllTags();
+        })
     }
 
 
     function deleteTag(e: React.SyntheticEvent, tagId: string) {
         e.preventDefault();
 
-        axios.delete(`http://localhost:5000/tags/delete/${tagId}`)
-            .then(() => {
-                fetchAllTags();
-            })
+        axios.delete(`http://localhost:5000/tags/delete/${tagId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(() => {
+            fetchAllTags();
+        })
     }
 
 

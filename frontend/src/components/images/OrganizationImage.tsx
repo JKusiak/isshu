@@ -59,6 +59,7 @@ const OrganizationImage: FC<OrganizationImageProps> = (props) => {
 					className={classes.image}
 					src={props.imageUrl}
 					onClick={handleImageClick}
+					alt='organization logo'
 				/>
 			}
 

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('xs')]: {
 				paddingRight: 0,
 				paddingLeft: 0,
-		  },
+			},
 		},
 		boardTitle: {
 			fontSize: '36px',
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 		},
 	}
-));
+	));
 
 
 interface BoardDataProps {
@@ -80,9 +80,9 @@ interface BoardDataProps {
 const BoardData: FC<BoardDataProps> = (props) => {
 	const classes = useStyles();
 	const history = useHistory();
-	const { projectId } = useParams<{projectId: string}>();
+	const { projectId } = useParams<{ projectId: string }>();
 	const { dispatch } = useContext(BoardReducerContext);
-	
+
 	function handleGoBack() {
 		history.push(`/project/${projectId}`);
 	}
@@ -90,9 +90,9 @@ const BoardData: FC<BoardDataProps> = (props) => {
 
 	const onDragEnd = (result: DropResult) => {
 		const { source, destination, draggableId } = result;
-		if(!destination) return;
+		if (!destination) return;
 
-		if(source.droppableId !== destination.droppableId) {
+		if (source.droppableId !== destination.droppableId) {
 			const oldColumnId = source.droppableId;
 			const newColumnId = destination.droppableId;
 			const payload = {
@@ -101,9 +101,9 @@ const BoardData: FC<BoardDataProps> = (props) => {
 				issueId: draggableId,
 			}
 
-			dispatch({type: ActionTypes.ChangeColumns, payload: payload});
+			dispatch({ type: ActionTypes.ChangeColumns, payload: payload });
 			props.changeColumn(destination.droppableId, draggableId);
-		} 
+		}
 		// else if (source.droppableId === destination.droppableId){
 		//       const chosenColumn = ensure(props.board.columns.find(column => column._id === source.droppableId));
 		//       const reorderedIssues = reorderColumn(chosenColumn.issues, source.index, destination.index);
@@ -125,54 +125,50 @@ const BoardData: FC<BoardDataProps> = (props) => {
 	//       issues.splice(endIndex, 0, removed);       
 	//       return issues;
 	// };
-	
+
 
 
 	function displayBoardContent() {
-		if(props.board.columns !== undefined && props.board.columns.length > 0) {
-			return(
+		if (props.board.columns !== undefined && props.board.columns.length > 0) {
+			return (
 				<div className={classes.container}>
-					<DragDropContext onDragEnd={result => onDragEnd(result)}>           
+					<DragDropContext onDragEnd={result => onDragEnd(result)}>
 						{props.board.columns.map((column: INestedColumn, index: number) => {
-							return(
+							return (
 								<Fragment key={index}>
-									<ColumnData column={column}/> 
+									<ColumnData column={column} />
 								</Fragment>
 							);
-						})}       
+						})}
 					</DragDropContext>
 				</div>
 			);
 		}
 	}
 
-	
+
 	return (
 		<>
 			<div className={classes.navigation}>
 				<IconButton className={classes.backButton} onClick={handleGoBack}>
-					<BackIcon className={classes.backIcon}/>
+					<BackIcon className={classes.backIcon} />
 				</IconButton>
 
 				<div className={classes.boardTitle}>
-					<UpdateBoard boardName={props.board.name}/>
+					<UpdateBoard boardName={props.board.name} />
 				</div>
 
 				<div>
 					<DeleteBoard />
-				</div>          
+				</div>
 			</div>
 
 			<div className={classes.wrapper}>
 				{displayBoardContent()}
-				<AddColumn/>
+				<AddColumn />
 			</div>
 		</>
 	);
 }
 
 export default BoardData;
-
-function dispatch(arg0: { type: any; payload: { oldColumnId: string; newColumnId: string | undefined; issueId: string; }; }) {
-	throw new Error("Function not implemented.");
-}

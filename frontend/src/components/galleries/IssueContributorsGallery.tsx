@@ -9,60 +9,60 @@ import { ActionTypes } from '../reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    contributorsContainer: {
-      	marginBottom: theme.spacing(4),
-    },
-    headline: {
-        fontSize: '16px',
-        fontWeight: 'bold',
-		color: theme.palette.secondary.main,
-		marginBottom: theme.spacing(1),
-    },
-	formContainer: {
-		marginBottom: theme.spacing(2),
-	},
-	autocomplete: {
-		width: '100%',
-		height: '100%',
-		// text within the search
-		"& .MuiAutocomplete-input": {
-			fontSize: '14px',
+	createStyles({
+		contributorsContainer: {
+			marginBottom: theme.spacing(4),
 		},
-		"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
-			// "& *": {
-				backgroundColor: theme.palette.primary.light,
-			// }
-	  	},
-		"& .MuiAutocomplete-endAdornment": {
-			"& *": {
-				color: theme.palette.secondary.main,
-			}
-		}
-	},
-	inputField: {
-		"& .MuiOutlinedInput-root": {
+		headline: {
+			fontSize: '16px',
+			fontWeight: 'bold',
 			color: theme.palette.secondary.main,
-			"& .MuiOutlinedInput-notchedOutline": { 
-				borderRadius: '10px',
-				borderColor: theme.palette.secondary.light,
-			}, 
-			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-				borderColor: theme.palette.secondary.light,
-				borderWidth: "2px",
+			marginBottom: theme.spacing(1),
+		},
+		formContainer: {
+			marginBottom: theme.spacing(2),
+		},
+		autocomplete: {
+			width: '100%',
+			height: '100%',
+			// text within the search
+			"& .MuiAutocomplete-input": {
+				fontSize: '14px',
+			},
+			"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
+				// "& *": {
+				backgroundColor: theme.palette.primary.light,
+				// }
+			},
+			"& .MuiAutocomplete-endAdornment": {
+				"& *": {
+					color: theme.palette.secondary.main,
+				}
 			}
 		},
-	},
-	dropdownPaper: {
-		backgroundColor: theme.palette.primary.light,
-		color: theme.palette.secondary.main,
-	},
-	contributor: {
-		display: 'flex',
-		alignItems: 'center',
-		color: theme.palette.secondary.main,
-	},
-  })
+		inputField: {
+			"& .MuiOutlinedInput-root": {
+				color: theme.palette.secondary.main,
+				"& .MuiOutlinedInput-notchedOutline": {
+					borderRadius: '10px',
+					borderColor: theme.palette.secondary.light,
+				},
+				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+					borderColor: theme.palette.secondary.light,
+					borderWidth: "2px",
+				}
+			},
+		},
+		dropdownPaper: {
+			backgroundColor: theme.palette.primary.light,
+			color: theme.palette.secondary.main,
+		},
+		contributor: {
+			display: 'flex',
+			alignItems: 'center',
+			color: theme.palette.secondary.main,
+		},
+	})
 );
 
 
@@ -74,36 +74,36 @@ interface IssueContributorsGalleryProps {
 
 
 const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
-    const classes = useStyles();
-	const [newContributor, setNewContributor] = useState<INestedUser|null>(UserTemplate);
+	const classes = useStyles();
+	const [newContributor, setNewContributor] = useState<INestedUser | null>(UserTemplate);
 	const [resetAutocomplete, setResetAutocomplete] = useState<boolean>(false);
-    const { dispatch } = useContext(BoardReducerContext);
+	const { dispatch } = useContext(BoardReducerContext);
 	const issueContributorsToId = props.issue.contributors.map(contributor => contributor._id);
 
 	function displayIssueContributors() {
-		return(props.issue.contributors.map((contributor: INestedUser, index: number) => {
-            return(
-                <Fragment key={index}>
+		return (props.issue.contributors.map((contributor: INestedUser, index: number) => {
+			return (
+				<Fragment key={index}>
 					<div className={classes.contributor}>
 						{`${contributor.name} ${contributor.surname}`}
-						<DeleteContributorButton 
+						<DeleteContributorButton
 							issue={props.issue}
 							clickedContributor={contributor}
 							updateContributors={props.updateContributors}
 						/>
 					</div>
-                </Fragment>
-            );
-        }));
+				</Fragment>
+			);
+		}));
 	}
 
 
-	function handleSubmit(e:React.SyntheticEvent) {
+	function handleSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
-		let issueContributors:(INestedUser | null)[] = [...props.issue.contributors];
+		let issueContributors: (INestedUser | null)[] = [...props.issue.contributors];
 
-		if(issueContributors[issueContributors.length - 1] !== newContributor) {
-			issueContributors =  [...props.issue.contributors, newContributor];
+		if (issueContributors[issueContributors.length - 1] !== newContributor) {
+			issueContributors = [...props.issue.contributors, newContributor];
 
 			const payload = {
 				columnId: props.issue.columnId,
@@ -112,8 +112,8 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 					contributors: issueContributors,
 				},
 			}
-			
-			dispatch({type: ActionTypes.UpdateIssue, payload: payload})
+
+			dispatch({ type: ActionTypes.UpdateIssue, payload: payload })
 			props.updateContributors();
 		}
 
@@ -121,34 +121,34 @@ const IssueContributorsGallery: FC<IssueContributorsGalleryProps> = (props) => {
 	}
 
 
-    return (
-      <div className={classes.contributorsContainer}>
-        <Typography className={classes.headline} component="h5" variant="h5">
-            Contributors
-        </Typography>
-		<form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
-			<Autocomplete
-				key={resetAutocomplete.toString()}
-				className={classes.autocomplete}
-				classes={{ paper: classes.dropdownPaper }}
-				id="contributors-to-ticket"
-				options={props.projectContributors}
-				getOptionLabel={option => `${option.name} ${option.surname}`}
-				getOptionDisabled={(option) => issueContributorsToId.includes(option._id)}
-				onChange={(e, value) => setNewContributor(value)}
-				renderInput={(params) => 
-					<TextField
-						className={classes.inputField} 
-						{...params} 
-						placeholder="Search contributors..." 
-						variant='outlined'
-					/>}
-			/>
-		</form>
-		
-		{displayIssueContributors()}
-      </div>
-    );
+	return (
+		<div className={classes.contributorsContainer}>
+			<Typography className={classes.headline} component="h5" variant="h5">
+				Contributors
+			</Typography>
+			<form className={classes.formContainer} onSubmit={handleSubmit} autoComplete="off">
+				<Autocomplete
+					key={resetAutocomplete.toString()}
+					className={classes.autocomplete}
+					classes={{ paper: classes.dropdownPaper }}
+					id="contributors-to-ticket"
+					options={props.projectContributors}
+					getOptionLabel={option => `${option.name} ${option.surname}`}
+					getOptionDisabled={(option) => issueContributorsToId.includes(option._id)}
+					onChange={(e, value) => setNewContributor(value)}
+					renderInput={(params) =>
+						<TextField
+							className={classes.inputField}
+							{...params}
+							placeholder="Search contributors..."
+							variant='outlined'
+						/>}
+				/>
+			</form>
+
+			{displayIssueContributors()}
+		</div>
+	);
 }
 
 export default IssueContributorsGallery;

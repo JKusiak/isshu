@@ -57,17 +57,17 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
         const checkedSteps = allSteps.filter(step => step.isCompleted === true);
         const percentage = Math.floor((checkedSteps.length / allSteps.length) * 100);
 
-        if(isNaN(percentage)) {
+        if (isNaN(percentage)) {
             setProgress(0);
         } else {
             setProgress(percentage);
         }
     }, [props.issue.steps]);
 
-    
+
     function displaySteps() {
-        return(props.issue.steps.map((step: IStep, index: number) => {
-            return(
+        return (props.issue.steps.map((step: IStep, index: number) => {
+            return (
                 <Fragment key={index}>
                     <IssueStepData
                         issue={props.issue}
@@ -82,14 +82,14 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
 
 
     function displayProgress() {
-        return(
+        return (
             <div className={classes.progressContainer}>
 
-                <LinearProgress className={classes.progressBar} variant="determinate" value={progress}/>
+                <LinearProgress className={classes.progressBar} variant="determinate" value={progress} />
 
-            <Typography className={classes.progress} variant="body2">
-                {`${progress}%`}
-            </Typography>
+                <Typography className={classes.progress} variant="body2">
+                    {`${progress}%`}
+                </Typography>
             </div>
         )
     }
@@ -97,10 +97,10 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
 
     function onDragEnd(result: DropResult) {
         const { source, destination } = result;
-        if(!destination) return;
+        if (!destination) return;
 
         if (source.droppableId === destination.droppableId) {
-            const reorderedSteps = reorderSteps(props.issue.steps ,source.index, destination.index);
+            const reorderedSteps = reorderSteps(props.issue.steps, source.index, destination.index);
             const payload = {
                 columnId: props.issue.columnId,
                 issueId: props.issue._id,
@@ -108,8 +108,8 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
                     steps: reorderedSteps,
                 },
             };
-    
-            dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
             props.updateSteps();
         } else {
             return;
@@ -119,37 +119,37 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
 
     function reorderSteps(steps: [IStep], startIndex: number, endIndex: number) {
         const [removed] = steps.splice(startIndex, 1);
-        steps.splice(endIndex, 0, removed);       
+        steps.splice(endIndex, 0, removed);
         return steps;
     }
 
 
     return (
-    <>
-        <Typography className={classes.headline} component="h5" variant="h5">
-            Steps
-        </Typography>
-        {displayProgress()}
+        <>
+            <Typography className={classes.headline} component="h5" variant="h5">
+                Steps
+            </Typography>
+            {displayProgress()}
 
             <DragDropContext onDragEnd={result => onDragEnd(result)}>
                 <Droppable droppableId={props.issue._id}>
-                {provided => {
-                    return (
-                        <div {...provided.droppableProps} ref={provided.innerRef}>
-                            {displaySteps()}
-                            {provided.placeholder}
-                        </div>
-                    );
-                }}   
+                    {provided => {
+                        return (
+                            <div {...provided.droppableProps} ref={provided.innerRef}>
+                                {displaySteps()}
+                                {provided.placeholder}
+                            </div>
+                        );
+                    }}
                 </Droppable>
             </DragDropContext>
 
-        
-        <AddStepButton 
-            updateSteps={props.updateSteps}
-            issue={props.issue}
-        />
-    </>
+
+            <AddStepButton
+                updateSteps={props.updateSteps}
+                issue={props.issue}
+            />
+        </>
     );
 }
 

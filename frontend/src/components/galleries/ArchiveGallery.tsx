@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: '350px',
 			"& .MuiOutlinedInput-root": {
 				color: theme.palette.secondary.main,
-				"& .MuiOutlinedInput-notchedOutline": { 
+				"& .MuiOutlinedInput-notchedOutline": {
 					borderRadius: '10px',
 					borderColor: theme.palette.secondary.light,
-				}, 
+				},
 				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
 					borderColor: theme.palette.secondary.light,
 					borderWidth: "2px",
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginLeft: theme.spacing(8),
 			marginBottom: theme.spacing(4),
 		},
-		
+
 	})
 );
 
@@ -65,22 +65,23 @@ const ArchiveGallery: FC<ArchiveGalleryProps> = (props) => {
 
 	function search(issues: any) {
 		return issues.filter((issue: any) => {
-			if(query === '') return issue;
+			if (query === '') return issue;
 
-			if(issue.name.toLowerCase().includes(query.toLowerCase()) || (issue.description && issue.description.toLowerCase().includes(query.toLowerCase()))) {
-				return issue
+			if (issue.name.toLowerCase().includes(query.toLowerCase()) || (issue.description && issue.description.toLowerCase().includes(query.toLowerCase()))) {
+				return issue;
 			}
+			return null;
 		});
 	}
 
 
 	function displayIssues() {
-		return(
+		return (
 			search(props.archivedIssues).map((issue: any) => {
 				return (
 					<Fragment key={issue._id}>
-						<ArchivedIssueCard issue={issue}/>
-					</Fragment>	
+						<ArchivedIssueCard issue={issue} />
+					</Fragment>
 				);
 			})
 		)
@@ -93,13 +94,13 @@ const ArchiveGallery: FC<ArchiveGalleryProps> = (props) => {
 			</Typography>
 			<div className={classes.searchWrapper}>
 				<TextField
-					className={classes.searchField} 
-					placeholder="Search issues..." 
+					className={classes.searchField}
+					placeholder="Search issues..."
 					variant='outlined'
 					InputProps={{
-						endAdornment: 
+						endAdornment:
 							<InputAdornment position="end">
-								<SearchIcon/>
+								<SearchIcon />
 							</InputAdornment>
 					}}
 					onChange={(e) => setQuery(e.target.value)}

@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '16px',
 		[theme.breakpoints.down('xs')]: {
 			fontSize: '12px',
-			minWidth: 'auto',	
+			minWidth: 'auto',
 		},
 		color: theme.palette.secondary.main,
 		'&:hover': {
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.secondary.main,
 		[theme.breakpoints.down('xs')]: {
 			transform: 'rotate(20deg) scale(0.7)',
-			padding:0,
+			padding: 0,
 		},
 	},
 	menu: {
@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 	offset: theme.mixins.toolbar,
 
 }));
+
 
 interface NavbarProps {
 }

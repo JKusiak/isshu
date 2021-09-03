@@ -5,34 +5,34 @@ import UpdateCompletionButton from '../../buttons/issueButtons/UpdateCompletionB
 
 
 interface ManageCompletionProps {
-      issue: INestedIssue,
+	issue: INestedIssue,
 }
 
 
 const ManageCompletion: FC<ManageCompletionProps> = (props) => {
 
-      function updateCompletion() {
-            const isFinished = props.issue.isFinished;
-            const requestBody = {
-				isFinished: isFinished,
-            }
+	function updateCompletion() {
+		const isFinished = props.issue.isFinished;
+		const requestBody = {
+			isFinished: isFinished,
+		}
 
-            axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).catch((err) => {
-                  console.log(err);
-            })
-      } 
+		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
 
 
-      return (
+	return (
 		<UpdateCompletionButton
 			issue={props.issue}
 			updateCompletion={updateCompletion}
-        />
-      );
+		/>
+	);
 }
 
 export default ManageCompletion;

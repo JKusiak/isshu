@@ -17,64 +17,64 @@ export const DarkModeContext = createContext<{ darkMode: boolean, setDarkMode: R
 export const LoggedInContext = createContext<{ isLoggedIn: boolean, setLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
 
 const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(
-    localStorage.getItem('token') === '' ? false : true
-  );
-  const [darkMode, setDarkMode] = useState<boolean>(
-    localStorage.getItem('darkMode') === 'true' ? true : false
-  );
+	const [isLoggedIn, setLoggedIn] = useState<boolean>(
+		localStorage.getItem('token') === '' ? false : true
+	);
+	const [darkMode, setDarkMode] = useState<boolean>(
+		localStorage.getItem('darkMode') === 'true' ? true : false
+	);
 
-  const defaultTheme = createMuiTheme();
+	const defaultTheme = createMuiTheme();
 
-  const theme = createMuiTheme({
-    palette: darkMode ? darkPalette : lightPalette,
-    shadows: darkMode ? getAntiShadows() : defaultTheme.shadows,
-    overrides: darkMode ? overrides : undefined
-  });
+	const theme = createMuiTheme({
+		palette: darkMode ? darkPalette : lightPalette,
+		shadows: darkMode ? getAntiShadows() : defaultTheme.shadows,
+		overrides: darkMode ? overrides : undefined
+	});
 
 
-  return (
-    <ThemeProvider theme={theme}>
-      <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-        <LoggedInContext.Provider value={{ isLoggedIn, setLoggedIn }}>
-          <CssBaseline>
-            <Helmet>
-              <title>Isshu.</title>
-              <meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
-              <style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
-            </Helmet>
+	return (
+		<ThemeProvider theme={theme}>
+			<DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+				<LoggedInContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+					<CssBaseline>
+						<Helmet>
+							<title>Isshu.</title>
+							<meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
+							<style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
+						</Helmet>
 
-            <Router>
-              <Navbar />
-              <Switch>
-                <Route path="/home">
-                  <GetHomePage />
-                </Route>
-                <Route path="/project/:projectId">
-                  <ProjectPage />
-                </Route>
-                <Route path="/login">
-                  <LoginPage />
-                </Route>
-                <Route path="/register">
-                  <RegisterPage />
-                </Route>
-                <Route path="/user/profile">
-                  <LoggedUserPage />
-                </Route>
-                <Route path="/user/:userId">
-                  <UserPage />
-                </Route>
-                <Route path="/">
-                  <TitlePage />
-                </Route>
-              </Switch>
-            </Router>
-          </CssBaseline>
-        </LoggedInContext.Provider>
-      </DarkModeContext.Provider>
-    </ThemeProvider>
-  );
+						<Router>
+							<Navbar />
+							<Switch>
+								<Route path="/home">
+									<GetHomePage />
+								</Route>
+								<Route path="/project/:projectId">
+									<ProjectPage />
+								</Route>
+								<Route path="/login">
+									<LoginPage />
+								</Route>
+								<Route path="/register">
+									<RegisterPage />
+								</Route>
+								<Route path="/user/profile">
+									<LoggedUserPage />
+								</Route>
+								<Route path="/user/:userId">
+									<UserPage />
+								</Route>
+								<Route path="/">
+									<TitlePage />
+								</Route>
+							</Switch>
+						</Router>
+					</CssBaseline>
+				</LoggedInContext.Provider>
+			</DarkModeContext.Provider>
+		</ThemeProvider>
+	);
 }
 
 export default App;

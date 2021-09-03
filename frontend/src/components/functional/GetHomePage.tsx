@@ -71,14 +71,14 @@ const GetHomePage = () => {
 
 	return (
 		<>
-		{isLoaded &&
-			<FetchMembersContext.Provider value={{ members, setMembers }}>
-				<HomePage
-					organization={organization}
-					user={user}
-				/>
-			</FetchMembersContext.Provider>
-		}
+			{isLoaded &&
+				<FetchMembersContext.Provider value={{ members, setMembers }}>
+					<HomePage
+						organization={organization}
+						user={user}
+					/>
+				</FetchMembersContext.Provider>
+			}
 		</>
 	);
 }

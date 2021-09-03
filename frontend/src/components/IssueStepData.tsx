@@ -40,25 +40,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IssueStepProps {
     issue: INestedIssue,
-	step: IStep,
-	index: number,
+    step: IStep,
+    index: number,
     updateSteps: () => void,
 }
 
 
 const IssueStep: FC<IssueStepProps> = (props) => {
     const classes = useStyles();
-	const { dispatch } = useContext(BoardReducerContext);
+    const { dispatch } = useContext(BoardReducerContext);
 
 
     function handleCheck(checkedStep: IStep) {
         const updatedSteps = props.issue.steps.map((step: IStep) => {
-            if(props.issue.steps.indexOf(step) === props.issue.steps.indexOf(checkedStep)) {
+            if (props.issue.steps.indexOf(step) === props.issue.steps.indexOf(checkedStep)) {
                 step.isCompleted = !step.isCompleted;
             }
             return step;
         });
-        
+
         const payload = {
             columnId: props.issue.columnId,
             issueId: props.issue._id,
@@ -67,55 +67,55 @@ const IssueStep: FC<IssueStepProps> = (props) => {
             },
         };
 
-        dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+        dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
         props.updateSteps();
     }
 
 
     return (
-    <>
-        <Draggable draggableId={`${props.issue.steps.indexOf(props.step)}`} index={props.index}>
-			{(provided) => {
-				return (
-					<Card 
-						className={classes.stepCard} 
-						onClick={() => handleCheck(props.step)}
-						ref={provided.innerRef}
-						{...provided.draggableProps}
-						{...provided.dragHandleProps}
-						style={{
-								...provided.draggableProps.style
-						}}
-					>
-						<CardContent className={classes.cardContent}>
-							<Checkbox
-								className={classes.checkbox}
-								checked={props.step.isCompleted}
-							/>
+        <>
+            <Draggable draggableId={`${props.issue.steps.indexOf(props.step)}`} index={props.index}>
+                {(provided) => {
+                    return (
+                        <Card
+                            className={classes.stepCard}
+                            onClick={() => handleCheck(props.step)}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                                ...provided.draggableProps.style
+                            }}
+                        >
+                            <CardContent className={classes.cardContent}>
+                                <Checkbox
+                                    className={classes.checkbox}
+                                    checked={props.step.isCompleted}
+                                />
 
-							<Typography 
-								component="h5" 
-								variant="h5"
-								style={{
-									fontSize: '14px',
-									textDecoration: props.step.isCompleted? 'line-through' : 'none',
-									overflow: 'hidden',
-								}}
-							>
-								{props.step.content}
-							</Typography>
-							
-							<DeleteStepButton
-								updateSteps={props.updateSteps}
-								issue={props.issue}
-								clickedStep={props.step}
-							/>
-						</CardContent>
-					</Card>
-				);
-			}}
-		</Draggable>
-    </>
+                                <Typography
+                                    component="h5"
+                                    variant="h5"
+                                    style={{
+                                        fontSize: '14px',
+                                        textDecoration: props.step.isCompleted ? 'line-through' : 'none',
+                                        overflow: 'hidden',
+                                    }}
+                                >
+                                    {props.step.content}
+                                </Typography>
+
+                                <DeleteStepButton
+                                    updateSteps={props.updateSteps}
+                                    issue={props.issue}
+                                    clickedStep={props.step}
+                                />
+                            </CardContent>
+                        </Card>
+                    );
+                }}
+            </Draggable>
+        </>
     );
 }
 

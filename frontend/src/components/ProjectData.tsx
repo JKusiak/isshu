@@ -10,20 +10,20 @@ interface ProjectDataProps {
 
 
 const ProjectData: FC<ProjectDataProps> = (props) => {
-      const { path } = useRouteMatch();
+	const { path } = useRouteMatch();
 
-      return (
-            <>
-            <Switch>
-                  <Route path={`${path}/:boardId`}>
-                        <GetBoard/>
-                  </Route>
-                  <Route path={path}>
-                        <GetBoardsGallery/>
-                  </Route>
-            </Switch>
-            </>
-      );
+	return (
+		<>
+			<Switch>
+				<Route path={`${path}/:boardId`}>
+					<GetBoard />
+				</Route>
+				<Route path={path}>
+					<GetBoardsGallery />
+				</Route>
+			</Switch>
+		</>
+	);
 }
 
 export default ProjectData;

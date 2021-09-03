@@ -7,47 +7,47 @@ import { BoardReducerContext } from './GetBoard';
 
 
 interface UpdateColumnProps {
-      column: INestedColumn,
+	column: INestedColumn,
 }
 
 
 const UpdateColumn: FC<UpdateColumnProps> = (props) => {
-      const [tempColumnName, setTempColumnName] = useState(props.column.name);
-      const { dispatch } = useContext(BoardReducerContext);
+	const [tempColumnName, setTempColumnName] = useState(props.column.name);
+	const { dispatch } = useContext(BoardReducerContext);
 
 
-      function onSubmit(e: React.SyntheticEvent) {
-            e.preventDefault();
+	function onSubmit(e: React.SyntheticEvent) {
+		e.preventDefault();
 
-            const column = {
-                  name: tempColumnName,
-            }
+		const column = {
+			name: tempColumnName,
+		}
 
-            axios.post(`http://localhost:5000/columns/update/${props.column._id}`, column, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            })
-            
-            const payload = {
-                  newName: tempColumnName,
-                  columnId: props.column._id,
-            }
+		axios.post(`http://localhost:5000/columns/update/${props.column._id}`, column, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		})
 
-            dispatch({type: ActionTypes.UpdateColumn, payload: payload})
-      } 
+		const payload = {
+			newName: tempColumnName,
+			columnId: props.column._id,
+		}
+
+		dispatch({ type: ActionTypes.UpdateColumn, payload: payload })
+	}
 
 
-      return (
-      <> 
-            <ColumnNameButton
-                  tempColumnName={tempColumnName}
-                  setTempColumnName={setTempColumnName}
-                  permColumnName={props.column.name}
-                  onSubmit={onSubmit}
-            />
-      </>
-      );
+	return (
+		<>
+			<ColumnNameButton
+				tempColumnName={tempColumnName}
+				setTempColumnName={setTempColumnName}
+				permColumnName={props.column.name}
+				onSubmit={onSubmit}
+			/>
+		</>
+	);
 }
 
 export default UpdateColumn;
