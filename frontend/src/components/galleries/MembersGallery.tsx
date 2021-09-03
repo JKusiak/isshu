@@ -2,14 +2,6 @@ import { Card, CardActions, CardContent, CardMedia, Typography } from "@material
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
-// hardcoded now just for aesthetic purposes during development <3
-import ProjectCover1 from '../../resources/covers/project_cover1.png';
-import ProjectCover2 from '../../resources/covers/project_cover2.png';
-import ProjectCover3 from '../../resources/covers/project_cover3.png';
-import ProjectCover4 from '../../resources/covers/project_cover4.png';
-import ProjectCover5 from '../../resources/covers/project_cover5.png';
-import ProjectCover6 from '../../resources/covers/project_cover6.png';
-import ProjectCover7 from '../../resources/covers/project_cover7.png';
 import { INestedUser } from "../../types/ModelTypes";
 import DeleteMember from "../functional/DeleteMember";
 import { FetchMembersContext } from "../functional/GetHomePage";
@@ -87,13 +79,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	})
 );
-
-
-function shuffleProjectCover() {
-	const coversArr = [ProjectCover1, ProjectCover2, ProjectCover3, ProjectCover4, ProjectCover5, ProjectCover6, ProjectCover7];
-
-	return coversArr[Math.floor(Math.random() * coversArr.length)];
-}
 
 
 const MembersGallery = () => {

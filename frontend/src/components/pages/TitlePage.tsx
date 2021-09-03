@@ -2,7 +2,6 @@ import { CardMedia, Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useContext } from "react";
 import { DarkModeContext, LoggedInContext } from '../../App';
-import Cover from '../../resources/covers/project_cover1.png';
 import TextLogo from '../../resources/logo/logo_text.svg';
 import DarkTextLogo from '../../resources/logo/logo_text_darkmode.svg';
 import ToProjectsButton from "../buttons/ToProjectsButton";
@@ -151,7 +150,7 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 					</div>
 					<CardMedia
 						className={classes.cardImage}
-						image={Cover}
+						image={''}
 						title="Future app screenshot"
 					/>
 				</div>
@@ -160,7 +159,7 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 					<Hidden xsDown implementation="css">
 						<CardMedia
 							className={classes.cardImage}
-							image={Cover}
+							image={''}
 							title="Future app screenshot"
 						/>
 					</Hidden>
@@ -176,7 +175,7 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 					<Hidden smUp implementation="css">
 						<CardMedia
 							className={classes.cardImage}
-							image={Cover}
+							image={''}
 							title="Future app screenshot"
 						/>
 					</Hidden>
@@ -193,7 +192,7 @@ const TitlePage: FC<TitlePageProps> = (props) => {
 					</div>
 					<CardMedia
 						className={classes.cardImage}
-						image={Cover}
+						image={''}
 						title="Future app screenshot"
 					/>
 				</div>

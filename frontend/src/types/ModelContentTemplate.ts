@@ -2,6 +2,7 @@
 // as I don't know how to solve it with types 
 
 import {
+      IAttachment,
       IBoard,
       IColumn,
       IIssue,
@@ -73,6 +74,11 @@ export const StepTemplate: IStep = {
       isCompleted: false,
 }
 
+export const AttachmentTemplate: IAttachment = {
+      _id: '',
+      name: '',
+}
+
 export const IssueTemplate: IIssue = {
       _id: '',
       name: '',
@@ -80,6 +86,7 @@ export const IssueTemplate: IIssue = {
       creator: '',
       contributors: [''],
       tags: [''],
+      attachments: [AttachmentTemplate],
       messages: [MessageTemplate],
       steps: [StepTemplate],
       columnId: '',

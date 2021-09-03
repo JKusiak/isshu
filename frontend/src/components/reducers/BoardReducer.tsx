@@ -96,6 +96,7 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
                                                 if(payload.modified.messages) issue.messages = payload.modified.messages;
                                                 if(payload.modified.tags) issue.tags = payload.modified.tags;
                                                 if(payload.modified.contributors) issue.contributors = payload.modified.contributors;
+                                                if(payload.modified.attachments) issue.attachments = payload.modified.attachments;
                                                 if(typeof payload.modified.isFinished !== 'undefined') issue.isFinished = payload.modified.isFinished;
                                           }
                                           return issue;

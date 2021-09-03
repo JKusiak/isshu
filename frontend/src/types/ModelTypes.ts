@@ -47,6 +47,7 @@ export interface IIssue {
       creator: string;        // ref id
       columnId: string;       // ref id
       isFinished: boolean;
+      attachments: [IAttachment];
       messages: [IMessage];
       steps: [IStep];
       tags: [string];         // ref id
@@ -70,6 +71,11 @@ export interface IStep {
       _id: string;
       content: string;
       isCompleted: boolean;
+}
+
+export interface IAttachment {
+      _id: string;
+      name: string;
 }
 
 // types with nested subtypes for call on getNestedBoard
@@ -111,6 +117,7 @@ export interface INestedIssue {
       creator: INestedUser;
       columnId: string;
       isFinished: boolean;
+      attachments: [IAttachment];
       messages: [INestedMessage];
       steps: [IStep];
       tags: [ITag];
