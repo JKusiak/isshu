@@ -9,41 +9,39 @@ import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface GetProjectInfoBannerProps {
-      project: INestedProject,
+	project: INestedProject,
 }
 
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
-      const { projectId } = useParams<{ projectId: string }>();
-      const [projectBannerState, dispatch] = useReducer(bannerReducer, ProjectTemplate);
-      const [file, setFile] = useState<string | Blob>('');
-	const [imageUrl, setUrl] = useState<string | undefined>();
-      const loggedInUser = getLoggedInUser();
-      
-
-      useEffect(() => {
-            const initialReducerData = {
-                  _id: props.project._id,
-                  name: props.project.name,
-                  description: props.project.description,
-                  dateStart: props.project.dateStart,
-                  dateEnd: props.project.dateEnd,
-                  creator: props.project.creator,
-            }
-            dispatch({ type: ActionTypes.FetchData, payload: initialReducerData });
-      }, [props.project])
+	const { projectId } = useParams<{ projectId: string }>();
+	const [projectBannerState, dispatch] = useReducer(bannerReducer, ProjectTemplate);
+	const [file, setFile] = useState<string | Blob>('');
+	const [imageUrl, setImageUrl] = useState<string | undefined>();
+	const [imageExists, setImageExists] = useState<boolean>(false);
+	const loggedInUser = getLoggedInUser();
 
 
-      // when props are loaded, fetches image from the server
 	useEffect(() => {
-		if (props.project._id) {
-			fetchImage(`uploads/organization-${loggedInUser.organizationId}/projects-covers/${props.project._id}.jpg`);
+		const initialReducerData = {
+			_id: props.project._id,
+			name: props.project.name,
+			description: props.project.description,
+			dateStart: props.project.dateStart,
+			dateEnd: props.project.dateEnd,
+			creator: props.project.creator,
 		}
-	}, [props.project._id]);
+		dispatch({ type: ActionTypes.FetchData, payload: initialReducerData });
+	}, [props.project])
 
 
-      // executes uploading image to server when user chooses picture without submit button
+	// when props are loaded, fetches image from the server
 	useEffect(() => {
-            console.log(file);
+		checkIfExists();
+	}, [props.project]);
+
+
+	// executes uploading image to server when user chooses picture without submit button
+	useEffect(() => {
 		if (file != '') uploadImage();
 	}, [file]);
 
@@ -60,52 +58,59 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`,
 				'Content-Type': 'multipart/form-data'
 			}
-		}).then((resp) => {
-			const adjustedPath = resp.data.replaceAll('\\', '/');
-			fetchImage(adjustedPath);
-			// setErrorText('');
+		}).then(() => {
+			checkIfExists();
 		}).catch((err) => {
-			// setErrorText('Please upload in .jpg format and under 1MB file size');
+			console.log(err);
 		})
 	}
 
 
-      function fetchImage(path: string) {
-		axios.get(`http://localhost:5000/${path}`, {
+	function checkIfExists() {
+		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
+		const path = `uploads%2forganization-${loggedInUser.organizationId}%2fprojects-covers%2f${props.project._id}.jpg`;
+
+		axios.get(`http://localhost:5000/uploads/get/${path}`, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`,
 			}
-		}).then(() => {
-			setUrl('');
-			setUrl(`http://localhost:5000/${path}`);
+		}).then((resp) => {
+			setImageExists(resp.data);
+			console.log(resp.data);
+			if (resp.data) {
+				// ?t= and timestamp added to trick cache into re-downloading image under same path
+				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
+				setImageUrl(`http://localhost:5000/${adjustedPath}`);
+			}
 		}).catch((err) => {
-			setUrl(undefined);
+			console.log(err);
 		})
 	}
 
 
-      function updateProject() {
-            axios.post(`http://localhost:5000/projects/update/${projectId}`, projectBannerState, {
-                  headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                  }
-            }).catch((err) => {
-                  console.log(err);
-            });
-      }
+	function updateProject() {
+		axios.post(`http://localhost:5000/projects/update/${projectId}`, projectBannerState, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).catch((err) => {
+			console.log(err);
+		});
+	}
 
 
-      return (
-            <>
-                  <ProjectInfoBanner
-                        projectBannerState={projectBannerState}
-                        dispatch={dispatch}
-                        updateProject={updateProject}
-                        bannerPath={imageUrl}
-                        setFile={setFile}
-                  />
-            </>
-      );
+	return (
+		<>
+			<ProjectInfoBanner
+				projectBannerState={projectBannerState}
+				dispatch={dispatch}
+				updateProject={updateProject}
+				imageExists={imageExists}
+				bannerPath={imageUrl}
+				setFile={setFile}
+			/>
+		</>
+	);
 }
 
 export default GetProjectInfoBanner;

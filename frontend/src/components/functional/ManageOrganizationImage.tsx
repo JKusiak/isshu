@@ -17,10 +17,11 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 	const [imageExists, setImageExists] = useState<boolean>(false);
 	const [imageUrl, setImageUrl] = useState<string>('');
 
+	
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
 		checkIfExists();
-	}, [file, imageExists]);
+	}, []);
 
 
 	// executes uploading image to server when user chooses picture without submit button
@@ -41,10 +42,10 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`,
 				'Content-Type': 'multipart/form-data'
 			}
-		}).then((resp) => {
+		}).then(() => {
+			checkIfExists();
 			props.setErrorText('');
-			setImageExists(false);
-		}).catch((err) => {
+		}).catch(() => {
 			props.setErrorText('Please upload in .jpg format and under 1MB file size');
 		})
 	}
@@ -61,7 +62,8 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 		}).then((resp) => {
 			setImageExists(resp.data);
 			if(resp.data) {
-				const adjustedPath = path.replaceAll('%2f', '/');
+				// ?t= and timestamp added to trick cache into re-downloading image under same path
+				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
 				setImageUrl(`http://localhost:5000/${adjustedPath}`);
 			}
 		}).catch((err) => {

@@ -12,15 +12,14 @@ interface ManageUserImageProps {
 
 const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 	const [file, setFile] = useState<string | Blob>('');
-	const [url, setUrl] = useState<string | undefined>();
+	const [imageExists, setImageExists] = useState<boolean>(false);
+	const [imageUrl, setImageUrl] = useState<string>('');
 
 
-	// when props are loaded, fetches image from the server
+	/// when props are loaded, fetches image from the server
 	useEffect(() => {
-		if (props.user._id) {
-			fetchImage(`uploads/organization-${props.user.organizationId}/user-profile/${props.user._id}.jpg`);
-		}
-	}, [props.user._id]);
+		checkIfExists();
+	}, [props.user]);
 
 
 	// executes uploading image to server when user chooses picture without submit button
@@ -42,8 +41,7 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 				'Content-Type': 'multipart/form-data'
 			}
 		}).then((resp) => {
-			const adjustedPath = resp.data.replaceAll('\\', '/');
-			fetchImage(adjustedPath);
+			checkIfExists();
 			props.setErrorText('');
 		}).catch((err) => {
 			props.setErrorText('Please upload in .jpg format and under 1MB file size');
@@ -51,24 +49,33 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 	}
 
 
-	function fetchImage(path: string) {
-		axios.get(`http://localhost:5000/${path}`, {
+	function checkIfExists() {
+		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
+		const path = `uploads%2forganization-${props.user.organizationId}%2fuser-profile%2f${props.user._id}.jpg`;
+
+		axios.get(`http://localhost:5000/uploads/get/${path}`, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`,
 			}
-		}).then(() => {
-			setUrl('');
-			setUrl(`http://localhost:5000/${path}`);
+		}).then((resp) => {
+			setImageExists(resp.data);
+			if(resp.data) {
+				// ?t= and timestamp added to trick cache into re-downloading image under same path
+				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
+				setImageUrl(`http://localhost:5000/${adjustedPath}`);
+			}
 		}).catch((err) => {
-			setUrl(undefined);
+			console.log(err);
 		})
 	}
+
 
 	return (
 		<>
 			<UserImage
-				url={url}
+				imageExists={imageExists}
 				setFile={setFile}
+				imageUrl={imageUrl}
 			/>
 		</>
 	);

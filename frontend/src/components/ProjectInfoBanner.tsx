@@ -15,6 +15,7 @@ interface ProjectDataProps {
 	updateProject: () => void,
 	bannerPath: string | undefined,
 	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
+	imageExists: boolean,
 }
 
 
@@ -35,7 +36,7 @@ const useStyles = makeStyles<Theme, ProjectDataProps>(theme =>
 				width: '100%',
 				height: '100%',
 				zIndex: -1,
-				background: ({ bannerPath }) => bannerPath? `url(${bannerPath})` : theme.palette.secondary.light,
+				background: ({ bannerPath, imageExists }) => imageExists? `url(${bannerPath})` : theme.palette.secondary.light,
 				backgroundSize: 'cover',
 				filter: 'blur(3px) brightness(75%)',
 			},
@@ -217,13 +218,13 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 	function handleClickAway(e: React.MouseEvent<Document, MouseEvent>) {
 		if (isEditing === true) {
 			setIsEditing(false);
-			// type casting like this necessary because of insuficient overlap of types
+			// type casting like this necessary because of insufficient overlap of types
 			onSubmit(e as unknown as React.SyntheticEvent);
 		}
 	}
 
 
-	function handleImageClick() {
+	function handleChangePicture() {
 		imageInputRef.current?.click();
 	}
 
@@ -280,7 +281,7 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								<MenuItem className={classes.menuItem} onClick={handleEdit}>
 									Edit information
 								</MenuItem>
-								<MenuItem className={classes.menuItem} onClick={handleImageClick}>
+								<MenuItem className={classes.menuItem} onClick={handleChangePicture}>
 									Change background
 								</MenuItem>
 								<MenuItem className={classes.menuItem}>

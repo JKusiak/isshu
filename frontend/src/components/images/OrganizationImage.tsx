@@ -2,6 +2,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import ImagePlaceholder from '@material-ui/icons/ImageOutlined';
 import React, { FC, useRef } from "react";
 
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		image: {
@@ -54,19 +55,18 @@ const OrganizationImage: FC<OrganizationImageProps> = (props) => {
 			/>
 
 			{props.imageExists &&
-				<div key={props.imageExists.toString()}>
-					<img
-						className={classes.image}
-						src={props.imageUrl}
-						onClick={handleImageClick}
-					/>
-				</div>
-
-
+				<img
+					className={classes.image}
+					src={props.imageUrl}
+					onClick={handleImageClick}
+				/>
 			}
 
 			{!props.imageExists &&
-				<ImagePlaceholder className={classes.image} onClick={handleImageClick} />
+				<ImagePlaceholder
+					className={classes.image}
+					onClick={handleImageClick}
+				/>
 			}
 		</>
 

@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 interface UserImageProps {
-	url: string | undefined,
+	imageExists: boolean,
 	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
+	imageUrl: string,
 }
 
 
@@ -50,9 +51,19 @@ const UserImage: FC<UserImageProps> = (props) => {
 				ref={imageInputRef}
 			/>
 
-			{props.url ?
-				<img className={classes.image} src={props.url} onClick={handleImageClick} /> :
-				<ImagePlaceholder className={classes.image} onClick={handleImageClick} />
+			{props.imageExists &&
+				<img
+					className={classes.image}
+					src={props.imageUrl}
+					onClick={handleImageClick}
+				/>
+			}
+
+			{!props.imageExists &&
+				<ImagePlaceholder
+					className={classes.image}
+					onClick={handleImageClick}
+				/>
 			}
 		</>
 
