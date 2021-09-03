@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface AttachmentsGalleryProps {
     issue: INestedIssue,
     addAttachment: (file: string | Blob) => void,
+    deleteAttachment: () => void,
 }
 
 
@@ -94,12 +95,11 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
             if (attachment._id) {
                 return (
                     <Fragment key={index}>
-
                         <EnlargedAttachmentModal
                             issue={props.issue}
-                            attachment={attachment}
+                            clickedAttachment={attachment}
+                            deleteAttachment={props.deleteAttachment}
                         />
-
                     </Fragment>
                 );
             }

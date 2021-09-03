@@ -1,11 +1,14 @@
-import { Card, CardMedia } from '@material-ui/core';
+import { Card, CardMedia, IconButton } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React, { FC, useState } from 'react';
+import DeleteIcon from '@material-ui/icons/ClearOutlined';
+import { FC, useContext, useState } from 'react';
 import { IAttachment, INestedIssue } from '../../types/ModelTypes';
+import { BoardReducerContext } from '../functional/GetBoard';
 import { getLoggedInUser } from '../functional/GetLoggedInUser';
+import { ActionTypes } from '../reducers/BoardReducer';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 			boxShadow: theme.shadows[5],
 			cursor: 'pointer',
 		},
-		marginBottom: theme.spacing(2),
+		// marginBottom: theme.spacing(2),
 	},
 	attachmentText: {
 		marginLeft: theme.spacing(1),
@@ -64,13 +67,35 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		height: '100%',
 		padding: theme.spacing(0.2),
 		borderRadius: '10px',
-	}
+	},
+	cardAction: {
+		zIndex: 20,
+		// position: 'relative',
+		background: theme.palette.primary.dark,
+		// borderRadius: '50%',
+		// left: '95%',
+		// top: '-9%',
+	},
+	iconButton: {
+		zIndex: 1,
+		left: '90%',
+		bottom: '70%',
+		width: '25px',
+		borderRadius: '50%',
+		background: theme.palette.primary.light,
+		padding: 2,
+	},
+	icon: {
+		fontSize: '18px',
+		color: theme.palette.secondary.main,
+	},
 }));
 
 
 interface EnlargedAttachmentModalProps {
 	issue: INestedIssue,
-	attachment: IAttachment,
+	clickedAttachment: IAttachment,
+	deleteAttachment: () => void,
 }
 
 
@@ -78,27 +103,42 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState<boolean>(false);
 	const loggedInUser = getLoggedInUser();
+	const { dispatch } = useContext(BoardReducerContext);
 
 
-	function handleOpen(e: React.MouseEvent) {
-		e.preventDefault();
+	function deleteAttachment() {
+		const updatedAttachments = props.issue.attachments.filter(attachment => 
+			props.issue.attachments.indexOf(attachment) !== props.issue.attachments.indexOf(props.clickedAttachment));
 
-		setOpen(true);
+		const payload = {
+			columnId: props.issue.columnId,
+			issueId: props.issue._id,
+			modified: {
+					attachments: updatedAttachments,
+			},
+		};
+
+		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
+		props.deleteAttachment();
 	}
 
 
 	return (
 		<>
 			<div className={classes.cardWrapper}>
-				<Card className={classes.attachmentCard} onClick={() => setOpen(true)}>
+				<Card className={classes.attachmentCard} >
 					<CardMedia
 						className={classes.image}
-						image={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.attachment._id}.jpg`}
+						image={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`}
 						title="Attachment picture"
+						onClick={() => setOpen(true)}
 					/>
 				</Card>
+				<IconButton className={classes.iconButton} onClick={deleteAttachment}>
+					<DeleteIcon className={classes.icon} />
+				</IconButton>
 				<div className={classes.attachmentText}>
-					{props.attachment.name}
+					{props.clickedAttachment.name}
 				</div>
 			</div>
 
@@ -115,9 +155,7 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 			>
 				<Fade in={open}>
 					<div className={classes.paper}>
-
-							<img className={classes.modalImage} src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.attachment._id}.jpg`} />
-
+						<img className={classes.modalImage} src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`} />
 					</div>
 				</Fade>
 			</Modal>

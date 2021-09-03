@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import { INestedIssue } from '../../../types/ModelTypes';
 import AttachmentsGallery from '../../galleries/AttachmentsGallery';
 import { ActionTypes } from '../../reducers/BoardReducer';
@@ -13,18 +13,8 @@ interface UpdateAttachmentsProps {
 
 
 const UpdateAttachments: FC<UpdateAttachmentsProps> = (props) => {
-      const [file, setFile] = useState<string | Blob>('');
-      const [urls, setUrls] = useState<[string]>(['']);
       const loggedInUser = getLoggedInUser();
       const { dispatch } = useContext(BoardReducerContext);
-
-
-      // // when props are loaded, fetches image from the server
-      // useEffect(() => {
-      // 	if (props.user._id) {
-      // 		fetchImage(`uploads/organization-${props.user.organizationId}/user-profile/${props.user._id}.jpg`);
-      // 	}
-      // }, [props.user._id]);
 
 
       function addAttachment(file: string | Blob) {
@@ -46,7 +36,7 @@ const UpdateAttachments: FC<UpdateAttachmentsProps> = (props) => {
                               attachments: attachments,
                         },
                   };
-                 
+
                   dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
                   uploadImage(file, newAttachment._id);
             }).catch((err) => {
@@ -67,57 +57,36 @@ const UpdateAttachments: FC<UpdateAttachmentsProps> = (props) => {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'multipart/form-data'
                   }
-            }).then((resp) => {
-                  // const adjustedPath = resp.data.replaceAll('\\', '/');
-                  // setUrls(...urls, adjustedPath);
-                  // props.setErrorText('');
             }).catch((err) => {
-                  // props.setErrorText('Please upload in .jpg format and under 1MB file size');
+                  console.log(err);
             })
       }
 
 
-      // function fetchImage(path: string) {
-      // 	axios.get(`http://localhost:5000/${path}`, {
-      // 		headers: {
-      // 			'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      // 		}
-      // 	}).then(() => {
-      // 		setUrl('');
-      // 		setUrl(`http://localhost:5000/${path}`);
-      // 	}).catch((err) => {
-      // 		setUrl(undefined);
-      // 	})
-      // }
-
-
       function deleteAttachment() {
-            // const adjustedMessages = props.issue.messages.map(message => {
-            //       const changedMessage: IMessage = {
-            //             ...message,
-            //             sender: message.sender._id,
-            //       }
-
-            //       return changedMessage;
-            // });
-
-            // const requestBody = {
-            //       messages: adjustedMessages,
-            // }
-
-            // axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-            //       headers: {
-            //             'Authorization': `Bearer ${localStorage.getItem('token')}`
-            //       }
-            // }).catch((err) => {
-            //       console.log(err);
-            // })
+            const requestBody = {
+                  attachments: props.issue.attachments,
+            }
+            axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
+                  headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+            }).catch((err) => {
+                  console.log(err);
+            })
       }
+
+
+      function deleteImage() {
+
+      }
+
 
       return (
             <AttachmentsGallery
                   issue={props.issue}
                   addAttachment={addAttachment}
+                  deleteAttachment={deleteAttachment}
             />
       );
 }
