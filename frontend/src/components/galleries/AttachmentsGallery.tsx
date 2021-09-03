@@ -56,6 +56,7 @@ interface AttachmentsGalleryProps {
     issue: INestedIssue,
     addAttachment: (file: string | Blob) => void,
     deleteAttachment: () => void,
+    deleteImage: (clickedAttachment: IAttachment) => void,
 }
 
 
@@ -99,6 +100,7 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
                             issue={props.issue}
                             clickedAttachment={attachment}
                             deleteAttachment={props.deleteAttachment}
+                            deleteImage={props.deleteImage}
                         />
                     </Fragment>
                 );

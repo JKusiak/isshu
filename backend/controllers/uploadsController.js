@@ -3,7 +3,20 @@ import fs from 'fs';
 import multer from 'multer';
 
 
-export const uploadImage = asyncHandler(async(req, res) => {
+export const checkIfExsists = asyncHandler(async (req, res) => {
+	fs.access(req.params.path, function (error) {
+		if(error) {
+			res.json(null);
+			console.log("Directory does not exist.")
+		} else {
+			res.json('Exists');
+			console.log("Directory exists.")
+		}
+	})
+});
+
+
+export const uploadImage = asyncHandler(async (req, res) => {
 	try {
 		res.json(req.file.path);
 	} catch (err) {
@@ -12,28 +25,15 @@ export const uploadImage = asyncHandler(async(req, res) => {
 	}
 });
 
-
-export const deleteImage = asyncHandler(async(req, res) => {
-	const id = req.params.columnId;
-
-	const update = { 
-		  $set: {
-				name: req.body.name,
-		  } 
-	};
-
-	const options =  {
-		  new: true, 
-		  useFindAndModify: false,
-	};
-
-	try {
-		  const updatedColumn = await Column.findByIdAndUpdate(id, update, options);
-		  res.json(updatedColumn);
-	} catch(err) {
-		  res.status(400).json({message: "Update of column unsuccessfull"});
-		  throw new Error('Update of column unsuccessfull');
-	}
+export const deleteImage = asyncHandler(async (req, res) => {
+	fs.unlink(req.params.path, function (error) {
+		if(error) {
+			console.log(err);
+		} else {
+			res.json('Deleted');
+			console.log(`Deleted from ${req.params.path}`);
+		}
+	})
 });
 
 
@@ -41,23 +41,25 @@ export function setupDiskStorage() {
 	const storage = multer.diskStorage({
 		destination: (req, file, cb) => {
 			const dir = `uploads/organization-${req.body.organizationId}/${req.body.directory}`
-	
+
 			fs.access(dir, function (error) {
 				if (error) {
 					// no such directory, creates it
-					return fs.mkdir(dir, { recursive: true }, (error) => cb(error, dir));
+					return fs.mkdir(dir, {
+						recursive: true
+					}, (error) => cb(error, dir));
 				} else {
 					// directory exists
 					return cb(null, dir);
 				}
 			});
 		},
-		
+
 		filename: (req, file, cb) => {
 			cb(null, `${req.params.imageId}.jpg`);
 		}
 	});
-	
+
 	const upload = multer({
 		storage: storage,
 		limits: {

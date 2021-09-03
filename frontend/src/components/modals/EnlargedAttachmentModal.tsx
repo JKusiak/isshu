@@ -96,6 +96,7 @@ interface EnlargedAttachmentModalProps {
 	issue: INestedIssue,
 	clickedAttachment: IAttachment,
 	deleteAttachment: () => void,
+	deleteImage: (clickedAttachment: IAttachment) => void,
 }
 
 
@@ -120,6 +121,7 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 
 		dispatch({type: ActionTypes.UpdateIssue, payload: payload});
 		props.deleteAttachment();
+		props.deleteImage(props.clickedAttachment);
 	}
 
 
