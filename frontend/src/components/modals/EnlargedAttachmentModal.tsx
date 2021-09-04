@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		// marginBottom: theme.spacing(2),
 	},
 	attachmentText: {
+		height: '15px',
 		marginLeft: theme.spacing(1),
 		marginRight: theme.spacing(1),
 		marginBottom: theme.spacing(2),
@@ -68,16 +69,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		padding: theme.spacing(0.2),
 		borderRadius: '10px',
 	},
-	cardAction: {
-		zIndex: 20,
-		// position: 'relative',
-		background: theme.palette.primary.dark,
-		// borderRadius: '50%',
-		// left: '95%',
-		// top: '-9%',
-	},
-	iconButton: {
-		zIndex: 1,
+	deleteButton: {
 		left: '90%',
 		bottom: '70%',
 		width: '25px',
@@ -85,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		background: theme.palette.primary.light,
 		padding: 2,
 	},
-	icon: {
+	deleteIcon: {
 		fontSize: '18px',
 		color: theme.palette.secondary.main,
 	},
@@ -136,8 +128,8 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 						onClick={() => setOpen(true)}
 					/>
 				</Card>
-				<IconButton className={classes.iconButton} onClick={deleteAttachment}>
-					<DeleteIcon className={classes.icon} />
+				<IconButton className={classes.deleteButton} onClick={deleteAttachment}>
+					<DeleteIcon className={classes.deleteIcon} />
 				</IconButton>
 				<div className={classes.attachmentText}>
 					{props.clickedAttachment.name}

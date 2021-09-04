@@ -40,7 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 		},
 		name: {
+			display: 'flex',
+			flexWrap: 'nowrap',
 			color: theme.palette.secondary.main,
+			overflow: 'hidden',
+			maxHeight: '30px',
 		},
 		description: {
 			overflow: 'hidden',

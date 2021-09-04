@@ -29,7 +29,6 @@ export const deleteImage = asyncHandler(async (req, res) => {
 			console.log(err);
 		} else {
 			res.json('Deleted');
-			console.log(`Deleted from ${req.params.path}`);
 		}
 	})
 });

@@ -19,6 +19,8 @@ const UpdateColumn: FC<UpdateColumnProps> = (props) => {
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
+		if (tempColumnName === '') return;
+
 		const column = {
 			name: tempColumnName,
 		}

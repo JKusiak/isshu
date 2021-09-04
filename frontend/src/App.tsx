@@ -13,8 +13,10 @@ import TitlePage from './components/pages/TitlePage';
 import UserPage from './components/pages/UserPage';
 import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
+
 export const DarkModeContext = createContext<{ darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
 export const LoggedInContext = createContext<{ isLoggedIn: boolean, setLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
+
 
 const App = () => {
 	const [isLoggedIn, setLoggedIn] = useState<boolean>(

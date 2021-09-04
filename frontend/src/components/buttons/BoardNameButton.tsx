@@ -74,11 +74,7 @@ const BoardNameButton: FC<BoardNameButtonProps> = (props) => {
 							value={props.tempBoardName}
 							autoComplete="board-name"
 							onChange={e => {
-								if (e.target.value !== '') {
-									props.setTempBoardName(e.target.value);
-								} else {
-									props.setTempBoardName('Enter value');
-								}
+								props.setTempBoardName(e.target.value);
 							}}
 						/>
 					</form>

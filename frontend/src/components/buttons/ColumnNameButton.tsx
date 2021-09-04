@@ -70,11 +70,7 @@ const ColumnNameButton: FC<ColumnNameButtonProps> = (props) => {
 							value={props.tempColumnName}
 							autoComplete="column-name"
 							onChange={e => {
-								if (e.target.value !== '') {
-									props.setTempColumnName(e.target.value);
-								} else {
-									props.setTempColumnName('Enter value');
-								}
+								props.setTempColumnName(e.target.value);
 							}}
 						/>
 					</form>

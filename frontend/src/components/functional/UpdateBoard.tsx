@@ -20,6 +20,8 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
+		if (tempBoardName === '') return;
+
 		const board = {
 			name: tempBoardName,
 		}
