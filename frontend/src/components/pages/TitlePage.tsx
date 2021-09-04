@@ -1,13 +1,18 @@
-import { CardMedia, Hidden } from '@material-ui/core';
+import { Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useContext } from "react";
 import { DarkModeContext, LoggedInContext } from '../../App';
 import TextLogo from '../../resources/logo_text.svg';
 import DarkTextLogo from '../../resources/logo_text_darkmode.svg';
+import TitleScreen1 from '../../resources/title_screen1.png';
+import TitleScreenMobile1 from '../../resources/title_screen1_mobile.png';
+import TitleScreen2 from '../../resources/title_screen2.png';
+import TitleScreenMobile2 from '../../resources/title_screen2_mobile.png';
+import TitleScreen3 from '../../resources/title_screen3.png';
+import TitleScreenMobile3 from '../../resources/title_screen3_mobile.png';
 import ToProjectsButton from "../buttons/ToProjectsButton";
 import RegisterModal from "../modals/RegisterModal";
 import Footer from './Footer';
-
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	container: {
@@ -47,8 +52,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 				}
 			},
 			"&>:nth-child(odd)": {
-				"& $cardImage": {
-					marginLeft: 'auto',
+				"& $advertTextWrapper": {
+					marginRight: 'auto',
 				}
 			},
 		},
@@ -62,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		},
 		alignItems: 'center',
 		height: '90vh',
-		width: '70vw',
+		width: '80vw',
 		color: theme.palette.secondary.main,
 		backgroundColor: theme.palette.primary.main,
 		border: 'none',
@@ -82,16 +87,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	advertText: {
 		fontSize: '16px',
 		textAlign: 'center',
-		marginTop: theme.spacing(1),
+		marginTop: theme.spacing(2),
 		[theme.breakpoints.down('xs')]: {
 			marginBottom: theme.spacing(4),
 		},
 	},
 	cardImage: {
-		width: '250px',
-		height: '250px',
+		maxWidth: '40vw',
+		maxHeight: '40vh',
+		borderRadius: '10px',
+		boxShadow: theme.shadows[5],
 		[theme.breakpoints.down('xs')]: {
-			marginBottom: theme.spacing(12),
+			marginBottom: theme.spacing(16),
+			maxWidth: '60vw',
+			maxHeight: '60vh',
 		},
 	},
 	actionCall: {
@@ -143,19 +152,19 @@ const TitlePage = () => {
 							Isshu offers only tools essential for project management, reducing unnecessary noise.
 						</div>
 					</div>
-					<CardMedia
+					<img
 						className={classes.cardImage}
-						image={''}
-						title="Future app screenshot"
+						src={window.innerWidth < 600 ? TitleScreenMobile1 : TitleScreen1}
+						alt="Future app screenshot"
 					/>
 				</div>
 
 				<div className={classes.advertBox}>
 					<Hidden xsDown implementation="css">
-						<CardMedia
+						<img
 							className={classes.cardImage}
-							image={''}
-							title="Future app screenshot"
+							src={window.innerWidth < 600 ? TitleScreenMobile2 : TitleScreen2}
+							alt="Future app screenshot"
 						/>
 					</Hidden>
 
@@ -167,11 +176,12 @@ const TitlePage = () => {
 							All the crucial information, nothing more.
 						</div>
 					</div>
+
 					<Hidden smUp implementation="css">
-						<CardMedia
+						<img
 							className={classes.cardImage}
-							image={''}
-							title="Future app screenshot"
+							src={window.innerWidth < 600 ? TitleScreenMobile2 : TitleScreen2}
+							alt="Future app screenshot"
 						/>
 					</Hidden>
 				</div>
@@ -185,10 +195,10 @@ const TitlePage = () => {
 							Make the tool work best for what your team sees fit.
 						</div>
 					</div>
-					<CardMedia
+					<img
 						className={classes.cardImage}
-						image={''}
-						title="Future app screenshot"
+						src={window.innerWidth < 600 ? TitleScreenMobile3 : TitleScreen3}
+						alt="Future app screenshot"
 					/>
 				</div>
 
