@@ -3,14 +3,14 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import React, { createContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import GetHomePage from './components/functional/GetHomePage';
-import LoggedUserPage from './components/pages/LoggedUserPage';
-import LoginPage from './components/pages/LoginPage';
-import Navbar from './components/pages/Navbar';
-import ProjectPage from './components/pages/ProjectPage';
-import RegisterPage from './components/pages/RegisterPage';
-import TitlePage from './components/pages/TitlePage';
-import UserPage from './components/pages/UserPage';
+import GetHomePage from './api/GetHomePage';
+import Navbar from './layout/Navbar';
+import LoggedUserPage from './pages/LoggedUserPage';
+import LoginPage from './pages/LoginPage';
+import ProjectPage from './pages/Project/ProjectPage';
+import RegisterPage from './pages/RegisterPage';
+import TitlePage from './pages/TitlePage';
+import UserPage from './pages/UserPage';
 import { darkPalette, getAntiShadows, lightPalette, overrides } from './resources/theme';
 
 
