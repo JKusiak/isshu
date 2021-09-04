@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FC } from "react";
-import { IOrganization } from "../../types/ModelTypes";
+import { IOrganization, IUser } from "../../types/ModelTypes";
 import InvitationModal from "../modals/InvitationModal";
 
 
@@ -17,16 +17,37 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 			organizationId: props.invite._id,
 			invitations: []
 		}
-
 		axios.post(`http://localhost:5000/users/update/${props.user._id}`, requestBody, {
 			headers: {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
-		}).then(() => {
-			window.location.reload();
+		}).then((resp) => {
+			updateToken(resp.data);
 		}).catch((err) => {
 			console.log(err);
 		});
+	}
+
+
+	function updateToken(user: IUser) {
+		const requestBody = {
+			_id: user._id,
+			email: user.email,
+			name: user.name,
+			surname: user.surname,
+			organizationId: user.organizationId,
+		}
+
+		axios.post(`http://localhost:5000/login/newOrganization/`, requestBody, {
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		}).then((res) => {
+			localStorage.setItem('token', res.data.token);
+			window.location.reload();
+		}).catch((err) => {
+			console.log(err);
+		})
 	}
 
 

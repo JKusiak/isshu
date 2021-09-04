@@ -11,10 +11,10 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DarkModeContext, LoggedInContext } from '../../App';
-import Icon from '../../resources/logo/icon.svg';
-import DarkIcon from '../../resources/logo/icon_darkmode.svg';
-import Logo from '../../resources/logo/logo.svg';
-import DarkLogo from '../../resources/logo/logo_darkmode.svg';
+import Icon from '../../resources/icon.svg';
+import DarkIcon from '../../resources/icon_darkmode.svg';
+import Logo from '../../resources/logo.svg';
+import DarkLogo from '../../resources/logo_darkmode.svg';
 import AddProject from '../functional/AddProject';
 
 

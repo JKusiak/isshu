@@ -109,6 +109,9 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
 	return (
 		<>
 			<Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={500} leaveDelay={200}>
+				{// span here necessary to still display tooltip even if the button is disabled
+				}
+				<span>
 				<IconButton
 					aria-label="add project"
 					disabled={isInOrganization}
@@ -116,6 +119,8 @@ const AddProjectModal: FC<AddProjectModalProps> = (props) => {
 				>
 					<AddProjectIcon className={classes.icon} />
 				</IconButton>
+				</span>
+				
 			</Tooltip>
 			<Modal
 				className={classes.modal}

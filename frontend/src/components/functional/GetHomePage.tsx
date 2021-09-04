@@ -31,6 +31,7 @@ const GetHomePage = () => {
 			}
 		}).then(resp => {
 			setUser(resp.data);
+			setIsLoaded(true);
 		}).catch((err) => {
 			console.log(err);
 		});;
@@ -45,7 +46,6 @@ const GetHomePage = () => {
 				}
 			}).then(resp => {
 				setOrganization(resp.data);
-				setIsLoaded(true);
 			}).catch((err) => {
 				console.log(err);
 			});;

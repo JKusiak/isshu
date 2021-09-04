@@ -1,5 +1,4 @@
 import { Backdrop, Button, Card, CardContent, createStyles, Fade, makeStyles, Modal, TextField, Theme, Typography } from "@material-ui/core";
-import InsertPhotoIcon from '@material-ui/icons/InsertPhotoOutlined';
 import { FC, useState } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,17 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			color: theme.palette.secondary.main,
 			textAlign: 'center',
-		},
-		imagePlaceholder: {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-			marginTop: theme.spacing(2),
-			marginBottom: theme.spacing(2),
-		},
-		placeholderIcon: {
-			width: '100px',
-			height: '100px',
+			marginBottom: theme.spacing(4),
 		},
 		form: {
 			width: '100%',
@@ -139,9 +128,6 @@ const AddOrganizationModal: FC<AddOrganizationModalProps> = (props) => {
 						<Typography className={classes.header} component="h1" variant="h4">
 							Create organization
 						</Typography>
-						<div className={classes.imagePlaceholder}>
-							<InsertPhotoIcon className={classes.placeholderIcon} />
-						</div>
 
 						<form className={classes.form} onSubmit={handleSubmit}>
 							<TextField

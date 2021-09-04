@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 import { IUser } from '../../types/ModelTypes';
 import AddOrganizationModal from '../modals/AddOrganizationModal';
 import { getLoggedInUser } from './GetLoggedInUser';

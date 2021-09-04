@@ -21,7 +21,7 @@ const ManageOrganizationImage: FC<ManageOrganizationImageProps> = (props) => {
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
 		checkIfExists();
-	}, []);
+	}, [props.organization]);
 
 
 	// executes uploading image to server when user chooses picture without submit button
