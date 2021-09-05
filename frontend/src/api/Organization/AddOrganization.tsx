@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AddOrganizationModal from '../../components/Organization/AddOrganizationModal';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
 import { IUser } from '../../types/ModelTypes';
+import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 

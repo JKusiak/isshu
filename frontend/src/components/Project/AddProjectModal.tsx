@@ -7,7 +7,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import React, { FC } from 'react';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
+import { getLoggedInUser } from '../../api/User/GetLoggedInUser';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

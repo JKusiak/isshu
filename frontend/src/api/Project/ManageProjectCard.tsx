@@ -1,8 +1,8 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import ProjectCard from "../../components/Project/ProjectCard";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
 import { IProject } from "../../types/ModelTypes";
+import { getLoggedInUser } from "../User/GetLoggedInUser";
 
 
 interface ManageGalleryProjectProps {

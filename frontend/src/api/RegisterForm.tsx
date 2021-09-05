@@ -4,9 +4,8 @@ import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -65,48 +64,49 @@ const emailRegex = "^$|^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
 const nameRegex = /^$|^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 const passRegex = /^$|^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-function RegisterForm() {
+
+interface RegisterProps {
+	registerUser: (user: any) => void,
+	isValid: boolean
+	setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+	isSent: boolean
+	setIsSent: React.Dispatch<React.SetStateAction<boolean>>,
+	errorText: string,
+	setErrorText: React.Dispatch<React.SetStateAction<string>>,
+}
+
+
+const RegisterForm: FC<RegisterProps> = (props) => {
 	const classes = useStyles();
-	const history = useHistory();
 	const [name, setName] = useState<string>('');
 	const [surname, setSurname] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [repeatPassword, setRepeatPassword] = useState<string>('');
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [isSent, setIsSent] = useState<boolean>(false);
-	const [errorText, setErrorText] = useState<string>('');
 
 
 	useEffect(() => {
 		if (repeatPassword === password) {
-			setIsValid(true);
+			props.setIsValid(true);
 		} else {
-			setErrorText("Passwords must be the same");
-			setIsValid(false);
+			props.setErrorText("Passwords must be the same");
+			props.setIsValid(false);
 		};
 	}, [password, repeatPassword]);
 
-	const user = {
-		name: name,
-		surname: surname,
-		email: email,
-		password: password,
-	}
 
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
-		if (isValid) {
-			axios.post('http://localhost:5000/users/add', user)
-				.then(() => {
-					setIsSent(true);
-					setTimeout(() => { history.push('/login') }, 1000);
-				}).catch((err) => {
-					console.log(err);
-					setIsValid(false);
-					setErrorText('Email already taken');
-				});
+		const user = {
+			name: name,
+			surname: surname,
+			email: email,
+			password: password,
+		}
+
+		if (props.isValid) {
+			props.registerUser(user);
 		}
 	}
 
@@ -132,12 +132,12 @@ function RegisterForm() {
 							onChange={e => {
 								if (e.target.value.match(nameRegex)) {
 									setName(e.target.value);
-									setIsValid(true);
+									props.setIsValid(true);
 								} else {
-									setErrorText("Name must only contain lower- and uppercase letters");
-									setIsValid(false);
+									props.setErrorText("Name must only contain lower- and uppercase letters");
+									props.setIsValid(false);
 								}
-								setIsSent(false);
+								props.setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -154,12 +154,12 @@ function RegisterForm() {
 							onChange={e => {
 								if (e.target.value.match(nameRegex)) {
 									setSurname(e.target.value);
-									setIsValid(true);
+									props.setIsValid(true);
 								} else {
-									setErrorText("Surname must only contain lower- and uppercase letters");
-									setIsValid(false);
+									props.setErrorText("Surname must only contain lower- and uppercase letters");
+									props.setIsValid(false);
 								}
-								setIsSent(false);
+								props.setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -176,12 +176,12 @@ function RegisterForm() {
 							onChange={e => {
 								if (e.target.value.match(emailRegex)) {
 									setEmail(e.target.value);
-									setIsValid(true);
+									props.setIsValid(true);
 								} else {
-									setErrorText("Email must follow valid email format");
-									setIsValid(false);
+									props.setErrorText("Email must follow valid email format");
+									props.setIsValid(false);
 								}
-								setIsSent(false);
+								props.setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -199,15 +199,15 @@ function RegisterForm() {
 							onChange={e => {
 								if (e.target.value.match(passRegex)) {
 									setPassword(e.target.value);
-									setIsValid(true);
+									props.setIsValid(true);
 								} else {
-									setErrorText("Password must contain minimum 8 characters,"
+									props.setErrorText("Password must contain minimum 8 characters,"
 										+ " at least 1 uppercase letter, 1 lowercase letter,"
 										+ " 1 number and 1 special character (@$!%*?&)");
-									setIsValid(false);
+										props.setIsValid(false);
 								}
 
-								setIsSent(false);
+								props.setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -224,13 +224,13 @@ function RegisterForm() {
 							autoComplete="repeat-password"
 							onChange={e => {
 								setRepeatPassword(e.target.value);
-								setIsSent(false);
+								props.setIsSent(false);
 							}}
 						/>
 					</Grid>
 				</Grid>
-				{isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
-				{!isValid && <div className={classes.wrongInput}><p>{errorText}</p></div>}
+				{props.isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
+				{!props.isValid && <div className={classes.wrongInput}><p>{props.errorText}</p></div>}
 				<Button
 					className={classes.submitButton}
 					type="submit"

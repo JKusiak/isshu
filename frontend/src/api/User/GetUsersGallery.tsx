@@ -2,9 +2,9 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UsersGallery from "../../components/User/UsersGallery";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
+import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface GetUsersGalleryProps {

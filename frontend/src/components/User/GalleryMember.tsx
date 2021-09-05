@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC } from "react";
 import { Link } from 'react-router-dom';
 import DeleteMember from "../../api/Organization/DeleteMember";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
+import { getLoggedInUser } from "../../api/User/GetLoggedInUser";
 import { INestedUser } from "../../types/ModelTypes";
 
 

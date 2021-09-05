@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import GetHomePage from './api/GetHomePage';
 import Navbar from './layout/Navbar';
-import LoggedUserPage from './pages/LoggedUserPage';
 import LoginPage from './pages/LoginPage';
 import ProjectPage from './pages/Project/ProjectPage';
 import RegisterPage from './pages/RegisterPage';
@@ -20,7 +19,7 @@ export const LoggedInContext = createContext<{ isLoggedIn: boolean, setLoggedIn:
 
 const App = () => {
 	const [isLoggedIn, setLoggedIn] = useState<boolean>(
-		localStorage.getItem('token') === '' ? false : true
+		localStorage.getItem('token') ? true : false
 	);
 	const [darkMode, setDarkMode] = useState<boolean>(
 		localStorage.getItem('darkMode') === 'true' ? true : false
@@ -60,9 +59,6 @@ const App = () => {
 								</Route>
 								<Route path="/register">
 									<RegisterPage />
-								</Route>
-								<Route path="/user/profile">
-									<LoggedUserPage />
 								</Route>
 								<Route path="/user/:userId">
 									<UserPage />

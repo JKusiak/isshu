@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { getLoggedInUser } from "../functions/GetLoggedInUser";
 import HomePage from "../pages/Home/HomePage";
 import { NestedUserTemplate, OrganizationTemplate, UserTemplate } from "../types/ModelContentTemplate";
 import { INestedUser, IOrganization, IUser } from "../types/ModelTypes";
+import { getLoggedInUser } from "./User/GetLoggedInUser";
 
 
 

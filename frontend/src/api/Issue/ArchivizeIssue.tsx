@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { FC } from 'react';
 import ArchivizeIssueButton from '../../components/Issue/ArchivizeIssueButton';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
 import { INestedIssue } from '../../types/ModelTypes';
+import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 interface ArchivizeIssueProps {

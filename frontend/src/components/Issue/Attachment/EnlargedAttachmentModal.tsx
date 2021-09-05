@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import { FC, useContext, useState } from 'react';
 import { BoardReducerContext } from '../../../api/Board/GetBoard';
-import { getLoggedInUser } from '../../../functions/GetLoggedInUser';
+import { getLoggedInUser } from '../../../api/User/GetLoggedInUser';
 import { ActionTypes } from '../../../reducers/BoardReducer';
 import { IAttachment, INestedIssue } from '../../../types/ModelTypes';
 

@@ -4,7 +4,7 @@ import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useState } from 'react';
-import RegisterForm from '../api/RegisterForm';
+import Register from '../api/Register';
 
 
 
@@ -82,7 +82,7 @@ const RegisterModal = () => {
 			>
 				<Fade in={open}>
 					<div className={classes.paper}>
-						<RegisterForm />
+						<Register />
 					</div>
 				</Fade>
 			</Modal>

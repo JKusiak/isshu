@@ -1,8 +1,8 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import GalleryMember from "../../components/User/GalleryMember";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
 import { INestedUser } from "../../types/ModelTypes";
+import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface ManageMemberCardProps {

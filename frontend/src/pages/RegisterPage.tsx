@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import RegisterForm from '../api/RegisterForm';
+import Register from '../api/Register';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -21,7 +21,7 @@ const RegisterPage = () => {
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 			<div className={classes.paper}>
-				<RegisterForm />
+				<Register />
 			</div>
 		</Container>
 	);

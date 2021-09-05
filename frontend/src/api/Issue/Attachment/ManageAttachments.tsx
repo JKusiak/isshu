@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { FC, useContext } from 'react';
 import AttachmentsGallery from '../../../components/Issue/Attachment/AttachmentsGallery';
-import { getLoggedInUser } from '../../../functions/GetLoggedInUser';
 import { ActionTypes } from '../../../reducers/BoardReducer';
 import { IAttachment, INestedIssue } from '../../../types/ModelTypes';
 import { BoardReducerContext } from '../../Board/GetBoard';
+import { getLoggedInUser } from '../../User/GetLoggedInUser';
 
 
 interface UpdateAttachmentsProps {

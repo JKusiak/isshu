@@ -4,10 +4,8 @@ import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
-import React, { useContext, useState } from 'react';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
-import { LoggedInContext } from '../App';
+import React, { FC, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -53,31 +51,28 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-const LoginForm = () => {
+interface LoginProps {
+	loginUser: (credentials: any) => void,
+	isValid: boolean, 
+	setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+
+const LoginForm: FC<LoginProps> = (props) => {
 	const classes = useStyles();
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const { setLoggedIn } = useContext(LoggedInContext);
-	let history = useHistory();
-	const credentials = {
-		email: email,
-		password: password,
-	}
 
 
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
-		axios.post('http://localhost:5000/login/', credentials)
-			.then((res) => {
-				localStorage.setItem('token', res.data.token);
-				setLoggedIn(true);
-				history.push("/home/projects");
-			}).catch((err) => {
-				console.log(err);
-				setIsValid(false);
-			});
+		const credentials = {
+			email: email,
+			password: password,
+		}
+
+		props.loginUser(credentials);
 	}
 
 
@@ -101,7 +96,7 @@ const LoginForm = () => {
 							autoComplete="email-address"
 							onChange={e => {
 								setEmail(e.target.value);
-								setIsValid(true);
+								props.setIsValid(true);
 							}}
 						/>
 					</Grid>
@@ -118,12 +113,12 @@ const LoginForm = () => {
 							type="password"
 							onChange={e => {
 								setPassword(e.target.value);
-								setIsValid(true);
+								props.setIsValid(true);
 							}}
 						/>
 					</Grid>
 				</Grid>
-				{!isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
+				{!props.isValid && <div className={classes.wrongInput}><p>Invalid username or password</p></div>}
 				<Button
 					className={classes.submitButton}
 					fullWidth

@@ -17,8 +17,7 @@ const GetData = () => {
 				'Authorization': `Bearer ${localStorage.getItem('token')}`
 			}
 		}).then(resp => {
-			const userCredentials = resp.data;
-			setUser(userCredentials);
+			setUser(resp.data);
 		}).catch((err) => {
 			console.log(err);
 		});

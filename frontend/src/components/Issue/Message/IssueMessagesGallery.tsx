@@ -1,7 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React, { FC, Fragment, useContext } from "react";
 import { BoardReducerContext } from "../../../api/Board/GetBoard";
-import { getLoggedInUser, getUserLanguage } from "../../../functions/GetLoggedInUser";
+import { getLoggedInUser, getUserLanguage } from "../../../api/User/GetLoggedInUser";
 import { ActionTypes } from "../../../reducers/BoardReducer";
 import { INestedIssue, INestedMessage } from "../../../types/ModelTypes";
 import AddMessageButton from "./AddMessageButton";

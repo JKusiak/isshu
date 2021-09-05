@@ -2,10 +2,10 @@ import axios from "axios";
 import { FC, useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProjectInfoBanner from "../../components/Project/ProjectInfoBanner";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
 import { ActionTypes, bannerReducer } from "../../reducers/BannerReducer";
 import { ProjectTemplate } from "../../types/ModelContentTemplate";
 import { INestedProject } from "../../types/ModelTypes";
+import { getLoggedInUser } from "../User/GetLoggedInUser";
 
 
 
@@ -77,7 +77,6 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 			}
 		}).then((resp) => {
 			setImageExists(resp.data);
-			console.log(resp.data);
 			if (resp.data) {
 				// ?t= and timestamp added to trick cache into re-downloading image under same path
 				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();

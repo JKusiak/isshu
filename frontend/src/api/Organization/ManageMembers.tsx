@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddMemberButton from "../../components/Organization/AddMemberButton";
-import { getLoggedInUser } from "../../functions/GetLoggedInUser";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
+import { getLoggedInUser } from "../User/GetLoggedInUser";
 
 
 

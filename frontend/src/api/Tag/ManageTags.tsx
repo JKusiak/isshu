@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { FC, useState } from 'react';
 import AllTagsGallery from '../../components/Tag/AllTagsGallery';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
 import { useMountEffect } from '../../hooks/useMountEffect';
 import { TagTemplate } from '../../types/ModelContentTemplate';
 import { INestedIssue, ITag } from '../../types/ModelTypes';
+import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 

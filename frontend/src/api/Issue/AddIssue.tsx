@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { FC, useContext, useState } from 'react';
 import AddIssueButton from '../../components/Issue/AddIssueButton';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
 import { ActionTypes } from '../../reducers/BoardReducer';
 import { IColumn } from '../../types/ModelTypes';
 import { BoardReducerContext } from '../Board/GetBoard';
+import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 interface AddIssueProps {

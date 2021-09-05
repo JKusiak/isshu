@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import AddProjectModal from '../../components/Project/AddProjectModal';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
+import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 const AddProject = () => {

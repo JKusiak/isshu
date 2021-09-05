@@ -11,12 +11,12 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddProject from '../api/Project/AddProject';
+import { getLoggedInUser } from '../api/User/GetLoggedInUser';
 import { DarkModeContext, LoggedInContext } from '../App';
 import Icon from '../resources/icon.svg';
 import DarkIcon from '../resources/icon_darkmode.svg';
 import Logo from '../resources/logo.svg';
 import DarkLogo from '../resources/logo_darkmode.svg';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -108,6 +108,8 @@ const Navbar = () => {
 	const open = Boolean(anchorEl);
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
 	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
+	const loggedInUser = isLoggedIn ? getLoggedInUser() : null;
+
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -119,7 +121,7 @@ const Navbar = () => {
 
 	const handleLogout = () => {
 		handleClose();
-		localStorage.setItem('token', '');
+		localStorage.removeItem('token');
 		setLoggedIn(false);
 	};
 
@@ -192,10 +194,11 @@ const Navbar = () => {
 									onClose={handleClose}
 								>
 									<MenuItem
+										key={isLoggedIn.toString()}
 										className={classes.menuItem}
 										onClick={handleClose}
 										component={Link}
-										to="/user/profile"
+										to={`/user/${loggedInUser._id}`}
 									>
 										Profile
 									</MenuItem>

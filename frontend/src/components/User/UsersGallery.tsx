@@ -12,7 +12,7 @@ import AddIcon from '@material-ui/icons/AddOutlined';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import { FC, forwardRef, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { getLoggedInUser } from '../../functions/GetLoggedInUser';
+import { getLoggedInUser } from '../../api/User/GetLoggedInUser';
 import { IUser } from '../../types/ModelTypes';
 
 
