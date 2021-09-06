@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from '../../components/Authentication/RegisterForm';
+
 
 
 const Register = () => {

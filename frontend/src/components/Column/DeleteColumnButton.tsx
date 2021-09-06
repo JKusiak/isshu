@@ -1,9 +1,10 @@
 import { createStyles, IconButton, makeStyles, Theme } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import { BoardReducerContext } from "../../api/Board/GetBoard";
 import { ActionTypes } from "../../reducers/BoardReducer";
 import { IColumn } from "../../types/ModelTypes";
+import ConfirmationModal from "../Commons/ConfirmationModal";
 
 
 
@@ -26,6 +27,7 @@ interface DeleteColumnButtonProps {
 
 const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
 	const classes = useStyles();
+	const [openModal, setOpenModal] = useState(false);
 	const { dispatch } = useContext(BoardReducerContext);
 
 
@@ -37,9 +39,15 @@ const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
 
 	return (
 		<>
-			<IconButton className={classes.button} onClick={handleDelete}>
+			<IconButton className={classes.button} onClick={() => {setOpenModal(true)}}>
 				<DeleteIcon className={classes.icon} />
 			</IconButton>
+
+			<ConfirmationModal
+				handleConfirm={handleDelete}
+				open={openModal}
+				setOpen={setOpenModal}
+			/>
 		</>
 	);
 }

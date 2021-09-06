@@ -1,11 +1,9 @@
-import { Button, IconButton, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import React, { FC, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { FC } from 'react';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -23,20 +21,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		borderRadius: '10px',
 		boxShadow: theme.shadows[2],
 		padding: theme.spacing(2, 4, 3),
-	},
-	iconButton: {
-		padding: theme.spacing(2),
-		[theme.breakpoints.down('xs')]: {
-			paddingRight: 0,
-			paddingLeft: 0,
-		},
-	},
-	deleteIcon: {
-		transform: 'scale(2)',
-		[theme.breakpoints.down('xs')]: {
-			transform: 'scale(1.4)',
-		},
-		color: theme.palette.secondary.main,
 	},
 	header: {
 		display: 'grid',
@@ -64,68 +48,44 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface DeleteProps {
-	deleteBoard: () => void,
+interface ConfirmationProps {
+	handleConfirm: () => void,
+	open: boolean,
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
-const DeleteModal: FC<DeleteProps> = (props) => {
+const ConfirmationModal: FC<ConfirmationProps> = (props) => {
 	const classes = useStyles();
-	const [open, setOpen] = useState<boolean>(false);
-	const { projectId } = useParams<{ projectId: string }>();
-	let history = useHistory();
 
-
-	function handleOpen(e: React.MouseEvent) {
-		e.preventDefault();
-
-		setOpen(true);
+	function handleYes() {
+		props.setOpen(false);
+		props.handleConfirm();
 	}
-
-
-	function handleClose(e: React.MouseEvent) {
-		e.preventDefault();
-
-		setOpen(false);
-	}
-
-
-	function handleDelete(e: React.MouseEvent) {
-		e.preventDefault();
-
-		props.deleteBoard();
-		history.push(`/project/${projectId}`);
-	}
-
 
 	return (
 		<>
-			<IconButton className={classes.iconButton} onClick={handleOpen}>
-				<DeleteIcon className={classes.deleteIcon} />
-			</IconButton>
-
-
 			<Modal
 				aria-labelledby="transition-modal-title"
 				aria-describedby="transition-modal-description"
 				className={classes.modal}
-				open={open}
-				onClose={handleClose}
+				open={props.open}
+				onClose={() => {props.setOpen(false)}}
 				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
 				}}
 			>
-				<Fade in={open}>
+				<Fade in={props.open}>
 					<div className={classes.paper}>
 						<Typography className={classes.header} component="h1" variant="h4">
-							Delete board?
+							Are you sure?
 						</Typography>
 						<div className={classes.form}>
 							<Button
 								className={classes.button}
-								onClick={handleDelete}
+								onClick={handleYes}
 								fullWidth
 								type="submit"
 								variant="contained"
@@ -136,7 +96,7 @@ const DeleteModal: FC<DeleteProps> = (props) => {
 
 							<Button
 								className={classes.button}
-								onClick={handleClose}
+								onClick={() => {props.setOpen(false)}}
 								fullWidth
 								type="submit"
 								variant="contained"
@@ -152,4 +112,4 @@ const DeleteModal: FC<DeleteProps> = (props) => {
 	);
 }
 
-export default DeleteModal;
+export default ConfirmationModal;

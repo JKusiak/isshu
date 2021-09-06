@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Register from '../api/Register';
+import Register from '../api/Authentication/Register';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({

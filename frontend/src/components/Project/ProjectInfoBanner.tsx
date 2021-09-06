@@ -169,6 +169,7 @@ const useStyles = makeStyles<Theme, ProjectDataProps>(theme =>
 const ProjectData: FC<ProjectDataProps> = (props) => {
 	const classes = useStyles(props);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [modalOpen, setModalOpen] = useState(false);
 	const open = Boolean(anchorEl);
 	const [isEditing, setIsEditing] = useState(false);
 	const imageInputRef = useRef<HTMLInputElement>(null);
@@ -284,8 +285,12 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								<MenuItem className={classes.menuItem} onClick={handleChangePicture}>
 									Change background
 								</MenuItem>
-								<MenuItem className={classes.menuItem}>
-									<DeleteProject handleSettingsClose={handleSettingsClose} />
+								<MenuItem className={classes.menuItem} onClick={() => {setModalOpen(true)}}>
+									Delete project
+									<DeleteProject 
+										open={modalOpen}
+										setOpen={setModalOpen}
+									/>
 								</MenuItem>
 								<input
 									style={{ display: 'none' }}

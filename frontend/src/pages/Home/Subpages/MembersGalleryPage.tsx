@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Fragment, useContext } from "react";
-import { FetchMembersContext } from "../../../api/GetHomePage";
+import { FetchMembersContext } from "../../../api/Authentication/GetHomePage";
 import ManageMembers from "../../../api/Organization/ManageMembers";
 import ManageMemberCard from "../../../api/User/ManageMemberCard";
 import { INestedUser } from "../../../types/ModelTypes";

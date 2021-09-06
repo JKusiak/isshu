@@ -7,6 +7,7 @@ import { Action, ActionTypes, boardContentReducer } from "../../reducers/BoardRe
 import { NestedBoardTemplate } from "../../types/ModelContentTemplate";
 
 
+
 // context for avoiding propagating function fetchBoard() for refreshing 
 // the board content to child components
 export const BoardReducerContext = createContext<{ boardState: any, dispatch: Dispatch<Action> }>({

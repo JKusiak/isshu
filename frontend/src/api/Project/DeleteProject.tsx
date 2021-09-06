@@ -1,32 +1,36 @@
 import axios from 'axios';
 import { FC } from 'react';
-import { useParams } from "react-router-dom";
-import DeleteProjectModal from '../../components/Project/DeleteProjectModal';
+import { useHistory, useParams } from "react-router-dom";
+import ConfirmationModal from '../../components/Commons/ConfirmationModal';
 
 
 
 interface DeleteProjectProps {
-	handleSettingsClose: () => void,
+	open: boolean,
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
 const DeleteProject: FC<DeleteProjectProps> = (props) => {
 	const { projectId } = useParams<{ projectId: string }>();
+	let history = useHistory();
 
 
-	async function deleteProject() {
-		await axios.delete(`/projects/delete/${projectId}`)
+	function deleteProject() {
+		axios.delete(`/projects/delete/${projectId}`)
 			.catch((err) => {
 				console.log(err);
 			});
+		history.push(`/home/projects`);
 	}
 
 
 	return (
 		<>
-			<DeleteProjectModal
-				deleteProject={deleteProject}
-				handleSettingsClose={props.handleSettingsClose}
+			<ConfirmationModal
+				handleConfirm={deleteProject}
+				open={props.open}
+				setOpen={props.setOpen}
 			/>
 		</>
 	);

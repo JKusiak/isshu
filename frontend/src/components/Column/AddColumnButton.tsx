@@ -7,23 +7,20 @@ import { FC, SetStateAction, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	card: {
-		flexShrink: 0,
 		width: 'auto',
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.primary.light,
 	},
 	form: {
 		display: 'flex',
+		width: '250px',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	inputField: {
-		width: 'auto',
+		flexShrink: 0,
 		marginLeft: theme.spacing(1),
 		color: theme.palette.secondary.main,
-	},
-	iconButton: {
-
 	},
 	icon: {
 		transform: 'scale(1)',
@@ -75,7 +72,7 @@ const AddColumnButton: FC<AddColumnButtonProps> = (props) => {
 							</form>
 						}
 						{!addMode &&
-							<IconButton className={classes.iconButton}>
+							<IconButton>
 								<AddIcon className={classes.icon} />
 							</IconButton>
 						}

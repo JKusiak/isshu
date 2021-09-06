@@ -193,7 +193,6 @@ const Navbar = () => {
 									onClose={handleClose}
 								>
 									<MenuItem
-										key={isLoggedIn.toString()}
 										className={classes.menuItem}
 										onClick={handleClose}
 										component={Link}

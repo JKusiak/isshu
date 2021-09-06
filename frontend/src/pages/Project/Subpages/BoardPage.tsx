@@ -1,13 +1,11 @@
-import { IconButton } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import BackIcon from '@material-ui/icons/ChevronLeftOutlined';
 import { FC, Fragment, useContext } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useHistory, useParams } from "react-router-dom";
 import DeleteBoard from "../../../api/Board/DeleteBoard";
 import { BoardReducerContext } from "../../../api/Board/GetBoard";
 import UpdateBoard from "../../../api/Board/UpdateBoard";
 import AddColumn from "../../../api/Column/AddColumn";
+import GoBackButton from "../../../components/Board/GoBackButton";
 import ColumnData from "../../../components/Column/ColumnData";
 import { ActionTypes } from "../../../reducers/BoardReducer";
 import { INestedBoard, INestedColumn } from "../../../types/ModelTypes";
@@ -26,13 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 			marginBottom: theme.spacing(8),
 		},
-		backButton: {
-			padding: theme.spacing(2),
-			[theme.breakpoints.down('xs')]: {
-				paddingRight: 0,
-				paddingLeft: 0,
-			},
-		},
+		
 		boardTitle: {
 			fontSize: '36px',
 			[theme.breakpoints.down('xs')]: {
@@ -44,13 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			width: '30%',
 			overflow: 'hidden',
-		},
-		backIcon: {
-			transform: 'scale(2.5)',
-			color: theme.palette.secondary.main,
-			[theme.breakpoints.down('xs')]: {
-				transform: 'scale(1.8)',
-			},
 		},
 		wrapper: {
 			display: 'flex',
@@ -79,16 +64,9 @@ interface BoardPageProps {
 
 const BoardPage: FC<BoardPageProps> = (props) => {
 	const classes = useStyles();
-	const history = useHistory();
-	const { projectId } = useParams<{ projectId: string }>();
 	const { dispatch } = useContext(BoardReducerContext);
 
 	
-	function handleGoBack() {
-		history.push(`/project/${projectId}`);
-	}
-
-
 	const onDragEnd = (result: DropResult) => {
 		const { source, destination, draggableId } = result;
 		if (!destination) return;
@@ -151,16 +129,14 @@ const BoardPage: FC<BoardPageProps> = (props) => {
 	return (
 		<>
 			<div className={classes.navigation}>
-				<IconButton className={classes.backButton} onClick={handleGoBack}>
-					<BackIcon className={classes.backIcon} />
-				</IconButton>
+				<GoBackButton/>
 
 				<div className={classes.boardTitle}>
 					<UpdateBoard boardName={props.board.name} />
 				</div>
 
 				<div>
-					<DeleteBoard />
+					<DeleteBoard/>
 				</div>
 			</div>
 

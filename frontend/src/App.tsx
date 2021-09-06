@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { createContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import GetHomePage from './api/GetHomePage';
+import GetHomePage from './api/Authentication/GetHomePage';
 import { getLoggedInUser } from './api/User/GetLoggedInUser';
 import Navbar from './layout/Navbar';
 import LoginPage from './pages/LoginPage';

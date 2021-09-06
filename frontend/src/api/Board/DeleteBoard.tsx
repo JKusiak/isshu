@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-import DeleteBoardModal from '../../components/Board/DeleteModal';
-
+import { useHistory, useParams } from "react-router-dom";
+import DeleteBoardButton from '../../components/Board/DeleteBoardButton';
 
 
 const DeleteBoard = () => {
 	const { boardId } = useParams<{ boardId: string }>();
+	const { projectId } = useParams<{ projectId: string }>();
+	let history = useHistory();
 
 
 	function deleteBoard() {
@@ -13,12 +14,14 @@ const DeleteBoard = () => {
 			.catch((err) => {
 				console.log(err);
 			});
+
+		history.push(`/project/${projectId}`);
 	}
 
 
 	return (
 		<>
-			<DeleteBoardModal
+			<DeleteBoardButton
 				deleteBoard={deleteBoard}
 			/>
 		</>

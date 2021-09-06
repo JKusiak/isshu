@@ -1,9 +1,10 @@
 import { Button, Card } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { BoardReducerContext } from '../../api/Board/GetBoard';
 import { ActionTypes } from '../../reducers/BoardReducer';
 import { INestedIssue } from '../../types/ModelTypes';
+import ConfirmationModal from '../Commons/ConfirmationModal';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -39,7 +40,9 @@ interface ArchivizeProps {
 
 const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 	const classes = useStyles();
+	const [modalOpen, setModalOpen] = useState(false);
 	const { dispatch } = useContext(BoardReducerContext);
+
 
 	function handleSubmit() {
 		const payload = {
@@ -55,11 +58,17 @@ const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 	return (
 		<>
 			<Card className={classes.cardWrapper}>
-				<Button className={classes.button} onClick={handleSubmit}>
+				<Button className={classes.button} onClick={() => {setModalOpen(true)}}>
 					<div className={classes.text}>
 						Archivize
 					</div>
 				</Button>
+
+				<ConfirmationModal
+					handleConfirm={handleSubmit}
+					open={modalOpen}
+					setOpen={setModalOpen}
+				/>
 			</Card>
 		</>
 	);

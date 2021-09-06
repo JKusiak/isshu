@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { AuthUserContext } from "../App";
-import HomePage from "../pages/Home/HomePage";
-import { NestedUserTemplate, OrganizationTemplate, UserTemplate } from "../types/ModelContentTemplate";
-import { INestedUser, IOrganization, IUser } from "../types/ModelTypes";
+import { AuthUserContext } from "../../App";
+import HomePage from "../../pages/Home/HomePage";
+import { NestedUserTemplate, OrganizationTemplate, UserTemplate } from "../../types/ModelContentTemplate";
+import { INestedUser, IOrganization, IUser } from "../../types/ModelTypes";
 
 
 export const FetchMembersContext = createContext<{ members: [INestedUser], setMembers: React.Dispatch<React.SetStateAction<[INestedUser]>> }>({} as any);
