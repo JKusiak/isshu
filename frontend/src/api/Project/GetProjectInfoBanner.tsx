@@ -2,7 +2,7 @@ import axios from "axios";
 import { FC, useContext, useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthUserContext } from "../../App";
-import ProjectInfoBanner from "../../components/Project/ProjectInfoBanner";
+import ProjectInfoBanner from "../../components/Project/ProjectInfoBanner/ProjectInfoBanner";
 import { ActionTypes, bannerReducer } from "../../reducers/BannerReducer";
 import { ProjectTemplate } from "../../types/ModelContentTemplate";
 import { INestedProject } from "../../types/ModelTypes";

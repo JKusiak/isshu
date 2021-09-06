@@ -4,8 +4,9 @@ import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import React, { FC, useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { FC, useEffect, useReducer, useState } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { ActionTypes, registerReducer, UserToRegisterTemplate } from '../../reducers/RegisterReducer';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	}
 }));
 
+
 const emailRegex = "^$|^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
 	+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 const nameRegex = /^$|^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
@@ -69,8 +71,6 @@ interface RegisterProps {
 	registerUser: (user: any) => void,
 	isValid: boolean
 	setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
-	isSent: boolean
-	setIsSent: React.Dispatch<React.SetStateAction<boolean>>,
 	errorText: string,
 	setErrorText: React.Dispatch<React.SetStateAction<string>>,
 }
@@ -78,35 +78,32 @@ interface RegisterProps {
 
 const RegisterForm: FC<RegisterProps> = (props) => {
 	const classes = useStyles();
-	const [name, setName] = useState<string>('');
-	const [surname, setSurname] = useState<string>('');
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
-	const [repeatPassword, setRepeatPassword] = useState<string>('');
+	const [userReducer, dispatch] = useReducer(registerReducer, UserToRegisterTemplate);
+	const [isSent, setIsSent] = useState<boolean>(false);
+	const history = useHistory();
 
 
 	useEffect(() => {
-		if (repeatPassword === password) {
+		if (userReducer.repeatPassword === userReducer.password) {
 			props.setIsValid(true);
 		} else {
 			props.setErrorText("Passwords must be the same");
 			props.setIsValid(false);
 		};
-	}, [password, repeatPassword]);
+	}, [userReducer.password, userReducer.repeatPassword]);
 
 
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
-		const user = {
-			name: name,
-			surname: surname,
-			email: email,
-			password: password,
-		}
+		const {name, surname, email, password } = userReducer;
+
+		const newUser = {name, surname, email, password};
 
 		if (props.isValid) {
-			props.registerUser(user);
+			props.registerUser(newUser);
+			setIsSent(true);
+			setTimeout(() => { history.push('/login') }, 1000);
 		}
 	}
 
@@ -131,13 +128,13 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							autoComplete="your-name"
 							onChange={e => {
 								if (e.target.value.match(nameRegex)) {
-									setName(e.target.value);
+									dispatch({ type: ActionTypes.SetName, payload: e.target.value });
 									props.setIsValid(true);
 								} else {
 									props.setErrorText("Name must only contain lower- and uppercase letters");
 									props.setIsValid(false);
 								}
-								props.setIsSent(false);
+								setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -153,13 +150,13 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							autoComplete="your-surname"
 							onChange={e => {
 								if (e.target.value.match(nameRegex)) {
-									setSurname(e.target.value);
+									dispatch({ type: ActionTypes.SetSurname, payload: e.target.value });
 									props.setIsValid(true);
 								} else {
 									props.setErrorText("Surname must only contain lower- and uppercase letters");
 									props.setIsValid(false);
 								}
-								props.setIsSent(false);
+								setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -175,13 +172,13 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							autoComplete="email-address"
 							onChange={e => {
 								if (e.target.value.match(emailRegex)) {
-									setEmail(e.target.value);
+									dispatch({ type: ActionTypes.SetEmail, payload: e.target.value });
 									props.setIsValid(true);
 								} else {
 									props.setErrorText("Email must follow valid email format");
 									props.setIsValid(false);
 								}
-								props.setIsSent(false);
+								setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -198,16 +195,16 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							autoComplete="password"
 							onChange={e => {
 								if (e.target.value.match(passRegex)) {
-									setPassword(e.target.value);
+									dispatch({ type: ActionTypes.SetPassword, payload: e.target.value });
 									props.setIsValid(true);
 								} else {
 									props.setErrorText("Password must contain minimum 8 characters,"
 										+ " at least 1 uppercase letter, 1 lowercase letter,"
 										+ " 1 number and 1 special character (@$!%*?&)");
-										props.setIsValid(false);
+									props.setIsValid(false);
 								}
 
-								props.setIsSent(false);
+								setIsSent(false);
 							}}
 						/>
 					</Grid>
@@ -223,13 +220,13 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							type="password"
 							autoComplete="repeat-password"
 							onChange={e => {
-								setRepeatPassword(e.target.value);
-								props.setIsSent(false);
+								dispatch({ type: ActionTypes.SetRepeatPassword, payload: e.target.value });
+								setIsSent(false);
 							}}
 						/>
 					</Grid>
 				</Grid>
-				{props.isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
+				{isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
 				{!props.isValid && <div className={classes.wrongInput}><p>{props.errorText}</p></div>}
 				<Button
 					className={classes.submitButton}

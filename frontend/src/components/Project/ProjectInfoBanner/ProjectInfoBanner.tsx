@@ -4,9 +4,9 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import React, { FC, useRef, useState } from "react";
-import DeleteProject from '../../api/Project/DeleteProject';
-import { Action, ActionTypes } from '../../reducers/BannerReducer';
-import { IProject } from "../../types/ModelTypes";
+import DeleteProject from '../../../api/Project/DeleteProject';
+import { Action, ActionTypes } from '../../../reducers/BannerReducer';
+import { IProject } from "../../../types/ModelTypes";
 
 
 interface ProjectDataProps {
@@ -285,9 +285,9 @@ const ProjectData: FC<ProjectDataProps> = (props) => {
 								<MenuItem className={classes.menuItem} onClick={handleChangePicture}>
 									Change background
 								</MenuItem>
-								<MenuItem className={classes.menuItem} onClick={() => {setModalOpen(true)}}>
+								<MenuItem className={classes.menuItem} onClick={() => { setModalOpen(true) }}>
 									Delete project
-									<DeleteProject 
+									<DeleteProject
 										open={modalOpen}
 										setOpen={setModalOpen}
 									/>
