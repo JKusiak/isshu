@@ -6,8 +6,8 @@ import { INestedUser, IOrganization, IUser } from "../types/ModelTypes";
 import { getLoggedInUser } from "./User/GetLoggedInUser";
 
 
-
 export const FetchMembersContext = createContext<{ members: [INestedUser], setMembers: React.Dispatch<React.SetStateAction<[INestedUser]>> }>({} as any);
+
 
 const GetHomePage = () => {
 	const [organization, setOrganization] = useState<IOrganization>(OrganizationTemplate);
@@ -27,46 +27,36 @@ const GetHomePage = () => {
 
 
 	function fetchUser() {
-		axios.get(`http://localhost:5000/users/getProjects/${loggedInUser._id}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setUser(resp.data);
-			setIsLoaded(true);
-		}).catch((err) => {
-			console.log(err);
-		});;
+		axios.get(`/users/getProjects/${loggedInUser._id}`)
+			.then(resp => {
+				setUser(resp.data);
+				setIsLoaded(true);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
 	function fetchOrganization() {
 		if (user.organizationId) {
-			axios.get(`http://localhost:5000/organization/${user.organizationId}`, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
-			}).then(resp => {
-				setOrganization(resp.data);
-			}).catch((err) => {
-				console.log(err);
-			});;
+			axios.get(`/organization/${user.organizationId}`)
+				.then(resp => {
+					setOrganization(resp.data);
+				}).catch((err) => {
+					console.log(err);
+				});;
 		}
-
 	}
 
 
 	function fetchMembers() {
 		if (user.organizationId) {
-			axios.get(`http://localhost:5000/organization/members/${user.organizationId}`, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
-			}).then(resp => {
-				setMembers(resp.data);
-			}).catch((err) => {
-				console.log(err);
-			});;
+			axios.get(`/organization/members/${user.organizationId}`)
+				.then(resp => {
+					setMembers(resp.data);
+				}).catch((err) => {
+					console.log(err);
+				});;
 		}
 	}
 

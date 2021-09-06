@@ -21,15 +21,12 @@ const ManageContributors: FC<ManageContributorsProps> = (props) => {
 
 
 	function fetchContributors() {
-		axios.get(`http://localhost:5000/users/getUsersByProject/${projectId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setProjectContributors(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});;
+		axios.get(`/users/getUsersByProject/${projectId}`)
+			.then(resp => {
+				setProjectContributors(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});;
 	}
 
 
@@ -40,13 +37,10 @@ const ManageContributors: FC<ManageContributorsProps> = (props) => {
 			contributors: contributorsToId,
 		}
 
-		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/issues/update/${props.issue._id}`, requestBody)
+			.catch((err) => {
+				console.log(err);
+			})
 	}
 
 

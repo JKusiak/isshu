@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface UpdateCompletionButtonProps {
+interface ArchivizeProps {
 	issue: INestedIssue,
 	archivizeIssue: () => void,
 }
 
 
-const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
+const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 	const classes = useStyles();
 	const { dispatch } = useContext(BoardReducerContext);
 
@@ -66,4 +66,4 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 }
 
 
-export default UpdateCompletionButton;
+export default ArchivizeButton;

@@ -1,5 +1,6 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import axios from 'axios';
 import React, { createContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -21,6 +22,7 @@ const App = () => {
 	const [isLoggedIn, setLoggedIn] = useState<boolean>(
 		localStorage.getItem('token') ? true : false
 	);
+	
 	const [darkMode, setDarkMode] = useState<boolean>(
 		localStorage.getItem('darkMode') === 'true' ? true : false
 	);
@@ -32,6 +34,9 @@ const App = () => {
 		shadows: darkMode ? getAntiShadows() : defaultTheme.shadows,
 		overrides: darkMode ? overrides : undefined
 	});
+
+	axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+	axios.defaults.baseURL = 'http://localhost:5000/';
 
 
 	return (

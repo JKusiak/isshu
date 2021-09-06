@@ -27,29 +27,23 @@ const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
 
 	// fetching users that do not belong to currently displayed project
 	function fetchOtherUsers() {
-		axios.get(`http://localhost:5000/users/getUsersWithoutProject/${organizationId}/${projectId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setOtherUsers(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/users/getUsersWithoutProject/${organizationId}/${projectId}`)
+			.then(resp => {
+				setOtherUsers(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
 	// fetching users that belong to currently displayed project
 	function fetchContributors() {
-		axios.get(`http://localhost:5000/users/getUsersByProject/${projectId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setContributors(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});;
+		axios.get(`/users/getUsersByProject/${projectId}`)
+			.then(resp => {
+				setContributors(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});;
 	}
 
 
@@ -59,15 +53,10 @@ const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
 			projectId: projectId
 		}
 
-		axios.post(`http://localhost:5000/users/addProject/${userId}`, projectIdData, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((resp) => {
-
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/users/addProject/${userId}`, projectIdData)
+			.catch((err) => {
+				console.log(err);
+			});
 
 		fetchContributors();
 		fetchOtherUsers();
@@ -76,10 +65,7 @@ const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
 
 	// remove currently displayed project from clicked user
 	function removeProjectFromUser(userId: string) {
-		axios.delete(`http://localhost:5000/users/deleteProject/${userId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			},
+		axios.delete(`/users/deleteProject/${userId}`, {
 			data: {
 				projectId: projectId
 			}

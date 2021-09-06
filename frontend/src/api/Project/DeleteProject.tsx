@@ -15,13 +15,10 @@ const DeleteProject: FC<DeleteProjectProps> = (props) => {
 
 
 	async function deleteProject() {
-		await axios.delete(`http://localhost:5000/projects/delete/${projectId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		await axios.delete(`/projects/delete/${projectId}`)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 

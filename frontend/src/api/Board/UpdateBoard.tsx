@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FC, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BoardNameButton from '../../components/Board/BoardNameButton';
+import UpdateBoardNameButton from '../../components/Board/UpdateNameButton';
 import { ActionTypes } from '../../reducers/BoardReducer';
 import { BoardReducerContext } from './GetBoard';
 
@@ -27,11 +27,7 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
 			name: tempBoardName,
 		}
 
-		axios.post(`http://localhost:5000/boards/update/${boardId}`, board, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		})
+		axios.post(`/boards/update/${boardId}`, board);
 
 		dispatch({ type: ActionTypes.UpdateBoard, payload: tempBoardName });
 	}
@@ -39,7 +35,7 @@ const UpdateBoard: FC<UpdateBoardProps> = (props) => {
 
 	return (
 		<>
-			<BoardNameButton
+			<UpdateBoardNameButton
 				tempBoardName={tempBoardName}
 				setTempBoardName={setTempBoardName}
 				permBoardName={props.boardName}

@@ -12,15 +12,12 @@ const GetData = () => {
 	const [user, setUser] = useState<IUser>(UserTemplate);
 
 	useEffect(() => {
-		axios.get(`http://localhost:5000/users/${userId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setUser(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/users/${userId}`)
+			.then(resp => {
+				setUser(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}, [userId]);
 
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { LoggedInContext } from '../App';
-import LoginForm from './LoginForm';
+import LoginForm from '../components/LoginForm';
 
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
 
 
 	function loginUser(credentials: any) {
-		axios.post('http://localhost:5000/login/', credentials)
+		axios.post('/login', credentials)
 			.then((res) => {
 				localStorage.setItem('token', res.data.token);
 				setLoggedIn(true);

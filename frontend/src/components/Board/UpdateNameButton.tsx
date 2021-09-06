@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface BoardNameButtonProps {
+interface UpdateNameProps {
 	tempBoardName: string,
 	setTempBoardName: React.Dispatch<React.SetStateAction<string>>,
 	permBoardName: string,
@@ -46,7 +46,7 @@ interface BoardNameButtonProps {
 }
 
 
-const BoardNameButton: FC<BoardNameButtonProps> = (props) => {
+const UpdateNameButton: FC<UpdateNameProps> = (props) => {
 	const classes = useStyles();
 	const [updateMode, setUpdateMode] = useState<boolean>(false);
 
@@ -89,4 +89,4 @@ const BoardNameButton: FC<BoardNameButtonProps> = (props) => {
 }
 
 
-export default BoardNameButton;
+export default UpdateNameButton;

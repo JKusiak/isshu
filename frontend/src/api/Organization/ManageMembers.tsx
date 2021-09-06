@@ -22,15 +22,12 @@ const GetAllUsers = () => {
 
 	// fetching users that do not belong to any organization
 	function fetchAllUsers() {
-		axios.get(`http://localhost:5000/users/`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			setAllUsers(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/users/`)
+			.then(resp => {
+				setAllUsers(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
@@ -42,13 +39,10 @@ const GetAllUsers = () => {
 			invitations: [...addedUser.invitations, loggedInUser.organizationId]
 		}
 
-		axios.post(`http://localhost:5000/users/update/${addedUser._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/users/update/${addedUser._id}`, requestBody)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	return (

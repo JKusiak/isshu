@@ -32,16 +32,13 @@ const AddProject = () => {
 			projectId: res.data._id,
 		};
 
-		axios.post(`http://localhost:5000/users/addProject/${loggedInUser._id}`, newProjectId, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(() => {
-			setIsOpen(false);
-			history.push(`/project/${newProjectId.projectId}`);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/users/addProject/${loggedInUser._id}`, newProjectId)
+			.then(() => {
+				setIsOpen(false);
+				history.push(`/project/${newProjectId.projectId}`);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
@@ -57,17 +54,14 @@ const AddProject = () => {
 			organizationId: loggedInUser.organizationId,
 		}
 
-		axios.post('http://localhost:5000/projects/add', project, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			addProjectToUser(res);
-		}).catch((err) => {
-			console.log(err);
-			setErrorText('Project name already taken');
-			setIsValid(false);
-		});
+		axios.post('/projects/add', project)
+			.then((res) => {
+				addProjectToUser(res);
+			}).catch((err) => {
+				console.log(err);
+				setErrorText('Project name already taken');
+				setIsValid(false);
+			});
 	}
 
 

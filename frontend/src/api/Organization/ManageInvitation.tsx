@@ -18,15 +18,12 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 			organizationId: props.invite._id,
 			invitations: []
 		}
-		axios.post(`http://localhost:5000/users/update/${props.user._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((resp) => {
-			updateToken(resp.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/users/update/${props.user._id}`, requestBody)
+			.then((resp) => {
+				updateToken(resp.data);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
@@ -39,16 +36,13 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 			organizationId: user.organizationId,
 		}
 
-		axios.post(`http://localhost:5000/login/newOrganization/`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			localStorage.setItem('token', res.data.token);
-			window.location.reload();
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/login/newOrganization/`, requestBody)
+			.then((res) => {
+				localStorage.setItem('token', res.data.token);
+				window.location.reload();
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 

@@ -12,7 +12,7 @@ const GetIssuesGallery = () => {
 
 	// requests issues created by user
 	useEffect(() => {
-		axios.get('http://localhost:5000/issues/getIssueCreator/60bce0e59c89184d505fa989')
+		axios.get('/issues/getIssueCreator/60bce0e59c89184d505fa989')
 			.then(resp => {
 				const issuesData = resp.data;
 				setIssuesCreated(issuesData);
@@ -23,7 +23,7 @@ const GetIssuesGallery = () => {
 
 	// requests issues taken by user
 	useEffect(() => {
-		axios.get('http://localhost:5000/issues/getIssueContributor/60bce0e59c89184d505fa989')
+		axios.get('/issues/getIssueContributor/60bce0e59c89184d505fa989')
 			.then(resp => {
 				const issuesData = resp.data;
 				setIssuesTaken(issuesData);

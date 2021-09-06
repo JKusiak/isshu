@@ -25,16 +25,13 @@ const GetBoard = () => {
 
 
 	function fetchBoard() {
-		axios.get(`http://localhost:5000/boards/getContent/${boardId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then(resp => {
-			dispatch({ type: ActionTypes.FetchData, payload: resp.data });
-			setIsLoaded(true);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/boards/getContent/${boardId}`)
+			.then(resp => {
+				dispatch({ type: ActionTypes.FetchData, payload: resp.data });
+				setIsLoaded(true);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 
@@ -43,13 +40,10 @@ const GetBoard = () => {
 			columnId: newColumnId,
 		}
 
-		axios.post(`http://localhost:5000/issues/update/${issueId}`, issueChanges, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/issues/update/${issueId}`, issueChanges)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 

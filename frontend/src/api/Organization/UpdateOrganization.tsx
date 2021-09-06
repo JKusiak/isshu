@@ -26,11 +26,7 @@ const UpdateOrganization: FC<UpdateOrganizationProps> = (props) => {
 			name: tempOrgName,
 		}
 
-		axios.post(`http://localhost:5000/organization/update/${props.organization._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		})
+		axios.post(`/organization/update/${props.organization._id}`, requestBody);
 	}
 
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import RegisterForm from './RegisterForm';
+import RegisterForm from '../components/RegisterForm';
 
 
 const Register = () => {
@@ -12,7 +12,7 @@ const Register = () => {
 
 
 	function registerUser(user: any) {
-		axios.post('http://localhost:5000/users/add', user)
+		axios.post('/users/add', user)
 			.then(() => {
 				setIsSent(true);
 				setTimeout(() => { history.push('/login') }, 1000);

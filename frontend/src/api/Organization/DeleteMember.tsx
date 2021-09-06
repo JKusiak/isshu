@@ -18,13 +18,10 @@ const DeleteMember: FC<DeleteMemberProps> = (props) => {
 			projects: [],
 		};
 
-		axios.post(`http://localhost:5000/users/update/${props.member._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/users/update/${props.member._id}`, requestBody)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 

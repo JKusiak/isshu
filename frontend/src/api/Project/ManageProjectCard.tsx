@@ -24,19 +24,17 @@ const ManageGalleryProject: FC<ManageGalleryProjectProps> = (props) => {
 	function checkIfExists() {
 		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
 		const path = `uploads%2forganization-${loggedInUser.organizationId}%2fprojects-covers%2f${props.project._id}.jpg`;
-		axios.get(`http://localhost:5000/uploads/get/${path}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-			}
-		}).then((resp) => {
-			setImageExists(resp.data);
-			if (resp.data) {
-				const adjustedPath = path.replaceAll('%2f', '/');
-				setImageUrl(`http://localhost:5000/${adjustedPath}`);
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		
+		axios.get(`/uploads/get/${path}`)
+			.then((resp) => {
+				setImageExists(resp.data);
+				if (resp.data) {
+					const adjustedPath = path.replaceAll('%2f', '/');
+					setImageUrl(`http://localhost:5000/${adjustedPath}`);
+				}
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 

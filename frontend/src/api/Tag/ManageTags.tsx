@@ -30,25 +30,18 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
             tags: tagsToId,
         }
 
-        axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
+        axios.post(`/issues/update/${props.issue._id}`, requestBody)
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
 
     function fetchAllTags() {
-        axios.get(`http://localhost:5000/tags/${loggedInUser.organizationId}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then((res) => {
-            setAllTags(res.data);
-        })
-        console.log('fetched');
+        axios.get(`/tags/${loggedInUser.organizationId}`)
+            .then((res) => {
+                setAllTags(res.data);
+            })
     }
 
 
@@ -60,26 +53,20 @@ const ManageTags: FC<ManageTagsProps> = (props) => {
             organizationId: loggedInUser.organizationId,
         }
 
-        axios.post('http://localhost:5000/tags/add', requestBody, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(() => {
-            fetchAllTags();
-        })
+        axios.post('/tags/add', requestBody)
+            .then(() => {
+                fetchAllTags();
+            })
     }
 
 
     function deleteTag(e: React.SyntheticEvent, tagId: string) {
         e.preventDefault();
 
-        axios.delete(`http://localhost:5000/tags/delete/${tagId}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(() => {
-            fetchAllTags();
-        })
+        axios.delete(`/tags/delete/${tagId}`)
+            .then(() => {
+                fetchAllTags();
+            })
     }
 
 

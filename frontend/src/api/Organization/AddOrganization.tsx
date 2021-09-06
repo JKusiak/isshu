@@ -13,15 +13,12 @@ const AddOrganization = () => {
 			name: orgName,
 		};
 
-		axios.post('http://localhost:5000/organization/add', requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			updateUserOrganization(res.data._id);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post('/organization/add', requestBody)
+			.then((res) => {
+				updateUserOrganization(res.data._id);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 	function updateUserOrganization(orgId: String) {
@@ -29,15 +26,12 @@ const AddOrganization = () => {
 			organizationId: orgId,
 		};
 
-		axios.post(`http://localhost:5000/users/update/${currentUser._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			updateToken(res.data);
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/users/update/${currentUser._id}`, requestBody)
+			.then((res) => {
+				updateToken(res.data);
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 	function updateToken(user: IUser) {
@@ -49,16 +43,13 @@ const AddOrganization = () => {
 			organizationId: user.organizationId,
 		}
 
-		axios.post(`http://localhost:5000/login/newOrganization/`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			localStorage.setItem('token', res.data.token);
-			window.location.reload();
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/login/newOrganization/`, requestBody)
+			.then((res) => {
+				localStorage.setItem('token', res.data.token);
+				window.location.reload();
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 	return (

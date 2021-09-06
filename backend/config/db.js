@@ -3,9 +3,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
       try {
-            const databaseName='isshu';
-
-            const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`, { 
+            const con = await mongoose.connect(process.env.DATABASE_URL, { 
                   useNewUrlParser: true,
                   useUnifiedTopology: true,
                   useCreateIndex: true,

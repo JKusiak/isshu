@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface DeleteBoardModalProps {
+interface DeleteProps {
 	deleteBoard: () => void,
 }
 
 
-const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
+const DeleteModal: FC<DeleteProps> = (props) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState<boolean>(false);
 	const { projectId } = useParams<{ projectId: string }>();
@@ -152,4 +152,4 @@ const DeleteBoardModal: FC<DeleteBoardModalProps> = (props) => {
 	);
 }
 
-export default DeleteBoardModal;
+export default DeleteModal;

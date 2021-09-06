@@ -26,11 +26,7 @@ const UpdateColumn: FC<UpdateColumnProps> = (props) => {
 			name: tempColumnName,
 		}
 
-		axios.post(`http://localhost:5000/columns/update/${props.column._id}`, column, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		})
+		axios.post(`/columns/update/${props.column._id}`, column);
 
 		const payload = {
 			newName: tempColumnName,

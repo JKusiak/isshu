@@ -54,16 +54,12 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 		formData.append('directory', 'projects-covers');
 		formData.append('imageUpload', file);
 
-		axios.post(`http://localhost:5000/uploads/add/${props.project._id}`, formData, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-				'Content-Type': 'multipart/form-data'
-			}
-		}).then(() => {
-			checkIfExists();
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/uploads/add/${props.project._id}`, formData)
+			.then(() => {
+				checkIfExists();
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 
@@ -71,31 +67,25 @@ const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
 		const path = `uploads%2forganization-${loggedInUser.organizationId}%2fprojects-covers%2f${props.project._id}.jpg`;
 
-		axios.get(`http://localhost:5000/uploads/get/${path}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-			}
-		}).then((resp) => {
-			setImageExists(resp.data);
-			if (resp.data) {
-				// ?t= and timestamp added to trick cache into re-downloading image under same path
-				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
-				setImageUrl(`http://localhost:5000/${adjustedPath}`);
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.get(`/uploads/get/${path}`)
+			.then((resp) => {
+				setImageExists(resp.data);
+				if (resp.data) {
+					// ?t= and timestamp added to trick cache into re-downloading image under same path
+					const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
+					setImageUrl(`http://localhost:5000/${adjustedPath}`);
+				}
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 
 	function updateProject() {
-		axios.post(`http://localhost:5000/projects/update/${projectId}`, projectBannerState, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.post(`/projects/update/${projectId}`, projectBannerState)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 

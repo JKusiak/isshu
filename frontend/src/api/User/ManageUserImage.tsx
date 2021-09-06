@@ -36,17 +36,13 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 		formData.append('directory', 'user-profile');
 		formData.append('imageUpload', file);
 
-		axios.post(`http://localhost:5000/uploads/add/${props.user._id}`, formData, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-				'Content-Type': 'multipart/form-data'
-			}
-		}).then((resp) => {
-			checkIfExists();
-			props.setErrorText('');
-		}).catch((err) => {
-			props.setErrorText('Please upload in .jpg format and under 1MB file size');
-		})
+		axios.post(`/uploads/add/${props.user._id}`, formData)
+			.then(() => {
+				checkIfExists();
+				props.setErrorText('');
+			}).catch((err) => {
+				props.setErrorText('Please upload in .jpg format and under 1MB file size');
+			})
 	}
 
 
@@ -54,20 +50,17 @@ const ManageUserImage: FC<ManageUserImageProps> = (props) => {
 		// substitutes backslash (/) with %2f as the whole path is passed as one parameter
 		const path = `uploads%2forganization-${props.user.organizationId}%2fuser-profile%2f${props.user._id}.jpg`;
 
-		axios.get(`http://localhost:5000/uploads/get/${path}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-			}
-		}).then((resp) => {
-			setImageExists(resp.data);
-			if (resp.data) {
-				// ?t= and timestamp added to trick cache into re-downloading image under same path
-				const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
-				setImageUrl(`http://localhost:5000/${adjustedPath}`);
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.get(`/uploads/get/${path}`)
+			.then((resp) => {
+				setImageExists(resp.data);
+				if (resp.data) {
+					// ?t= and timestamp added to trick cache into re-downloading image under same path
+					const adjustedPath = path.replaceAll('%2f', '/') + '?t=' + new Date().getTime();
+					setImageUrl(`http://localhost:5000/${adjustedPath}`);
+				}
+			}).catch((err) => {
+				console.log(err);
+			})
 	}
 
 

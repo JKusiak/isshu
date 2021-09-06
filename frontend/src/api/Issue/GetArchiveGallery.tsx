@@ -18,17 +18,14 @@ const GetArchiveGallery: FC<GetArchiveGalleryProps> = (props) => {
 
 
 	function fetchArchive() {
-		axios.get(`http://localhost:5000/organization/archive/${props.user.organizationId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			if (res.data.archivedIssues) {
-				setArchivedIssues(res.data.archivedIssues);
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/organization/archive/${props.user.organizationId}`)
+			.then((res) => {
+				if (res.data.archivedIssues) {
+					setArchivedIssues(res.data.archivedIssues);
+				}
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 

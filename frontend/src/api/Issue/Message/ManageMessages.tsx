@@ -24,13 +24,10 @@ const UpdateMessages: FC<UpdateMessagesProps> = (props) => {
 		const requestBody = {
 			messages: adjustedMessages,
 		}
-		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/issues/update/${props.issue._id}`, requestBody)
+			.catch((err) => {
+				console.log(err);
+			})
 	}
 
 
@@ -48,13 +45,10 @@ const UpdateMessages: FC<UpdateMessagesProps> = (props) => {
 			messages: adjustedMessages,
 		}
 
-		axios.post(`http://localhost:5000/issues/update/${props.issue._id}`, requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).catch((err) => {
-			console.log(err);
-		})
+		axios.post(`/issues/update/${props.issue._id}`, requestBody)
+			.catch((err) => {
+				console.log(err);
+			})
 	}
 
 

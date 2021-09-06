@@ -23,11 +23,7 @@ const AddBoard: FC<AddBoardProps> = (props) => {
 			boardId: newBoardId,
 		}
 
-		axios.post('http://localhost:5000/columns/add', requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		})
+		axios.post('/columns/add', requestBody);
 	}
 
 
@@ -46,21 +42,18 @@ const AddBoard: FC<AddBoardProps> = (props) => {
 			projectId: projectId,
 		}
 
-		axios.post('http://localhost:5000/boards/add', board, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			createDefaultColumns(res);
-			setAddMode(false);
+		axios.post('/boards/add', board)
+			.then((res) => {
+				createDefaultColumns(res);
+				setAddMode(false);
 
-			window.scroll({
-				top: document.body.scrollHeight,
-				left: 0,
-				behavior: 'smooth'
-			});
-			props.fetchBoards();
-		})
+				window.scroll({
+					top: document.body.scrollHeight,
+					left: 0,
+					behavior: 'smooth'
+				});
+				props.fetchBoards();
+			})
 	}
 
 

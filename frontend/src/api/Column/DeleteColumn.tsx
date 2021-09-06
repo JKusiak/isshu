@@ -13,13 +13,10 @@ interface DeleteColumnProps {
 const DeleteColumn: FC<DeleteColumnProps> = (props) => {
 
 	function deleteColumn() {
-		axios.delete(`http://localhost:5000/columns/delete/${props.column._id}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`,
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.delete(`/columns/delete/${props.column._id}`)
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 

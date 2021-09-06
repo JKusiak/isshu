@@ -16,15 +16,12 @@ const GetBoardsGallery = () => {
 
 
 	function fetchProject() {
-		axios.get(`http://localhost:5000/projects/getProgress/${projectId}`, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			setProject(res.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		axios.get(`/projects/getProgress/${projectId}`)
+			.then((res) => {
+				setProject(res.data);
+			}).catch((err) => {
+				console.log(err);
+			});
 	}
 
 

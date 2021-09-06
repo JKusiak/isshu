@@ -32,14 +32,11 @@ const AddIssue: FC<AddIssueProps> = (props) => {
 			columnId: props.column._id,
 		}
 
-		axios.post('http://localhost:5000/issues/add', requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((res) => {
-			setAddMode(false);
-			dispatch({ type: ActionTypes.AddIssue, payload: res.data })
-		})
+		axios.post('/issues/add', requestBody)
+			.then((res) => {
+				setAddMode(false);
+				dispatch({ type: ActionTypes.AddIssue, payload: res.data })
+			})
 	}
 
 

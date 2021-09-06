@@ -21,18 +21,15 @@ const AddColumn = () => {
 			boardId: boardId,
 		};
 
-		axios.post('http://localhost:5000/columns/add', requestBody, {
-			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`
-			}
-		}).then((resp) => {
-			setColumnName('');
-			const payload = {
-				...resp.data,
-				issues: [],
-			}
-			dispatch({ type: ActionTypes.AddColumn, payload: payload })
-		})
+		axios.post('/columns/add', requestBody)
+			.then((resp) => {
+				setColumnName('');
+				const payload = {
+					...resp.data,
+					issues: [],
+				}
+				dispatch({ type: ActionTypes.AddColumn, payload: payload })
+			})
 	}
 
 
