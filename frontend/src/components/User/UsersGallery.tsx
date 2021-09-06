@@ -10,9 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddOutlined';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
-import { FC, forwardRef, Fragment } from 'react';
+import { FC, forwardRef, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getLoggedInUser } from '../../api/User/GetLoggedInUser';
+import { AuthUserContext } from '../../App';
 import { IUser } from '../../types/ModelTypes';
 
 
@@ -79,7 +79,7 @@ const UsersGallery: FC<UsersGalleryProps> = forwardRef((props, ref) => {
 	const theme = useTheme();
 	const { window } = props;
 	const container = window !== undefined ? () => window().document.body : undefined;
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 
 	function displayUsers(userType: [IUser]) {

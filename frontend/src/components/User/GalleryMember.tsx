@@ -1,9 +1,9 @@
 import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Link } from 'react-router-dom';
 import DeleteMember from "../../api/Organization/DeleteMember";
-import { getLoggedInUser } from "../../api/User/GetLoggedInUser";
+import { AuthUserContext } from "../../App";
 import { INestedUser } from "../../types/ModelTypes";
 
 
@@ -64,8 +64,9 @@ interface GalleryMemberProps {
 
 const GalleryMember: FC<GalleryMemberProps> = (props) => {
 	const classes = useStyles();
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
+	
 	return (
 		<>
 			<Card className={classes.cardContainer}>

@@ -6,7 +6,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/ClearOutlined';
 import { FC, useContext, useState } from 'react';
 import { BoardReducerContext } from '../../../api/Board/GetBoard';
-import { getLoggedInUser } from '../../../api/User/GetLoggedInUser';
+import { AuthUserContext } from '../../../App';
 import { ActionTypes } from '../../../reducers/BoardReducer';
 import { IAttachment, INestedIssue } from '../../../types/ModelTypes';
 
@@ -96,7 +96,7 @@ interface EnlargedAttachmentModalProps {
 const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState<boolean>(false);
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 	const { dispatch } = useContext(BoardReducerContext);
 
 

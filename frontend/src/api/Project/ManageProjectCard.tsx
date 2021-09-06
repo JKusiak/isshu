@@ -1,8 +1,8 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
+import { AuthUserContext } from "../../App";
 import ProjectCard from "../../components/Project/ProjectCard";
 import { IProject } from "../../types/ModelTypes";
-import { getLoggedInUser } from "../User/GetLoggedInUser";
 
 
 interface ManageGalleryProjectProps {
@@ -13,8 +13,9 @@ interface ManageGalleryProjectProps {
 const ManageGalleryProject: FC<ManageGalleryProjectProps> = (props) => {
 	const [imageExists, setImageExists] = useState<boolean>(false);
 	const [imageUrl, setImageUrl] = useState<string>('');
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
+	
 	// when props are loaded, fetches image from the server
 	useEffect(() => {
 		checkIfExists();

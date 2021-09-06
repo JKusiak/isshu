@@ -1,7 +1,8 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React, { FC, Fragment, useContext } from "react";
 import { BoardReducerContext } from "../../../api/Board/GetBoard";
-import { getLoggedInUser, getUserLanguage } from "../../../api/User/GetLoggedInUser";
+import { getUserLanguage } from "../../../api/User/GetLoggedInUser";
+import { AuthUserContext } from "../../../App";
 import { ActionTypes } from "../../../reducers/BoardReducer";
 import { INestedIssue, INestedMessage } from "../../../types/ModelTypes";
 import AddMessageButton from "./AddMessageButton";
@@ -55,7 +56,7 @@ interface IssueMessagesGalleryProps {
 const IssueMessagesGallery: FC<IssueMessagesGalleryProps> = (props) => {
 	const classes = useStyles();
 	const { dispatch } = useContext(BoardReducerContext);
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 
 	function handleSubmit(e: React.SyntheticEvent, messageContent: string) {

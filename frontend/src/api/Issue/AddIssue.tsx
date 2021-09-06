@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { FC, useContext, useState } from 'react';
+import { AuthUserContext } from '../../App';
 import AddIssueButton from '../../components/Issue/AddIssueButton';
 import { ActionTypes } from '../../reducers/BoardReducer';
 import { IColumn } from '../../types/ModelTypes';
 import { BoardReducerContext } from '../Board/GetBoard';
-import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 interface AddIssueProps {
@@ -16,8 +16,9 @@ const AddIssue: FC<AddIssueProps> = (props) => {
 	const [issueName, setIssueName] = useState<string>('');
 	const [addMode, setAddMode] = useState<boolean>(false);
 	const { dispatch } = useContext(BoardReducerContext);
+	const { loggedInUser } = useContext(AuthUserContext);
 
-
+	
 	function onSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 
@@ -28,7 +29,7 @@ const AddIssue: FC<AddIssueProps> = (props) => {
 
 		const requestBody = {
 			name: issueName,
-			creator: getLoggedInUser()._id,
+			creator: loggedInUser._id,
 			columnId: props.column._id,
 		}
 

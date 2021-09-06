@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { AuthUserContext } from '../../App';
 import ArchivizeIssueButton from '../../components/Issue/ArchivizeIssueButton';
 import { INestedIssue } from '../../types/ModelTypes';
-import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 interface ArchivizeIssueProps {
@@ -14,7 +14,7 @@ interface ArchivizeIssueProps {
 // this does not work as delete because issues remain after deleting
 // in the organization archive of all issues
 const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 	function updateIssue() {
 		const requestBody = {

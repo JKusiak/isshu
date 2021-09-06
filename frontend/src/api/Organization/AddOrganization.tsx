@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthUserContext } from '../../App';
 import AddOrganizationModal from '../../components/Organization/AddOrganizationModal';
 import { IUser } from '../../types/ModelTypes';
-import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 
 const AddOrganization = () => {
-	const currentUser = getLoggedInUser();
+	const { loggedInUser, setLoggedInUser } = useContext(AuthUserContext);
 
 	function onSubmit(orgName: string) {
 		const requestBody = {
@@ -26,7 +27,7 @@ const AddOrganization = () => {
 			organizationId: orgId,
 		};
 
-		axios.post(`/users/update/${currentUser._id}`, requestBody)
+		axios.post(`/users/update/${loggedInUser._id}`, requestBody)
 			.then((res) => {
 				updateToken(res.data);
 			}).catch((err) => {
@@ -46,6 +47,7 @@ const AddOrganization = () => {
 		axios.post(`/login/newOrganization/`, requestBody)
 			.then((res) => {
 				localStorage.setItem('token', res.data.token);
+				setLoggedInUser(requestBody);
 				window.location.reload();
 			}).catch((err) => {
 				console.log(err);

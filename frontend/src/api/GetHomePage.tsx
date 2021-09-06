@@ -1,9 +1,9 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { AuthUserContext } from "../App";
 import HomePage from "../pages/Home/HomePage";
 import { NestedUserTemplate, OrganizationTemplate, UserTemplate } from "../types/ModelContentTemplate";
 import { INestedUser, IOrganization, IUser } from "../types/ModelTypes";
-import { getLoggedInUser } from "./User/GetLoggedInUser";
 
 
 export const FetchMembersContext = createContext<{ members: [INestedUser], setMembers: React.Dispatch<React.SetStateAction<[INestedUser]>> }>({} as any);
@@ -14,7 +14,7 @@ const GetHomePage = () => {
 	const [user, setUser] = useState<IUser>(UserTemplate);
 	const [members, setMembers] = useState<[INestedUser]>([NestedUserTemplate]);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 
 	useEffect(() => {

@@ -11,8 +11,7 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddProject from '../api/Project/AddProject';
-import { getLoggedInUser } from '../api/User/GetLoggedInUser';
-import { DarkModeContext, LoggedInContext } from '../App';
+import { AuthUserContext, DarkModeContext, IsLoggedInContext } from '../App';
 import Icon from '../resources/icon.svg';
 import DarkIcon from '../resources/icon_darkmode.svg';
 import Logo from '../resources/logo.svg';
@@ -107,8 +106,8 @@ const Navbar = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
-	const { isLoggedIn, setLoggedIn } = useContext(LoggedInContext);
-	const loggedInUser = isLoggedIn ? getLoggedInUser() : null;
+	const { isLoggedIn, setLoggedIn } = useContext(IsLoggedInContext);
+	const { loggedInUser } = useContext(AuthUserContext);
 
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {

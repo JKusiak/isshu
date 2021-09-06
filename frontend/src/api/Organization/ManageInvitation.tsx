@@ -1,5 +1,6 @@
 import axios from "axios";
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { AuthUserContext } from "../../App";
 import InvitationModal from "../../components/Organization/InvitationModal";
 import { IOrganization, IUser } from "../../types/ModelTypes";
 
@@ -12,7 +13,9 @@ interface ManageInvitationsProps {
 
 
 const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
+	const { setLoggedInUser } = useContext(AuthUserContext);
 
+	
 	function accept() {
 		const requestBody = {
 			organizationId: props.invite._id,
@@ -39,6 +42,7 @@ const ManageInvitations: FC<ManageInvitationsProps> = (props) => {
 		axios.post(`/login/newOrganization/`, requestBody)
 			.then((res) => {
 				localStorage.setItem('token', res.data.token);
+				setLoggedInUser(requestBody);
 				window.location.reload();
 			}).catch((err) => {
 				console.log(err);

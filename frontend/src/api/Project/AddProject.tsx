@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { AuthUserContext } from '../../App';
 import AddProjectModal from '../../components/Project/AddProjectModal';
-import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 const AddProject = () => {
@@ -15,7 +15,7 @@ const AddProject = () => {
 	const [endDate, setEndDate] = useState<Date | null>(formattedDate);
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorText, setErrorText] = useState<string>('');
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 	useEffect(() => {
 		if (endDate! >= startDate!) {

@@ -6,8 +6,8 @@ import Modal from '@material-ui/core/Modal';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import React, { FC } from 'react';
-import { getLoggedInUser } from '../../api/User/GetLoggedInUser';
+import React, { FC, useContext } from 'react';
+import { AuthUserContext } from '../../App';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -104,7 +104,8 @@ interface AddProjectModalProps {
 const AddProjectModal: FC<AddProjectModalProps> = (props) => {
 	const classes = useStyles();
 	const projectNameRegex = /^$|^[A-Za-z][a-z\s]*$/;
-	const isInOrganization = getLoggedInUser().organizationId === null;
+	const { loggedInUser } = useContext(AuthUserContext);
+	const isInOrganization = loggedInUser.organizationId === null;
 
 
 	return (

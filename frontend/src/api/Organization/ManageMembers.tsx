@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthUserContext } from "../../App";
 import AddMemberButton from "../../components/Organization/AddMemberButton";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
-import { getLoggedInUser } from "../User/GetLoggedInUser";
 
 
 
@@ -11,7 +11,7 @@ const GetAllUsers = () => {
 	const [allUsers, setAllUsers] = useState([]);
 	const [query, setQuery] = useState('');
 	const [addedUser, setAddedUser] = useState<IUser>(UserTemplate);
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 	const queryTreshold = query.length >= 3;
 
 

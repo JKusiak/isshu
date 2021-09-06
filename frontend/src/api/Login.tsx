@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { LoggedInContext } from '../App';
+import { IsLoggedInContext } from '../App';
 import LoginForm from '../components/LoginForm';
 
 
 const Login = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
-	const { setLoggedIn } = useContext(LoggedInContext);
+	const { setLoggedIn } = useContext(IsLoggedInContext);
 	const history = useHistory();
 
 

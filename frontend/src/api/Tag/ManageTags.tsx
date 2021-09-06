@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
+import { AuthUserContext } from '../../App';
 import AllTagsGallery from '../../components/Tag/AllTagsGallery';
 import { useMountEffect } from '../../hooks/useMountEffect';
 import { TagTemplate } from '../../types/ModelContentTemplate';
 import { INestedIssue, ITag } from '../../types/ModelTypes';
-import { getLoggedInUser } from '../User/GetLoggedInUser';
 
 
 
@@ -17,7 +17,7 @@ interface ManageTagsProps {
 
 const ManageTags: FC<ManageTagsProps> = (props) => {
     const [allTags, setAllTags] = useState<[ITag]>([TagTemplate]);
-    const loggedInUser = getLoggedInUser();
+    const { loggedInUser } = useContext(AuthUserContext);
 
 
     useMountEffect(fetchAllTags);

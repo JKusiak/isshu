@@ -1,8 +1,8 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
+import { AuthUserContext } from "../../App";
 import GalleryMember from "../../components/User/GalleryMember";
 import { INestedUser } from "../../types/ModelTypes";
-import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface ManageMemberCardProps {
@@ -13,7 +13,7 @@ interface ManageMemberCardProps {
 const ManageMemberCard: FC<ManageMemberCardProps> = (props) => {
 	const [imageExists, setImageExists] = useState<boolean>(false);
 	const [imageUrl, setImageUrl] = useState<string>('');
-	const loggedInUser = getLoggedInUser();
+	const { loggedInUser } = useContext(AuthUserContext);
 
 	// when props are loaded, fetches image from the server
 	useEffect(() => {

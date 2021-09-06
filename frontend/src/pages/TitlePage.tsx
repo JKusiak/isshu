@@ -1,7 +1,7 @@
 import { Hidden } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useContext } from "react";
-import { DarkModeContext, LoggedInContext } from '../App';
+import { DarkModeContext, IsLoggedInContext } from '../App';
 import RegisterModal from "../components/RegisterModal";
 import ToProjectsButton from "../components/ToProjectsButton";
 import Footer from '../layout/Footer';
@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const TitlePage = () => {
 	const classes = useStyles();
 	const { darkMode } = useContext(DarkModeContext);
-	const { isLoggedIn } = useContext(LoggedInContext);
+	const { isLoggedIn } = useContext(IsLoggedInContext);
 
 
 	function buttonToCall() {

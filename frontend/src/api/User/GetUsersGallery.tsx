@@ -1,10 +1,10 @@
 import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthUserContext } from "../../App";
 import UsersGallery from "../../components/User/UsersGallery";
 import { UserTemplate } from "../../types/ModelContentTemplate";
 import { IUser } from "../../types/ModelTypes";
-import { getLoggedInUser } from "./GetLoggedInUser";
 
 
 interface GetUsersGalleryProps {
@@ -17,7 +17,8 @@ const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
 	const { projectId } = useParams<{ projectId: string }>();
 	const [otherUsers, setOtherUsers] = useState<[IUser]>([UserTemplate]);
 	const [contributors, setContributors] = useState<[IUser]>([UserTemplate]);
-	const organizationId = getLoggedInUser().organizationId;
+	const { loggedInUser } = useContext(AuthUserContext);
+
 
 	useEffect(() => {
 		fetchOtherUsers();
@@ -27,7 +28,7 @@ const GetUsersGallery: FC<GetUsersGalleryProps> = (props) => {
 
 	// fetching users that do not belong to currently displayed project
 	function fetchOtherUsers() {
-		axios.get(`/users/getUsersWithoutProject/${organizationId}/${projectId}`)
+		axios.get(`/users/getUsersWithoutProject/${loggedInUser.organizationId}/${projectId}`)
 			.then(resp => {
 				setOtherUsers(resp.data);
 			}).catch((err) => {

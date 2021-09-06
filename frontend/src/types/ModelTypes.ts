@@ -1,3 +1,12 @@
+// type for JWT token
+export interface JWTTokenUser {
+	_id: string,
+	email: string;
+	name: string;
+	surname: string;
+	organizationId: string;
+}
+
 // types for basic database models
 
 export interface IOrganization {

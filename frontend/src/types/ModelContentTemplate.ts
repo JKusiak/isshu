@@ -17,8 +17,17 @@ import {
 	IProject,
 	IStep,
 	ITag,
-	IUser
+	IUser,
+	JWTTokenUser
 } from "./ModelTypes";
+
+export const JWTUserTemplate: JWTTokenUser = {
+	_id: '',
+	email: '',
+	name: '',
+	surname: '',
+	organizationId: '',
+}
 
 export const UserTemplate: IUser = {
 	_id: '',
