@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		maxWidth: '260px',
 	},
 	name: {
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '18px',
+		},
+		overflow: 'hidden',
 		color: theme.palette.secondary.main,
 	},
 	description: {
@@ -54,14 +58,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 ));
 
 
-interface GalleryMemberProps {
+interface MemberProps {
 	member: INestedUser,
 	imageExists: boolean,
 	imageUrl: string,
 }
 
 
-const GalleryMember: FC<GalleryMemberProps> = (props) => {
+const MemberCard: FC<MemberProps> = (props) => {
 	const classes = useStyles();
 	const { loggedInUser } = useContext(AuthUserContext);
 
@@ -93,4 +97,4 @@ const GalleryMember: FC<GalleryMemberProps> = (props) => {
 	);
 }
 
-export default GalleryMember;
+export default MemberCard;

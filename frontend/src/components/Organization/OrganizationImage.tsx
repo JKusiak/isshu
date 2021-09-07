@@ -8,6 +8,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		display: 'flex',
 		width: '150px',
 		height: '150px',
+		[theme.breakpoints.down('sm')]: {
+			width: '120px',
+			height: '120px',
+		},
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginLeft: theme.spacing(4),

@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	cardContent: {
 		display: 'flex',
 		flexDirection: 'column',
+		justifyContent: 'center',
 		width: '100%',
 		maxWidth: '260px',
 		textDecoration: 'none',
@@ -30,20 +31,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 			maxWidth: '150px',
 		},
 	},
-	// dirty trick to make content display in the center if text
-	// is short, if long 'empty' will shrink to zero
-	empty: {
-		flexBasis: '20px',
-		[theme.breakpoints.down('xs')]: {
-			flexBasis: 0,
-		},
-	},
 	name: {
-		display: 'flex',
-		flexWrap: 'nowrap',
+		height: '30px',
+		flexShrink: 0,
 		color: theme.palette.secondary.main,
 		overflow: 'hidden',
-		maxHeight: '30px',
+		marginBottom: theme.spacing(0.5),
 	},
 	description: {
 		overflow: 'hidden',
@@ -78,7 +71,6 @@ const ProjectCard: FC<ProjectCardProps> = (props) => {
 		<>
 			<Card className={classes.cardContainer}>
 				<CardContent className={classes.cardContent} component={Link} to={`/project/${props.project._id}`}>
-					<div className={classes.empty} />
 					<Typography className={classes.name} component="h5" variant="h5">
 						{props.project.name}
 					</Typography>

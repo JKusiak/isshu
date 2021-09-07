@@ -16,7 +16,7 @@ const useStyles = makeStyles<Theme, ProjectDataProps>(theme => createStyles({
 		width: '100%',
 		height: '30vh',
 		[theme.breakpoints.down('xs')]: {
-			height: '50vh',
+			height: '40vh',
 		},
 		'&::before': {
 			content: '""',    // why for the love of god...

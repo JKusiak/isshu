@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		overflow: 'hidden',
 	},
 	cardName: {
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '18px',
+		},
 		color: theme.palette.secondary.main,
 	},
 	cardDescription: {

@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	},
 	dataPoint: {
 		fontSize: "18px",
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '12px',
+		},
 		fontWeight: 'bold',
 		"&:not(:last-child)": {
 			marginBottom: theme.spacing(2),

@@ -9,7 +9,10 @@ import React, { FC, SetStateAction } from 'react';
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	boardCard: {
 		display: 'flex',
-		minHeight: '300px',
+		height: '300px',
+		[theme.breakpoints.down('xs')]: {
+			height: '180px',
+		},
 		justifyContent: 'center',
 		alignItems: 'center',
 		transition: 'all .12s linear',
@@ -37,8 +40,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		fontSize: '35px',
 		color: theme.palette.secondary.main,
 	},
-
 }));
+
 
 interface AddBoardModalProps {
 	onSubmit: (e: React.SyntheticEvent<Element, Event>) => void,

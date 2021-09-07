@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		gap: theme.spacing(4),
 		gridTemplateColumns: 'repeat(auto-fill, minMax(450px, 1fr))',
 		[theme.breakpoints.down('xs')]: {
-			gridTemplateColumns: 'repeat(auto-fill)',
+			gridTemplateColumns: 'repeat(auto-fill, minMax(200px, 1fr))',
+			width: '90%',
 		},
 		margin: theme.spacing(4),
 	},
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		display: 'grid',
 		gridTemplateRows: '1fr 2fr 1fr',
 		height: '300px',
+		[theme.breakpoints.down('xs')]: {
+			height: '180px',
+		},
 		backgroundColor: theme.palette.primary.light,
 		transition: 'all .12s linear',
 		boxShadow: theme.shadows[2],
@@ -101,7 +105,7 @@ const BoardsGalleryPage: FC<BoardsGalleryProps> = (props) => {
 			<GetProjectInfoBanner project={props.project} />
 
 			<div className={classes.gridContainer}>
-				<AddBoard fetchBoards={props.fetchBoards} />
+				<AddBoard fetchBoards={props.fetchBoards}/>
 				{displayBoards()}
 			</div>
 		</>

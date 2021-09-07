@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		display: 'flex',
 		width: '150px',
 		height: '150px',
+		[theme.breakpoints.down('xs')]: {
+			width: '120px',
+			height: '120px',
+		},
 		marginLeft: theme.spacing(4),
 		marginRight: theme.spacing(4),
 		boxShadow: theme.shadows[2],

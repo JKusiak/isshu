@@ -13,6 +13,7 @@ const sidebarWidth = 270;
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	root: {
 		display: 'flex',
+		width: '100%',
 	},
 	sidebar: {
 		[theme.breakpoints.up('sm')]: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	pageContent: {
 		display: 'flex',
 		flexDirection: 'column',
+		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'center',
 		flexGrow: 1,

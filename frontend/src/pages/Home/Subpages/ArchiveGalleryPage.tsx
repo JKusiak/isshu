@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		justifyContent: 'center',
 		fontWeight: 'bold',
 		fontSize: '28px',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '22px',
+		},
 		color: theme.palette.secondary.main,
 		marginBottom: theme.spacing(2),
 	},

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FC, useContext, useEffect, useState } from "react";
 import { AuthUserContext } from "../../App";
-import GalleryMember from "../../components/User/GalleryMember";
+import MemberCard from "../../components/User/MemberCard";
 import { INestedUser } from "../../types/ModelTypes";
 
 
@@ -40,7 +40,7 @@ const ManageMemberCard: FC<ManageMemberCardProps> = (props) => {
 
 	return (
 		<>
-			<GalleryMember
+			<MemberCard
 				member={props.member}
 				imageExists={imageExists}
 				imageUrl={imageUrl}
