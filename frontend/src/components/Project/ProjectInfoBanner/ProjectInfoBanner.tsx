@@ -9,16 +9,6 @@ import NameForm from "./NameForm";
 import SettingsList from './SettingsList';
 
 
-interface ProjectDataProps {
-	projectBannerState: IProject,
-	dispatch: React.Dispatch<Action>,
-	updateProject: () => void,
-	bannerPath: string | undefined,
-	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
-	imageExists: boolean,
-}
-
-
 const useStyles = makeStyles<Theme, ProjectDataProps>(theme => createStyles({
 	projectInfoBanner: {
 		position: 'relative',
@@ -90,6 +80,16 @@ const useStyles = makeStyles<Theme, ProjectDataProps>(theme => createStyles({
 	},
 }
 ));
+
+
+interface ProjectDataProps {
+	projectBannerState: IProject,
+	dispatch: React.Dispatch<Action>,
+	updateProject: () => void,
+	bannerPath: string | undefined,
+	setFile: React.Dispatch<React.SetStateAction<string | Blob>>,
+	imageExists: boolean,
+}
 
 
 const ProjectData: FC<ProjectDataProps> = (props) => {

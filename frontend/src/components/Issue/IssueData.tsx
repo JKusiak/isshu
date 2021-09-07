@@ -4,7 +4,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import { FC, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { INestedIssue } from "../../types/ModelTypes";
-import IssueContentModal from "./IssueContentModal";
+import IssueModal from "./IssueModal";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -73,10 +73,11 @@ const IssueData: FC<IssueDataProps> = (props) => {
 								{props.issue.isFinished && <CheckIcon className={classes.checkIcon} />}
 							</Card>
 
-							<IssueContentModal
+							<IssueModal
 								issue={props.issue}
 								isIssueModalOpen={isModalOpen}
 								setIssueModalOpen={setIsModalOpen}
+								displayOnly={false}
 							/>
 						</>
 					);

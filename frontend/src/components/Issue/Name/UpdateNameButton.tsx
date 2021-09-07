@@ -1,29 +1,20 @@
 import { ClickAwayListener, TextField } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import CheckIcon from '@material-ui/icons/Check';
 import { FC, useState } from 'react';
 import { INestedIssue } from '../../../types/ModelTypes';
+import NameText from './NameText';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	nameContainer: {
-		marginBottom: theme.spacing(2),
-		width: '100%',
-	},
-	nameText: {
-		display: 'flex',
-		width: '100%',
-		alignItems: 'center',
-		fontWeight: 'bold',
-		fontSize: '24px',
-		color: theme.palette.secondary.main,
-		"&:hover": {
-			cursor: 'pointer'
-		},
-		overflow: 'hidden',
+		gridArea: 'header',
+		justifySelf: 'start',
+		width: '67%',
+		paddingRight: theme.spacing(2),
 	},
 	form: {
 		width: '100%',
+		marginBottom: theme.spacing(2),
 	},
 	inputField: {
 		width: '100%',
@@ -75,7 +66,7 @@ const UpdateNameButton: FC<UpdateNameButtonProps> = (props) => {
 
 	return (
 		<ClickAwayListener onClickAway={handleSubmit}>
-			<div className={classes.nameContainer}>
+			<div className={classes.nameContainer} onClick={() => setUpdateMode(true)}>
 				{updateMode &&
 					<form className={classes.form} onSubmit={handleSubmit} autoComplete="off">
 						<TextField
@@ -96,15 +87,10 @@ const UpdateNameButton: FC<UpdateNameButtonProps> = (props) => {
 				}
 
 				{!updateMode &&
-					<div
-						className={classes.nameText}
-						onClick={() => setUpdateMode(true)}
-						style={{
-							textDecoration: props.issue.isFinished ? 'line-through' : 'none',
-						}}>
-						{props.permName}
-						{props.issue.isFinished && <CheckIcon />}
-					</div>
+					<NameText
+						issue={props.issue}
+						permName={props.permName}
+					/>
 				}
 			</div>
 		</ClickAwayListener>

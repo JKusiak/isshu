@@ -1,6 +1,7 @@
 import { ClickAwayListener, TextField } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useState } from 'react';
+import DescriptionText from './DescriptionText';
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -99,9 +100,9 @@ const UpdateDescriptionButton: FC<UpdateDescriptionButtonProps> = (props) => {
                               }
 
                               {!updateMode &&
-                                    <div className={classes.descriptionText}>
-                                          {props.permDescription ? props.permDescription : 'Add description...'}
-                                    </div>
+                                    <DescriptionText
+                                          permDescription={props.permDescription}
+                                    />
                               }
                         </div>
                   </ClickAwayListener>

@@ -1,42 +1,41 @@
 import { Card, CardContent, createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { INestedIssue } from "../../types/ModelTypes";
-import IssueContentModal from "./IssueContentModal";
+import IssueModal from "./IssueModal";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		cardContainer: {
-			display: 'flex',
-			flexDirection: 'column',
-			alignItems: 'center',
-			justifyContent: 'center',
-			height: 140,
-			[theme.breakpoints.down('xs')]: {
-				height: 100,
-			},
-			width: 'auto',
-			transition: 'all .12s linear',
-			boxShadow: theme.shadows[2],
-			backgroundColor: theme.palette.primary.light,
-			"&:hover": {
-				boxShadow: theme.shadows[5],
-				cursor: 'pointer',
-			},
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	cardContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 140,
+		[theme.breakpoints.down('xs')]: {
+			height: 100,
 		},
-		cardContent: {
-			textAlign: 'center',
-			width: '100%',
-			maxWidth: '260px',
-			overflow: 'hidden',
+		width: 'auto',
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		backgroundColor: theme.palette.primary.light,
+		"&:hover": {
+			boxShadow: theme.shadows[5],
+			cursor: 'pointer',
 		},
-		cardName: {
-			color: theme.palette.secondary.main,
-		},
-		cardDescription: {
-			color: theme.palette.secondary.main,
-		},
-	})
+	},
+	cardContent: {
+		textAlign: 'center',
+		width: '100%',
+		maxWidth: '260px',
+		overflow: 'hidden',
+	},
+	cardName: {
+		color: theme.palette.secondary.main,
+	},
+	cardDescription: {
+		color: theme.palette.secondary.main,
+	},
+})
 );
 
 
@@ -63,13 +62,13 @@ const ArchivedIssueCard: FC<ArchivedIssueCardProps> = (props) => {
 				</CardContent>
 			</Card>
 
-			<IssueContentModal
+			<IssueModal
 				issue={props.issue}
 				isIssueModalOpen={isModalOpen}
 				setIssueModalOpen={setModalOpen}
+				displayOnly={true}
 			/>
 		</>
-
 	);
 }
 

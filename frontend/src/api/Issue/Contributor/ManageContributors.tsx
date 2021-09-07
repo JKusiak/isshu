@@ -9,6 +9,7 @@ import { INestedIssue, IUser } from '../../../types/ModelTypes';
 
 interface ManageContributorsProps {
 	issue: INestedIssue,
+	displayOnly: boolean,
 }
 
 
@@ -21,12 +22,15 @@ const ManageContributors: FC<ManageContributorsProps> = (props) => {
 
 
 	function fetchContributors() {
-		axios.get(`/users/getUsersByProject/${projectId}`)
+		// necessary for displaying archived issue without contributors
+		if(!props.displayOnly) {
+			axios.get(`/users/getUsersByProject/${projectId}`)
 			.then(resp => {
 				setProjectContributors(resp.data);
 			}).catch((err) => {
 				console.log(err);
 			});;
+		}
 	}
 
 
