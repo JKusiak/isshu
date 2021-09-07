@@ -19,7 +19,7 @@ import { JWTTokenUser } from './types/ModelTypes';
 
 export const DarkModeContext = createContext<{ darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
 export const IsLoggedInContext = createContext<{ isLoggedIn: boolean, setLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }>({} as any);
-export const AuthUserContext = createContext<{loggedInUser: JWTTokenUser, setLoggedInUser: React.Dispatch<React.SetStateAction<JWTTokenUser>>}>({} as any);
+export const AuthUserContext = createContext<{ loggedInUser: JWTTokenUser, setLoggedInUser: React.Dispatch<React.SetStateAction<JWTTokenUser>> }>({} as any);
 
 const App = () => {
 	const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -31,7 +31,7 @@ const App = () => {
 	);
 
 	const [loggedInUser, setLoggedInUser] = useState<JWTTokenUser>(
-		isLoggedIn? getLoggedInUser() : JWTUserTemplate
+		isLoggedIn ? getLoggedInUser() : JWTUserTemplate
 	);
 
 	const defaultTheme = createMuiTheme();

@@ -4,21 +4,19 @@ import { FC, Fragment } from "react";
 import ManageInvitation from "../../api/Organization/ManageInvitation";
 
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	header: {
+		textAlign: 'center',
+		fontSize: '20px',
+		color: theme.palette.secondary.main,
+		marginTop: theme.spacing(4),
+		marginBottom: theme.spacing(2),
+	},
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		header: {
-			textAlign: 'center',
-			fontSize: '20px',
-			color: theme.palette.secondary.main,
-			marginTop: theme.spacing(4),
-			marginBottom: theme.spacing(2),
-		},
-
-		buttons: {
-			marginLeft: 'auto',
-		}
-	})
+	buttons: {
+		marginLeft: 'auto',
+	}
+})
 );
 
 

@@ -8,21 +8,20 @@ import { INestedIssue, INestedUser } from '../../../types/ModelTypes';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		buttonWrapper: {
-			marginLeft: 'auto',
-		},
-		iconButton: {
-			justifyContent: 'center',
-			alignItems: 'center',
-			transform: 'scale(0.7)',
-			padding: theme.spacing(1),
-		},
-		icon: {
-			color: theme.palette.secondary.main,
-		},
-	})
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	buttonWrapper: {
+		marginLeft: 'auto',
+	},
+	iconButton: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		transform: 'scale(0.7)',
+		padding: theme.spacing(1),
+	},
+	icon: {
+		color: theme.palette.secondary.main,
+	},
+})
 );
 
 

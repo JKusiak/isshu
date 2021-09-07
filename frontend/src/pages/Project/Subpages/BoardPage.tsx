@@ -11,49 +11,48 @@ import { ActionTypes } from "../../../reducers/BoardReducer";
 import { INestedBoard, INestedColumn } from "../../../types/ModelTypes";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		navigation: {
-			display: 'flex',
-			justifyContent: 'space-between',
-			width: '100%',
-			padding: theme.spacing(2),
-			[theme.breakpoints.down('xs')]: {
-				width: '90%',
-				padding: 0,
-			},
-			marginBottom: theme.spacing(8),
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	navigation: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		width: '100%',
+		padding: theme.spacing(2),
+		[theme.breakpoints.down('xs')]: {
+			width: '90%',
+			padding: 0,
 		},
-		
-		boardTitle: {
-			fontSize: '36px',
-			[theme.breakpoints.down('xs')]: {
-				fontSize: '28px',
-			},
-			color: theme.palette.secondary.main,
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-			width: '30%',
-			overflow: 'hidden',
+		marginBottom: theme.spacing(8),
+	},
+
+	boardTitle: {
+		fontSize: '36px',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '28px',
 		},
-		wrapper: {
-			display: 'flex',
-			[theme.breakpoints.down('xs')]: {
-				flexDirection: 'column',
-			},
-			justifyContent: 'center',
+		color: theme.palette.secondary.main,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '30%',
+		overflow: 'hidden',
+	},
+	wrapper: {
+		display: 'flex',
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
 		},
-		container: {
-			display: "flex",
-			marginLeft: theme.spacing(8),
-			[theme.breakpoints.down('xs')]: {
-				flexDirection: 'column',
-				marginLeft: 0,
-			},
+		justifyContent: 'center',
+	},
+	container: {
+		display: "flex",
+		marginLeft: theme.spacing(8),
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+			marginLeft: 0,
 		},
-	}
-	));
+	},
+}
+));
 
 
 interface BoardPageProps {
@@ -66,7 +65,7 @@ const BoardPage: FC<BoardPageProps> = (props) => {
 	const classes = useStyles();
 	const { dispatch } = useContext(BoardReducerContext);
 
-	
+
 	const onDragEnd = (result: DropResult) => {
 		const { source, destination, draggableId } = result;
 		if (!destination) return;
@@ -129,14 +128,14 @@ const BoardPage: FC<BoardPageProps> = (props) => {
 	return (
 		<>
 			<div className={classes.navigation}>
-				<GoBackButton/>
+				<GoBackButton />
 
 				<div className={classes.boardTitle}>
 					<UpdateBoard boardName={props.board.name} />
 				</div>
 
 				<div>
-					<DeleteBoard/>
+					<DeleteBoard />
 				</div>
 			</div>
 

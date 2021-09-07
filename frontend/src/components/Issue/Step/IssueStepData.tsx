@@ -8,33 +8,32 @@ import DeleteStepButton from './DeleteStepButton';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        stepCard: {
-            width: '100%',
-            flexShrink: 0,
-            marginBottom: theme.spacing(1.5),
-            backgroundColor: theme.palette.primary.light,
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                cursor: 'pointer',
-                boxShadow: theme.shadows[5],
-            },
-            "& .MuiCardContent-root": {
-                padding: theme.spacing(0.2),
-            },
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    stepCard: {
+        width: '100%',
+        flexShrink: 0,
+        marginBottom: theme.spacing(1.5),
+        backgroundColor: theme.palette.primary.light,
+        transition: 'all .12s linear',
+        boxShadow: theme.shadows[2],
+        "&:hover": {
+            cursor: 'pointer',
+            boxShadow: theme.shadows[5],
         },
-        cardContent: {
-            display: 'flex',
-            alignItems: 'center',
-            color: theme.palette.secondary.main,
+        "& .MuiCardContent-root": {
+            padding: theme.spacing(0.2),
         },
-        checkbox: {
-            transform: 'scale(0.7)',
-            color: theme.palette.secondary.main,
-        },
-    })
+    },
+    cardContent: {
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.secondary.main,
+    },
+    checkbox: {
+        transform: 'scale(0.7)',
+        color: theme.palette.secondary.main,
+    },
+})
 );
 
 

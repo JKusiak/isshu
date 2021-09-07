@@ -8,47 +8,46 @@ import { IAttachment, INestedIssue } from "../../../types/ModelTypes";
 import EnlargedAttachmentModal from "./EnlargedAttachmentModal";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        wrapper: {
-            marginBottom: theme.spacing(2),
-        },
-        title: {
-            fontWeight: 'bold',
-            fontSize: '16px',
-            marginBottom: theme.spacing(1),
-            color: theme.palette.secondary.main,
-        },
-        gallery: {
-            display: 'flex',
-            flexWrap: 'wrap',
-            [theme.breakpoints.down('xs')]: {
-                justifyContent: 'center',
-            },
-        },
-
-        addAttachmentIcon: {
-            fontSize: '35px',
-            color: theme.palette.secondary.main,
-        },
-        attachmentCard: {
-            display: 'flex',
-            flexShrink: 0,
-            height: '80px',
-            width: '142px',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    wrapper: {
+        marginBottom: theme.spacing(2),
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: '16px',
+        marginBottom: theme.spacing(1),
+        color: theme.palette.secondary.main,
+    },
+    gallery: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        [theme.breakpoints.down('xs')]: {
             justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: theme.palette.primary.light,
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                boxShadow: theme.shadows[5],
-                cursor: 'pointer',
-            },
-            marginBottom: theme.spacing(2),
         },
+    },
 
-    })
+    addAttachmentIcon: {
+        fontSize: '35px',
+        color: theme.palette.secondary.main,
+    },
+    attachmentCard: {
+        display: 'flex',
+        flexShrink: 0,
+        height: '80px',
+        width: '142px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.palette.primary.light,
+        transition: 'all .12s linear',
+        boxShadow: theme.shadows[2],
+        "&:hover": {
+            boxShadow: theme.shadows[5],
+            cursor: 'pointer',
+        },
+        marginBottom: theme.spacing(2),
+    },
+
+})
 );
 
 

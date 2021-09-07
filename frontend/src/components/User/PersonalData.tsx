@@ -5,29 +5,28 @@ import { IUser } from "../../types/ModelTypes";
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		userData: {
-			display: 'flex',
-			width: "100%",
-			marginTop: theme.spacing(2),
-		},
-		userCredentials: {
-			display: 'flex',
-			flexDirection: 'column',
-			justifyContent: 'center',
-			marginRight: theme.spacing(4),
-			color: theme.palette.secondary.main,
-		},
-		dataPoint: {
-			fontSize: "18px",
-			fontWeight: 'bold',
-			"&:not(:last-child)": {
-				marginBottom: theme.spacing(2),
-			}
-
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	userData: {
+		display: 'flex',
+		width: "100%",
+		marginTop: theme.spacing(2),
+	},
+	userCredentials: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		marginRight: theme.spacing(4),
+		color: theme.palette.secondary.main,
+	},
+	dataPoint: {
+		fontSize: "18px",
+		fontWeight: 'bold',
+		"&:not(:last-child)": {
+			marginBottom: theme.spacing(2),
 		}
-	})
+
+	}
+})
 );
 
 

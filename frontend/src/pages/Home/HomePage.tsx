@@ -12,88 +12,87 @@ import MembersGalleryPage from "./Subpages/MembersGalleryPage";
 import ProjectsGalleryPage from "./Subpages/ProjectsGalleryPage";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		emptyContainer: {
-			display: 'flex',
-			flexDirection: 'column',
-			height: '90vh',
-			width: '100%',
-			justifyContent: 'center',
-			alignItems: 'center',
-		},
-		headerWrapper: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			marginTop: theme.spacing(2),
-			[theme.breakpoints.down('xs')]: {
-				marginTop: theme.spacing(4),
-			}
-		},
-		errorText: {
-			display: 'flex',
-			justifyContent: 'center',
-			marginTop: theme.spacing(1),
-			color: 'red',
-		},
-		buttonsContainer: {
-			display: 'flex',
-			width: '100%',
-			alignItems: 'center',
-			justifyContent: 'center',
-			paddingTop: theme.spacing(2),
-			paddingBottom: theme.spacing(2),
-		},
-		divider: {
-			[theme.breakpoints.down('xs')]: {
-				width: '90%',
-			},
-			[theme.breakpoints.up('sm')]: {
-				width: '40%',
-			},
-			height: '4px',
-			marginLeft: 'auto',
-			marginRight: 'auto',
-			marginTop: theme.spacing(1),
-			marginBottom: theme.spacing(1),
-			background: theme.palette.secondary.main,
-			opacity: 0.15,
-		},
-		extraMarginTop: {
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	emptyContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		height: '90vh',
+		width: '100%',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	headerWrapper: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginTop: theme.spacing(2),
+		[theme.breakpoints.down('xs')]: {
 			marginTop: theme.spacing(4),
+		}
+	},
+	errorText: {
+		display: 'flex',
+		justifyContent: 'center',
+		marginTop: theme.spacing(1),
+		color: 'red',
+	},
+	buttonsContainer: {
+		display: 'flex',
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center',
+		paddingTop: theme.spacing(2),
+		paddingBottom: theme.spacing(2),
+	},
+	divider: {
+		[theme.breakpoints.down('xs')]: {
+			width: '90%',
 		},
-		extraMarginBottom: {
-			marginBottom: theme.spacing(4),
+		[theme.breakpoints.up('sm')]: {
+			width: '40%',
 		},
-		cardWrapper: {
-			display: 'flex',
-			minWidth: '100px',
-			[theme.breakpoints.down('xs')]: {
-				minWidth: '70px',
-			},
-			backgroundColor: theme.palette.primary.light,
-			justifyContent: 'center',
-			alignItems: 'center',
-			marginLeft: theme.spacing(1),
+		height: '4px',
+		marginLeft: 'auto',
+		marginRight: 'auto',
+		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
+		background: theme.palette.secondary.main,
+		opacity: 0.15,
+	},
+	extraMarginTop: {
+		marginTop: theme.spacing(4),
+	},
+	extraMarginBottom: {
+		marginBottom: theme.spacing(4),
+	},
+	cardWrapper: {
+		display: 'flex',
+		minWidth: '100px',
+		[theme.breakpoints.down('xs')]: {
+			minWidth: '70px',
 		},
-		button: {
-			width: '100%',
-			textTransform: 'none',
-			fontWeight: 'bold',
-			borderRadius: 0,
-		},
-		text: {
-			fontSize: '14px',
-			color: theme.palette.secondary.main,
-		},
-		emptyImageIcon: {
-			width: 'auto',
-			height: 'auto',
-			color: theme.palette.secondary.main,
-		},
-	}
-	));
+		backgroundColor: theme.palette.primary.light,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginLeft: theme.spacing(1),
+	},
+	button: {
+		width: '100%',
+		textTransform: 'none',
+		fontWeight: 'bold',
+		borderRadius: 0,
+	},
+	text: {
+		fontSize: '14px',
+		color: theme.palette.secondary.main,
+	},
+	emptyImageIcon: {
+		width: 'auto',
+		height: 'auto',
+		color: theme.palette.secondary.main,
+	},
+}
+));
 
 
 interface HomePageProps {

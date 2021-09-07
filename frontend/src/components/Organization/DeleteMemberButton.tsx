@@ -7,14 +7,13 @@ import ConfirmationModal from "../Commons/ConfirmationModal";
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		button: {
-		},
-		icon: {
-			color: theme.palette.secondary.main,
-		},
-	}))
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	button: {
+	},
+	icon: {
+		color: theme.palette.secondary.main,
+	},
+}))
 
 
 interface DeleteMemberButtonProps {

@@ -3,23 +3,22 @@ import ImagePlaceholder from '@material-ui/icons/ImageOutlined';
 import React, { FC, useRef } from "react";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		image: {
-			display: 'flex',
-			width: '150px',
-			height: '150px',
-			justifyContent: 'center',
-			alignItems: 'center',
-			marginLeft: theme.spacing(4),
-			boxShadow: theme.shadows[2],
-			"&:hover": {
-				cursor: 'pointer',
-				boxShadow: theme.shadows[5],
-				opacity: 0.7,
-			},
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	image: {
+		display: 'flex',
+		width: '150px',
+		height: '150px',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginLeft: theme.spacing(4),
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
+			opacity: 0.7,
 		},
-	})
+	},
+})
 );
 
 

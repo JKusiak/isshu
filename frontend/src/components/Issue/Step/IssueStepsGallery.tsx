@@ -10,34 +10,33 @@ import IssueStepData from './IssueStepData';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        headline: {
-            fontSize: '16px',
-            fontWeight: 'bold',
-            color: theme.palette.secondary.main,
-        },
-        progressContainer: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: theme.spacing(1),
-            marginTop: theme.spacing(1),
-        },
-        progressBar: {
-            width: '100%',
-            backgroundColor: theme.palette.primary.main,
-            "& .MuiLinearProgress-barColorPrimary": {
-                backgroundColor: theme.palette.secondary.main,
-            }
-        },
-        progress: {
-            textAlign: 'center',
-            minWidth: '35px',
-            marginLeft: theme.spacing(1),
-            color: theme.palette.secondary.main
-        },
-    })
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    headline: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: theme.palette.secondary.main,
+    },
+    progressContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: theme.spacing(1),
+        marginTop: theme.spacing(1),
+    },
+    progressBar: {
+        width: '100%',
+        backgroundColor: theme.palette.primary.main,
+        "& .MuiLinearProgress-barColorPrimary": {
+            backgroundColor: theme.palette.secondary.main,
+        }
+    },
+    progress: {
+        textAlign: 'center',
+        minWidth: '35px',
+        marginLeft: theme.spacing(1),
+        color: theme.palette.secondary.main
+    },
+})
 );
 
 

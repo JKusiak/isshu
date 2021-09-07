@@ -7,70 +7,69 @@ import { INestedIssue, ITag } from '../../types/ModelTypes';
 import AddTagButton from './AddTagButton';
 
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        tagsContainer: {
-            display: 'flex',
-            flexDirection: 'column',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    tagsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    headline: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: theme.palette.secondary.main,
+        alignSelf: 'center',
+        marginBottom: theme.spacing(2),
+    },
+    tagItem: {
+        display: 'flex',
+    },
+    tagIncludedCard: {
+        width: '100%',
+        marginBottom: '10px',
+        marginRight: '10px',
+        backgroundColor: theme.palette.primary.light,
+        transition: 'all .12s linear',
+        boxShadow: theme.shadows[2],
+        "&:hover": {
+            cursor: 'pointer',
+            boxShadow: theme.shadows[5],
         },
-        headline: {
-            fontSize: '20px',
+        "& .MuiCardContent-root": {
+            padding: theme.spacing(1),
+        },
+        "& *": {
             fontWeight: 'bold',
-            color: theme.palette.secondary.main,
-            alignSelf: 'center',
-            marginBottom: theme.spacing(2),
-        },
-        tagItem: {
-            display: 'flex',
-        },
-        tagIncludedCard: {
-            width: '100%',
-            marginBottom: '10px',
-            marginRight: '10px',
-            backgroundColor: theme.palette.primary.light,
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                cursor: 'pointer',
-                boxShadow: theme.shadows[5],
-            },
-            "& .MuiCardContent-root": {
-                padding: theme.spacing(1),
-            },
-            "& *": {
-                fontWeight: 'bold',
-                color: theme.palette.secondary.main
-            }
-        },
-        tagNotIncludedCard: {
-            width: '100%',
-            marginBottom: '10px',
-            marginRight: '10px',
-            backgroundColor: theme.palette.primary.light,
-            transition: 'all .12s linear',
-            boxShadow: theme.shadows[2],
-            "&:hover": {
-                cursor: 'pointer',
-                boxShadow: theme.shadows[5],
-            },
-            "& .MuiCardContent-root": {
-                padding: theme.spacing(1),
-            },
-            "& *": {
-                color: theme.palette.secondary.main
-            }
-        },
-        tagName: {
-            fontSize: '12px',
-        },
-        deleteButton: {
-            width: '30px',
-            height: '30px',
-        },
-        deleteIcon: {
-            color: theme.palette.secondary.main,
+            color: theme.palette.secondary.main
         }
-    })
+    },
+    tagNotIncludedCard: {
+        width: '100%',
+        marginBottom: '10px',
+        marginRight: '10px',
+        backgroundColor: theme.palette.primary.light,
+        transition: 'all .12s linear',
+        boxShadow: theme.shadows[2],
+        "&:hover": {
+            cursor: 'pointer',
+            boxShadow: theme.shadows[5],
+        },
+        "& .MuiCardContent-root": {
+            padding: theme.spacing(1),
+        },
+        "& *": {
+            color: theme.palette.secondary.main
+        }
+    },
+    tagName: {
+        fontSize: '12px',
+    },
+    deleteButton: {
+        width: '30px',
+        height: '30px',
+    },
+    deleteIcon: {
+        color: theme.palette.secondary.main,
+    }
+})
 );
 
 

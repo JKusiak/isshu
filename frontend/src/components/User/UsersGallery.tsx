@@ -17,49 +17,48 @@ import { IUser } from '../../types/ModelTypes';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		container: {
-			marginTop: theme.spacing(8.5),
-			padding: 0,
-		},
-		listSubtitle: {
-			fontSize: '24px',
-			textAlign: 'center',
-			padding: theme.spacing(2),
-			// marginBottom: theme.spacing(2),
-			fontWeight: 600,
-			color: theme.palette.secondary.main,
-		},
-		drawerPaper: {
-			zIndex: 1,
-			width: '270px',
-			backgroundColor: theme.palette.primary.main,
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	container: {
+		marginTop: theme.spacing(8.5),
+		padding: 0,
+	},
+	listSubtitle: {
+		fontSize: '24px',
+		textAlign: 'center',
+		padding: theme.spacing(2),
+		// marginBottom: theme.spacing(2),
+		fontWeight: 600,
+		color: theme.palette.secondary.main,
+	},
+	drawerPaper: {
+		zIndex: 1,
+		width: '270px',
+		backgroundColor: theme.palette.primary.main,
+		boxShadow: theme.shadows[5],
+	},
+	listItem: {
+		'&:hover': {
+			backgroundColor: theme.palette.primary.light,
 			boxShadow: theme.shadows[5],
-		},
-		listItem: {
-			'&:hover': {
-				backgroundColor: theme.palette.primary.light,
-				boxShadow: theme.shadows[5],
-			}
-		},
-		nameLink: {
-			color: theme.palette.secondary.main,
-			textDecoration: 'none',
-			'&:hover': {
-				'& *': {
-					fontWeight: 600
-				}
-			}
-		},
-		listButton: {
-			color: theme.palette.secondary.main,
-		},
-		divider: {
-			backgroundColor: theme.palette.secondary.light,
-			opacity: 0.2,
 		}
-	}),
+	},
+	nameLink: {
+		color: theme.palette.secondary.main,
+		textDecoration: 'none',
+		'&:hover': {
+			'& *': {
+				fontWeight: 600
+			}
+		}
+	},
+	listButton: {
+		color: theme.palette.secondary.main,
+	},
+	divider: {
+		backgroundColor: theme.palette.secondary.light,
+		opacity: 0.2,
+	}
+}),
 );
 
 

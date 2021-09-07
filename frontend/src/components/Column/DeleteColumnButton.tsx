@@ -8,15 +8,14 @@ import ConfirmationModal from "../Commons/ConfirmationModal";
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		button: {
-			padding: theme.spacing(1),
-		},
-		icon: {
-			color: theme.palette.secondary.light,
-		},
-	}))
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	button: {
+		padding: theme.spacing(1),
+	},
+	icon: {
+		color: theme.palette.secondary.light,
+	},
+}))
 
 
 interface DeleteColumnButtonProps {
@@ -39,7 +38,7 @@ const DeleteColumnButton: FC<DeleteColumnButtonProps> = (props) => {
 
 	return (
 		<>
-			<IconButton className={classes.button} onClick={() => {setOpenModal(true)}}>
+			<IconButton className={classes.button} onClick={() => { setOpenModal(true) }}>
 				<DeleteIcon className={classes.icon} />
 			</IconButton>
 

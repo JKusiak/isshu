@@ -44,6 +44,7 @@ const RegisterField: FC<FieldProps> = (props) => {
 			fullWidth
 			type={props.inputType}
 			variant="outlined"
+			autoComplete="register"
 			name={props.type}
 			id={props.type}
 			placeholder={props.type}

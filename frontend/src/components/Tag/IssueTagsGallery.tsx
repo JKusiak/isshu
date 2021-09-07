@@ -6,43 +6,42 @@ import { INestedIssue, ITag } from "../../types/ModelTypes";
 import TagsListModal from "./TagsListModal";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		tagsContainer: {
-			display: 'flex',
-			// not spacing(4) because tag cards need additional margin if the wrap
-			marginBottom: theme.spacing(3),
-			flexWrap: 'wrap',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	tagsContainer: {
+		display: 'flex',
+		// not spacing(4) because tag cards need additional margin if the wrap
+		marginBottom: theme.spacing(3),
+		flexWrap: 'wrap',
+	},
+	tagCard: {
+		display: 'flex',
+		flexShrink: 0,
+		minHeight: '34px',
+		minWidth: '34px',
+		marginRight: theme.spacing(1),
+		marginBottom: theme.spacing(1),
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
 		},
-		tagCard: {
-			display: 'flex',
-			flexShrink: 0,
-			minHeight: '34px',
-			minWidth: '34px',
-			marginRight: theme.spacing(1),
-			marginBottom: theme.spacing(1),
-			justifyContent: 'center',
-			alignItems: 'center',
-			backgroundColor: theme.palette.primary.light,
-			transition: 'all .12s linear',
-			boxShadow: theme.shadows[2],
-			"&:hover": {
-				cursor: 'pointer',
-				boxShadow: theme.shadows[5],
-			},
-			"& .MuiCardContent-root": {
-				padding: theme.spacing(1),
-			},
+		"& .MuiCardContent-root": {
+			padding: theme.spacing(1),
 		},
-		tagName: {
-			fontSize: '14px',
-			color: theme.palette.secondary.main,
-		},
-		modalButtonIcon: {
-			fontSize: '15px',
-			color: theme.palette.secondary.main,
-		},
-	})
+	},
+	tagName: {
+		fontSize: '14px',
+		color: theme.palette.secondary.main,
+	},
+	modalButtonIcon: {
+		fontSize: '15px',
+		color: theme.palette.secondary.main,
+	},
+})
 );
 
 

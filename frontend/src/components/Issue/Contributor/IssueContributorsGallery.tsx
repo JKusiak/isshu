@@ -8,61 +8,60 @@ import { INestedIssue, INestedUser, IUser } from '../../../types/ModelTypes';
 import DeleteContributorButton from './DeleteContributorButton';
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		contributorsContainer: {
-			marginBottom: theme.spacing(4),
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	contributorsContainer: {
+		marginBottom: theme.spacing(4),
+	},
+	headline: {
+		fontSize: '16px',
+		fontWeight: 'bold',
+		color: theme.palette.secondary.main,
+		marginBottom: theme.spacing(1),
+	},
+	formContainer: {
+		marginBottom: theme.spacing(2),
+	},
+	autocomplete: {
+		width: '100%',
+		height: '100%',
+		// text within the search
+		"& .MuiAutocomplete-input": {
+			fontSize: '14px',
 		},
-		headline: {
-			fontSize: '16px',
-			fontWeight: 'bold',
+		"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
+			// "& *": {
+			backgroundColor: theme.palette.primary.light,
+			// }
+		},
+		"& .MuiAutocomplete-endAdornment": {
+			"& *": {
+				color: theme.palette.secondary.main,
+			}
+		}
+	},
+	inputField: {
+		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
-			marginBottom: theme.spacing(1),
-		},
-		formContainer: {
-			marginBottom: theme.spacing(2),
-		},
-		autocomplete: {
-			width: '100%',
-			height: '100%',
-			// text within the search
-			"& .MuiAutocomplete-input": {
-				fontSize: '14px',
+			"& .MuiOutlinedInput-notchedOutline": {
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
 			},
-			"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
-				// "& *": {
-				backgroundColor: theme.palette.primary.light,
-				// }
-			},
-			"& .MuiAutocomplete-endAdornment": {
-				"& *": {
-					color: theme.palette.secondary.main,
-				}
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
 			}
 		},
-		inputField: {
-			"& .MuiOutlinedInput-root": {
-				color: theme.palette.secondary.main,
-				"& .MuiOutlinedInput-notchedOutline": {
-					borderRadius: '10px',
-					borderColor: theme.palette.secondary.light,
-				},
-				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-					borderColor: theme.palette.secondary.light,
-					borderWidth: "2px",
-				}
-			},
-		},
-		dropdownPaper: {
-			backgroundColor: theme.palette.primary.light,
-			color: theme.palette.secondary.main,
-		},
-		contributor: {
-			display: 'flex',
-			alignItems: 'center',
-			color: theme.palette.secondary.main,
-		},
-	})
+	},
+	dropdownPaper: {
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.secondary.main,
+	},
+	contributor: {
+		display: 'flex',
+		alignItems: 'center',
+		color: theme.palette.secondary.main,
+	},
+})
 );
 
 

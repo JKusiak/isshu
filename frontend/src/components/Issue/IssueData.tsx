@@ -7,37 +7,36 @@ import { INestedIssue } from "../../types/ModelTypes";
 import IssueModal from "./IssueModal";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		issueCard: {
-			display: 'grid',
-			gridRows: '1fr, 1fr',
-			height: 'auto',
-			minHeight: '70px',
-			maxHeight: '250px',
-			marginBottom: theme.spacing(2),
-			backgroundColor: theme.palette.primary.light,
-			boxShadow: theme.shadows[2],
-			"&:hover": {
-				cursor: 'pointer',
-				boxShadow: theme.shadows[5],
-			}
-		},
-		name: {
-			gridRow: 1,
-			margin: theme.spacing(1),
-			fontSize: '14px',
-			overflow: 'hidden',
-			color: theme.palette.secondary.main,
-		},
-		checkIcon: {
-			gridRow: 2,
-			justifySelf: 'end',
-			marginRight: theme.spacing(1),
-			color: theme.palette.success.dark,
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	issueCard: {
+		display: 'grid',
+		gridRows: '1fr, 1fr',
+		height: 'auto',
+		minHeight: '70px',
+		maxHeight: '250px',
+		marginBottom: theme.spacing(2),
+		backgroundColor: theme.palette.primary.light,
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
 		}
+	},
+	name: {
+		gridRow: 1,
+		margin: theme.spacing(1),
+		fontSize: '14px',
+		overflow: 'hidden',
+		color: theme.palette.secondary.main,
+	},
+	checkIcon: {
+		gridRow: 2,
+		justifySelf: 'end',
+		marginRight: theme.spacing(1),
+		color: theme.palette.success.dark,
 	}
-	));
+}
+));
 
 
 interface IssueDataProps {

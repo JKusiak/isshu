@@ -4,63 +4,62 @@ import React, { FC, SetStateAction, useState } from 'react';
 import { IUser } from '../../types/ModelTypes';
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		searchWrapper: {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	searchWrapper: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	formContainer: {
+		width: '350px',
+		marginBottom: theme.spacing(5),
+	},
+	autocomplete: {
+		width: '100%',
+		height: '100%',
+		// text within the search
+		"& .MuiAutocomplete-input": {
+			fontSize: '16px',
 		},
-		formContainer: {
-			width: '350px',
-			marginBottom: theme.spacing(5),
+		"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
+			backgroundColor: theme.palette.primary.light,
 		},
-		autocomplete: {
-			width: '100%',
-			height: '100%',
-			// text within the search
-			"& .MuiAutocomplete-input": {
-				fontSize: '16px',
+		"& .MuiAutocomplete-endAdornment": {
+			display: 'none',
+		}
+	},
+	inputField: {
+		"& .MuiOutlinedInput-root": {
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": {
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
 			},
-			"& .MuiAutocomplete-popper.MuiAutocomplete-paper": {
-				backgroundColor: theme.palette.primary.light,
-			},
-			"& .MuiAutocomplete-endAdornment": {
-				display: 'none',
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
 			}
 		},
-		inputField: {
-			"& .MuiOutlinedInput-root": {
-				color: theme.palette.secondary.main,
-				"& .MuiOutlinedInput-notchedOutline": {
-					borderRadius: '10px',
-					borderColor: theme.palette.secondary.light,
-				},
-				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-					borderColor: theme.palette.secondary.light,
-					borderWidth: "2px",
-				}
-			},
-		},
-		dropdownPaper: {
-			backgroundColor: theme.palette.primary.light,
-			color: theme.palette.secondary.main,
-		},
-		contributor: {
-			display: 'flex',
-			alignItems: 'center',
-			color: theme.palette.secondary.main,
-		},
-		invitePrompt: {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-			color: 'green',
-			fontSize: '16px',
-			fontWeight: 'bold',
-			marginTop: theme.spacing(5),
-		}
-	})
+	},
+	dropdownPaper: {
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.secondary.main,
+	},
+	contributor: {
+		display: 'flex',
+		alignItems: 'center',
+		color: theme.palette.secondary.main,
+	},
+	invitePrompt: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		color: 'green',
+		fontSize: '16px',
+		fontWeight: 'bold',
+		marginTop: theme.spacing(5),
+	}
+})
 );
 
 

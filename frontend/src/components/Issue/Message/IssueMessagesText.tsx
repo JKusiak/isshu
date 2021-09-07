@@ -7,34 +7,33 @@ import { ActionTypes } from "../../../reducers/BoardReducer";
 import { INestedIssue, INestedMessage } from "../../../types/ModelTypes";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		messageContainer: {
-			marginBottom: theme.spacing(2),
-			marginLeft: theme.spacing(2),
-		},
-		name: {
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	messageContainer: {
+		marginBottom: theme.spacing(2),
+		marginLeft: theme.spacing(2),
+	},
+	name: {
+		fontWeight: 'bold',
+		color: theme.palette.secondary.main,
+	},
+	date: {
+		fontSize: '12px',
+		color: theme.palette.secondary.main,
+	},
+	content: {
+		marginBottom: theme.spacing(1),
+		marginTop: theme.spacing(1),
+		color: theme.palette.secondary.main,
+	},
+	deleteButton: {
+		fontSize: '12px',
+		color: theme.palette.secondary.main,
+		"&:hover": {
+			cursor: 'pointer',
 			fontWeight: 'bold',
-			color: theme.palette.secondary.main,
 		},
-		date: {
-			fontSize: '12px',
-			color: theme.palette.secondary.main,
-		},
-		content: {
-			marginBottom: theme.spacing(1),
-			marginTop: theme.spacing(1),
-			color: theme.palette.secondary.main,
-		},
-		deleteButton: {
-			fontSize: '12px',
-			color: theme.palette.secondary.main,
-			"&:hover": {
-				cursor: 'pointer',
-				fontWeight: 'bold',
-			},
-		}
-	})
+	}
+})
 );
 
 

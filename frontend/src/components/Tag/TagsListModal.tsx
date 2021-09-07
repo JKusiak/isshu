@@ -4,27 +4,26 @@ import ManageTags from "../../api/Tag/ManageTags";
 import { INestedIssue } from "../../types/ModelTypes";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		modal: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		paper: {
-			display: 'grid',
-			width: '25vw',
-			minWidth: '270px',
-			height: '60vh',
-			backgroundColor: theme.palette.primary.main,
-			border: '2px solid',
-			borderColor: theme.palette.secondary.main,
-			borderRadius: '10px',
-			boxShadow: theme.shadows[2],
-			padding: theme.spacing(2, 2, 2),
-		},
-	}
-	));
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	paper: {
+		display: 'grid',
+		width: '25vw',
+		minWidth: '270px',
+		height: '60vh',
+		backgroundColor: theme.palette.primary.main,
+		border: '2px solid',
+		borderColor: theme.palette.secondary.main,
+		borderRadius: '10px',
+		boxShadow: theme.shadows[2],
+		padding: theme.spacing(2, 2, 2),
+	},
+}
+));
 
 
 interface TagsListModalProps {

@@ -5,51 +5,50 @@ import { FC, Fragment, useState } from "react";
 import ArchivedIssueCard from "../../../components/Issue/ArchivedIssueCard";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		header: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			fontWeight: 'bold',
-			fontSize: '28px',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	header: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontWeight: 'bold',
+		fontSize: '28px',
+		color: theme.palette.secondary.main,
+		marginBottom: theme.spacing(2),
+	},
+	searchWrapper: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: theme.spacing(5),
+	},
+	searchField: {
+		width: '350px',
+		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
-			marginBottom: theme.spacing(2),
-		},
-		searchWrapper: {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-			marginBottom: theme.spacing(5),
-		},
-		searchField: {
-			width: '350px',
-			"& .MuiOutlinedInput-root": {
-				color: theme.palette.secondary.main,
-				"& .MuiOutlinedInput-notchedOutline": {
-					borderRadius: '10px',
-					borderColor: theme.palette.secondary.light,
-				},
-				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-					borderColor: theme.palette.secondary.light,
-					borderWidth: "2px",
-				}
+			"& .MuiOutlinedInput-notchedOutline": {
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
 			},
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
 		},
-		issuesGrid: {
-			display: 'grid',
-			justifyContent: 'center',
-			gap: theme.spacing(4),
-			gridTemplateColumns: 'repeat(auto-fill, 400px)',
-			[theme.breakpoints.down('xs')]: {
-				gridTemplateColumns: 'repeat(auto-fill, 250px)',
-			},
-			marginRight: theme.spacing(8),
-			marginLeft: theme.spacing(8),
-			marginBottom: theme.spacing(4),
+	},
+	issuesGrid: {
+		display: 'grid',
+		justifyContent: 'center',
+		gap: theme.spacing(4),
+		gridTemplateColumns: 'repeat(auto-fill, 400px)',
+		[theme.breakpoints.down('xs')]: {
+			gridTemplateColumns: 'repeat(auto-fill, 250px)',
 		},
+		marginRight: theme.spacing(8),
+		marginLeft: theme.spacing(8),
+		marginBottom: theme.spacing(4),
+	},
 
-	})
+})
 );
 
 

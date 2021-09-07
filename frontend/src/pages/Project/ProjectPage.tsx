@@ -10,34 +10,33 @@ import GetUsersGallery from "../../api/User/GetUsersGallery";
 
 const sidebarWidth = 270;
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			display: 'flex',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	root: {
+		display: 'flex',
+	},
+	sidebar: {
+		[theme.breakpoints.up('sm')]: {
+			width: sidebarWidth,
+			flexShrink: 0,
 		},
-		sidebar: {
-			[theme.breakpoints.up('sm')]: {
-				width: sidebarWidth,
-				flexShrink: 0,
-			},
+	},
+	pageContent: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexGrow: 1,
+	},
+	menuButton: {
+		color: theme.palette.secondary.main,
+		[theme.breakpoints.up("sm")]: {
+			display: "none"
 		},
-		pageContent: {
-			display: 'flex',
-			flexDirection: 'column',
-			alignItems: 'center',
-			justifyContent: 'center',
-			flexGrow: 1,
-		},
-		menuButton: {
-			color: theme.palette.secondary.main,
-			[theme.breakpoints.up("sm")]: {
-				display: "none"
-			},
-			marginTop: '1em',
-			marginBottom: '1em',
-		},
-	}
-	));
+		marginTop: '1em',
+		marginBottom: '1em',
+	},
+}
+));
 
 
 const ProjectPage = () => {

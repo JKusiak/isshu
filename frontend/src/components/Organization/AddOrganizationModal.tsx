@@ -1,85 +1,84 @@
 import { Backdrop, Button, Card, CardContent, createStyles, Fade, makeStyles, Modal, TextField, Theme, Typography } from "@material-ui/core";
 import { FC, useState } from "react";
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		cardContainer: {
-			height: '100px',
-			width: '250px',
-			transition: 'all .12s linear',
-			boxShadow: theme.shadows[2],
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	cardContainer: {
+		height: '100px',
+		width: '250px',
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		backgroundColor: theme.palette.primary.light,
+		"&:hover": {
+			boxShadow: theme.shadows[5],
+			cursor: 'pointer',
+		},
+		marginBottom: theme.spacing(4),
+	},
+	cardText: {
+		color: theme.palette.secondary.main,
+		textAlign: 'center',
+		// fontWeight: 'bold',
+	},
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	paper: {
+		[theme.breakpoints.up('sm')]: {
+			width: '35vw',
+			minWidth: '430px',
+		},
+		[theme.breakpoints.down('xs')]: {
+			width: '95vw',
+			minWidth: 0,
+		},
+		height: 'auto',
+		backgroundColor: theme.palette.primary.main,
+		border: '2px solid',
+		borderColor: theme.palette.secondary.main,
+		borderRadius: '10px',
+		boxShadow: theme.shadows[2],
+		padding: theme.spacing(2, 4, 3),
+	},
+	header: {
+		display: 'grid',
+		justifyContent: 'center',
+		color: theme.palette.secondary.main,
+		textAlign: 'center',
+		marginBottom: theme.spacing(4),
+	},
+	form: {
+		width: '100%',
+	},
+	submit: {
+		margin: theme.spacing(3, 0, 3),
+		borderRadius: '10px',
+		color: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.light,
+		transition: 'all .12s linear',
+		boxShadow: theme.shadows[2],
+		"&:hover": {
+			cursor: 'pointer',
+			boxShadow: theme.shadows[5],
 			backgroundColor: theme.palette.primary.light,
-			"&:hover": {
-				boxShadow: theme.shadows[5],
-				cursor: 'pointer',
-			},
-			marginBottom: theme.spacing(4),
 		},
-		cardText: {
+	},
+	inputField: {
+		"& .MuiOutlinedInput-root": {
 			color: theme.palette.secondary.main,
-			textAlign: 'center',
-			// fontWeight: 'bold',
-		},
-		modal: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		paper: {
-			[theme.breakpoints.up('sm')]: {
-				width: '35vw',
-				minWidth: '430px',
+			"& .MuiOutlinedInput-notchedOutline": {
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
 			},
-			[theme.breakpoints.down('xs')]: {
-				width: '95vw',
-				minWidth: 0,
-			},
-			height: 'auto',
-			backgroundColor: theme.palette.primary.main,
-			border: '2px solid',
-			borderColor: theme.palette.secondary.main,
-			borderRadius: '10px',
-			boxShadow: theme.shadows[2],
-			padding: theme.spacing(2, 4, 3),
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
 		},
-		header: {
-			display: 'grid',
-			justifyContent: 'center',
-			color: theme.palette.secondary.main,
-			textAlign: 'center',
-			marginBottom: theme.spacing(4),
-		},
-		form: {
-			width: '100%',
-		},
-		submit: {
-			margin: theme.spacing(3, 0, 3),
-			borderRadius: '10px',
-			color: theme.palette.secondary.main,
-			backgroundColor: theme.palette.primary.light,
-			transition: 'all .12s linear',
-			boxShadow: theme.shadows[2],
-			"&:hover": {
-				cursor: 'pointer',
-				boxShadow: theme.shadows[5],
-				backgroundColor: theme.palette.primary.light,
-			},
-		},
-		inputField: {
-			"& .MuiOutlinedInput-root": {
-				color: theme.palette.secondary.main,
-				"& .MuiOutlinedInput-notchedOutline": {
-					borderRadius: '10px',
-					borderColor: theme.palette.secondary.light,
-				},
-				"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-					borderColor: theme.palette.secondary.light,
-					borderWidth: "2px",
-				}
-			},
-		},
+	},
 
-	})
+})
 );
 
 

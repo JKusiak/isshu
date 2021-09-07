@@ -9,56 +9,55 @@ import IssueData from "../Issue/IssueData";
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		columnWrapper: {
-			display: "flex",
-			flexDirection: "column",
-			minHeight: 500,
-			alignItems: "center",
-			"&:not(:last-child)": {
-				[theme.breakpoints.up('sm')]: {
-					borderRight: '1px solid',
-					borderRightColor: theme.palette.secondary.light,
-				},
-				[theme.breakpoints.down('xs')]: {
-					borderRight: 'none',
-					marginBottom: theme.spacing(4),
-				},
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	columnWrapper: {
+		display: "flex",
+		flexDirection: "column",
+		minHeight: 500,
+		alignItems: "center",
+		"&:not(:last-child)": {
+			[theme.breakpoints.up('sm')]: {
+				borderRight: '1px solid',
+				borderRightColor: theme.palette.secondary.light,
 			},
+			[theme.breakpoints.down('xs')]: {
+				borderRight: 'none',
+				marginBottom: theme.spacing(4),
+			},
+		},
 
-		},
-		columnHeader: {
-			display: 'grid',
-			gridTemplateColumns: '0.5fr 1fr 0.5fr',
-			minWidth: '100%',
-			borderBottom: '0.1px solid',
-			borderBottomColor: theme.palette.secondary.light,
-		},
-		columnName: {
-			gridColumn: '2',
-			justifySelf: 'center',
-			paddingTop: theme.spacing(2),
-			paddingBottom: theme.spacing(2),
-			fontSize: '20px',
-			fontWeight: 400,
-			color: theme.palette.secondary.light,
-		},
-		deleteColumnButton: {
-			gridColumn: '3',
-			justifySelf: 'center',
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-		},
-		columnContentWrapper: {
-			width: '275px',
-			minHeight: '50vh',
-			height: 'auto',
-			margin: '15px',
-		},
-	}
-	));
+	},
+	columnHeader: {
+		display: 'grid',
+		gridTemplateColumns: '0.5fr 1fr 0.5fr',
+		minWidth: '100%',
+		borderBottom: '0.1px solid',
+		borderBottomColor: theme.palette.secondary.light,
+	},
+	columnName: {
+		gridColumn: '2',
+		justifySelf: 'center',
+		paddingTop: theme.spacing(2),
+		paddingBottom: theme.spacing(2),
+		fontSize: '20px',
+		fontWeight: 400,
+		color: theme.palette.secondary.light,
+	},
+	deleteColumnButton: {
+		gridColumn: '3',
+		justifySelf: 'center',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	columnContentWrapper: {
+		width: '275px',
+		minHeight: '50vh',
+		height: 'auto',
+		margin: '15px',
+	},
+}
+));
 
 
 interface ColumnDataProps {

@@ -8,15 +8,14 @@ import AddMessageButton from "./AddMessageButton";
 import IssueMessagesText from "./IssueMessagesText";
 
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		messagesTitle: {
-			fontWeight: 'bold',
-			fontSize: '16px',
-			color: theme.palette.secondary.main,
-			marginBottom: theme.spacing(2),
-		},
-	})
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	messagesTitle: {
+		fontWeight: 'bold',
+		fontSize: '16px',
+		color: theme.palette.secondary.main,
+		marginBottom: theme.spacing(2),
+	},
+})
 );
 
 
@@ -63,17 +62,17 @@ const IssueMessagesGallery: FC<IssueMessagesGalleryProps> = (props) => {
 	}
 
 
-	
+
 
 
 	return (
 		<>
 			<div className={classes.messagesTitle}>Messages</div>
 			<AddMessageButton handleSubmit={handleSubmit} />
-			<IssueMessagesText 
-					issue={props.issue}
-					deleteMessage={props.deleteMessage}
-					displayOnly={false}
+			<IssueMessagesText
+				issue={props.issue}
+				deleteMessage={props.deleteMessage}
+				displayOnly={false}
 			/>
 		</>
 	);
