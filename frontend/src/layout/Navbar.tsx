@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import ProfileIcon from '@material-ui/icons/AccountCircleOutlined';
+import AddProjectIcon from '@material-ui/icons/AddBoxOutlined';
 import DarkModeOn from '@material-ui/icons/Brightness2';
 import DarkModeOff from '@material-ui/icons/Brightness2Outlined';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '28px',
 		color: theme.palette.secondary.main,
 	},
+	addProjectIcon: {
+		fontSize: '26px',
+		color: theme.palette.secondary.main,
+	},
 	profileIcon: {
 		fontSize: '24px',
 		color: theme.palette.secondary.main,
@@ -104,10 +109,12 @@ const useStyles = makeStyles((theme) => ({
 const Navbar = () => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const open = Boolean(anchorEl);
+	const openList = Boolean(anchorEl);
+	const [modalOpen, setModalOpen] = useState(false);
 	const { darkMode, setDarkMode } = useContext(DarkModeContext);
 	const { isLoggedIn, setLoggedIn } = useContext(IsLoggedInContext);
 	const { loggedInUser } = useContext(AuthUserContext);
+	const isInOrganization = loggedInUser.organizationId === null;
 
 
 	const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -168,7 +175,24 @@ const Navbar = () => {
 									</IconButton>
 								</Tooltip>
 
-								<AddProject />
+								<Tooltip title="Add project" aria-label="add project" placement="bottom" enterDelay={500} leaveDelay={200}>
+									{// span here necessary to still display tooltip even if the button is disabled
+									}
+									<span>
+										<IconButton
+											aria-label="add project"
+											disabled={isInOrganization}
+											onClick={() => setModalOpen(true)}
+										>
+											<AddProjectIcon className={classes.addProjectIcon} />
+										</IconButton>
+									</span>
+								</Tooltip>
+								
+								<AddProject 
+									isOpen={modalOpen}
+									setIsOpen={setModalOpen}
+								/>
 
 								<Tooltip title="Your profile" aria-label="user profile" placement="bottom" enterDelay={500} leaveDelay={200}>
 									<IconButton aria-label="user profile" onClick={handleMenu}>
@@ -189,7 +213,7 @@ const Navbar = () => {
 										vertical: 'top',
 										horizontal: 'center',
 									}}
-									open={open}
+									open={openList}
 									onClose={handleClose}
 								>
 									<MenuItem

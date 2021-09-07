@@ -34,6 +34,7 @@ export interface IProject {
 	dateStart: Date;
 	dateEnd: Date;
 	creator: IUser;
+	organizationId: string;
 }
 
 export interface IBoard {

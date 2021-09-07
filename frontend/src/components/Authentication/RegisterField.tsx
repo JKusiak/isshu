@@ -1,53 +1,67 @@
-// import { TextField } from '@material-ui/core';
-// import axios from 'axios';
-// import { FC, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
-// import RegisterForm from '../../components/Authentication/RegisterForm';
+import { createStyles, makeStyles, TextField, Theme } from '@material-ui/core';
+import { FC } from 'react';
+import { Action, ActionTypes } from '../../reducers/RegisterReducer';
 
 
-// interface FieldProps {
-// 	inputFieldClass,
-// 	setValue,
-// 	setIsValid,
-// 	regex,
-// 	errorText,
-// 	setErrorText,
-// 	setIsSent
-// }
+const useStyles = makeStyles((theme: Theme) => createStyles({
+	inputField: {
+		"& .MuiOutlinedInput-root": {
+			color: theme.palette.secondary.main,
+			"& .MuiOutlinedInput-notchedOutline": {
+				borderRadius: '10px',
+				borderColor: theme.palette.secondary.light,
+			},
+			"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+				borderColor: theme.palette.secondary.light,
+				borderWidth: "2px",
+			}
+		},
+	},
+}));
 
 
-// const RegisterField: FC<FieldProps> = (props) => {
-// 	const [isValid, setIsValid] = useState<boolean>(true);
-// 	const [isSent, setIsSent] = useState<boolean>(false);
-// 	const [errorText, setErrorText] = useState<string>('');
-// 	const history = useHistory();
+interface FieldProps {
+	type: string,
+	inputType: string,
+	setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+	regex: RegExp,
+	errorText: string,
+	setErrorText: React.Dispatch<React.SetStateAction<string>>,
+	setIsSent: React.Dispatch<React.SetStateAction<boolean>>,
+	dispatch: (value: Action) => void,
+	actionType: ActionTypes,
+}
 
 
+const RegisterField: FC<FieldProps> = (props) => {
+	const classes = useStyles();
 
-// 	return (
-// 		<TextField
-// 			className={props.inputFieldClass}
-// 			required
-// 			fullWidth
-// 			variant="outlined"
-// 			name="surname"
-// 			id="surname"
-// 			placeholder="Surname"
-// 			autoComplete="your-surname"
-// 			onChange={e => {
-// 				if (e.target.value.match(props.regex)) {
-// 					props.setValue(e.target.value);
-// 					props.setIsValid(true);
-// 				} else {
-// 					props.setErrorText(props.errorText);
-// 					props.setIsValid(false);
-// 				}
-// 				props.setIsSent(false);
-// 			}}
-// 		/>
-// 	);
-// }
 
-// export default RegisterField;
+	return (
+		<TextField
+			className={classes.inputField}
+			required
+			fullWidth
+			type={props.inputType}
+			variant="outlined"
+			name={props.type}
+			id={props.type}
+			placeholder={props.type}
+			onChange={e => {
+				if (e.target.value.match(props.regex)) {
+					props.dispatch({ type: props.actionType, payload: e.target.value });
+					props.setIsValid(true);
+				} else {
+					props.setErrorText(props.errorText);
+					props.setIsValid(false);
+				}
+				props.setIsSent(false);
+			}}
+		/>
+	);
+}
+
+export default RegisterField;
 
 export { };
+

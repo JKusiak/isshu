@@ -48,6 +48,7 @@ export const ProjectTemplate: IProject = {
 	dateStart: new Date(),
 	dateEnd: new Date(),
 	creator: UserTemplate,
+	organizationId: '',
 };
 
 

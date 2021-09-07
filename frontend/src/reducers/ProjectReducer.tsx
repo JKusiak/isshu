@@ -14,7 +14,7 @@ export type Action = {
 	payload: any,
 }
 
-export const bannerReducer = (state: IProject, action: Action) => {
+export const projectReducer = (state: IProject, action: Action) => {
 	const { type, payload } = action;
 
 	switch (type) {

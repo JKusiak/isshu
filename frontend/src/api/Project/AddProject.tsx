@@ -1,41 +1,35 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useReducer, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { AuthUserContext } from '../../App';
-import AddProjectModal from '../../components/Project/AddProjectModal';
+import AddProjectModal from '../../components/Project/AddProjectModal/AddProjectModal';
+import { projectReducer } from '../../reducers/ProjectReducer';
+import { ProjectTemplate } from '../../types/ModelContentTemplate';
 
 
-const AddProject = () => {
+interface AddProps {
+	isOpen: boolean,
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+
+const AddProject: FC<AddProps> = (props) => {
 	let history = useHistory();
-	const formattedDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [projectName, setProjectName] = useState<string>('');
-	const [description, setDescription] = useState<string>('');
-	const [startDate, setStartDate] = useState<Date | null>(formattedDate);
-	const [endDate, setEndDate] = useState<Date | null>(formattedDate);
+	const [projectState, dispatch] = useReducer(projectReducer, ProjectTemplate);
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorText, setErrorText] = useState<string>('');
 	const { loggedInUser } = useContext(AuthUserContext);
 
-	useEffect(() => {
-		if (endDate! >= startDate!) {
-			setIsValid(true);
-		} else {
-			setErrorText("End date can not be before start date");
-			setIsValid(false);
-		}
-	}, [startDate, endDate]);
-
 
 	function addProjectToUser(res: AxiosResponse) {
-		const newProjectId = {
+		const requestBody = {
 			projectId: res.data._id,
 		};
 
-		axios.post(`/users/addProject/${loggedInUser._id}`, newProjectId)
+		axios.post(`/users/addProject/${loggedInUser._id}`, requestBody)
 			.then(() => {
-				setIsOpen(false);
-				history.push(`/project/${newProjectId.projectId}`);
+				props.setIsOpen(false);
+				history.push(`/project/${requestBody.projectId}`);
 			}).catch((err) => {
 				console.log(err);
 			});
@@ -46,10 +40,7 @@ const AddProject = () => {
 		e.preventDefault();
 
 		const project = {
-			name: projectName,
-			description: description,
-			dateStart: startDate,
-			dateEnd: endDate,
+			...projectState,
 			creator: loggedInUser._id,
 			organizationId: loggedInUser.organizationId,
 		}
@@ -66,23 +57,17 @@ const AddProject = () => {
 
 
 	return (
-		<>
-			<AddProjectModal
-				onSubmit={onSubmit}
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				isValid={isValid}
-				setIsValid={setIsValid}
-				startDate={startDate}
-				setStartDate={setStartDate}
-				endDate={endDate}
-				setEndDate={setEndDate}
-				errorText={errorText}
-				setErrorText={setErrorText}
-				setProjectName={setProjectName}
-				setDescription={setDescription}
-			/>
-		</>
+		<AddProjectModal
+			onSubmit={onSubmit}
+			projectState={projectState}
+			dispatch={dispatch}
+			isOpen={props.isOpen}
+			setIsOpen={props.setIsOpen}
+			isValid={isValid}
+			setIsValid={setIsValid}
+			errorText={errorText}
+			setErrorText={setErrorText}
+		/>
 	);
 }
 

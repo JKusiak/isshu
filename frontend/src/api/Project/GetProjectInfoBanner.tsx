@@ -3,19 +3,19 @@ import { FC, useContext, useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthUserContext } from "../../App";
 import ProjectInfoBanner from "../../components/Project/ProjectInfoBanner/ProjectInfoBanner";
-import { ActionTypes, bannerReducer } from "../../reducers/BannerReducer";
+import { ActionTypes, projectReducer } from "../../reducers/ProjectReducer";
 import { ProjectTemplate } from "../../types/ModelContentTemplate";
 import { INestedProject } from "../../types/ModelTypes";
-
 
 
 interface GetProjectInfoBannerProps {
 	project: INestedProject,
 }
 
+
 const GetProjectInfoBanner: FC<GetProjectInfoBannerProps> = (props) => {
 	const { projectId } = useParams<{ projectId: string }>();
-	const [projectBannerState, dispatch] = useReducer(bannerReducer, ProjectTemplate);
+	const [projectBannerState, dispatch] = useReducer(projectReducer, ProjectTemplate);
 	const [file, setFile] = useState<string | Blob>('');
 	const [imageUrl, setImageUrl] = useState<string | undefined>();
 	const [imageExists, setImageExists] = useState<boolean>(false);
