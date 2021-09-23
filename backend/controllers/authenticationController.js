@@ -17,7 +17,7 @@ export const loginUser = asyncHandler(async(req, res) => {
 
       if (bcrypt.compareSync(req.body.password, userData.password)) {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-            // res.cookie('token', accessToken, {httpOnly: 'true'});
+            // res.cookie('token', accessToken, {httpOnly: true});
             res.json({ token: accessToken});
       } else {
             res.status(401).json({message: 'Authentication failed. Invalid user or password.'});
@@ -38,7 +38,6 @@ export const newOrganizationToken = asyncHandler(async(req, res) => {
 })
 
 
-// middleware for JWT token authentication
 export const authenticateJWT = (req, res, next) => {
       const authHeader = req.headers.authorization;
       const token = authHeader && authHeader.split(' ')[1];

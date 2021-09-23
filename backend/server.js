@@ -23,6 +23,7 @@ const PORT = process.env.PORT;
 const MODE = process.env.NODE_ENV;
 
 connectDB();
+
 const app = express();
 
 app.use(cors());

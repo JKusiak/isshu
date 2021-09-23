@@ -56,7 +56,7 @@ const App = () => {
 								<meta name="description" content="Minimalistic bug tracking tool for small sized teams" />
 								<style>{`body { background-color: ${theme.palette.primary.main}; }`}</style>
 							</Helmet>
-
+							
 							<Router>
 								<Navbar />
 								<Switch>

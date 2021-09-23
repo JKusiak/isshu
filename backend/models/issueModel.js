@@ -11,9 +11,19 @@ const issueSchema = mongoose.Schema({
 		required: false,
 		default: null,
 	},
+	isFinished: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 	creator: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
+		required: true,
+	},
+	columnId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Project',
 		required: true,
 	},
 	contributors: [{
@@ -34,17 +44,17 @@ const issueSchema = mongoose.Schema({
 			required: false,
 			default: null,
 		},
+		addTime: {
+			type: Date,
+			required: false,
+			default: null,
+		},
 		sender: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Tag',
 			required: false,
 			default: null,
 		},
-		addTime: {
-			type: Date,
-			required: false,
-			default: null,
-		}
 	}],
 	steps: [{
 		content: {
@@ -65,16 +75,6 @@ const issueSchema = mongoose.Schema({
 			default: null,
 		}
 	}],
-	columnId: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Project',
-		required: true,
-	},
-	isFinished: {
-		type: Boolean,
-		required: false,
-		default: false,
-	}
 });
 
 
