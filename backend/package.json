@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "servers": "concurrently \"npm run dev\" \"cd ../frontend && npm run start\""
+    "servers": "concurrently \"npm run dev\" \"cd ../frontend && npm run start\"",
+    "browsertest": "nightwatch",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Juliusz Kusiak",
