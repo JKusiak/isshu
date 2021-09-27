@@ -21,7 +21,6 @@ columnSchema.post('findOneAndDelete', async function(res) {
       const columnId = res._id;
       const childIssues = await Issue.find({columnId: columnId});
       
-      
       // array of promises is passed to Promise.all to resolve concurrently
       Promise.all(
             childIssues.map(async issue => {

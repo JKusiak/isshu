@@ -129,6 +129,7 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
             <Typography className={classes.headline} component="h5" variant="h5">
                 Steps
             </Typography>
+            
             {displayProgress()}
 
             <DragDropContext onDragEnd={result => onDragEnd(result)}>
@@ -143,7 +144,6 @@ const IssueStepsGallery: FC<IssueStepsGalleryProps> = (props) => {
                     }}
                 </Droppable>
             </DragDropContext>
-
 
             <AddStepButton
                 updateSteps={props.updateSteps}

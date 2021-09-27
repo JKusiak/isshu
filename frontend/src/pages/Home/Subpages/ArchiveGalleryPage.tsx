@@ -50,9 +50,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		marginLeft: theme.spacing(8),
 		marginBottom: theme.spacing(4),
 	},
-
-})
-);
+}));
 
 
 interface ArchiveGalleryProps {

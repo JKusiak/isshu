@@ -42,20 +42,20 @@ app.use('/uploads', protectedImageRouter, express.static('uploads'));
 
 // universal route for handling 404 response if route not existing
 app.use((req, res, next) => {
-      const error = new Error("This page does not exist");
-      error.status = 404;
-      next(error);
+    const error = new Error("This page does not exist");
+    error.status = 404;
+    next(error);
 });
 
 app.use((error, req, res, next) => {
-      res.status(error.status || 500).send({
-            error: {
-            	status: error.status || 500,
-            	message: error.message || 'Internal Server Error',
-            },
-      });
+    res.status(error.status || 500).send({
+        error: {
+            status: error.status || 500,
+            message: error.message || 'Internal Server Error',
+        },
+    });
 });
 
 app.listen(PORT, () => {
-      console.log(`App is running in ${MODE} mode on port ${PORT}`)
+    console.log(`App is running in ${MODE} mode on port ${PORT}`)
 });

@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 				marginBottom: theme.spacing(4),
 			},
 		},
-
 	},
 	columnHeader: {
 		display: 'grid',

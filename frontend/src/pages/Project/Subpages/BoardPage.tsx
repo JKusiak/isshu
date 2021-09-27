@@ -77,21 +77,11 @@ const BoardPage: FC<BoardPageProps> = (props) => {
 				oldColumnId: oldColumnId,
 				newColumnId: newColumnId,
 				issueId: draggableId,
-			}
+			};
 
 			dispatch({ type: ActionTypes.ChangeColumns, payload: payload });
 			props.changeColumn(destination.droppableId, draggableId);
 		}
-		// else if (source.droppableId === destination.droppableId){
-		//       const chosenColumn = ensure(props.board.columns.find(column => column._id === source.droppableId));
-		//       const reorderedIssues = reorderColumn(chosenColumn.issues, source.index, destination.index);
-		//       const payload = {
-		//             columnId: source.droppableId,
-		//             reorderedIssues: reorderedIssues,
-		//       }
-
-		//       dispatch({type: ActionTypes.ReorderColumn, payload: payload});
-		// } 
 		else {
 			return;
 		}

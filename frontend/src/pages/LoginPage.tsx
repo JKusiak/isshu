@@ -4,7 +4,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Login from '../api/Authentication/Login';
 
 
-
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	paper: {
 		marginTop: theme.spacing(9),
@@ -27,4 +26,5 @@ const LoginPage = () => {
 		</Container>
 	);
 }
+
 export default LoginPage;

@@ -63,8 +63,8 @@ export function setupDiskStorage() {
 			fileSize: 1024 * 1024 * 5,
 		},
 		fileFilter: (req, file, cb) => {
-			if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
-				return cb(new Error('File extension must be .jpg or .jpeg'));
+			if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+				return cb(new Error('File extension must be .jpg, .png or .jpeg'));
 			}
 			cb(null, true);
 		},
