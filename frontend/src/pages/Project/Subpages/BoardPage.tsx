@@ -42,10 +42,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 			flexDirection: 'column',
 		},
 		justifyContent: 'center',
+		marginLeft: theme.spacing(8),
+		marginRight: theme.spacing(8),
 	},
 	container: {
 		display: "flex",
-		marginLeft: theme.spacing(8),
+		flex: '0 0 0',
 		[theme.breakpoints.down('xs')]: {
 			flexDirection: 'column',
 			marginLeft: 0,

@@ -8,12 +8,11 @@ import { INestedColumn, INestedIssue } from "../../types/ModelTypes";
 import IssueData from "../Issue/IssueData";
 
 
-
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	columnWrapper: {
 		display: "flex",
 		flexDirection: "column",
-		minHeight: 500,
+		minHeight: '500px',
 		alignItems: "center",
 		"&:not(:last-child)": {
 			[theme.breakpoints.up('sm')]: {
@@ -29,12 +28,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	columnHeader: {
 		display: 'grid',
 		gridTemplateColumns: '0.5fr 1fr 0.5fr',
-		minWidth: '100%',
+		width: '100%',
 		borderBottom: '0.1px solid',
 		borderBottomColor: theme.palette.secondary.light,
 	},
 	columnName: {
 		gridColumn: '2',
+		overflow: 'hidden',
+		maxHeight: '100%',
+		maxWidth: '100%',
+		whiteSpace: 'nowrap',
 		justifySelf: 'center',
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(2),
