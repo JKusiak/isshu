@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		transition: 'all .12s linear',
 		boxShadow: theme.shadows[2],
 		backgroundColor: theme.palette.primary.light,
+		
 		"&:hover": {
 			boxShadow: theme.shadows[5],
 			cursor: 'pointer',

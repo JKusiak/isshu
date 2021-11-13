@@ -32,13 +32,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-interface ArchivizeProps {
+interface ArchiveProps {
 	issue: INestedIssue,
-	archivizeIssue: () => void,
+	archiveIssue: () => void,
 }
 
 
-const ArchivizeButton: FC<ArchivizeProps> = (props) => {
+const ArchiveButton: FC<ArchiveProps> = (props) => {
 	const classes = useStyles();
 	const [modalOpen, setModalOpen] = useState(false);
 	const { dispatch } = useContext(BoardReducerContext);
@@ -50,8 +50,8 @@ const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 			issueId: props.issue._id,
 		};
 
-		dispatch({ type: ActionTypes.ArchivizeIssue, payload: payload });
-		props.archivizeIssue();
+		dispatch({ type: ActionTypes.ArchiveIssue, payload: payload });
+		props.archiveIssue();
 	}
 
 
@@ -60,7 +60,7 @@ const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 			<Card className={classes.cardWrapper}>
 				<Button className={classes.button} onClick={() => {setModalOpen(true)}}>
 					<div className={classes.text}>
-						Archivize
+						Archive
 					</div>
 				</Button>
 
@@ -75,4 +75,4 @@ const ArchivizeButton: FC<ArchivizeProps> = (props) => {
 }
 
 
-export default ArchivizeButton;
+export default ArchiveButton;

@@ -66,13 +66,13 @@ const AddColumnButton: FC<AddColumnButtonProps> = (props) => {
 										props.setColumnName(e.target.value);
 									}}
 								/>
-								<IconButton type="submit">
+								<IconButton type="submit" aria-label='expandedAddColumnButton'>
 									<AddIcon className={classes.icon} />
 								</IconButton>
 							</form>
 						}
 						{!addMode &&
-							<IconButton>
+							<IconButton aria-label='addColumnButton'>
 								<AddIcon className={classes.icon} />
 							</IconButton>
 						}

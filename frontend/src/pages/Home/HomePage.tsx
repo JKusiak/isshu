@@ -1,7 +1,7 @@
 import { Button, Card, Divider } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
 import GetArchiveGallery from "../../api/Issue/GetArchiveGallery";
 import AddOrganization from "../../api/Organization/AddOrganization";
 import ManageOrganizationImage from "../../api/Organization/ManageOrganizationImage";
@@ -81,8 +81,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		textTransform: 'none',
 		fontWeight: 'bold',
 		borderRadius: 0,
-	},
-	text: {
 		fontSize: '14px',
 		color: theme.palette.secondary.main,
 	},
@@ -104,7 +102,7 @@ interface HomePageProps {
 const HomePage: FC<HomePageProps> = (props) => {
 	const classes = useStyles();
 	const [errorText, setErrorText] = useState('');
-
+	const path = useLocation().pathname;
 
 	function displayOrganization() {
 		return (
@@ -123,29 +121,25 @@ const HomePage: FC<HomePageProps> = (props) => {
 				</div>
 
 				<Divider className={`${classes.divider} ${classes.extraMarginTop}`} />
+
 				<div className={classes.buttonsContainer}>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/projects'>
-							<div className={classes.text}>
+						<Button className={classes.button} component={Link} to='/home/projects' style={{backgroundColor: path === '/home/projects' ? '#c7c7c7': ''}}>
 								Projects
-							</div>
 						</Button>
 					</Card>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/archive'>
-							<div className={classes.text}>
+						<Button className={classes.button} component={Link} to='/home/archive' style={{backgroundColor: path === '/home/archive' ? '#c7c7c7' : ''}}>
 								Archive
-							</div>
 						</Button>
 					</Card>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/members'>
-							<div className={classes.text}>
+						<Button className={classes.button} component={Link} to='/home/members' style={{backgroundColor: path === '/home/members' ? '#c7c7c7' : ''}}>
 								Members
-							</div>
 						</Button>
 					</Card>
 				</div>
+
 				<Divider className={`${classes.divider} ${classes.extraMarginBottom}`} />
 
 				<Switch>

@@ -1,6 +1,6 @@
 import { Backdrop, createStyles, Fade, makeStyles, Modal, Theme } from "@material-ui/core";
 import React, { FC, useState } from "react";
-import ArchivizeIssue from "../../api/Issue/ArchivizeIssue";
+import ArchiveIssue from "../../api/Issue/ArchiveIssue";
 import ManageAttachments from "../../api/Issue/Attachment/ManageAttachments";
 import ManageContributors from "../../api/Issue/Contributor/ManageContributors";
 import UpdateDescription from "../../api/Issue/Description/UpdateDescription";
@@ -129,7 +129,7 @@ const IssueContentModal: FC<ModalProps> = (props) => {
 
 					<div className={classes.buttons}>
 						<ManageCompletion issue={props.issue} />
-						<ArchivizeIssue issue={props.issue} setIssueModalOpen={props.setIssueModalOpen} />
+						<ArchiveIssue issue={props.issue} setIssueModalOpen={props.setIssueModalOpen} />
 					</div>
 
 					<div className={classes.leftColumn}>

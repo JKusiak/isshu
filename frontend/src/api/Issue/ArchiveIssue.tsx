@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { FC, useContext } from 'react';
 import { AuthUserContext } from '../../App';
-import ArchivizeIssueButton from '../../components/Issue/ArchivizeIssueButton';
+import ArchiveIssueButton from '../../components/Issue/ArchiveIssueButton';
 import { INestedIssue } from '../../types/ModelTypes';
 
 
-interface ArchivizeIssueProps {
+interface ArchiveIssueProps {
 	issue: INestedIssue,
 	setIssueModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }
@@ -13,7 +13,7 @@ interface ArchivizeIssueProps {
 
 // this does not work as delete because issues remain after deleting
 // in the organization archive of all issues
-const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
+const ArchiveIssue: FC<ArchiveIssueProps> = (props) => {
 	const { loggedInUser } = useContext(AuthUserContext);
 
 	function updateIssue() {
@@ -40,7 +40,7 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 	}
 
 
-	function archivizeIssue() {
+	function archiveIssue() {
 		addToArchive();
 		updateIssue();
 		props.setIssueModalOpen(false);
@@ -49,12 +49,12 @@ const ArchivizeIssue: FC<ArchivizeIssueProps> = (props) => {
 
 	return (
 		<>
-			<ArchivizeIssueButton
+			<ArchiveIssueButton
 				issue={props.issue}
-				archivizeIssue={archivizeIssue}
+				archiveIssue={archiveIssue}
 			/>
 		</>
 	);
 }
 
-export default ArchivizeIssue;
+export default ArchiveIssue;

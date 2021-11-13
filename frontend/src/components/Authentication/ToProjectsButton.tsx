@@ -1,6 +1,5 @@
 import { Card } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		height: '40px',
 		borderRadius: '10px',
 		background: 'white',
-		fontSize: '14px',
+		fontSize: '16px',
 		backgroundColor: theme.palette.primary.light,
 		color: theme.palette.secondary.main,
 		transition: 'all .12s linear',
@@ -36,7 +35,7 @@ function ButtonToProjects() {
 		<div>
 			<Link className={classes.buttonLink} to='/home/projects'>
 				<Card className={classes.toProjectsCard}>
-					YOUR PROJECTS
+					Your projects
 				</Card>
 			</Link>
 

@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	submitButton: {
 		margin: theme.spacing(3, 0, 3),
 		borderRadius: '10px',
+		fontSize: '16px',
+		textTransform: 'none',
 		color: theme.palette.secondary.main,
 		backgroundColor: theme.palette.primary.light,
 		transition: 'all .12s linear',
@@ -60,8 +62,8 @@ interface LoginProps {
 
 const LoginForm: FC<LoginProps> = (props) => {
 	const classes = useStyles();
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
+	const [email, setEmail] = React.useState<string>('');
+	const [password, setPassword] = React.useState<string>('');
 
 
 	function onSubmit(e: React.SyntheticEvent) {

@@ -90,7 +90,7 @@ const ArchiveGalleryPage: FC<ArchiveGalleryProps> = (props) => {
 	return (
 		<>
 			<Typography className={classes.header} component="h1" variant="h4">
-				Archivized issues
+				Archived issues
 			</Typography>
 			<div className={classes.searchWrapper}>
 				<TextField

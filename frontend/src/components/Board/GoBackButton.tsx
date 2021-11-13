@@ -34,7 +34,11 @@ const GoBackButton = () => {
 
 
 	return (
-		<IconButton className={classes.backButton} onClick={handleGoBack}>
+		<IconButton 
+			className={classes.backButton}
+			aria-label='backToProjectButton' 
+			onClick={handleGoBack}
+		>
 			<BackIcon className={classes.backIcon} />
 		</IconButton>
 	);

@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import React, { FC, useEffect, useReducer, useState } from 'react';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import React, { FC, useEffect, useReducer } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { ActionTypes, registerReducer, UserToRegisterTemplate } from '../../reducers/RegisterReducer';
 import RegisterField from './RegisterField';
 
@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	submitButton: {
 		margin: theme.spacing(3, 0, 3),
 		borderRadius: '10px',
+		textTransform: 'none',
+		fontSize: '16px',
 		color: theme.palette.secondary.main,
 		backgroundColor: theme.palette.primary.light,
 		transition: 'all .12s linear',
@@ -58,6 +60,8 @@ interface RegisterProps {
 	registerUser: (user: any) => void,
 	isValid: boolean
 	setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+	isSent: boolean,
+	setIsSent: React.Dispatch<React.SetStateAction<boolean>>,
 	errorText: string,
 	setErrorText: React.Dispatch<React.SetStateAction<string>>,
 }
@@ -66,8 +70,7 @@ interface RegisterProps {
 const RegisterForm: FC<RegisterProps> = (props) => {
 	const classes = useStyles();
 	const [userReducer, dispatch] = useReducer(registerReducer, UserToRegisterTemplate);
-	const [isSent, setIsSent] = useState<boolean>(false);
-	const history = useHistory();
+	
 
 
 	useEffect(() => {
@@ -84,13 +87,11 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 		e.preventDefault();
 
 		const { name, surname, email, password } = userReducer;
-
 		const newUser = { name, surname, email, password };
 
 		if (props.isValid) {
 			props.registerUser(newUser);
-			setIsSent(true);
-			setTimeout(() => { history.push('/login') }, 1000);
+			
 		}
 	}
 
@@ -110,7 +111,7 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							regex={nameRegex}
 							errorText='Name must only contain lower- and uppercase letters'
 							setErrorText={props.setErrorText}
-							setIsSent={setIsSent}
+							setIsSent={props.setIsSent}
 							dispatch={dispatch}
 							actionType={ActionTypes.SetName}
 						/>
@@ -123,7 +124,7 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							regex={nameRegex}
 							errorText='Surname must only contain lower- and uppercase letters'
 							setErrorText={props.setErrorText}
-							setIsSent={setIsSent}
+							setIsSent={props.setIsSent}
 							dispatch={dispatch}
 							actionType={ActionTypes.SetSurname}
 						/>
@@ -136,7 +137,7 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							regex={emailRegex}
 							errorText='Email must follow valid email format'
 							setErrorText={props.setErrorText}
-							setIsSent={setIsSent}
+							setIsSent={props.setIsSent}
 							dispatch={dispatch}
 							actionType={ActionTypes.SetEmail}
 						/>
@@ -151,27 +152,27 @@ const RegisterForm: FC<RegisterProps> = (props) => {
 							+ ' at least 1 uppercase letter, 1 lowercase letter,'
 							+ ' 1 number and 1 special character (@$!%*?&)'}
 							setErrorText={props.setErrorText}
-							setIsSent={setIsSent}
+							setIsSent={props.setIsSent}
 							dispatch={dispatch}
 							actionType={ActionTypes.SetPassword}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<RegisterField
-							type='Confirm password'
+							type='Confirm_password'
 							inputType='password'
 							setIsValid={props.setIsValid}
 							regex={anythingRegex}
 							errorText={''}
 							setErrorText={props.setErrorText}
-							setIsSent={setIsSent}
+							setIsSent={props.setIsSent}
 							dispatch={dispatch}
 							actionType={ActionTypes.SetRepeatPassword}
 						/>
 					</Grid>
 				</Grid>
-				{isSent && <div className={classes.createdAccount}><p>Succesfully created account</p></div>}
-				{!props.isValid && <div className={classes.wrongInput}><p>{props.errorText}</p></div>}
+				{props.isSent && <div className={classes.createdAccount}><p id='success_text'>Succesfully created account</p></div>}
+				{!props.isValid && <div className={classes.wrongInput}><p id='error_text'>{props.errorText}</p></div>}
 				<Button
 					className={classes.submitButton}
 					type="submit"

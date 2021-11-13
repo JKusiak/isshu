@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		width: '200px',
 		height: '40px',
 		borderRadius: '10px',
-		fontSize: '14px',
+		fontSize: '16px',
 		color: theme.palette.secondary.main,
 		backgroundColor: theme.palette.primary.light,
 		transition: 'all .12s linear',
@@ -68,7 +68,7 @@ const RegisterModal = () => {
 	return (
 		<>
 			<Card className={classes.registerButton} onClick={handleOpen}>
-				GET STARTED
+				Get started
 			</Card>
 
 			<Modal

@@ -16,7 +16,7 @@ export enum ActionTypes {
 	DeleteColumn = 'DELETE COLUMN',
 	UpdateColumn = 'UPDATE COLUMN',
 	AddIssue = 'ADD ISSUE',
-	ArchivizeIssue = 'ARCHIVIZE ISSUE',
+	ArchiveIssue = 'ARCHIVE ISSUE',
 	UpdateIssue = 'UPDATE ISSUE',
 	ChangeColumns = 'REMOVE FROM COLUMN',
 	ReorderColumn = 'REORDER COLUMN'
@@ -68,7 +68,7 @@ export const boardContentReducer = (state: INestedBoard, action: Action) => {
 					return column;
 				})
 			}
-		case ActionTypes.ArchivizeIssue:
+		case ActionTypes.ArchiveIssue:
 			return {
 				...state,
 				columns: state.columns.map(column => {

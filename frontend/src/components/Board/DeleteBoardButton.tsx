@@ -34,7 +34,11 @@ const DeleteBoardButton: FC<DeleteBoardProps> = (props) => {
 
 	return (
 		<>
-			<IconButton className={classes.deleteButton} onClick={() => setOpenModal(true)}>
+			<IconButton 
+				className={classes.deleteButton} 
+				aria-label='deleteBoardButton' 
+				onClick={() => setOpenModal(true)}
+			>
 				<DeleteIcon className={classes.deleteIcon} />
 			</IconButton>
 
