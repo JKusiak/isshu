@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     iconButton: {
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     icon: {
         transform: 'scale(0.7)',

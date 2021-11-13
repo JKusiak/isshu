@@ -1,4 +1,4 @@
-import { Button, Card, Divider } from "@material-ui/core";
+import { Button, Card, Divider, useTheme } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { FC, useState } from "react";
 import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
@@ -103,6 +103,7 @@ const HomePage: FC<HomePageProps> = (props) => {
 	const classes = useStyles();
 	const [errorText, setErrorText] = useState('');
 	const path = useLocation().pathname;
+	const theme = useTheme();
 
 	function displayOrganization() {
 		return (
@@ -124,17 +125,17 @@ const HomePage: FC<HomePageProps> = (props) => {
 
 				<div className={classes.buttonsContainer}>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/projects' style={{backgroundColor: path === '/home/projects' ? '#c7c7c7': ''}}>
+						<Button className={classes.button} component={Link} to='/home/projects' style={{backgroundColor: path === '/home/projects' ? theme.palette.primary.dark : ''}}>
 								Projects
 						</Button>
 					</Card>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/archive' style={{backgroundColor: path === '/home/archive' ? '#c7c7c7' : ''}}>
+						<Button className={classes.button} component={Link} to='/home/archive' style={{backgroundColor: path === '/home/archive' ? theme.palette.primary.dark : ''}}>
 								Archive
 						</Button>
 					</Card>
 					<Card className={classes.cardWrapper}>
-						<Button className={classes.button} component={Link} to='/home/members' style={{backgroundColor: path === '/home/members' ? '#c7c7c7' : ''}}>
+						<Button className={classes.button} component={Link} to='/home/members' style={{backgroundColor: path === '/home/members' ? theme.palette.primary.dark : ''}}>
 								Members
 						</Button>
 					</Card>

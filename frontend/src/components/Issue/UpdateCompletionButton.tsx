@@ -1,4 +1,4 @@
-import { Button, Card } from '@material-ui/core';
+import { Button, Card, useTheme } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FC, useContext } from 'react';
 import { BoardReducerContext } from '../../api/Board/GetBoard';
@@ -19,13 +19,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		width: '100%',
 		textTransform: 'none',
 		fontWeight: 'bold',
+		fontSize: '14px',
+		color: theme.palette.secondary.main,
 		"&:hover": {
 			fontWeight: 'bold',
 		}
-	},
-	text: {
-		fontSize: '14px',
-		color: theme.palette.secondary.main,
 	},
 }));
 
@@ -39,6 +37,7 @@ interface UpdateCompletionButtonProps {
 const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 	const classes = useStyles();
 	const { dispatch } = useContext(BoardReducerContext);
+	const theme = useTheme();
 
 	function handleSubmit() {
 		const isFinished = !props.issue.isFinished;
@@ -58,10 +57,8 @@ const UpdateCompletionButton: FC<UpdateCompletionButtonProps> = (props) => {
 	return (
 		<>
 			<Card className={classes.cardWrapper}>
-				<Button className={classes.button} onClick={handleSubmit}>
-					<div className={classes.text}>
-						{props.issue.isFinished ? 'Not finished' : 'Finished'}
-					</div>
+				<Button className={classes.button} onClick={handleSubmit} style={{backgroundColor: props.issue.isFinished ? theme.palette.primary.dark : ''}}>
+						Complete
 				</Button>
 			</Card>
 		</>
