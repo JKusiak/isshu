@@ -25,6 +25,6 @@ protectedIssueRouter.route('/getTags/:id').get(getTagsOfIssue);
 
 protectedIssueRouter.route('/addTag/:id').post(addTagToIssue);
 
-protectedIssueRouter.route('/getIssueCreator/:id').get(getIssuesByCreator)
+protectedIssueRouter.route('/getIssuesCreator/:id').get(getIssuesByCreator)
 
-protectedIssueRouter.route('/getIssueContributor/:id').get(getIssuesByContributor);
+protectedIssueRouter.route('/getIssuesContributor/:id').get(getIssuesByContributor);

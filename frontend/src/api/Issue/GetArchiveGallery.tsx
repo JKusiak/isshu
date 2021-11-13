@@ -2,7 +2,8 @@ import axios from "axios";
 import { FC, useState } from "react";
 import { useMountEffect } from "../../hooks/useMountEffect";
 import ArchiveGallery from "../../pages/Home/Subpages/ArchiveGalleryPage";
-import { IUser } from "../../types/ModelTypes";
+import { NestedIssueTemplate } from "../../types/ModelContentTemplate";
+import { INestedIssue, IUser } from "../../types/ModelTypes";
 
 
 interface GetArchiveGalleryProps {
@@ -11,7 +12,7 @@ interface GetArchiveGalleryProps {
 
 
 const GetArchiveGallery: FC<GetArchiveGalleryProps> = (props) => {
-	const [archivedIssues, setArchivedIssues] = useState<[]>([]);
+	const [archivedIssues, setArchivedIssues] = useState<[INestedIssue]>([NestedIssueTemplate]);
 
 
 	useMountEffect(fetchArchive);

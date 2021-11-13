@@ -54,20 +54,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	paper: {
-		width: '90vw',
-		height: '90vh',
-		backgroundColor: theme.palette.primary.main,
+	modalImage: {
+		maxWidth: '90vw',
+		maxHeight: '90vh',
 		border: '2px solid',
 		borderColor: theme.palette.secondary.main,
-		borderRadius: '10px',
-		boxShadow: theme.shadows[2],
-		padding: 0,
-	},
-	modalImage: {
-		width: '100%',
-		height: '100%',
-		padding: theme.spacing(0.2),
 		borderRadius: '10px',
 	},
 	deleteButton: {
@@ -149,13 +140,11 @@ const EnlargedAttachmentModal: FC<EnlargedAttachmentModalProps> = (props) => {
 				}}
 			>
 				<Fade in={open}>
-					<div className={classes.paper}>
-						<img
-							className={classes.modalImage}
-							src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`}
-							alt='Attachment enlarged'
-						/>
-					</div>
+					<img
+						className={classes.modalImage}
+						src={`http://localhost:5000/uploads/organization-${loggedInUser.organizationId}/issues/issue-${props.issue._id}/${props.clickedAttachment._id}.jpg`}
+						alt='Attachment enlarged'
+					/>
 				</Fade>
 			</Modal>
 		</>

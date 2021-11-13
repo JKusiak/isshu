@@ -137,8 +137,26 @@ export const addTagToIssue = asyncHandler(async(req, res) => {
 
 export const getIssuesByCreator = asyncHandler(async(req, res) => {
       try {
-            const issue = await Issue.find({creator: req.params.id});
-            res.json(issue);
+            const issues = await Issue.find({creator: req.params.id}).populate([{
+                  path: 'tags',
+                  model: 'Tag',
+            },{
+                  path: 'creator',
+                  select: 'name surname',
+                  model: 'User',
+            },{
+                  path: 'contributors',
+                  select: 'name surname',
+                  model: 'User',
+            },{
+                  path: 'messages',
+                  populate: {
+                        path: 'sender',
+                        select: 'name surname',
+                        model: 'User',
+                  },
+            }]);
+            res.json(issues);
       } catch(err) {
             res.status(404).json({message: "Issues of creator not found"});
             throw new Error('Issue not found');
@@ -148,8 +166,26 @@ export const getIssuesByCreator = asyncHandler(async(req, res) => {
 
 export const getIssuesByContributor = asyncHandler(async(req, res) => {
       try {
-            const issue = await Issue.find({contributor: req.params.id});
-            res.json(issue);
+            const issues = await Issue.find({contributors: {$all: [req.params.id]}}).populate([{
+                  path: 'tags',
+                  model: 'Tag',
+            },{
+                  path: 'creator',
+                  select: 'name surname',
+                  model: 'User',
+            },{
+                  path: 'contributors',
+                  select: 'name surname',
+                  model: 'User',
+            },{
+                  path: 'messages',
+                  populate: {
+                        path: 'sender',
+                        select: 'name surname',
+                        model: 'User',
+                  },
+            }]);
+            res.json(issues);
       } catch(err) {
             res.status(404).json({message: "Issues of contributor not found"});
             throw new Error('Issue not found');

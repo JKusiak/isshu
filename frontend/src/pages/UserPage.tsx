@@ -1,11 +1,13 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import GetData from "../api/User/GetData";
+import GetUserIssues from "../api/User/GetUserIssues";
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	root: {
 		display: 'grid',
-		placeItems: 'center'
+		placeItems: 'center',
+		marginTop: theme.spacing(2),
 	},
 }));
 
@@ -15,9 +17,8 @@ const UserPage = () => {
 
 	return (
 		<div className={classes.root}>
-			<div>
-				<GetData />
-			</div>
+			<GetData />
+			<GetUserIssues />
 		</div>
 	);
 }

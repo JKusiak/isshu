@@ -84,9 +84,12 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
                 attachments: updatedAttachments,
             },
         };
-
-        dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
-        props.addAttachment(e.target.files[0]);
+        const mimeType = e.target.files[0].type;
+        const correctExtension =  mimeType === 'image/png' || mimeType === 'image/jpg' || mimeType === 'image/jpeg';
+        if (correctExtension) {
+            dispatch({ type: ActionTypes.UpdateIssue, payload: payload });
+            props.addAttachment(e.target.files[0]);
+        }
     }
 
 
@@ -119,6 +122,7 @@ const AttachmentsGallery: FC<AttachmentsGalleryProps> = (props) => {
                     <input
                         style={{ display: 'none' }}
                         type="file"
+                        accept=".jpg, .jpeg, .png"
                         onChange={handleChooseFile}
                         ref={imageInputRef}
                     />

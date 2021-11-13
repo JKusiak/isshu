@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import SearchIcon from '@material-ui/icons/SearchOutlined';
 import { FC, Fragment, useState } from "react";
 import ArchivedIssueCard from "../../../components/Issue/ArchivedIssueCard";
+import { INestedIssue } from "../../../types/ModelTypes";
 
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
 interface ArchiveGalleryProps {
-	archivedIssues: any;
+	archivedIssues: [INestedIssue];
 }
 
 
