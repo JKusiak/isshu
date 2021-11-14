@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'center',
-		flexGrow: 0,
+		marginLeft: 'auto',
+		marginRight: 'auto',
 	},
 	menuButton: {
 		color: theme.palette.secondary.main,
