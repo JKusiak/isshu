@@ -6,8 +6,14 @@ import IssueModal from "../Issue/IssueModal";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	issueCard: {
+		height: '60px',
+		width: '400px',
+		marginLeft: 'auto',
+		marginRight: 'auto',
+		maxWidth: '70%',
 		padding: theme.spacing(2),
 		boxShadow: theme.shadows[2],
+		background: theme.palette.primary.light,
 		"&:hover": {
 			cursor: 'pointer',
 			boxShadow: theme.shadows[5],
